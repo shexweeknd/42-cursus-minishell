@@ -20,7 +20,7 @@ MINISH_INC	= -Iincludes
 
 # COMPILATION CONFIG
 CC		= cc -g
-CFLAGS	= -Wall -Wextra -Werror $(MINISH_INC)
+CFLAGS	= -Wall -Wextra -Werror $(MINISH_INC) -Lreadline
 
 # FUNCTION
 define Compile

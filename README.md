@@ -1,1 +1,4 @@
 # Minishell
+
+## Function
+- `readline` : -> 
