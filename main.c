@@ -1,5 +1,14 @@
 #include "minishell.h"
 
+void	ft_show_list(t_list	*list)
+{
+	while (list)
+	{
+		printf("	- %s\n", (char *)list->content);
+		list = list->next;
+	}
+}
+
 int main(int argc, char const *argv[], char **env)
 {
 	t_env	*v_env;
@@ -8,11 +17,12 @@ int main(int argc, char const *argv[], char **env)
 	printf("test %d %s\n", argc, argv[0]);
 	// if (argc == 2)
 	// {
-		while (v_env->var)
-		{
-			printf("%s\n", v_env->var->name);
-			v_env->var = v_env->var->next;
-		}
+		// while (v_env->var)
+		// {
+		// 	printf("\033[0;4;32m%s :\033[0;0m\n", v_env->var->name);
+		// 	ft_show_list(v_env->var->content);
+		// 	v_env->var = v_env->var->next;
+		// }
 	// }
 	// else
 	// {
@@ -22,6 +32,7 @@ int main(int argc, char const *argv[], char **env)
 		// 	env++;
 		// }
 	// }
+	ft_envclear(v_env);
 	return 0;
 }
 

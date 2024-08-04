@@ -3,7 +3,7 @@ NAME		= minishell
 
 # FILES
 FILES		= main.c
-FUNC_FILES	= env.c
+FUNC_FILES	= env.c free.c libft.c env.c env_utils.c
 SRC_FILES	= ""
 
 # SRC FILES
@@ -49,8 +49,8 @@ $(NAME)		: $(FUNC_OBJS) $(OBJS)
 run			: all
 				./$(NAME)
 
-run-test	: all
-				./$(NAME) test
+test		: all
+				valgrind --leak-check=full ./$(NAME)
 
 clean		:
 				rm -rf $(OBJS)
