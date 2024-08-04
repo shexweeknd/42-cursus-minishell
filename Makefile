@@ -3,7 +3,7 @@ NAME		= minishell
 
 # FILES
 FILES		= main.c
-FUNC_FILES	= ""
+FUNC_FILES	= env.c
 SRC_FILES	= ""
 
 # SRC FILES
@@ -19,8 +19,8 @@ SRC_OBJS	= $(SRC:src/%.c=output/%.o)
 MINISH_INC	= -Iincludes
 
 # COMPILATION CONFIG
-CC		= cc -g
-CFLAGS	= -Wall -Wextra -Werror $(MINISH_INC) -Lreadline
+CC		= gcc -g
+CFLAGS	= -Wall -Wextra -Werror $(MINISH_INC)
 
 # FUNCTION
 define Compile
@@ -28,7 +28,7 @@ define Compile
 endef
 
 define CreateExe
-	$(CC) $(CFLAGS) $(1) -o $(2)
+	$(CC) $(CFLAGS) $(1) -lreadline -o $(2)
 endef
 
 # COMMANDS
@@ -43,11 +43,14 @@ output/%.o	: %.c | output
 output/%.o	: */%.c | output
 				$(call Compile,$<,$@)
 
-$(NAME)		: $(OBJS)
-				$(call CreateExe,$<,$@)
+$(NAME)		: $(FUNC_OBJS) $(OBJS)
+				$(call CreateExe,$^,$@)
 
-run			:
-				@./$(NAME)
+run			: all
+				./$(NAME)
+
+run-test	: all
+				./$(NAME) test
 
 clean		:
 				rm -rf $(OBJS)
