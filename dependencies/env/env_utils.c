@@ -16,11 +16,14 @@ t_env_var	*ft_init_var_env()
 char	*ft_init_var_env_content(char *var_env)
 {
 	char	*r_value;
+	char	*tmp;
 	int		len;
 
-	len = ft_strchr(var_env, ':');
-	if (len == -1)
+	tmp = ft_strchr(var_env, ':');
+	if (!tmp)
 		len = ft_strlen(var_env) + 1;
+	else
+		len = tmp - var_env;
 	if (len == 0)
 		return (NULL);
 	r_value = (char *)malloc(sizeof(char) + len);
@@ -29,7 +32,9 @@ char	*ft_init_var_env_content(char *var_env)
 	return (r_value);
 }
 
-int	ft_get_var_env_content()
-{
-
-}
+// int	ft_get_var_env_content(t_list *list, char *var_env)
+// {
+// 	(void)list;
+// 	(void)var_env;
+// 	return (0);
+// }

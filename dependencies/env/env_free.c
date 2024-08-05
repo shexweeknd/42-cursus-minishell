@@ -1,18 +1,19 @@
-#include "minishell.h"
+#include "env.h"
 
-void	ft_envclear(t_env *env)
+static void	ft_del_value(void *value)
 {
-	t_env_var	*var;
+	free((char *)value);
+}
+
+void	ft_envclear(t_env_var *env_var)
+{
 	t_env_var	*tmp;
 
-	var = env->var;
-	while (var)
+	while (env_var)
 	{
-		tmp = var;
-		var = var->next;
+		tmp = env_var;
+		env_var = env_var->next;
 		free(tmp->name);
-		ft_lstclear(tmp->content);
-		free(tmp);
+		ft_lstclear(&tmp->content, ft_del_value);
 	}
-	free(env);
 }

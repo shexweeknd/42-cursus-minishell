@@ -4,27 +4,30 @@ NAME		= libenv.a
 # FILES
 FILES		= env.c env_utils.c env_free.c
 
+# OBJECT FILES
+OBJS		= $(FILES:%.c=output/%.o)
+
 # DEPENDENCIES
 DEP_PATH	= ..
 LIBFT_PATH	= $(DEP_PATH)/libft
 
-# OBJECT FILES
-OBJS		= $(FILES:%.c=output/%.o)
+# LIBS
+LIBFT		= -L$(LIBFT_PATH) -lft
+LIBS		= $(LIBFT)
 
 # INCLUDES
 LIBFT_INC	= -I$(LIBFT_PATH)
 ENV_INC		= -Iincludes
 INCLUDES	= $(LIBFT_INC) $(ENV_INC)
 
-
 # COMPILATION CONFIG
 CC		= cc -g
 AR		= ar rcs
-CFLAGS	= -Wall -Wextra -Werror $(INCLUDES)
+CFLAGS	= -Wall -Wextra -Werror
 
 # FUNCTION
 define Compile
-	$(CC) $(CFLAGS) -c $(1) -o $(2)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2) -L../libft -lft
 endef
 
 define CreateLib
@@ -40,10 +43,8 @@ output		:
 output/%.o	: %.c | output
 				$(call Compile,$<,$@)
 
-libft		:
+$(NAME)		: $(OBJS)
 				make -C $(LIBFT_PATH)
-
-$(NAME)		: libft $(OBJS)
 				$(call CreateLib,$^,$@)
 
 clean		:
