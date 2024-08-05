@@ -1,11 +1,7 @@
 #ifndef ENV_STRUCT_H
 # define ENV_STRUCT_H
 
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+# include "libft.h"
 
 typedef struct s_env_var
 {

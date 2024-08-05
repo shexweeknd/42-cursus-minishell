@@ -1,18 +1,5 @@
 #include "minishell.h"
 
-void	ft_lstclear(t_list *list)
-{
-	t_list	*tmp;
-
-	while (list)
-	{
-		tmp = list;
-		list = list->next;
-		free(tmp->content);
-		free(tmp);
-	}
-}
-
 void	ft_envclear(t_env *env)
 {
 	t_env_var	*var;

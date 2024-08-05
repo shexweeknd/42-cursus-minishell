@@ -6,6 +6,10 @@ FILES		= main.c
 FUNC_FILES	= env.c free.c libft.c env.c env_utils.c
 SRC_FILES	= ""
 
+# DEPENDENCIES
+DEP_PATH	= ./dependencies
+LIBFT_PATH	= $(DEP_PATH)/libft
+
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)
 SRC			= $(SRC_FILES:%.c=src/%.c)
@@ -17,9 +21,10 @@ SRC_OBJS	= $(SRC:src/%.c=output/%.o)
 
 # INCLUDES
 MINISH_INC	= -Iincludes
+LIBFT_INC	= -I$(LIBFT_PATH)
 
 # COMPILATION CONFIG
-CC		= gcc -g
+CC		= cc -g
 CFLAGS	= -Wall -Wextra -Werror $(MINISH_INC)
 
 # FUNCTION
