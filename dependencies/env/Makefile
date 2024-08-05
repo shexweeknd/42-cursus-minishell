@@ -27,7 +27,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 # FUNCTION
 define Compile
-	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2) -L../libft -lft
+	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2) $(LIBS)
 endef
 
 define CreateLib

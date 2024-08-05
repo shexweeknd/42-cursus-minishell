@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:44:06 by ballain           #+#    #+#             */
-/*   Updated: 2024/02/21 18:44:08 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/05 19:30:05 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	ft_nbint(int n)
 void	ft_putnbr_fd(int n, int fd)
 {
 	char	r_value;
-	int		exp;	
+	int		exp;
 
 	r_value = 0;
 	exp = ft_nbint(n) - 1;

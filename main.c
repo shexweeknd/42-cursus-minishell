@@ -15,7 +15,7 @@ int main(int argc, char const *argv[], char **env)
 
 	printf("test 2\n");
 	v_env = ft_get_env(env);
-	(void)v_env;
+	// (void)v_env;
 	printf("test %d %s\n", argc, argv[0]);
 	// if (argc == 2)
 	// {
@@ -34,17 +34,17 @@ int main(int argc, char const *argv[], char **env)
 		// 	env++;
 		// }
 	// }
-	// ft_envclear(v_env);
+	ft_envclear(v_env);
 	return 0;
 }
 
 
 // char	*test;
-	// t_env	*v_env;
+// t_env	*v_env;
 
-	// printf("test %d %s\n", argc, argv[0]);
-	// v_env = ft_get_env(env);
-	// (void)v_env;
-	//
-	// test = readline("\033[0;32mtest\033[0;0m > ");
-	// printf("test value	: [%s]\n", test);
+// printf("test %d %s\n", argc, argv[0]);
+// v_env = ft_get_env(env);
+// (void)v_env;
+//
+// test = readline("\033[0;32mtest\033[0;0m > ");
+// printf("test value	: [%s]\n", test);

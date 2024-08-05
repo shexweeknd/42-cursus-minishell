@@ -23,7 +23,7 @@ ENV_PATH	= $(DEP_PATH)/env
 # LIBS
 LIBFT_LIB	= -L$(LIBFT_PATH) -lft
 ENV_LIB		= -L$(ENV_PATH) -lenv
-LIBS		= $(LIBFT_LIB) $(ENV_LIB)
+LIBS		= $(ENV_LIB) $(LIBFT_LIB)
 
 # INCLUDES
 MINISH_INC	= -Iincludes
@@ -40,7 +40,13 @@ define Compile
 	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2)
 endef
 
+define CompileLibs
+	make -C $(LIBFT_PATH)
+	make -C $(ENV_PATH)
+endef
+
 define CreateExe
+	$(call CompileLibs)
 	$(CC) $(CFLAGS) $(1) -o $(2) $(LIBS)
 endef
 
@@ -58,28 +64,25 @@ output/%.o	: */%.c | output
 				$(call Compile,$<,$@)
 
 $(NAME)		: $(OBJS)
-				make -C $(LIBFT_PATH)
-				make -C $(ENV_PATH)
+
 				$(call CreateExe,$^,$@)
-
-## Libs
-
-libs		:
-				@make -C $(LIBFT_PATH)
-				@make -C $(ENV_PATH)
 
 ## Test
 run			: all
 				./$(NAME)
 
 test		: all
-				valgrind --leak-check=full ./$(NAME)
+				valgrind --leak-check=full -s ./$(NAME)
 
 ## Clean
 clean		:
+				make clean -C $(LIBFT_PATH)
+				make clean -C $(ENV_PATH)
 				rm -rf $(OBJS)
 
 fclean		: clean
+				make fclean -C $(LIBFT_PATH)
+				make fclean -C $(ENV_PATH)
 				rm -rf $(NAME)
 
 re			: fclean all
