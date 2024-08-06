@@ -12,19 +12,23 @@ void	ft_show_list(t_list	*list)
 int main(int argc, char const *argv[], char **env)
 {
 	t_env_var	*v_env;
+	t_list		*content;
 
 	printf("test 2\n");
 	v_env = ft_get_env(env);
 	(void)v_env;
 	printf("test %d %s\n", argc, argv[0]);
+	content = (t_list *)ft_get_env_var(v_env, "PATH", 1);
+	ft_show_list(content);
+	// printf("FIND TEST	: [%s]\n", ((t_env_var *)ft_get_env_var(v_env, "PATH", 0))->name);
 	// if (argc == 2)
 	// {
-		while (v_env)
-		{
-			printf("\033[0;4;32m%s :\033[0;0m\n", v_env->name);
-			ft_show_list(v_env->content);
-			v_env = v_env->next;
-		}
+		// while (v_env)
+		// {
+		// 	printf("\033[0;4;32m%s :\033[0;0m\n", v_env->name);
+		// 	ft_show_list(v_env->content);
+		// 	v_env = v_env->next;
+		// }
 	// }
 	// else
 	// {
@@ -34,7 +38,7 @@ int main(int argc, char const *argv[], char **env)
 		// 	env++;
 		// }
 	// }
-	// ft_envclear(v_env);
+	ft_envclear(v_env);
 	return 0;
 }
 

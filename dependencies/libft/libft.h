@@ -6,14 +6,14 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:02:13 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/06 14:06:48 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/06 19:39:47 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <stdio.h>	
+# include <stdio.h>
 # include <ctype.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -26,6 +26,7 @@ typedef struct s_list
 }	t_list;
 
 void	ft_bzero(void *s, size_t n);
+int		ft_isspace(char c);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
