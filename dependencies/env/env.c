@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:22:05 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/05 19:22:06 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/06 13:31:32 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,8 @@ t_list	*ft_get_var_env_content(char *var_env)
 		while (*var_env && *var_env != ':')
 			((char *)r_tmp->content)[i++] = *(var_env++);
 		((char *)r_tmp->content)[i] = '\0';
-		if (*var_env == ':')
-			var_env++;
-		if (*var_env)
+		if (*var_env == ':' && *(++var_env))
 			r_tmp->next = ft_lstnew(NULL);
-		else
-			r_tmp->next = NULL;
 		r_tmp = r_tmp->next;
 	}
 	return (r_value);
@@ -78,7 +74,7 @@ t_env_var	*ft_get_env(char **env)
 	{
 		env_var->name = ft_get_var_env_name(*env);
 		env_var->content = ft_get_var_env_content(*env);
-		if (*(env++))
+		if (*(++env))
 		{
 			env_var->next = ft_init_var_env();
 			if (!env_var->next)

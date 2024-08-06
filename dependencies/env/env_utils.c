@@ -6,13 +6,13 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:22:01 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/05 19:22:02 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/06 14:16:30 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 
-t_env_var	*ft_init_var_env()
+t_env_var	*ft_init_var_env(void)
 {
 	t_env_var	*r_value;
 
@@ -44,9 +44,17 @@ char	*ft_init_var_env_content(char *var_env)
 	return (r_value);
 }
 
-// int	ft_get_var_env_content(t_list *list, char *var_env)
-// {
-// 	(void)list;
-// 	(void)var_env;
-// 	return (0);
-// }
+void	*ft_get_env_var(t_env_var *env_var, char *name, int type)
+{
+	while (env_var)
+	{
+		if (ft_strcmp(env_var->name, name) == 0)
+		{
+			if (type == 0)
+				return (env_var);
+			return (env_var->content);
+		}
+		env_var = env_var->next;
+	}
+	return (NULL);
+}
