@@ -6,17 +6,15 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 12:05:17 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/05 19:22:17 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/07 10:04:45 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isspace(const int c)
+int	ft_isspace(const int c)
 {
-	if ((c >= 9 && c <= 13) || c == 32)
-		return (1);
-	return (0);
+	return ((c >= 9 && c <= 13) || c == 32);
 }
 
 int	ft_atoi(const char *nptr)

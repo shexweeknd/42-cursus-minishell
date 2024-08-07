@@ -6,7 +6,8 @@ typedef enum e_link
 	NONE,
 	PIPE,
 	OR,
-	AND
+	AND,
+	TMP
 }	t_link;
 
 typedef struct s_cmd

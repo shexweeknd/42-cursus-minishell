@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 13:48:30 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/06 14:17:23 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/08 00:50:33 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
-	if (!(*s1) && !(*s2))
-		return (0);
 	while (*s1 && *s2)
 	{
 		if (*s1 != *s2)

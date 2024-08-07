@@ -3,9 +3,10 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-// # include <readline/readline.h>
-// # include <readline/history.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "env.h"
+# include "cmd.h"
 # include "struct.h"
 
 #endif

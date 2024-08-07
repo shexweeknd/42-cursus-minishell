@@ -19,17 +19,20 @@ SRC_OBJS	= $(SRC:src/%.c=output/%.o)
 DEP_PATH	= ./dependencies
 LIBFT_PATH	= $(DEP_PATH)/libft
 ENV_PATH	= $(DEP_PATH)/env
+CMD_PATH	= $(DEP_PATH)/cmd
 
 # LIBS
 LIBFT_LIB	= -L$(LIBFT_PATH) -lft
 ENV_LIB		= -L$(ENV_PATH) -lenv
-LIBS		= $(ENV_LIB) $(LIBFT_LIB)
+CMD_LIB		= -L$(CMD_PATH) -lcmd
+LIBS		= $(CMD_LIB) $(ENV_LIB) $(LIBFT_LIB) -lreadline
 
 # INCLUDES
 MINISH_INC	= -Iincludes
 LIBFT_INC	= -I$(LIBFT_PATH)
 ENV_INC		= -I$(ENV_PATH)/includes
-INCLUDES	= $(MINISH_INC) $(LIBFT_INC) $(ENV_INC)
+CMD_INC		= -I$(CMD_PATH)/includes
+INCLUDES	= $(MINISH_INC) $(LIBFT_INC) $(ENV_INC) $(CMD_INC)
 
 # COMPILATION CONFIG
 CC		= cc -g
@@ -40,13 +43,14 @@ define Compile
 	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2)
 endef
 
-define CompileLibs
-	make -C $(LIBFT_PATH)
-	make -C $(ENV_PATH)
+define MakeLibs
+	make $(1) -C $(LIBFT_PATH)
+	make $(1) -C $(ENV_PATH)
+	make $(1) -C $(CMD_PATH)
 endef
 
 define CreateExe
-	$(call CompileLibs)
+	$(call MakeLibs)
 	$(CC) $(CFLAGS) $(1) -o $(2) $(LIBS)
 endef
 
@@ -72,17 +76,16 @@ run			: all
 				./$(NAME)
 
 test		: all
-				valgrind --leak-check=full -s ./$(NAME)
+				# --show-leak-kinds=all
+				valgrind --leak-check=full --show-leak-kinds=all -s ./$(NAME)
 
 ## Clean
 clean		:
-				make clean -C $(LIBFT_PATH)
-				make clean -C $(ENV_PATH)
+				$(call MakeLibs,clean)
 				rm -rf $(OBJS)
 
 fclean		: clean
-				make fclean -C $(LIBFT_PATH)
-				make fclean -C $(ENV_PATH)
+				$(call MakeLibs,fclean)
 				rm -rf $(NAME)
 
 re			: fclean all
