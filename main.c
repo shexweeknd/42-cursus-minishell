@@ -13,26 +13,29 @@ int main(int argc, char const *argv[], char **env)
 {
 
 	// ft_get_cmd("test -t ./file");
-	printf("test %d %s %s\n", argc, argv[0], *env);
-	char *line;
-    while ((line = readline("Enter something: ")) != NULL) {
-        if (*line) { // Si la ligne n'est pas vide
-            add_history(line);
-        }
-        printf("You entered: %s\n", line);
-		rl_clear_history();
-		if (ft_strcmp(line, "end"))
-        {
-			free(line);
-			break ;
-		}
-        free(line);
-    }
-    rl_clear_history();
-	// rl_cleanup_after_signal();
+	printf("test %d %s %s %s\n", argc, argv[0], *env, getcwd(NULL, 0));
+	chdir("/goinfre/ballain/Minishell/lol");
+	printf("current	: [%s]\n", getcwd(NULL, 0));
 	return (0);
 }
 
+
+// char *line;
+    // while ((line = readline("Enter something: ")) != NULL) {
+    //     if (*line) { // Si la ligne n'est pas vide
+    //         add_history(line);
+    //     }
+    //     printf("You entered: %s\n", line);
+	// 	rl_clear_history();
+	// 	if (ft_strcmp(line, "end"))
+    //     {
+	// 		free(line);
+	// 		break ;
+	// 	}
+    //     free(line);
+    // }
+    // rl_clear_history();
+	// rl_cleanup_after_signal();
 
 // t_env_var	*v_env;
 	// t_list		*content;
