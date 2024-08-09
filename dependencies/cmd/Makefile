@@ -2,10 +2,15 @@
 NAME		= libcmd.a
 
 # FILES
-FILES		= cmd.c
+FILES		= cmd.c cmd_utils.c
+FUNC_FILES	= cmd_redirect.c cmd_redirect.c
+
+# SRC FILES
+FUNC		= $(FUNC_FILES:%.c=functions/%.c)
 
 # OBJECT FILES
 OBJS		= $(FILES:%.c=output/%.o)
+FUNC_OBJS	= $(FUNC:functions/%.c=output/%.o)
 
 # DEPENDENCIES
 DEP_PATH	= ..
@@ -43,7 +48,10 @@ output		:
 output/%.o	: %.c | output
 				$(call Compile,$<,$@)
 
-$(NAME)		: $(OBJS)
+output/%.o	: */%.c | output
+				$(call Compile,$<,$@)
+
+$(NAME)		: $(OBJS) $(FUNC_OBJS)
 				make -C $(LIBFT_PATH)
 				$(call CreateLib,$^,$@)
 

@@ -7,7 +7,6 @@
 # include "cmd_struct.h"
 # include "libft.h"
 
-int		ft_is_cmd_sep(const int c);
-void	ft_add_cmd_info(t_cmd *cmd, void *value, int type);
+void	ft_add_back_(void **src, void *new, t_list_type type);
 
 #endif

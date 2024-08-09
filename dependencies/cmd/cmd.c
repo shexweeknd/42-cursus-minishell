@@ -1,14 +1,22 @@
 #include "cmd.h"
 
+int	ft_is_cmd_sep(const int c)
+{
+	return (ft_isspace(c) || c == '|' || c == '&');
+}
+
+int	ft_is_redirect(const char c)
+{
+	return (c == '<' || c == '>');
+}
+
 void	ft_show_cmd(t_cmd *cmd)
 {
 	printf("\033[0;4;32mCMD	:\033[0;0m\n");
 	printf(" name	: [%s]\n", cmd->name);
 	printf(" option	: [%s]\n", cmd->option);
 	printf(" arg	: [%s]\n", cmd->arg);
-	printf(" in	: [%d]\n", cmd->in);
-	printf(" out	: [%d]\n", cmd->out);
-	printf(" io_arg	: [%s]\n", cmd->io_arg);
+	// printf(" io_arg	: [%s]\n", cmd->io_arg);
 	if (cmd->link_type == NONE)
 		printf(" l_type	: [NONE]\n");
 	if (cmd->link_type == PIPE)
@@ -32,6 +40,14 @@ int	ft_get_info_len(char *cmd)
 		cmd++;
 	}
 	return (i);
+}
+
+void	ft_get_cmd(char *cmd)
+{
+	t_cmd *r_cmd;
+
+	while (cmd && *cmd && ft_isspace(*cmd))
+		cmd++;
 }
 
 t_cmd	*ft_cmd(char *cmd)

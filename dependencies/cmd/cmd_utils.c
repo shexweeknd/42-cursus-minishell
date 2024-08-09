@@ -1,40 +1,33 @@
 #include "cmd.h"
 
-int	ft_is_cmd_sep(const int c)
+void	*_next(void *value, t_list_type type)
 {
-	return (ft_isspace(c) || c == '|' || c == '&');
+	if (type == CMD)
+		return (((t_cmd *)value)->next);
+	if (type == LIST)
+		return (((t_list *)value)->next);
+	return (value);
 }
 
-void	ft_add_back_cmd(t_cmd **cmd, t_cmd *new_cmd)
+void	_add_next(void *value, void *next, t_list_type type)
 {
-	t_cmd	*tmp;
+	if (type == CMD)
+		((t_cmd *)value)->next = (t_cmd *)next;
+	if (type == LIST)
+		((t_list *)value)->next = (t_list *)next;
+}
 
-	if (!cmd || !new_cmd)
+void	ft_add_back_(void **src, void *new, t_list_type type)
+{
+	void	*tmp;
+
+	if (!src || !new)
 		return ;
-	tmp = *cmd;
-	while (tmp && tmp->next)
-		tmp = tmp->next;
+	tmp = *src;
+	while (tmp && _next(tmp, type))
+		tmp = _next(tmp, type);
 	if (!tmp)
-		*cmd = new_cmd;
+		*src = new;
 	else
-		tmp->next = new_cmd;
+		_add_next(tmp, new, type);
 }
-
-void	ft_add_cmd_info(t_cmd *cmd, void *value, int type)
-{
-	if (type == 0)
-		cmd->name = (char *)value;
-	if (type == 1)
-		cmd->option = (char *)value;
-	if (type == 2)
-		cmd->arg = (char *)value;
-	if (type == 3)
-		cmd->in = *((int *)value);
-	if (type == 4)
-		cmd->out = *((int *)value);
-	if (type == 5)
-		cmd->io_arg = (char *)value;
-	if (type == 6)
-		cmd->link_type = *((int *)value);
-}
-
