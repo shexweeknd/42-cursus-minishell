@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:28 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/10 03:10:28 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/10 05:45:13 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,23 @@ t_redirect	ft_get_rtype(char *cmd)
 
 int	ft_get_redirect(t_cmd *_cmd, char *cmd)
 {
-	char	*tmp;
+	char		*tmp;
+	t_io_arg	*new_io_arg;
 
 	if (!cmd)
 		return (0);
 	tmp = cmd;
 	if (ft_is_redirect(*cmd))
 	{
-		_cmd->io_arg = (t_io_arg *)malloc(sizeof(t_io_arg));
-		if (!_cmd->io_arg)
+		new_io_arg = (t_io_arg *)malloc(sizeof(t_io_arg));
+		if (!new_io_arg)
 			return (0);
-		_cmd->io_arg->redirect = ft_get_rtype(cmd);
+		new_io_arg->redirect = ft_get_rtype(cmd);
 		while (ft_isspace(*cmd) || ft_is_redirect(*cmd))
 			cmd++;
-		if (_cmd->io_arg->redirect != NO)
-			cmd += _get_info(&_cmd->io_arg->arg, cmd);
+		if (new_io_arg->redirect != NO)
+			cmd += _get_info(&new_io_arg->arg, cmd);
+		ft_add_back_((void **)&_cmd->io_arg, new_io_arg, IO_ARG);
 		return (cmd - tmp);
 	}
 	return (0);

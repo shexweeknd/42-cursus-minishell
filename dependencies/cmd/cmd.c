@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:50 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/10 03:12:15 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/10 05:44:42 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,19 @@ void	ft_show_cmd(t_cmd *cmd)
 			printf(" NO REDIRECTION\n");
 		else
 		{
-			if (cmd->io_arg->redirect == IN_1)
-				printf(" REDIRECTION	: [IN]\n");
-			else if (cmd->io_arg->redirect == IN_2)
-				printf(" REDIRECTION	: [HEREDOC]\n");
-			else if (cmd->io_arg->redirect == OUT_1)
-				printf(" REDIRECTION	: [OUT]\n");
-			else
-				printf(" REDIRECTION	: [OUT END]\n");
-			printf(" ARG	: [%s]\n", cmd->io_arg->arg);
+			while (cmd->io_arg)
+			{
+				if (cmd->io_arg->redirect == IN_1)
+					printf(" REDIRECTION	: [IN]\n");
+				else if (cmd->io_arg->redirect == IN_2)
+					printf(" REDIRECTION	: [HEREDOC]\n");
+				else if (cmd->io_arg->redirect == OUT_1)
+					printf(" REDIRECTION	: [OUT]\n");
+				else
+					printf(" REDIRECTION	: [OUT END]\n");
+				printf(" ARG	: [%s]\n", cmd->io_arg->arg);
+				cmd->io_arg = cmd->io_arg->next;
+			}
 		}
 		printf("\n");
 		cmd = cmd->next;

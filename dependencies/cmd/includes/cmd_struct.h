@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:45 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/10 03:10:46 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/10 05:39:44 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 typedef enum e_list_type
 {
 	CMD,
-	LIST
+	LIST,
+	IO_ARG
 }	t_list_type;
 
 typedef enum e_link

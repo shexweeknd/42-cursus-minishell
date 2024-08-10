@@ -61,6 +61,7 @@ $(NAME)		: $(OBJS) $(FUNC_OBJS)
 
 clean		:
 				rm -rf $(OBJS)
+				rm -rf $(FUNC_OBJS)
 
 fclean		: clean
 				rm -rf $(NAME)
