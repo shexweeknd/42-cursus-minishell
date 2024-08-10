@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd_struct.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/10 03:10:45 by ballain           #+#    #+#             */
+/*   Updated: 2024/08/10 03:10:46 by ballain          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CMD_STRUCT_H
 # define CMD_STRUCT_H
 
@@ -11,13 +23,14 @@ typedef enum e_link
 {
 	NONE,
 	PIPE,
+	BG,
 	OR,
-	AND,
+	AND
 }	t_link;
 
 typedef enum e_redirect
 {
-	NONE,
+	NO,
 	IN_1,
 	IN_2,
 	OUT_1,

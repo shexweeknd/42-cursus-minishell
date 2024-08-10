@@ -3,7 +3,11 @@ NAME		= libcmd.a
 
 # FILES
 FILES		= cmd.c cmd_utils.c
-FUNC_FILES	= cmd_redirect.c cmd_redirect.c
+FUNC_FILES	= \
+		cmd_extra.c			\
+		cmd_extra_utils.c	\
+		utils.c					\
+		list_utils.c
 
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)

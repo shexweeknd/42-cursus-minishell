@@ -11,16 +11,19 @@ void	ft_show_list(t_list	*list)
 
 int main(int argc, char const *argv[], char **env)
 {
-	t_list	*lst;
-	// ft_get_cmd("test -t ./file");
-	lst = ft_lstnew("test");
-	if (!lst)
-		return (0);
-	ft_add_back_((void **)(&lst), ft_lstnew("test 2"), LIST);
-	ft_show_list(lst);
+	// t_cmd	*cmd;
+
+	ft_get_cmds((char *)argv[1]);
+	// if (cmd->io_arg->redirect == IN_1)
+	// 	printf("REDIRECTION	: [IN]\n");
+	// if (cmd->io_arg->redirect == IN_2)
+	// 	printf("REDIRECTION	: [HEREDOC]\n");
+	// if (cmd->io_arg->redirect == OUT_1)
+	// 	printf("REDIRECTION	: [OUT]\n");
+	// if (cmd->io_arg->redirect == OUT_2)
+	// 	printf("REDIRECTION	: [OUT END]\n");
+	// printf("ARG	: [%s]\n", cmd->io_arg->arg);
 	printf("test %d %s %s %s\n", argc, argv[0], *env, getcwd(NULL, 0));
-	chdir("/goinfre/ballain/Minishell/lol");
-	printf("current	: [%s]\n", getcwd(NULL, 0));
 	return (0);
 }
 

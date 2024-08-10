@@ -1,33 +1,62 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/10 03:11:02 by ballain           #+#    #+#             */
+/*   Updated: 2024/08/10 03:11:03 by ballain          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cmd.h"
 
-void	*_next(void *value, t_list_type type)
+int	ft_get_info_len(char *cmd)
 {
-	if (type == CMD)
-		return (((t_cmd *)value)->next);
-	if (type == LIST)
-		return (((t_list *)value)->next);
-	return (value);
+	int	i;
+
+	i = 0;
+	if (!cmd)
+		return (0);
+	while (*cmd)
+	{
+		if (ft_is_cmd_sep(*cmd) || ft_is_redirect(*cmd))
+			return (i);
+		i++;
+		cmd++;
+	}
+	return (i);
 }
 
-void	_add_next(void *value, void *next, t_list_type type)
+int	_get_info(char **str, char *cmd)
 {
-	if (type == CMD)
-		((t_cmd *)value)->next = (t_cmd *)next;
-	if (type == LIST)
-		((t_list *)value)->next = (t_list *)next;
+	int	len;
+	int	i;
+
+	if (!cmd || !(*cmd))
+	{
+		*str = NULL;
+		return (0);
+	}
+	i = _skip_space(cmd);
+	len = ft_get_info_len(cmd + i);
+	if (len)
+		*str = ft_substr(cmd + i, 0, len);
+	i += _skip_space(cmd + i + len);
+	return (i + len);
 }
 
-void	ft_add_back_(void **src, void *new, t_list_type type)
+int	ft_get_cmd_info(t_cmd *_cmd, char *cmd)
 {
-	void	*tmp;
+	char	*tmp;
 
-	if (!src || !new)
-		return ;
-	tmp = *src;
-	while (tmp && _next(tmp, type))
-		tmp = _next(tmp, type);
-	if (!tmp)
-		*src = new;
-	else
-		_add_next(tmp, new, type);
+	tmp = cmd;
+	if (!cmd)
+		return (0);
+	cmd += _get_info(&_cmd->name, cmd);
+	if (*cmd == '-')
+		cmd += _get_info(&_cmd->option, cmd);
+	cmd += _get_info(&_cmd->arg, cmd);
+	return (cmd - tmp);
 }
