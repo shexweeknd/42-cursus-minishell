@@ -85,7 +85,7 @@ push\:%		: all
 				git add *
 				git status
 				git commit -m "$(subst push:,,$@)"
-
+				git push
 
 ## Clean
 clean		:
