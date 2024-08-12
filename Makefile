@@ -83,7 +83,15 @@ test		: all
 				# --show-leak-kinds=all
 				valgrind --leak-check=full --show-leak-kinds=all -s ./$(NAME)
 
-## Clea
+## Save
+push\:%		: fclean
+				git status
+				git add *
+				git status
+				git commit -m "$(subst push:,,$@)"
+				git push
+
+## Clean
 clean		:
 				$(call MakeLibs,clean)
 				rm -rf $(OBJS)

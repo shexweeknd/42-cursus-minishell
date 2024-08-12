@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:28 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/10 03:11:28 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/12 15:28:25 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,4 @@ int	_skip_space(char *str)
 	return (i);
 }
 
-t_cmd	*_init_cmd(void)
-{
-	t_cmd	*cmd;
 
-	cmd = (t_cmd *)malloc(sizeof(t_cmd));
-	if (!cmd)
-		return (NULL);
-	cmd->name = NULL;
-	cmd->option = NULL;
-	cmd->arg = NULL;
-	cmd->io_arg = NULL;
-	cmd->link_type = NONE;
-	cmd->next = NULL;
-	return (cmd);
-}

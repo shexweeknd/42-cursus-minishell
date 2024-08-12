@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:41 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/10 03:10:42 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/12 15:28:21 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include "libft.h"
 
 /* --------------------- UTILS --------------------- */
-t_cmd		*_init_cmd(void);
 int			_skip_space(char *str);
 int			ft_is_delimiter(const char c);
 int			ft_is_cmd_sep(const char c);
@@ -33,6 +32,10 @@ void		ft_add_back_(void **src, void *new, t_list_type type);
 int			_get_info(char **str, char *cmd);
 int			ft_get_info_len(char *cmd);
 int			ft_get_cmd_info(t_cmd *_cmd, char *cmd);
+
+/* --------------------- CMD EXTRA --------------------- */
+t_cmd		*_init_cmd(void);
+t_io_arg	*_init_io_arg(t_redirect redirect, char *arg);
 
 /* --------------------- CMD EXTRA --------------------- */
 t_redirect	ft_get_rtype(char *cmd);
