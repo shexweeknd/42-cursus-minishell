@@ -79,6 +79,14 @@ test		: all
 				# --show-leak-kinds=all
 				valgrind --leak-check=full --show-leak-kinds=all -s ./$(NAME)
 
+## Save
+push\:%		: all
+				git status
+				git add *
+				git status
+				git commit -m "$(subst push:,,$@)"
+
+
 ## Clean
 clean		:
 				$(call MakeLibs,clean)

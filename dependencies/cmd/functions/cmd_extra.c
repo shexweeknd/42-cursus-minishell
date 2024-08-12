@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:28 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/10 05:45:13 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/12 15:28:17 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_get_redirect(t_cmd *_cmd, char *cmd)
 	tmp = cmd;
 	if (ft_is_redirect(*cmd))
 	{
-		new_io_arg = (t_io_arg *)malloc(sizeof(t_io_arg));
+		new_io_arg = _init_io_arg(NO, NULL);
 		if (!new_io_arg)
 			return (0);
 		new_io_arg->redirect = ft_get_rtype(cmd);
