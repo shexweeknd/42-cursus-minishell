@@ -79,9 +79,8 @@ $(NAME)		: $(OBJS)
 run			: all
 				./$(NAME)
 
-test		: all
-				# --show-leak-kinds=all
-				valgrind --leak-check=full --show-leak-kinds=all -s ./$(NAME)
+test\:%		: all
+				valgrind --leak-check=full --show-leak-kinds=all -s ./$(NAME) $(subst test:,,$@)
 
 ## Save
 push\:%		: fclean

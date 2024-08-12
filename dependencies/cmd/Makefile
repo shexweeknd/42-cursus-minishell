@@ -6,7 +6,8 @@ FILES		= cmd.c cmd_utils.c
 FUNC_FILES	= \
 		cmd_extra.c			\
 		cmd_extra_utils.c	\
-		utils.c					\
+		cmd_free.c			\
+		utils.c				\
 		list_utils.c
 
 # SRC FILES

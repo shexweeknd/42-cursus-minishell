@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/12 15:34:31 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/12 17:59:50 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	_get_info(char **str, char *cmd)
 int	ft_get_cmd_info(t_cmd *_cmd, char *cmd)
 {
 	char		*tmp;
-	t_io_arg	*io_tmp;
 
 	tmp = cmd;
 	if (!cmd)
@@ -56,11 +55,7 @@ int	ft_get_cmd_info(t_cmd *_cmd, char *cmd)
 	if (*cmd == '-')
 		cmd += _get_info(&_cmd->option, cmd);
 	cmd += _get_info(&_cmd->arg, cmd);
-	if (*cmd && !ft_is_delimiter(*cmd))
-	{
-		io_tmp = _init_io_arg(IN_1, NULL);
-		cmd += _get_info(&io_tmp->arg, cmd);
-		ft_add_back_((void **)&_cmd->io_arg, io_tmp, IO_ARG);
-	}
+	if (*cmd && !ft_is_delimiter(*cmd) && !ft_is_redirect(*cmd))
+		*(--cmd) = '<';
 	return (cmd - tmp);
 }

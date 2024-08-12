@@ -1,6 +1,4 @@
 #include "minishell.h"
-#include <readline/history.h>
-#include <readline/readline.h>
 
 void	ft_show_list(t_list *list)
 {
@@ -13,9 +11,11 @@ void	ft_show_list(t_list *list)
 
 int	main(int argc, char const **argv, char **env)
 {
+	t_cmd	*cmd;
+
 	(void)argc;
-	(void)argv;
 	(void)env;
-	set_history();
+	cmd = ft_get_cmds((char *)argv[1]);
+	ft_free_cmds(cmd);
 	return (0);
 }

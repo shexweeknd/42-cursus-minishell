@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:50 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/10 05:44:42 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/12 18:31:52 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_show_cmd(t_cmd *cmd)
 {
+	t_io_arg	*tmp;
 	printf("\033[0;4;32mCMD	:\033[0;0m\n");
 	while (cmd)
 	{
@@ -34,18 +35,19 @@ void	ft_show_cmd(t_cmd *cmd)
 			printf(" NO REDIRECTION\n");
 		else
 		{
-			while (cmd->io_arg)
+			tmp = cmd->io_arg;
+			while (tmp)
 			{
-				if (cmd->io_arg->redirect == IN_1)
+				if (tmp->redirect == IN_1)
 					printf(" REDIRECTION	: [IN]\n");
-				else if (cmd->io_arg->redirect == IN_2)
+				else if (tmp->redirect == IN_2)
 					printf(" REDIRECTION	: [HEREDOC]\n");
-				else if (cmd->io_arg->redirect == OUT_1)
+				else if (tmp->redirect == OUT_1)
 					printf(" REDIRECTION	: [OUT]\n");
 				else
 					printf(" REDIRECTION	: [OUT END]\n");
-				printf(" ARG	: [%s]\n", cmd->io_arg->arg);
-				cmd->io_arg = cmd->io_arg->next;
+				printf(" ARG	: [%s]\n", tmp->arg);
+				tmp = tmp->next;
 			}
 		}
 		printf("\n");
@@ -89,6 +91,6 @@ t_cmd	*ft_get_cmds(char *cmd)
 		while (*cmd && ft_is_delimiter(*cmd))
 			cmd++;
 	}
-	ft_show_cmd(cmds);
+	// ft_show_cmd(cmds);
 	return (cmds);
 }

@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:33 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/10 05:40:33 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/12 18:33:11 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,21 @@ void	_add_next(void *value, void *next, t_list_type type)
 		((t_list *)value)->next = (t_list *)next;
 	if (type == IO_ARG)
 		((t_io_arg *)value)->next = (t_io_arg *)next;
+}
+
+void	_loop(void **src, void (*_do)(void *, t_list_type), t_list_type type)
+{
+	void	*tmp;
+	void	*func_param;
+
+	tmp = *src;
+	while (tmp)
+	{
+		func_param = tmp;
+		tmp = _next(tmp, type);
+		if (_do)
+			_do(func_param, type);
+	}	
 }
 
 void	ft_add_back_(void **src, void *new, t_list_type type)
