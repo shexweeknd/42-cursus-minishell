@@ -1,6 +1,8 @@
 #include "minishell.h"
+#include <readline/history.h>
+#include <readline/readline.h>
 
-void	ft_show_list(t_list	*list)
+void	ft_show_list(t_list *list)
 {
 	while (list)
 	{
@@ -9,9 +11,11 @@ void	ft_show_list(t_list	*list)
 	}
 }
 
-int	main(int argc, char const *argv[], char **env)
+int	main(int argc, char const **argv, char **env)
 {
-	ft_get_cmds((char *)argv[1]);
-	printf("test %d %s %s %s\n", argc, argv[0], *env, getcwd(NULL, 0));
+	(void)argc;
+	(void)argv;
+	(void)env;
+	set_history();
 	return (0);
 }
