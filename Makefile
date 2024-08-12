@@ -20,19 +20,22 @@ DEP_PATH	= ./dependencies
 LIBFT_PATH	= $(DEP_PATH)/libft
 ENV_PATH	= $(DEP_PATH)/env
 CMD_PATH	= $(DEP_PATH)/cmd
+HISTORY_PATH = $(DEP_PATH)/history
 
 # LIBS
 LIBFT_LIB	= -L$(LIBFT_PATH) -lft
 ENV_LIB		= -L$(ENV_PATH) -lenv
 CMD_LIB		= -L$(CMD_PATH) -lcmd
-LIBS		= $(CMD_LIB) $(ENV_LIB) $(LIBFT_LIB) -lreadline
+HISTORY_LIB = -L$(HISTORY_PATH) -lhistory
+LIBS		= $(HISTORY_LIB) $(CMD_LIB) $(ENV_LIB) $(LIBFT_LIB) -lreadline
 
 # INCLUDES
 MINISH_INC	= -Iincludes
 LIBFT_INC	= -I$(LIBFT_PATH)
 ENV_INC		= -I$(ENV_PATH)/includes
 CMD_INC		= -I$(CMD_PATH)/includes
-INCLUDES	= $(MINISH_INC) $(LIBFT_INC) $(ENV_INC) $(CMD_INC)
+HISTORY_INC = -I$(HISTORY_PATH)/includes
+INCLUDES	= $(MINISH_INC) $(LIBFT_INC) $(ENV_INC) $(CMD_INC) $(HISTORY_INC)
 
 # COMPILATION CONFIG
 CC		= cc -g
@@ -47,6 +50,7 @@ define MakeLibs
 	make $(1) -C $(LIBFT_PATH)
 	make $(1) -C $(ENV_PATH)
 	make $(1) -C $(CMD_PATH)
+	make $(1) -C $(HISTORY_PATH)
 endef
 
 define CreateExe
@@ -80,7 +84,7 @@ test		: all
 				valgrind --leak-check=full --show-leak-kinds=all -s ./$(NAME)
 
 ## Save
-push\:%		: all
+push\:%		: fclean
 				git status
 				git add *
 				git status

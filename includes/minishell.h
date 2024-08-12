@@ -13,12 +13,13 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "cmd.h"
+# include "env.h"
+# include "history.h"
+# include "struct.h"
+# include <readline/history.h>
+# include <readline/readline.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "env.h"
-# include "cmd.h"
-# include "struct.h"
 
 #endif
