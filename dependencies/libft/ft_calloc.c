@@ -6,15 +6,11 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:16:46 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/05 19:22:32 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/12 14:16:47 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <string.h>
-#include <stdio.h>
-#include <bsd/string.h>
-#include <stdlib.h>
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {

@@ -6,7 +6,7 @@
 #    By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 11:14:27 by ballain           #+#    #+#              #
-#    Updated: 2024/08/07 10:05:08 by ballain          ###   ########.fr        #
+#    Updated: 2024/08/12 14:17:09 by ballain          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ OBJS		= $(SRCS:%.c=output/%.o)
 OBJSBONUS	= $(SRCSBONUS:%.c=output/%.o)
 VIMFILES	= ./.*.swp
 CFLAGS		= -Wall -Wextra -Werror
-RM		= rm -rf
-CC		= cc
+RM			= rm -rf
+CC			= cc -g
 
 all 		: bonus
 
