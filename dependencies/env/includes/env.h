@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:21:45 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/06 14:16:35 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/13 10:23:51 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
 
-# include <stdlib.h>
 # include "env_struct.h"
 # include "libft.h"
+# include <stdlib.h>
 
 t_env_var	*ft_init_var_env(void);
 char		*ft_init_var_env_content(char *var_env);

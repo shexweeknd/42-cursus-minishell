@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/13 11:38:58 by hramaros          #+#    #+#             */
+/*   Updated: 2024/08/13 11:38:59 by hramaros         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	ft_show_list(t_list *list)
@@ -11,11 +23,9 @@ void	ft_show_list(t_list *list)
 
 int	main(int argc, char const **argv, char **env)
 {
-	t_cmd	*cmd;
-
 	(void)argc;
 	(void)env;
-	cmd = ft_get_cmds((char *)argv[1]);
-	ft_free_cmds(cmd);
+	(void)argv;
+	get_history("~/.bash_history");
 	return (0);
 }

@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   history_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 08:14:44 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/13 10:43:04 by hramaros         ###   ########.fr       */
+/*   Created: 2024/08/13 12:54:12 by hramaros          #+#    #+#             */
+/*   Updated: 2024/08/13 12:54:43 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <string.h>
+#include "history.h"
 
-char	*ft_strchr(const char *s, int c)
+void	free_history(t_hist_elem *hist_elem)
 {
-	if (!s)
-		return (0);
-	while (*s)
+	t_hist_elem	*suivant;
+
+	while (hist_elem)
 	{
-		if (*s == (char)c)
-			return ((char *)(s));
-		s++;
+		suivant = hist_elem->next;
+		free(hist_elem);
+		hist_elem = suivant;
 	}
-	if (*s == (char)c)
-		return ((char *)(s));
-	return ((char *)0);
+	return ;
 }
