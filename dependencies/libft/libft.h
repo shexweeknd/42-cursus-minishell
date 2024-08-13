@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:02:13 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/13 10:51:32 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/13 14:36:45 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_list
 }					t_list;
 
 void				ft_bzero(void *s, size_t n);
+size_t				ft_get_occ(char *str, char c);
 int					ft_isspace(const int c);
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
@@ -78,5 +79,6 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 char				*get_next_line(int fd);
 size_t				get_line_size(char *str);
 size_t				get_twodim_char_size(char **buffer);
+void				free_two_dim(char **buffer);
 
 #endif

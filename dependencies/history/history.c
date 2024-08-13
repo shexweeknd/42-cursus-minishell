@@ -6,52 +6,32 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:39:28 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/13 12:55:39 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:16:58 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "history.h"
 
-// TOTEST si fonctionne
-static t_hist_elem	*parse_to_hist_elem(char **content)
-{
-	t_hist_elem	*result;
-	t_hist_elem	*temp;
-
-	result = malloc(sizeof(t_hist_elem));
-	if (!result)
-		return (NULL);
-	temp = result;
-	while (content)
-	{
-		temp->command = *content;
-		content++;
-		if (!content)
-			temp->next = NULL;
-		else
-		{
-			temp->next = malloc(sizeof(t_hist_elem));
-			if (!temp->next)
-				return (free_history(result), NULL);
-		}
-		temp = temp->next;
-	}
-	return (result);
-}
-
 // servira a parser l'historique contenu dans le fichier historique
 t_hist_elem	*get_history(char *history_path)
 {
 	t_hist_elem	*result;
-	char		**content;
+	int			fd;
+	size_t		index;
+	size_t		size;
 
-	content = parse_twodim(history_path);
-	if (!content)
-		return (NULL);
-	result = parse_to_hist_elem(content);
-	if (!result)
-		return (free(content), NULL);
-	return (free(content), result);
+	fd = open(history_path, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	result = NULL;
+	size = count_files_line(history_path);
+	index = 0;
+	while (index < size)
+	{
+		result = ft_append_hist_elem(result, get_next_line(fd));
+		index++;
+	}
+	return (close(fd), result);
 }
 
 // servira a ecrire l'historique en memoire vers le fichier d'historique

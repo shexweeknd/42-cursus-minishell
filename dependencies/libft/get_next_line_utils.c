@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:39:19 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/13 10:50:06 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/13 14:09:17 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,25 @@ size_t	get_twodim_char_size(char **buffer)
 	size_t	result;
 
 	result = 0;
-	while (buffer)
+	while (*buffer)
 	{
 		result++;
 		buffer++;
 	}
 	return (result);
+}
+
+void	free_two_dim(char **buffer)
+{
+	size_t	size;
+	size_t	index;
+
+	size = get_twodim_char_size(buffer);
+	index = 0;
+	while (index < (size + 1))
+	{
+		free(buffer[index]);
+		index++;
+	}
+	free(buffer);
 }

@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history_utils.c                                    :+:      :+:    :+:   */
+/*   ft_get_occ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/13 12:54:12 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/13 15:21:45 by hramaros         ###   ########.fr       */
+/*   Created: 2024/08/13 14:35:24 by hramaros          #+#    #+#             */
+/*   Updated: 2024/08/13 14:57:05 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "history.h"
+#include "libft.h"
 
-void	free_history(t_hist_elem *hist_elem)
+size_t	ft_get_occ(char *str, char c)
 {
-	if (!hist_elem)
-		return ;
-	if (!hist_elem->next)
+	size_t	occ;
+
+	if (!str)
+		return (0);
+	occ = 0;
+	while (*str)
 	{
-		free(hist_elem->command);
-		free(hist_elem);
-		return ;
+		if (*str == c)
+			occ++;
+		str++;
 	}
-	free_history(hist_elem->next);
-	free(hist_elem->command);
-	free(hist_elem);
-	return ;
+	return (occ);
 }
