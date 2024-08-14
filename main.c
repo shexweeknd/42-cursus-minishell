@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:38:58 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/13 15:22:58 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/14 12:11:42 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_show_list(t_list *list)
 	}
 }
 
+// test de la fonction get_history
 int	main(int argc, char const **argv, char **env)
 {
 	t_hist_elem	*result;

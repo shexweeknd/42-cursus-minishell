@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:36:41 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/13 13:24:03 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/14 12:08:22 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ static char	*push_line(char *buffer)
 		result[i + 1] = '\0';
 		return (result);
 	}
+	if (i == 0)
+		return (free(result), NULL);
 	result[i] = '\0';
 	return (result);
 }
@@ -77,20 +79,15 @@ static char	*get_remains(char *remains)
 	while (remains[i] && remains[i] != '\n')
 		i++;
 	if (remains[i] == '\0')
-	{
-		free(remains);
-		return (NULL);
-	}
+		return (free(remains), NULL);
 	result = malloc(sizeof(char) * (ft_strlen(&remains[i]) + 1));
 	if (!result)
 		return (NULL);
-	i++;
 	j = 0;
-	while (remains[i])
-		result[j++] = remains[i++];
+	while (remains[++i])
+		result[j++] = remains[i];
 	result[j] = '\0';
-	free(remains);
-	return (result);
+	return (free(remains), result);
 }
 
 char	*get_next_line(int fd)
@@ -112,10 +109,7 @@ char	*get_next_line(int fd)
 	}
 	result = push_line(remains);
 	remains = get_remains(remains);
-	if (result[0] == '\0')
-	{
-		free(result);
-		return (NULL);
-	}
+	if (result == NULL)
+		return (free(remains), NULL);
 	return (result);
 }
