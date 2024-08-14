@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:50:45 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/14 12:17:29 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/14 15:34:10 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static char	*ft_nl_to_zero(char *str)
 	return (result);
 }
 
-t_hist_elem	*ft_append_hist_elem(t_hist_elem *first_elem, char *command)
+t_hist_elem	*ft_append_hist_elem(t_hist_elem *first_elem, char *command,
+		int position)
 {
 	t_hist_elem	*backup;
 
@@ -59,6 +60,7 @@ t_hist_elem	*ft_append_hist_elem(t_hist_elem *first_elem, char *command)
 		if (!first_elem)
 			return (NULL);
 		first_elem->command = ft_nl_to_zero(command);
+		first_elem->line_number = position;
 		first_elem->is_offset_to_write = 0;
 		first_elem->next = NULL;
 		return (first_elem);
@@ -70,7 +72,25 @@ t_hist_elem	*ft_append_hist_elem(t_hist_elem *first_elem, char *command)
 	if (!first_elem->next)
 		return (free_history(backup), NULL);
 	first_elem->next->command = ft_nl_to_zero(command);
+	first_elem->line_number = position;
 	first_elem->next->is_offset_to_write = 0;
-	first_elem->next->next = NULL;
-	return (backup);
+	return (first_elem->next->next = NULL, backup);
+}
+
+t_hist_elem	*ft_get_last_history(t_hist_elem *elem)
+{
+	if (!elem)
+		return (elem);
+	while (elem->next)
+		elem = elem->next;
+	return (elem);
+}
+
+t_hist_elem	*ft_get_history_offsetted(t_hist_elem *elem)
+{
+	if (!elem)
+		return (elem);
+	while (!elem->is_offset_to_write && elem->next)
+		elem = elem->next;
+	return (elem);
 }

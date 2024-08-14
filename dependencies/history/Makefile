@@ -5,6 +5,7 @@ NAME		= libhistory.a
 FILES		= history.c
 FUNC_FILES	= history_utils.c \
 			history_getters_utils.c \
+			history_setters_utils.c \
 			history_debug_utils.c \
 
 # SRC FILES
