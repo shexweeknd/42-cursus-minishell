@@ -6,11 +6,37 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/12 17:59:50 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/15 12:37:52 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
+
+void	ft_show_ltype(t_link link_type)
+{
+	if (link_type == BG)
+		printf(" l_type	: [BG]\n");
+	if (link_type == NONE)
+		printf(" l_type	: [NONE]\n");
+	if (link_type == PIPE)
+		printf(" l_type	: [PIPE]\n");
+	if (link_type == OR)
+		printf(" l_type	: [OR]\n");
+	if (link_type == AND)
+		printf(" l_type	: [AND]]\n");
+}
+
+void	ft_show_redirection(t_redirect redirect)
+{
+	if (redirect == IN_1)
+		printf(" REDIRECTION	: [IN]\n");
+	else if (redirect == IN_2)
+		printf(" REDIRECTION	: [HEREDOC]\n");
+	else if (redirect == OUT_1)
+		printf(" REDIRECTION	: [OUT]\n");
+	else
+		printf(" REDIRECTION	: [OUT END]\n");
+}
 
 int	ft_get_info_len(char *cmd)
 {

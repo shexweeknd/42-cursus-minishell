@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:21:55 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/15 08:56:03 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/15 11:24:40 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,3 @@ void	ft_free_env(t_env_var *env_var)
 {
 	_loop((void **)&env_var, (t_lst_utils){0, _free_env, _next_env});
 }
-// 	t_env_var	*tmp;
-
-// 	while (env_var)
-// 	{
-// 		tmp = env_var;
-// 		env_var = env_var->next;
-// 		free(tmp->name);
-// 		ft_lstclear(&tmp->content, ft_del_value);
-// 		free(tmp);
-// 	}
-// }

@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:21:45 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/15 08:43:36 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/15 11:20:45 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "libft.h"
 # include <stdlib.h>
 
+void		_add_next_env(t_env_var *env_var, t_env_var *new);
 void		*_next_env(void *tmp);
 
 int			ft_getstr(char **dest, char *str, char delimiter);

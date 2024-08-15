@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:50 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/15 02:47:39 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/15 13:15:43 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,14 @@
 void	ft_show_cmd(t_cmd *cmd)
 {
 	t_io_arg	*tmp;
+
 	printf("\033[0;4;32mCMD	:\033[0;0m\n");
 	while (cmd)
 	{
 		printf(" name	: [%s]\n", cmd->name);
 		printf(" option	: [%s]\n", cmd->option);
 		printf(" arg	: [%s]\n", cmd->arg);
-		if (cmd->link_type == BG)
-			printf(" l_type	: [BG]\n");
-		if (cmd->link_type == NONE)
-			printf(" l_type	: [NONE]\n");
-		if (cmd->link_type == PIPE)
-			printf(" l_type	: [PIPE]\n");
-		if (cmd->link_type == OR)
-			printf(" l_type	: [OR]\n");
-		if (cmd->link_type == AND)
-			printf(" l_type	: [AND]]\n");
+		ft_show_ltype(cmd->link_type);
 		if (!cmd->io_arg)
 			printf(" NO REDIRECTION\n");
 		else
@@ -38,14 +30,7 @@ void	ft_show_cmd(t_cmd *cmd)
 			tmp = cmd->io_arg;
 			while (tmp)
 			{
-				if (tmp->redirect == IN_1)
-					printf(" REDIRECTION	: [IN]\n");
-				else if (tmp->redirect == IN_2)
-					printf(" REDIRECTION	: [HEREDOC]\n");
-				else if (tmp->redirect == OUT_1)
-					printf(" REDIRECTION	: [OUT]\n");
-				else
-					printf(" REDIRECTION	: [OUT END]\n");
+				ft_show_redirection(tmp->redirect);
 				printf(" ARG	: [%s]\n", tmp->arg);
 				tmp = tmp->next;
 			}
@@ -80,7 +65,7 @@ t_cmd	*ft_init_cmd(char *cmd)
 
 t_cmd	*ft_get_cmds(char *cmd)
 {
-	t_cmd	*cmds;
+	t_cmd		*cmds;
 	t_lst_utils	actions;
 
 	actions = (t_lst_utils){CMD, _add_next, _next};

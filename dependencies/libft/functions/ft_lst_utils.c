@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 00:59:20 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/15 03:18:33 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/15 12:30:53 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,18 @@ void	ft_add_back_(void **src, void *new, t_lst_utils utils)
 
 	if (!src || !new)
 		return ;
+	if (!utils._do)
+	{
+		ft_lstadd_back((t_list **)src, new);
+		return ;
+	}
 	tmp = *src;
 	while (tmp && _get_next(tmp, utils))
 		tmp = _get_next(tmp, utils);
 	if (!tmp)
 		*src = new;
 	else
-	{
-		if (utils._do)
-			utils._do(tmp, new, utils.type);
-		else
-			ft_lstadd_back((t_list **)src, new);
-	}
+		utils._do(tmp, new, utils.type);
 }
 
 void	ft_add_front_(void **src, void *new, t_lst_utils utils)
