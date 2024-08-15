@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history_setters.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 15:20:51 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/14 19:06:25 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/15 10:20:15 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,15 @@ char	*get_things_after_offset(int fd)
 			break ;
 		result = ft_super_strjoin_and_free(result, line);
 	}
-	return (close(fd), result);
+	return (result);
 }
 
+void	write_cmd_typed_after_offset(int fd, t_hist_elem *hist)
+{
+	while (hist)
+	{
+		write(fd, hist->command, ft_strlen(hist->command));
+		write(fd, "\n", 1);
+		hist = hist->next;
+	}
+}

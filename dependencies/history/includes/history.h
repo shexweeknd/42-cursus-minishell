@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:38:41 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/14 19:03:18 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/15 10:19:37 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_hist_elem				*ft_get_history_offsetted(t_hist_elem *elem);
 // functions for set_history
 void					go_to_offset(int fd, t_hist_elem *hist_elem);
 char					*get_things_after_offset(int fd);
+void					write_cmd_typed_after_offset(int fd, t_hist_elem *hist);
 
 // utils function for everyone
 void					free_history(t_hist_elem *hist_elem);
