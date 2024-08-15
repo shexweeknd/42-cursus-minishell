@@ -6,11 +6,27 @@
 /*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:39:28 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/15 10:20:53 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/15 11:22:48 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "history.h"
+
+t_hist_elem	*new_history(char *command, int position)
+{
+	t_hist_elem	*result;
+
+	if (!command)
+		return (printf("The command to parse in history is null.\n"), NULL);
+	result = malloc(sizeof(t_hist_elem));
+	if (!result)
+		return (printf("Failed to malloc the command history."), NULL);
+	result->command = ft_strdup(command);
+	result->line_number = position;
+	result->is_offset_to_write = 0;
+	result->next = NULL;
+	return (result);
+}
 
 // servira a parser l'historique contenu dans le fichier historique
 t_hist_elem	*get_history(char *history_path)

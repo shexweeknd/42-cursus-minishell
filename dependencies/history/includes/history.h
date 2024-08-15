@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:38:41 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/15 10:19:37 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/15 11:23:33 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_hist_elem				*ft_get_history_offsetted(t_hist_elem *elem);
 void					go_to_offset(int fd, t_hist_elem *hist_elem);
 char					*get_things_after_offset(int fd);
 void					write_cmd_typed_after_offset(int fd, t_hist_elem *hist);
+t_hist_elem				*new_history(char *command, int position);
 
 // utils function for everyone
 void					free_history(t_hist_elem *hist_elem);
