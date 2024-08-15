@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:28 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/15 02:26:52 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/15 13:35:25 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_get_redirect(t_cmd *_cmd, char *cmd)
 			cmd++;
 		if (new_io_arg->redirect != NO)
 			cmd += _get_info(&new_io_arg->arg, cmd);
-		utils = (t_lst_utils){IO_ARG, _add_next, _next};
+		utils = (t_lst_utils){IO_ARG, _add_next_cmd, _next_cmd};
 		ft_add_back_((void **)&_cmd->io_arg, new_io_arg, utils);
 		return (cmd - tmp);
 	}

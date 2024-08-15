@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:50 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/15 13:15:43 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/15 13:31:02 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_cmd	*ft_get_cmds(char *cmd)
 	t_cmd		*cmds;
 	t_lst_utils	actions;
 
-	actions = (t_lst_utils){CMD, _add_next, _next};
+	actions = (t_lst_utils){CMD, _add_next_cmd, _next_cmd};
 	cmds = NULL;
 	while (*cmd)
 	{

@@ -6,11 +6,23 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:10 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/15 02:50:44 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/15 13:32:01 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
+
+int	_skip_space(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (i);
+	while (ft_isspace(*(str++)))
+		i++;
+	return (i);
+}
 
 t_io_arg	*_init_io_arg(t_redirect redirect, char *arg)
 {
@@ -41,7 +53,7 @@ t_cmd	*_init_cmd(void)
 	return (cmd);
 }
 
-void	*_next(void *value, t_list_type type)
+void	*_next_cmd(void *value, t_list_type type)
 {
 	if (type == CMD)
 		return (((t_cmd *)value)->next);
@@ -50,22 +62,10 @@ void	*_next(void *value, t_list_type type)
 	return (value);
 }
 
-void	_add_next(void *value, void *next, t_list_type type)
+void	_add_next_cmd(void *value, void *next, t_list_type type)
 {
 	if (type == CMD)
 		((t_cmd *)value)->next = (t_cmd *)next;
 	if (type == IO_ARG)
 		((t_io_arg *)value)->next = (t_io_arg *)next;
-}
-
-int	_skip_space(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (i);
-	while (ft_isspace(*(str++)))
-		i++;
-	return (i);
 }
