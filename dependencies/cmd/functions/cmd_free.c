@@ -19,7 +19,7 @@ void	_free(void *value, t_list_type type)
 		if (((t_cmd *)value)->io_arg)
 			_loop((void **)&((t_cmd *)value)->io_arg, utils);
 	}
-	else if (type == IO_ARG && value)
+	else if (type == IO_ARG)
 		free(((t_io_arg *)value)->arg);
 	free(value);
 }

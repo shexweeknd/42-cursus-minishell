@@ -6,33 +6,43 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:22:01 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/15 08:09:43 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/15 10:03:28 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 
+void	_add_next_env(t_env_var *env_var, t_env_var *new)
+{
+	if (!env_var || new)
+		return ;
+	env_var->next = new;
+}
+
+void	*_next_env(void *tmp)
+{
+	return (((t_env_var *)tmp)->next);
+}
+
 int	ft_getstr(char **dest, char *str, char delimiter)
 {
-	int		find;
+	char	*tmp;
 	int		len;
 
 	if (!(*str) || !dest)
-		return (NULL);
-	find = 1;
-	len = ft_strchr(str, delimiter) - str;
-	if (!len)
-	{
-		find = 0;
+		return (0);
+	tmp = ft_strchr(str, delimiter);
+	if (!tmp)
 		len = ft_strlen(str);
-	}
+	else
+		len = tmp - str;
 	if (!len)
-		return (NULL);
+		return (0);
 	*dest = ft_substr(str, 0, len);
 	if (!(*dest))
-		return (NULL);
-	if (find)
-		return (len + 1);
+		return (0);
+	if (!tmp)
+		len++;
 	return (len);
 }
 
@@ -82,3 +92,4 @@ void	*ft_get_env_var(t_env_var *env_var, char *name, int type)
 	}
 	return (NULL);
 }
+

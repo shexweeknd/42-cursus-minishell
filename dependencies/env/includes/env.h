@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:21:45 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/15 03:28:11 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/15 08:43:36 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 void		*_next_env(void *tmp);
 
+int			ft_getstr(char **dest, char *str, char delimiter);
 t_env_var	*ft_init_var_env(void);
 char		*ft_init_var_env_content(char *var_env);
 t_env_var	*ft_get_env(char **env);

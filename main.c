@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:38:58 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/15 08:02:47 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/15 10:05:50 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,31 @@ void	ft_show_env(t_env_var *env)
 // test de la fonction get_history
 int	main(int argc, char const **argv, char **env)
 {
-	// t_env_var	*venv;
+	t_env_var	*venv;
 
 	(void)argc;
 	(void)argv;
-	(void)env;
-	char	*tmp;
-	int		len;
+	if (argc == 2)
+	{
+		while (*env)
+		{
+			printf("%s\n", *env);
+			env++;
+		}
+	}
+	else
+	{
+		venv = ft_get_env(env);
+		ft_show_env(venv);
+		ft_free_env(venv);
+	}
+	// (void)env;
+	// char	*tmp;
+	// int		len;
 
-	len = 0;
-	tmp = ft_strdup("test:");
+	// len = 0;
+	// tmp = ft_strdup("test:");
 	// len = sizeof(tmp) / sizeof(char *);
-	printf("LEN	: [%d]\n", len);
-	// venv = ft_get_env(env);
-	// ft_show_env(venv);
-	// ft_free_env(venv);
+	// printf("LEN	: [%d]\n", len);
 	return (0);
 }

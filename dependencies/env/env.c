@@ -6,32 +6,11 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:22:05 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/15 08:09:42 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/15 10:05:46 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
-
-char	*ft_get_var_env_name(char *var_env)
-{
-	char	*tmp;
-	char	*var_env_name;
-	int		i;
-	int		len;
-
-	i = 0;
-	len = 0;
-	tmp = var_env;
-	while (*tmp && *(tmp++) != '=')
-		len++;
-	var_env_name = (char *)malloc(sizeof(char) + (++len));
-	if (!var_env_name)
-		return (NULL);
-	while (*var_env && *var_env != '=')
-		var_env_name[i++] = *(var_env++);
-	var_env_name[i] = '\0';
-	return (var_env_name);
-}
 
 t_list	*ft_get_var_env_content(char *var_env)
 {
@@ -61,6 +40,21 @@ t_list	*ft_get_var_env_content(char *var_env)
 	return (r_value);
 }
 
+void	ft_get_venv_content(t_list **lst, char *var_env)
+{
+	char		*tmp;
+
+	while (*var_env)
+	{
+		tmp = NULL;
+		var_env += ft_getstr(&tmp, var_env, ':');
+		if (!tmp)
+			return ;
+		ft_add_back_((void **)lst, ft_lstnew(tmp), (t_lst_utils){0});
+		var_env++;
+	}
+}
+
 t_env_var	*ft_get_env(char **env)
 {
 	t_env_var	*env_var;
@@ -72,8 +66,10 @@ t_env_var	*ft_get_env(char **env)
 	r_value = env_var;
 	while (*env)
 	{
-		env_var->name = ft_get_var_env_name(*env);
-		env_var->content = ft_get_var_env_content(*env);
+		// env_var->name = ft_get_var_env_name(*env);
+		*env += ft_getstr(&env_var->name, *env, '=');
+		// printf("NAME	: [%s]\n", env_var->name);
+		ft_get_venv_content(&env_var->content, *env);
 		if (*(++env))
 		{
 			env_var->next = ft_init_var_env();
