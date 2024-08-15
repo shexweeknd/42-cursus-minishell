@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history_setters.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 15:20:51 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/14 15:57:15 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/14 19:06:25 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	go_to_offset(int fd, t_hist_elem *hist_elem)
 	int		line_pos;
 
 	line_pos = 0;
-	while (line_pos < hist_elem->line_number && read(fd, buf, 1) > 0)
+	while (line_pos < hist_elem->line_number && read(fd, &buf, 1) > 0)
 	{
 		if (buf == '\n')
 			line_pos++;

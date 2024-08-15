@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:38:41 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/14 15:54:09 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/14 19:03:18 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_hist_elem
 }						t_hist_elem;
 
 // principal functions
-void					set_history(t_hist_elem *hist_elem, char *history_path);
+int						set_history(t_hist_elem *hist_elem, char *history_path);
 t_hist_elem				*get_history(char *history_path);
 
 // functions for get_history

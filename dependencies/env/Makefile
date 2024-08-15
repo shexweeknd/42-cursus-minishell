@@ -16,7 +16,7 @@ LIBFT		= -L$(LIBFT_PATH) -lft
 LIBS		= $(LIBFT)
 
 # INCLUDES
-LIBFT_INC	= -I$(LIBFT_PATH)
+LIBFT_INC	= -I$(LIBFT_PATH)/includes
 ENV_INC		= -Iincludes
 INCLUDES	= $(LIBFT_INC) $(ENV_INC)
 

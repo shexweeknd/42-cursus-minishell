@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:10 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/12 15:28:08 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/15 02:50:44 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,33 @@ t_cmd	*_init_cmd(void)
 	cmd->link_type = NONE;
 	cmd->next = NULL;
 	return (cmd);
+}
+
+void	*_next(void *value, t_list_type type)
+{
+	if (type == CMD)
+		return (((t_cmd *)value)->next);
+	if (type == IO_ARG)
+		return (((t_io_arg *)value)->next);
+	return (value);
+}
+
+void	_add_next(void *value, void *next, t_list_type type)
+{
+	if (type == CMD)
+		((t_cmd *)value)->next = (t_cmd *)next;
+	if (type == IO_ARG)
+		((t_io_arg *)value)->next = (t_io_arg *)next;
+}
+
+int	_skip_space(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (i);
+	while (ft_isspace(*(str++)))
+		i++;
+	return (i);
 }

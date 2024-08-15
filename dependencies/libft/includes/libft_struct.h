@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   libft_struct.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/10 03:11:28 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/15 02:36:19 by ballain          ###   ########.fr       */
+/*   Created: 2024/08/15 02:35:10 by ballain           #+#    #+#             */
+/*   Updated: 2024/08/15 02:35:10 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
+#ifndef LIBFT_STRUCT_H
+# define LIBFT_STRUCT_H
 
-int	ft_is_delimiter(const char c)
+typedef struct s_list
 {
-	return (c == '|' || c == '&');
-}
+	void			*content;
+	struct s_list	*next;
+}	t_list;
 
-int	ft_is_cmd_sep(const char c)
+typedef struct s_lst_utils
 {
-	return (ft_isspace(c) || ft_is_delimiter(c));
-}
+	int		type;
+	void	(*_do)();
+	void	*(*_next)();
+}	t_lst_utils;
 
-int	ft_is_redirect(const char c)
-{
-	return (c == '<' || c == '>');
-}
+#endif

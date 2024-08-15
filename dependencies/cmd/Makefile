@@ -7,8 +7,7 @@ FUNC_FILES	= \
 		cmd_extra.c			\
 		cmd_extra_utils.c	\
 		cmd_free.c			\
-		utils.c				\
-		list_utils.c
+		utils.c
 
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)
@@ -26,7 +25,7 @@ LIBFT		= -L$(LIBFT_PATH) -lft
 LIBS		= $(LIBFT)
 
 # INCLUDES
-LIBFT_INC	= -I$(LIBFT_PATH)
+LIBFT_INC	= -I$(LIBFT_PATH)/includes
 CMD_INC		= -Iincludes
 INCLUDES	= $(LIBFT_INC) $(CMD_INC)
 

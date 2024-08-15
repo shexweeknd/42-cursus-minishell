@@ -6,11 +6,35 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:22:01 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/06 14:16:30 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/15 08:09:43 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
+
+int	ft_getstr(char **dest, char *str, char delimiter)
+{
+	int		find;
+	int		len;
+
+	if (!(*str) || !dest)
+		return (NULL);
+	find = 1;
+	len = ft_strchr(str, delimiter) - str;
+	if (!len)
+	{
+		find = 0;
+		len = ft_strlen(str);
+	}
+	if (!len)
+		return (NULL);
+	*dest = ft_substr(str, 0, len);
+	if (!(*dest))
+		return (NULL);
+	if (find)
+		return (len + 1);
+	return (len);
+}
 
 t_env_var	*ft_init_var_env(void)
 {

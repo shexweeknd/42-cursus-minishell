@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:38:58 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/14 12:11:42 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/15 08:02:47 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,35 @@ void	ft_show_list(t_list *list)
 	}
 }
 
+void	ft_print_env(t_env_var *env)
+{
+	printf("\033[0;4;32m%s          \033[0;0m :\n", env->name);
+	ft_show_list(env->content);
+}
+
+void	ft_show_env(t_env_var *env)
+{
+	printf("\033[0;4;31mENV VARIABLE       : \033[0;0m\n");
+	_loop((void **)&env, (t_lst_utils){0, ft_print_env, _next_env});
+}
+
 // test de la fonction get_history
 int	main(int argc, char const **argv, char **env)
 {
-	t_hist_elem	*result;
+	// t_env_var	*venv;
 
 	(void)argc;
-	(void)env;
 	(void)argv;
-	result = get_history("/home/hramaros/Documents/Cursus/Cursus_42/Minishell/dependencies/history/src/history_test.txt");
-	print_history(result);
-	free_history(result);
+	(void)env;
+	char	*tmp;
+	int		len;
+
+	len = 0;
+	tmp = ft_strdup("test:");
+	// len = sizeof(tmp) / sizeof(char *);
+	printf("LEN	: [%d]\n", len);
+	// venv = ft_get_env(env);
+	// ft_show_env(venv);
+	// ft_free_env(venv);
 	return (0);
 }

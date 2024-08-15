@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:45 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/12 17:44:46 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/15 02:34:45 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 typedef enum e_list_type
 {
 	CMD,
-	LIST,
 	IO_ARG
 }	t_list_type;
 

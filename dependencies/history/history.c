@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:39:28 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/14 16:00:40 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/14 19:04:15 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_hist_elem	*get_history(char *history_path)
 }
 
 // servira a ecrire l'historique en memoire vers le fichier d'historique
-void	set_history(t_hist_elem *hist_elem, char *history_path)
+int	set_history(t_hist_elem *hist_elem, char *history_path)
 {
 	int		fd;
 	char	*remains;
@@ -53,7 +53,7 @@ void	set_history(t_hist_elem *hist_elem, char *history_path)
 	if (fd < 0)
 		return (printf("Failed to write the history\n"), 0);
 	go_to_offset(fd, ft_get_history_offsetted(hist_elem));
-	write_content_typed_after_offset();
+	// write_content_typed_after_offset();
 	// etape 3: ecrire le remains vers la fin
 	write(fd, remains, ft_strlen(remains));
 	return (1);

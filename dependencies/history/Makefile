@@ -5,8 +5,8 @@ NAME		= libhistory.a
 FILES		= history.c
 FUNC_FILES	= history_utils.c \
 			history_getters_utils.c \
-			history_setters_utils.c \
-			history_debug_utils.c \
+			history_setters.c \
+			history_debug_utils.c
 
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)
@@ -24,8 +24,8 @@ LIBFT		= -L$(LIBFT_PATH) -lft
 LIBS		= $(LIBFT)
 
 # INCLUDES
-LIBFT_INC	= -I$(LIBFT_PATH)
-HISTORY_INC		= -Iincludes
+LIBFT_INC	= -I$(LIBFT_PATH)/includes
+HISTORY_INC	= -Iincludes
 INCLUDES	= $(LIBFT_INC) $(HISTORY_INC)
 
 # COMPILATION CONFIG

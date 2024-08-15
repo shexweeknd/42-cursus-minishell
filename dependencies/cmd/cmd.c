@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:50 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/12 18:31:52 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/15 02:47:39 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,17 @@ t_cmd	*ft_init_cmd(char *cmd)
 t_cmd	*ft_get_cmds(char *cmd)
 {
 	t_cmd	*cmds;
+	t_lst_utils	actions;
 
+	actions = (t_lst_utils){CMD, _add_next, _next};
 	cmds = NULL;
 	while (*cmd)
 	{
-		ft_add_back_((void **)(&cmds), (void *)ft_init_cmd(cmd), CMD);
+		ft_add_back_((void **)(&cmds), ft_init_cmd(cmd), actions);
 		while (*cmd && !ft_is_delimiter(*cmd))
 			cmd++;
 		while (*cmd && ft_is_delimiter(*cmd))
 			cmd++;
 	}
-	// ft_show_cmd(cmds);
 	return (cmds);
 }

@@ -31,7 +31,7 @@ LIBS		= $(HISTORY_LIB) $(CMD_LIB) $(ENV_LIB) $(LIBFT_LIB) -lreadline
 
 # INCLUDES
 MINISH_INC	= -Iincludes
-LIBFT_INC	= -I$(LIBFT_PATH)
+LIBFT_INC	= -I$(LIBFT_PATH)/includes
 ENV_INC		= -I$(ENV_PATH)/includes
 CMD_INC		= -I$(CMD_PATH)/includes
 HISTORY_INC = -I$(HISTORY_PATH)/includes
