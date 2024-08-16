@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 00:59:20 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/15 12:30:53 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/16 10:31:31 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	_loop(void **src, t_lst_utils utils)
 	while (tmp)
 	{
 		func_param = tmp;
-		tmp = utils._next(tmp, utils.type);
+		tmp = _get_next(tmp, utils);
 		if (utils._do)
 			utils._do(func_param, utils.type);
 	}

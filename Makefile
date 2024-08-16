@@ -1,45 +1,45 @@
 # PROGRAM NAME
-NAME		= minishell
+NAME			= minishell
 
 # FILES
-FILES		= main.c
-FUNC_FILES	= ""
-SRC_FILES	= ""
+FILES			= main.c
+FUNC_FILES		= ""
+SRC_FILES		= ""
 
 # SRC FILES
-FUNC		= $(FUNC_FILES:%.c=functions/%.c)
-SRC			= $(SRC_FILES:%.c=src/%.c)
+FUNC			= $(FUNC_FILES:%.c=functions/%.c)
+SRC				= $(SRC_FILES:%.c=src/%.c)
 
 # OBJECT FILES
-OBJS		= $(FILES:%.c=output/%.o)
-FUNC_OBJS	= $(FUNC:functions/%.c=output/%.o)
-SRC_OBJS	= $(SRC:src/%.c=output/%.o)
+OBJS			= $(FILES:%.c=output/%.o)
+FUNC_OBJS		= $(FUNC:functions/%.c=output/%.o)
+SRC_OBJS		= $(SRC:src/%.c=output/%.o)
 
 # DEPENDENCIES
-DEP_PATH	= ./dependencies
-LIBFT_PATH	= $(DEP_PATH)/libft
-ENV_PATH	= $(DEP_PATH)/env
-CMD_PATH	= $(DEP_PATH)/cmd
-HISTORY_PATH = $(DEP_PATH)/history
+DEP_PATH		= ./dependencies
+LIBFT_PATH		= $(DEP_PATH)/libft
+ENV_PATH		= $(DEP_PATH)/env
+CMD_PATH		= $(DEP_PATH)/cmd
+HISTORY_PATH	= $(DEP_PATH)/history
 
 # LIBS
-LIBFT_LIB	= -L$(LIBFT_PATH) -lft
-ENV_LIB		= -L$(ENV_PATH) -lenv
-CMD_LIB		= -L$(CMD_PATH) -lcmd
-HISTORY_LIB = -L$(HISTORY_PATH) -lhistory
-LIBS		= $(HISTORY_LIB) $(CMD_LIB) $(ENV_LIB) $(LIBFT_LIB) -lreadline
+LIBFT_LIB		= -L$(LIBFT_PATH) -lft
+ENV_LIB			= -L$(ENV_PATH) -lenv
+CMD_LIB			= -L$(CMD_PATH) -lcmd
+HISTORY_LIB 	= -L$(HISTORY_PATH) -lhistory
+LIBS			= $(HISTORY_LIB) $(CMD_LIB) $(ENV_LIB) $(LIBFT_LIB) -lreadline
 
 # INCLUDES
-MINISH_INC	= -Iincludes
-LIBFT_INC	= -I$(LIBFT_PATH)/includes
-ENV_INC		= -I$(ENV_PATH)/includes
-CMD_INC		= -I$(CMD_PATH)/includes
-HISTORY_INC = -I$(HISTORY_PATH)/includes
-INCLUDES	= $(MINISH_INC) $(LIBFT_INC) $(ENV_INC) $(CMD_INC) $(HISTORY_INC)
+MINISH_INC		= -Iincludes
+LIBFT_INC		= -I$(LIBFT_PATH)/includes
+ENV_INC			= -I$(ENV_PATH)/includes
+CMD_INC			= -I$(CMD_PATH)/includes
+HISTORY_INC 	= -I$(HISTORY_PATH)/includes
+INCLUDES		= $(MINISH_INC) $(LIBFT_INC) $(ENV_INC) $(CMD_INC) $(HISTORY_INC) $(SAVE_INC)
 
 # COMPILATION CONFIG
-CC		= cc -g
-CFLAGS	= -Wall -Wextra -Werror
+CC				= cc -g
+CFLAGS			= -Wall -Wextra -Werror
 
 # FUNCTION
 define Compile
@@ -87,7 +87,7 @@ push\:%		: fclean
 				git status
 				git add *
 				git status
-				git commit -m "$(subst push:,,$@)"
+				git commit -m $(subst push:,,$@)
 				git push
 
 ## Leaks check
