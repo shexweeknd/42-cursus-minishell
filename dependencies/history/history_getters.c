@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history_getters_utils.c                            :+:      :+:    :+:   */
+/*   history_getters.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:50:45 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/14 15:34:10 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/16 16:09:15 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,6 @@ size_t	count_files_line(char *history_path)
 	return (close(fd), size);
 }
 
-static char	*ft_nl_to_zero(char *str)
-{
-	char	*result;
-
-	if (!str)
-		return (str);
-	result = str;
-	while (*str)
-	{
-		if (*str == '\n')
-			*str = '\0';
-		str++;
-	}
-	return (result);
-}
-
 t_hist_elem	*ft_append_hist_elem(t_hist_elem *first_elem, char *command,
 		int position)
 {
@@ -60,21 +44,21 @@ t_hist_elem	*ft_append_hist_elem(t_hist_elem *first_elem, char *command,
 		if (!first_elem)
 			return (NULL);
 		first_elem->command = ft_nl_to_zero(command);
-		first_elem->line_number = position;
-		first_elem->is_offset_to_write = 0;
+		first_elem->line_nbr = position;
+		first_elem->is_offset = 0;
 		first_elem->next = NULL;
-		return (first_elem);
+		return (add_history(command), first_elem);
 	}
 	backup = first_elem;
 	while (first_elem->next)
 		first_elem = first_elem->next;
 	first_elem->next = malloc(sizeof(t_hist_elem));
 	if (!first_elem->next)
-		return (free_history(backup), NULL);
+		return (free_lchistory(backup), NULL);
 	first_elem->next->command = ft_nl_to_zero(command);
-	first_elem->line_number = position;
-	first_elem->next->is_offset_to_write = 0;
-	return (first_elem->next->next = NULL, backup);
+	first_elem->next->line_nbr = position;
+	first_elem->next->is_offset = 0;
+	return (add_history(command), first_elem->next->next = NULL, backup);
 }
 
 t_hist_elem	*ft_get_last_history(t_hist_elem *elem)
@@ -90,7 +74,7 @@ t_hist_elem	*ft_get_history_offsetted(t_hist_elem *elem)
 {
 	if (!elem)
 		return (elem);
-	while (!elem->is_offset_to_write && elem->next)
+	while (!elem->is_offset && elem->next)
 		elem = elem->next;
 	return (elem);
 }

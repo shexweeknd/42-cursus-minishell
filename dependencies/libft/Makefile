@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+         #
+#    By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 11:14:27 by ballain           #+#    #+#              #
-#    Updated: 2024/08/15 01:41:50 by ballain          ###   ########.fr        #
+#    Updated: 2024/08/16 13:47:00 by hramaros         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS		= \
 	ft_itoa.c        ft_memset.c   ft_split.c     ft_strlcat.c     ft_strnstr.c   ft_toupper.c  ft_strcmp.c		\
 	get_next_line.c  get_next_line_utils.c        ft_lst_utils.c												\
 	ft_get_occ.c \
+	ft_nl_to_zero.c \
 
 SRCSBONUS	= \
 	ft_lstnew_bonus.c	ft_lstadd_front_bonus.c	ft_lstsize_bonus.c	ft_lstlast_bonus.c \

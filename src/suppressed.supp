@@ -1,0 +1,47 @@
+{
+   readline_alloc_history_entry
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:xmalloc
+   fun:alloc_history_entry
+   fun:add_history
+   fun:get_history
+   fun:main
+}
+
+{
+   readline_add_history
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:xmalloc
+   fun:add_history
+   fun:get_history
+   fun:main
+}
+
+{
+   ft_append_hist_elem
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:xmalloc
+   fun:alloc_history_entry
+   fun:add_history
+   fun:ft_append_hist_elem
+   fun:get_history
+   fun:main
+}
+
+{
+   ft_append_hist_elem
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:xmalloc
+   fun:add_history
+   fun:ft_append_hist_elem
+   fun:get_history
+   fun:main
+}

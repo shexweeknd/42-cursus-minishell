@@ -4,9 +4,9 @@ NAME		= libhistory.a
 # FILES
 FILES		= history.c
 FUNC_FILES	= history_utils.c \
-			history_getters_utils.c \
+			history_getters.c \
 			history_setters.c \
-			history_debug_utils.c
+			history_debug.c
 
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)

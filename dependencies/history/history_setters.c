@@ -6,24 +6,26 @@
 /*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 15:20:51 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/15 10:20:15 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/16 16:14:15 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "history.h"
 
+// USED FOR POSITIONNING THE CURSOR TO THE OFFSET
 void	go_to_offset(int fd, t_hist_elem *hist_elem)
 {
 	char	buf;
 	int		line_pos;
 
 	line_pos = 0;
-	while (line_pos < hist_elem->line_number && read(fd, &buf, 1) > 0)
+	while (line_pos < hist_elem->line_nbr && read(fd, &buf, 1) > 0)
 	{
 		if (buf == '\n')
 			line_pos++;
 	}
 }
+
 static char	*ft_super_strjoin_and_free(char *remains, char *buffer)
 {
 	char	*result;
@@ -52,6 +54,7 @@ static char	*ft_super_strjoin_and_free(char *remains, char *buffer)
 	return (result);
 }
 
+// USED FOR GETTING ALL THE THINGS AFTER THE OFFSET
 char	*get_things_after_offset(int fd)
 {
 	char	*result;

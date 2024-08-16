@@ -1,39 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history_utils.c                                    :+:      :+:    :+:   */
+/*   ft_nl_to_zero.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/13 12:54:12 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/16 15:34:14 by hramaros         ###   ########.fr       */
+/*   Created: 2024/08/16 13:46:13 by hramaros          #+#    #+#             */
+/*   Updated: 2024/08/16 13:46:23 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "history.h"
+#include "libft.h"
 
-void	*get_next_history(t_hist_elem *src)
+char	*ft_nl_to_zero(char *str)
 {
-	return (src->next);
-}
+	char	*result;
 
-void	add_back_history(t_hist_elem *src, t_hist_elem *new)
-{
-	src->next = new;
-}
-
-void	free_lchistory(t_hist_elem *hist_elem)
-{
-	if (!hist_elem)
-		return ;
-	if (!hist_elem->next)
+	if (!str)
+		return (str);
+	result = str;
+	while (*str)
 	{
-		free(hist_elem->command);
-		free(hist_elem);
-		return ;
+		if (*str == '\n')
+			*str = '\0';
+		str++;
 	}
-	free_lchistory(hist_elem->next);
-	free(hist_elem->command);
-	free(hist_elem);
-	return ;
+	return (result);
 }

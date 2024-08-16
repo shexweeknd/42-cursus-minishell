@@ -45,7 +45,7 @@
 - `fstat` : Fonction qui permet de rEcuperer les informations concerant un fichier ouvert
 	```
 	PROTOTYPE	: int fstat(int fildes, struct stat *buf);
-	RETUR		: 0 si tout c'est bien passE, sinon -1
+	RETURN		: 0 si tout c'est bien passE, sinon -1
 	```
 	> [!NOTE]
 	> fildes : file descriptor
@@ -60,3 +60,22 @@ Si le nom correspond à un lien symbolique, le lien est supprimé.
 
 - `execve` : Pour que ce soit plus claire concernant cette fonction, voici un lien youtube qui l'explique en mieux :
 (https://www.youtube.com/watch?v=OVFEWSP7n8c&list=PLfqABt5AS4FkW5mOn2Tn9ZZLLDwA3kZUY&index=13)
+
+## Utilisation du Makefile
+
+- `leaks`	: Une regle qui permet de faire un valgrind sur l'executable avec des suppressions. Le fichier de suppression se trouve dans `src/suppressed.supp`.
+	```
+	EXECUTION	:
+		$ make leaks <L_ARGS=[minishell_args]>
+
+		<L_ARGS> : argument optionnel
+	```
+
+- `suppr`	: Une regle qui permet de generer les suppressions a definir dans `src/suppressed.supp`.
+	```
+	EXECUTION	:
+		$ make suppr
+	```
+
+	> [!NOTE]
+	> Il faut taper `y` ou `Y` quand `valgrind` demande l'affichage des suppressions a considerer.

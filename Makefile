@@ -90,15 +90,32 @@ push\:%		: fclean
 				git commit -m "$(subst push:,,$@)"
 				git push
 
+## Leaks check
+
+L_ARGS =
+
+LEAKS_CMD = valgrind --leak-check=full --show-leak-kinds=all --suppressions=./src/suppressed.txt ./minishell $(L_ARGS)
+
+SUPPRESSION_CMD = valgrind --leak-check=full --show-leak-kinds=all --gen-suppressions=yes ./minishell $(L_ARGS)
+
+leaks		: re
+				@echo -e "\033[34mrunning : $(LEAKS_CMD)\033[0m"
+				@$(LEAKS_CMD)
+
+suppr 		: re
+				@echo -e "\033[34mrunning : $(SUPPRESSION_CMD)\033[0m"
+				@$(SUPPRESSION_CMD)
+
 ## Clean
 clean		:
-				$(call MakeLibs,clean)
+				$(call MakeLibs, clean)
 				rm -rf $(OBJS)
 
 fclean		: clean
-				$(call MakeLibs,fclean)
+				$(call MakeLibs, fclean)
 				rm -rf $(NAME)
 
 re			: fclean all
 
-.PHONY		: clean fclean re all
+.PHONY		: clean fclean re all \
+				leaks suppr
