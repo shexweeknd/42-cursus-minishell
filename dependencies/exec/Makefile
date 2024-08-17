@@ -1,14 +1,9 @@
 # PROGRAM NAME
-NAME		= libcmd.a
+NAME		= libexec.a
 
 # FILES
-FILES		= cmd.c cmd_utils.c
-FUNC_FILES	= \
-		cmd_extra.c			\
-		cmd_extra_utils.c	\
-		cmd_show.c			\
-		cmd_free.c			\
-		utils.c
+FILES		= ft_exec.c #exec_utils.c
+FUNC_FILES	= echo.c
 
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)
@@ -20,15 +15,21 @@ FUNC_OBJS	= $(FUNC:functions/%.c=output/%.o)
 # DEPENDENCIES
 DEP_PATH	= ..
 LIBFT_PATH	= $(DEP_PATH)/libft
+ENV_PATH	= $(DEP_PATH)/env
+CMD_PATH	= $(DEP_PATH)/cmd
 
 # LIBS
 LIBFT		= -L$(LIBFT_PATH) -lft
-LIBS		= $(LIBFT)
+ENV			= -L$(ENV_PATH) -lenv
+CMD			= -L$(CMD_PATH) -lcmd
+LIBS		= $(CMD) $(ENV) $(LIBFT)
 
 # INCLUDES
 LIBFT_INC	= -I$(LIBFT_PATH)/includes
-CMD_INC		= -Iincludes
-INCLUDES	= $(LIBFT_INC) $(CMD_INC)
+ENV_INC		= -I$(ENV_PATH)/includes
+CMD_INC		= -I$(CMD_PATH)/includes
+EXEC_INC	= -Iincludes
+INCLUDES	= $(LIBFT_INC) $(ENV_INC) $(CMD_INC) $(EXEC_INC)
 
 # COMPILATION CONFIG
 CC		= cc -g
@@ -38,6 +39,12 @@ CFLAGS	= -Wall -Wextra -Werror
 # FUNCTION
 define Compile
 	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2) $(LIBS)
+endef
+
+define MakeLibs
+	make $(1) -C $(LIBFT_PATH)
+	make $(1) -C $(ENV_PATH)
+	make $(1) -C $(CMD_PATH)
 endef
 
 define CreateLib
@@ -57,14 +64,16 @@ output/%.o	: */%.c | output
 				$(call Compile,$<,$@)
 
 $(NAME)		: $(OBJS) $(FUNC_OBJS)
-				make -C $(LIBFT_PATH)
+				$(call Makelibs)
 				$(call CreateLib,$^,$@)
 
 clean		:
+				$(call Makelibs, clean)
 				rm -rf $(OBJS)
 				rm -rf $(FUNC_OBJS)
 
 fclean		: clean
+				$(call Makelibs, fclean)
 				rm -rf $(NAME)
 
 re			: fclean all

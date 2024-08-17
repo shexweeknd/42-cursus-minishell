@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:10 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/15 13:32:01 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/17 00:25:45 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ t_cmd	*_init_cmd(void)
 	cmd = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
-	cmd->name = NULL;
-	cmd->option = NULL;
-	cmd->arg = NULL;
+	cmd->args = NULL;
 	cmd->io_arg = NULL;
 	cmd->link_type = NONE;
 	cmd->next = NULL;

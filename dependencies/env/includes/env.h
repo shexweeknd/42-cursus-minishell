@@ -6,16 +6,16 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:21:45 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/15 13:26:26 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/17 09:44:02 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
 
-# include "env_struct.h"
-# include "libft.h"
 # include <stdlib.h>
+# include "libft.h"
+# include "env_struct.h"
 
 void		_add_next_env(t_env_var *env_var, t_env_var *new);
 void		*_next_env(void *tmp);

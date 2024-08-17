@@ -6,41 +6,37 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:50 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/15 13:31:02 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/17 02:43:56 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
-void	ft_show_cmd(t_cmd *cmd)
+static int	ft_get_cmd_info(t_cmd *_cmd, char *cmd)
 {
-	t_io_arg	*tmp;
+	int		i;
+	char	*tmp;
 
-	printf("\033[0;4;32mCMD	:\033[0;0m\n");
-	while (cmd)
+	if (!cmd)
+		return (0);
+	i = ft_get_args_len(cmd);
+	if (i == 0)
+		return (0);
+	_cmd->args = (char **)malloc(sizeof(char *) * (++i));
+	if (!_cmd->args)
+		return (0);
+	i = 0;
+	tmp = cmd;
+	while (*cmd && !ft_is_delimiter(*cmd) && !ft_is_redirect(*cmd))
 	{
-		printf(" name	: [%s]\n", cmd->name);
-		printf(" option	: [%s]\n", cmd->option);
-		printf(" arg	: [%s]\n", cmd->arg);
-		ft_show_ltype(cmd->link_type);
-		if (!cmd->io_arg)
-			printf(" NO REDIRECTION\n");
-		else
-		{
-			tmp = cmd->io_arg;
-			while (tmp)
-			{
-				ft_show_redirection(tmp->redirect);
-				printf(" ARG	: [%s]\n", tmp->arg);
-				tmp = tmp->next;
-			}
-		}
-		printf("\n");
-		cmd = cmd->next;
+		_cmd->args[i] = NULL;
+		cmd += _get_info(&_cmd->args[i++], cmd);
 	}
+	_cmd->args[i] = NULL;
+	return (cmd - tmp);
 }
 
-t_cmd	*ft_init_cmd(char *cmd)
+static t_cmd	*ft_init_cmd(char *cmd)
 {
 	t_cmd	*r_cmd;
 

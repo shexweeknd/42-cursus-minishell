@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:41 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/15 13:32:24 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/17 02:12:23 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,16 @@
 int			ft_is_delimiter(const char c);
 int			ft_is_cmd_sep(const char c);
 int			ft_is_redirect(const char c);
+int			ft_is_quote(const char c);
 
-/* --------------------- CMD UTILS --------------------- */
+/* --------------------- CMD SHOW --------------------- */
 void		ft_show_ltype(t_link link_type);
 void		ft_show_redirection(t_redirect redirect);
+void		ft_show_cmd(t_cmd *cmd);
+
+/* --------------------- CMD UTILS --------------------- */
+int			ft_get_args_len(char *cmd);
 int			ft_get_info_len(char *cmd);
-int			ft_get_cmd_info(t_cmd *_cmd, char *cmd);
 int			_get_info(char **str, char *cmd);
 
 /* --------------------- CMD EXTRA UTILS --------------------- */
@@ -44,11 +48,9 @@ t_link		ft_get_ltype(char *cmd);
 int			ft_get_redirect(t_cmd *_cmd, char *cmd);
 
 /* --------------------- CMD --------------------- */
-void		ft_show_cmd(t_cmd *cmd);
 t_cmd		*ft_get_cmds(char *cmd);
 
 /* --------------------- CMD FREE --------------------- */
-void		_free(void *value, t_list_type type);
 void		ft_free_cmds(t_cmd *cmd);
 
 #endif

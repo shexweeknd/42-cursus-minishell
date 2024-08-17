@@ -21,13 +21,15 @@ LIBFT_PATH		= $(DEP_PATH)/libft
 ENV_PATH		= $(DEP_PATH)/env
 CMD_PATH		= $(DEP_PATH)/cmd
 HISTORY_PATH	= $(DEP_PATH)/history
+EXEC_PATH		= $(DEP_PATH)/exec
 
 # LIBS
 LIBFT_LIB		= -L$(LIBFT_PATH) -lft
 ENV_LIB			= -L$(ENV_PATH) -lenv
 CMD_LIB			= -L$(CMD_PATH) -lcmd
 HISTORY_LIB 	= -L$(HISTORY_PATH) -lhistory
-LIBS			= $(HISTORY_LIB) $(CMD_LIB) $(ENV_LIB) $(LIBFT_LIB) -lreadline
+EXEC_LIB 		= -L$(EXEC_PATH) -lexec
+LIBS			= $(EXEC_LIB) $(HISTORY_LIB) $(CMD_LIB) $(ENV_LIB) $(LIBFT_LIB) -lreadline
 
 # INCLUDES
 MINISH_INC		= -Iincludes
@@ -35,7 +37,8 @@ LIBFT_INC		= -I$(LIBFT_PATH)/includes
 ENV_INC			= -I$(ENV_PATH)/includes
 CMD_INC			= -I$(CMD_PATH)/includes
 HISTORY_INC 	= -I$(HISTORY_PATH)/includes
-INCLUDES		= $(MINISH_INC) $(LIBFT_INC) $(ENV_INC) $(CMD_INC) $(HISTORY_INC) $(SAVE_INC)
+EXEC_INC		= -I$(EXEC_PATH)/includes
+INCLUDES		= $(MINISH_INC) $(LIBFT_INC) $(ENV_INC) $(CMD_INC) $(HISTORY_INC) $(SAVE_INC) $(EXEC_INC)
 
 # COMPILATION CONFIG
 CC				= cc -g
@@ -51,6 +54,7 @@ define MakeLibs
 	make $(1) -C $(ENV_PATH)
 	make $(1) -C $(CMD_PATH)
 	make $(1) -C $(HISTORY_PATH)
+	make $(1) -C $(EXEC_PATH)
 endef
 
 define CreateExe
@@ -92,11 +96,11 @@ push\:%		: fclean
 
 ## Leaks check
 
-L_ARGS =
+L_ARGS			=
 
-LEAKS_CMD = valgrind --leak-check=full --show-leak-kinds=all --suppressions=./src/suppressed.supp ./minishell $(L_ARGS)
+LEAKS_CMD		= valgrind --leak-check=full --show-leak-kinds=all --suppressions=./src/suppressed.supp ./minishell $(L_ARGS)
 
-SUPPRESSION_CMD = valgrind --leak-check=full --show-leak-kinds=all --gen-suppressions=yes ./minishell $(L_ARGS)
+SUPPRESSION_CMD	= valgrind --leak-check=full --show-leak-kinds=all --gen-suppressions=yes ./minishell $(L_ARGS)
 
 leaks		: re
 				@echo -e "\033[34mrunning : $(LEAKS_CMD)\033[0m"
