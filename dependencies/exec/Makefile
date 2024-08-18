@@ -3,13 +3,24 @@ NAME		= libexec.a
 
 # FILES
 FILES		= ft_exec.c #exec_utils.c
-FUNC_FILES	= echo.c
+SRC_FILES	= \
+				echo.c	\
+				env.c	\
+				export.c\
+				pwd.c	\
+				unset.c	\
+				cd.c	\
+				ft_exit.c
+
+FUNC_FILES	= exec_utils.c
 
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)
+SRC			= $(SRC_FILES:%.c=src/%.c)
 
 # OBJECT FILES
 OBJS		= $(FILES:%.c=output/%.o)
+SRC_OBJS	= $(SRC:src/%.c=output/%.o)
 FUNC_OBJS	= $(FUNC:functions/%.c=output/%.o)
 
 # DEPENDENCIES
@@ -60,10 +71,13 @@ output		:
 output/%.o	: %.c | output
 				$(call Compile,$<,$@)
 
-output/%.o	: */%.c | output
+output/%.o	: functions/%.c | output
 				$(call Compile,$<,$@)
 
-$(NAME)		: $(OBJS) $(FUNC_OBJS)
+output/%.o	: src/%.c | output
+				$(call Compile,$<,$@)
+
+$(NAME)		: $(OBJS) $(SRC_OBJS) $(FUNC_OBJS)
 				$(call Makelibs)
 				$(call CreateLib,$^,$@)
 

@@ -76,7 +76,6 @@ output/%.o	: */%.c | output
 				$(call Compile,$<,$@)
 
 $(NAME)		: $(OBJS)
-
 				$(call CreateExe,$^,$@)
 
 ## Test

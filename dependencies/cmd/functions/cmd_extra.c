@@ -6,11 +6,30 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:28 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/15 13:35:25 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/18 18:56:33 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
+
+t_link	ft_get_ltype(char *cmd)
+{
+	if (!cmd)
+		return (NONE);
+	if (*cmd == '|' && cmd++)
+	{
+		if (cmd && *cmd == '|')
+			return (OR);
+		return (PIPE);
+	}
+	if (*cmd == '&' && cmd++)
+	{
+		if (cmd && *cmd == '&')
+			return (AND);
+		return (BG);
+	}
+	return (NONE);
+}
 
 t_redirect	ft_get_rtype(char *cmd)
 {
@@ -55,23 +74,4 @@ int	ft_get_redirect(t_cmd *_cmd, char *cmd)
 		return (cmd - tmp);
 	}
 	return (0);
-}
-
-t_link	ft_get_ltype(char *cmd)
-{
-	if (!cmd)
-		return (NONE);
-	if (*cmd == '|' && cmd++)
-	{
-		if (cmd && *cmd == '|')
-			return (OR);
-		return (PIPE);
-	}
-	if (*cmd == '&' && cmd++)
-	{
-		if (cmd && *cmd == '&')
-			return (AND);
-		return (BG);
-	}
-	return (NONE);
 }

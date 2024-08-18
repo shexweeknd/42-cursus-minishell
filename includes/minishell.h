@@ -6,13 +6,14 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:46 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/16 18:34:11 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/18 11:44:36 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "ft_exec.h"
 # include "cmd.h"
 # include "env.h"
 # include "history.h"

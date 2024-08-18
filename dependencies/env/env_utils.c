@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:22:01 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/15 11:25:07 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/18 11:29:32 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,12 @@ t_env_var	*ft_init_var_env(void)
 	return (r_value);
 }
 
-void	*ft_get_env_var(t_env_var *env_var, char *name, int type)
+t_env_var	*ft_get_env_var(t_env_var *env_var, char *name)
 {
 	while (env_var)
 	{
 		if (ft_strcmp(env_var->name, name) == 0)
-		{
-			if (type == 0)
-				return (env_var);
-			return (env_var->content);
-		}
+			return (env_var);
 		env_var = env_var->next;
 	}
 	return (NULL);
