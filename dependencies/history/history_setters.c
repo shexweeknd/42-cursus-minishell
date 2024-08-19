@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 15:20:51 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/19 10:25:40 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/19 10:46:27 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	go_to_offset(int fd, t_hist_elem *hist_elem)
 		if (buf == '\n')
 			line_pos++;
 	}
+	if (buf != '\n')
+		write(fd, "\n", 1);
 }
 
 static char	*ft_super_strjoin_and_free(char *remains, char *buffer)
