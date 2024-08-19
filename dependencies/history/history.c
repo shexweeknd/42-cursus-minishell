@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:39:28 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/16 16:14:38 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/19 10:31:58 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ t_hist_elem	*get_history(char *file_path)
 	index = 0;
 	while (index < (size + 1))
 	{
-		result = ft_append_hist_elem(result, get_next_line(fd), index);
+		result = ft_append_hist_elem(result, get_next_line(fd));
 		index++;
 	}
 	ft_get_last_history(result)->is_offset = 1;
 	return (close(fd), result);
 }
 
-// TOTEST WILL SERVE TO WRITE THE HISTORY TO THE FILE
+// WILL SERVE TO WRITE THE HISTORY TO THE FILE
 int	set_history(t_hist_elem *hist_elem, char *file_path)
 {
 	int		fd;
@@ -69,10 +69,10 @@ int	set_history(t_hist_elem *hist_elem, char *file_path)
 	go_to_offset(fd, ft_get_history_offsetted(hist_elem));
 	write_cmd_typed_after_offset(fd, ft_get_history_offsetted(hist_elem)->next);
 	write(fd, remains, ft_strlen(remains));
-	return (close(fd), 1);
+	return (free(remains), close(fd), 1);
 }
 
-// WILL SERVE TO MODIFY THE LHISTORY IN THE MEMORY
+// TODO WILL SERVE TO MODIFY THE LCHIST and RLHIST IN THE MEMORY
 void	modify_curr_history(void)
 {
 	printf("Modifie l'historique en memoire...\n");

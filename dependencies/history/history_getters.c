@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:50:45 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/16 16:09:15 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/19 10:14:01 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ size_t	count_files_line(char *history_path)
 	return (close(fd), size);
 }
 
-t_hist_elem	*ft_append_hist_elem(t_hist_elem *first_elem, char *command,
-		int position)
+t_hist_elem	*ft_append_hist_elem(t_hist_elem *first_elem, char *command)
 {
 	t_hist_elem	*backup;
 
@@ -44,7 +43,7 @@ t_hist_elem	*ft_append_hist_elem(t_hist_elem *first_elem, char *command,
 		if (!first_elem)
 			return (NULL);
 		first_elem->command = ft_nl_to_zero(command);
-		first_elem->line_nbr = position;
+		first_elem->line_nbr = 0;
 		first_elem->is_offset = 0;
 		first_elem->next = NULL;
 		return (add_history(command), first_elem);
@@ -56,7 +55,7 @@ t_hist_elem	*ft_append_hist_elem(t_hist_elem *first_elem, char *command,
 	if (!first_elem->next)
 		return (free_lchistory(backup), NULL);
 	first_elem->next->command = ft_nl_to_zero(command);
-	first_elem->next->line_nbr = position;
+	first_elem->next->line_nbr = first_elem->line_nbr + 1;
 	first_elem->next->is_offset = 0;
 	return (add_history(command), first_elem->next->next = NULL, backup);
 }

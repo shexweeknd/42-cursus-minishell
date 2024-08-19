@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:38:41 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/16 16:12:20 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/19 10:16:15 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ typedef struct s_hist_elem
 
 // principal functions
 t_hist_elem				*get_history(char *file_path);
+int						set_history(t_hist_elem *hist_elem, char *file_path);
 
 // functions for get_history
 size_t					count_files_line(char *history_path);
 t_hist_elem				*ft_append_hist_elem(t_hist_elem *first_elem,
-							char *command, int position);
+							char *command);
 t_hist_elem				*ft_get_last_history(t_hist_elem *elem);
 t_hist_elem				*ft_get_history_offsetted(t_hist_elem *elem);
 
