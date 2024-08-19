@@ -6,12 +6,14 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:45 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/18 19:30:39 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/19 10:24:49 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CMD_STRUCT_H
 # define CMD_STRUCT_H
+
+# include "libft.h"
 
 typedef enum e_list_type
 {
@@ -40,10 +42,10 @@ typedef enum e_redirect
 typedef struct s_cmd
 {
 	char			**args;
-	char			*file_in;
-	char			*file_out;
-	char			*file_append;
-	char			*heredoc;
+	t_list			*file_in;
+	t_list			*file_out;
+	t_list			*file_append;
+	t_list			*heredoc;
 	t_link			link_type;
 	struct s_cmd	*next;
 }	t_cmd;

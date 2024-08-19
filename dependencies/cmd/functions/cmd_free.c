@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 13:15:07 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/18 19:34:29 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/19 10:27:12 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ static void	_free_cmd(void *value)
 		free(((t_cmd *)value)->args);
 	}
 	if (((t_cmd *)value)->file_in)
-		free(((t_cmd *)value)->file_in);
+		ft_lstclear(&((t_cmd *)value)->file_in, free);
 	if (((t_cmd *)value)->file_out)
-		free(((t_cmd *)value)->file_out);
+		ft_lstclear(&((t_cmd *)value)->file_out, free);
 	if (((t_cmd *)value)->file_append)
-		free(((t_cmd *)value)->file_append);
+		ft_lstclear(&((t_cmd *)value)->file_append, free);
 	if (((t_cmd *)value)->heredoc)
-		free(((t_cmd *)value)->heredoc);
+		ft_lstclear(&((t_cmd *)value)->heredoc, free);
 	free(value);
 }
 
