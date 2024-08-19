@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:28 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/18 18:56:33 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/18 19:39:21 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,24 +53,24 @@ t_redirect	ft_get_rtype(char *cmd)
 int	ft_get_redirect(t_cmd *_cmd, char *cmd)
 {
 	char		*tmp;
-	t_io_arg	*new_io_arg;
-	t_lst_utils	utils;
+	t_redirect	redirect_type;
 
 	if (!cmd)
 		return (0);
 	tmp = cmd;
 	if (ft_is_redirect(*cmd))
 	{
-		new_io_arg = _init_io_arg(NO, NULL);
-		if (!new_io_arg)
-			return (0);
-		new_io_arg->redirect = ft_get_rtype(cmd);
+		redirect_type = ft_get_rtype(cmd);
 		while (ft_isspace(*cmd) || ft_is_redirect(*cmd))
 			cmd++;
-		if (new_io_arg->redirect != NO)
-			cmd += _get_info(&new_io_arg->arg, cmd);
-		utils = (t_lst_utils){IO_ARG, _add_next_cmd, _next_cmd};
-		ft_add_back_((void **)&_cmd->io_arg, new_io_arg, utils);
+		if (redirect_type == IN_1)
+			cmd += _get_info(&_cmd->file_in, cmd);
+		if (redirect_type == IN_2)
+			cmd += _get_info(&_cmd->heredoc, cmd);
+		if (redirect_type == OUT_1)
+			cmd += _get_info(&_cmd->file_out, cmd);
+		if (redirect_type == OUT_2)
+			cmd += _get_info(&_cmd->file_append, cmd);
 		return (cmd - tmp);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:10 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/17 00:25:45 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/18 19:26:24 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,6 @@ int	_skip_space(char *str)
 	return (i);
 }
 
-t_io_arg	*_init_io_arg(t_redirect redirect, char *arg)
-{
-	t_io_arg	*r_io_arg;
-
-	r_io_arg = (t_io_arg *)malloc(sizeof(t_io_arg));
-	if (!r_io_arg)
-		return (NULL);
-	r_io_arg->redirect = redirect;
-	r_io_arg->arg = arg;
-	r_io_arg->next = NULL;
-	return (r_io_arg);
-}
-
 t_cmd	*_init_cmd(void)
 {
 	t_cmd	*cmd;
@@ -45,7 +32,10 @@ t_cmd	*_init_cmd(void)
 	if (!cmd)
 		return (NULL);
 	cmd->args = NULL;
-	cmd->io_arg = NULL;
+	cmd->file_in = NULL;
+	cmd->file_out = NULL;
+	cmd->file_append = NULL;
+	cmd->heredoc = NULL;
 	cmd->link_type = NONE;
 	cmd->next = NULL;
 	return (cmd);
@@ -55,8 +45,6 @@ void	*_next_cmd(void *value, t_list_type type)
 {
 	if (type == CMD)
 		return (((t_cmd *)value)->next);
-	if (type == IO_ARG)
-		return (((t_io_arg *)value)->next);
 	return (value);
 }
 
@@ -64,6 +52,4 @@ void	_add_next_cmd(void *value, void *next, t_list_type type)
 {
 	if (type == CMD)
 		((t_cmd *)value)->next = (t_cmd *)next;
-	if (type == IO_ARG)
-		((t_io_arg *)value)->next = (t_io_arg *)next;
 }

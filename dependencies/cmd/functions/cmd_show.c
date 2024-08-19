@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 02:47:59 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/17 02:48:00 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/18 19:35:21 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,8 @@ void	ft_show_ltype(t_link link_type)
 		printf(" l_type	: [AND]]\n");
 }
 
-void	ft_show_redirection(t_redirect redirect)
-{
-	if (redirect == IN_1)
-		printf(" REDIRECTION	: [IN]\n");
-	else if (redirect == IN_2)
-		printf(" REDIRECTION	: [HEREDOC]\n");
-	else if (redirect == OUT_1)
-		printf(" REDIRECTION	: [OUT]\n");
-	else
-		printf(" REDIRECTION	: [OUT END]\n");
-}
-
 void	ft_show_cmd(t_cmd *cmd)
 {
-	t_io_arg	*tmp;
 	int			i;
 
 	printf("\033[0;4;32mCMD	:\033[0;0m\n");
@@ -49,19 +36,15 @@ void	ft_show_cmd(t_cmd *cmd)
 		i = 0;
 		while (cmd->args && cmd->args[i])
 			printf(" ARGS	: [%s]\n", cmd->args[i++]);
+		if (cmd->file_in)
+			printf(" REDIRECTION	: [IN] [%s]\n", cmd->file_in);
+		if (cmd->heredoc)
+			printf(" REDIRECTION	: [HEREDOC] [%s]\n", cmd->heredoc);
+		if (cmd->file_out)
+			printf(" REDIRECTION	: [OUT] [%s]\n", cmd->file_out);
+		if (cmd->file_append)
+			printf(" REDIRECTION	: [OUT END] [%s]\n", cmd->file_append);
 		ft_show_ltype(cmd->link_type);
-		if (!cmd->io_arg)
-			printf(" NO REDIRECTION\n");
-		else
-		{
-			tmp = cmd->io_arg;
-			while (tmp)
-			{
-				ft_show_redirection(tmp->redirect);
-				printf(" ARG	: [%s]\n", tmp->arg);
-				tmp = tmp->next;
-			}
-		}
 		printf("\n");
 		cmd = cmd->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:45 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/18 19:07:54 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/18 19:30:39 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,13 @@ typedef enum e_redirect
 	OUT_2
 }	t_redirect;
 
-typedef struct s_io_arg
-{
-	t_redirect		redirect;
-	char			*arg;
-	struct s_io_arg	*next;
-}	t_io_arg;
-
 typedef struct s_cmd
 {
 	char			**args;
-	t_io_arg		*io_arg;
+	char			*file_in;
+	char			*file_out;
+	char			*file_append;
+	char			*heredoc;
 	t_link			link_type;
 	struct s_cmd	*next;
 }	t_cmd;

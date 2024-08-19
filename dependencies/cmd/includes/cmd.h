@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:41 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/17 02:12:23 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/18 19:31:01 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int			ft_is_quote(const char c);
 
 /* --------------------- CMD SHOW --------------------- */
 void		ft_show_ltype(t_link link_type);
-void		ft_show_redirection(t_redirect redirect);
 void		ft_show_cmd(t_cmd *cmd);
 
 /* --------------------- CMD UTILS --------------------- */
@@ -38,7 +37,6 @@ int			_get_info(char **str, char *cmd);
 /* --------------------- CMD EXTRA UTILS --------------------- */
 int			_skip_space(char *str);
 t_cmd		*_init_cmd(void);
-t_io_arg	*_init_io_arg(t_redirect redirect, char *arg);
 void		*_next_cmd(void *value, t_list_type type);
 void		_add_next_cmd(void *value, void *next, t_list_type type);
 
