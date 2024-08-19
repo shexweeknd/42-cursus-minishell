@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:38:41 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/19 10:16:15 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:19:23 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ void					free_lchistory(t_hist_elem *hist_elem);
 // debugging functions
 void					display_rlhistory(void);
 void					display_lchistory(t_hist_elem *hist_elem);
+void					show_formatted_rlhistory(void);
 
 #endif

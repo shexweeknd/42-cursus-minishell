@@ -97,7 +97,7 @@ push\:%		: fclean
 
 L_ARGS			=
 
-LEAKS_CMD		= valgrind --leak-check=full --show-leak-kinds=all --suppressions=./src/suppressed.supp ./minishell $(L_ARGS)
+LEAKS_CMD		= valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=./src/suppressed.supp ./minishell $(L_ARGS)
 
 SUPPRESSION_CMD	= valgrind --leak-check=full --show-leak-kinds=all --gen-suppressions=yes ./minishell $(L_ARGS)
 

@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 15:20:51 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/19 10:46:27 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:38:45 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,20 @@ void	go_to_offset(int fd, t_hist_elem *hist_elem)
 {
 	char	buf;
 	int		line_pos;
+	int		readed;
 
+	if (!hist_elem)
+		return ;
+	buf = 0;
+	readed = 0;
 	line_pos = 0;
 	while (line_pos <= hist_elem->line_nbr && read(fd, &buf, 1) > 0)
 	{
 		if (buf == '\n')
 			line_pos++;
+		readed++;
 	}
-	if (buf != '\n')
+	if (buf != '\n' && readed)
 		write(fd, "\n", 1);
 }
 

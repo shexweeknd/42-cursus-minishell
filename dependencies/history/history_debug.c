@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:52:55 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/16 16:08:47 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:50:20 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,23 @@ void	display_rlhistory(void)
 		{
 			printf("\033[31mCommand \033[0m: %s\n", hist_list[i]->line);
 			printf("\033[31mLine number \033[0m: %d\n\n", i);
+			i++;
+		}
+	}
+}
+
+void	show_formatted_rlhistory(void)
+{
+	HIST_ENTRY	**hist_list;
+	int			i;
+
+	hist_list = history_list();
+	if (hist_list)
+	{
+		i = 0;
+		while (hist_list[i])
+		{
+			printf("%4d %s\n", i + 1, hist_list[i]->line);
 			i++;
 		}
 	}

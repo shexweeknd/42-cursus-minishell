@@ -1,4 +1,1 @@
-git log
-cat
-echo "bonjour"
-why_not
+echo 1

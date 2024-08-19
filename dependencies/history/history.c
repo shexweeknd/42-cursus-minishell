@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:39:28 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/19 10:31:58 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:45:05 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_hist_elem	*get_history(char *file_path)
 	size_t		index;
 	size_t		size;
 
-	fd = open(file_path, O_RDONLY);
+	fd = open(file_path, O_RDONLY | O_CREAT, 0644);
 	if (fd < 0)
 		return (0);
 	result = NULL;
@@ -47,7 +47,8 @@ t_hist_elem	*get_history(char *file_path)
 		result = ft_append_hist_elem(result, get_next_line(fd));
 		index++;
 	}
-	ft_get_last_history(result)->is_offset = 1;
+	if (result)
+		ft_get_last_history(result)->is_offset = 1;
 	return (close(fd), result);
 }
 
@@ -57,17 +58,21 @@ int	set_history(t_hist_elem *hist_elem, char *file_path)
 	int		fd;
 	char	*remains;
 
-	fd = open(file_path, O_RDWR);
+	fd = open(file_path, O_RDWR | O_CREAT, 0644);
 	if (fd < 0)
 		return (printf("Failed to write the history\n"), 0);
 	go_to_offset(fd, ft_get_history_offsetted(hist_elem));
 	remains = get_things_after_offset(fd);
 	close(fd);
-	fd = open(file_path, O_RDWR);
+	fd = open(file_path, O_RDWR | O_CREAT, 0644);
 	if (fd < 0)
 		return (printf("Failed to write the history\n"), 0);
 	go_to_offset(fd, ft_get_history_offsetted(hist_elem));
-	write_cmd_typed_after_offset(fd, ft_get_history_offsetted(hist_elem)->next);
+	if (ft_get_history_offsetted(hist_elem))
+		write_cmd_typed_after_offset(fd,
+			ft_get_history_offsetted(hist_elem)->next);
+	else
+		write_cmd_typed_after_offset(fd, hist_elem);
 	write(fd, remains, ft_strlen(remains));
 	return (free(remains), close(fd), 1);
 }

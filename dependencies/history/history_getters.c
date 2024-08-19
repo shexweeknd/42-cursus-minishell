@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:50:45 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/19 10:14:01 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:35:55 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ t_hist_elem	*ft_get_history_offsetted(t_hist_elem *elem)
 {
 	if (!elem)
 		return (elem);
+	if (!elem->next && !elem->is_offset)
+		return (NULL);
 	while (!elem->is_offset && elem->next)
 		elem = elem->next;
 	return (elem);
