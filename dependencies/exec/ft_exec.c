@@ -19,11 +19,14 @@ int	ft_local_exe(t_cmd *cmd)
 	return (0);
 }
 
+// int	ft_manage_file(t_list *file, int O_OPTION)
+// {
+
+// }
 
 int	ft_exec_cmd(t_cmd *cmd, t_env_var *venv, char **env)
 {
 	char	*exe;
-	int		id;
 
 	if (!cmd->args)
 		return (0);
@@ -32,10 +35,53 @@ int	ft_exec_cmd(t_cmd *cmd, t_env_var *venv, char **env)
 		return (0);
 	free(cmd->args[0]);
 	cmd->args[0] = exe;
+	execve(exe, cmd->args, env);
+	return (1);
+}
+
+int	ft_exec_cmds(t_cmd *cmd, t_env_var *venv, char **envp)
+{
+	int	fd[2];
+	int	id;
+	int	desc;
+	int	result_id;
+
+	(void)cmd;
+	(void)venv;
+	desc = open("tmp.txt", O_RDWR);
+	result_id = open("result.txt", O_RDWR);
+	if (desc == -1 && result_id == -1)
+	{
+		perror("FILE DOESN'T EXIST...\n");
+		exit(1);
+	}
+	if (pipe(fd) == -1)
+	{
+		perror("TUNNELING ERROR ...\n");
+		exit(1);
+	}
 	id = fork();
 	if (id == 0)
-		execve(exe, cmd->args, env);
+	{
+		dup2(desc, STDIN_FILENO);
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[0]);
+		close(fd[1]);
+		execve("/usr/bin/grep", (char *[]){"/usr/bin/grep", "main", NULL}, envp);
+	}
 	else
-		wait(NULL);
+	{
+		id = fork();
+		if (id == 0)
+		{
+			dup2(fd[0], STDIN_FILENO);
+			dup2(result_id, STDOUT_FILENO);
+			close(fd[0]);
+			close(fd[1]);
+			execve("/usr/bin/cat", (char *[]){"/usr/bin/cat", NULL}, envp);
+		}
+		else
+			wait(NULL);
+	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:50 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/17 02:43:56 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/20 10:06:04 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ static t_cmd	*ft_init_cmd(char *cmd)
 
 	if (!cmd)
 		return (NULL);
-	while (*cmd && ft_isspace(*cmd))
-		cmd++;
+	cmd += _skip_space(cmd);
 	r_cmd = _init_cmd();
 	if (!r_cmd)
 		return (NULL);
