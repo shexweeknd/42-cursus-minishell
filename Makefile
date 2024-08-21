@@ -29,7 +29,7 @@ ENV_LIB			= -L$(ENV_PATH) -lenv
 CMD_LIB			= -L$(CMD_PATH) -lcmd
 HISTORY_LIB 	= -L$(HISTORY_PATH) -lhistory
 EXEC_LIB 		= -L$(EXEC_PATH) -lexec
-LIBS			= $(EXEC_LIB) $(HISTORY_LIB) $(CMD_LIB) $(ENV_LIB) $(LIBFT_LIB) -lreadline
+LIBS			= $(EXEC_LIB) $(HISTORY_LIB) $(CMD_LIB) $(ENV_LIB) $(LIBFT_LIB) -lreadline -Wno-unused-command-line-argument
 
 # INCLUDES
 MINISH_INC		= -Iincludes

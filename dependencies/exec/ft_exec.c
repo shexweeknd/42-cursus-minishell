@@ -19,10 +19,29 @@ int	ft_local_exe(t_cmd *cmd)
 	return (0);
 }
 
-// int	ft_manage_file(t_list *file, int O_OPTION)
-// {
+int	ft_manage_file(int default_fd, t_list *file, int O_OPTION, int apply_all)
+{
+	int	fd;
 
-// }
+	if (!file)
+		return (default_fd);
+	while (file->next)
+	{
+		if (apply_all)
+		{
+			fd = open((char *)file->content, O_OPTION);
+			close(fd);
+		}
+		file = file->next;
+	}
+	fd = open((char *)file->content, O_OPTION);
+	if (fd == -1)
+	{
+		perror("ERROR WHEN OPEN FILE\n");
+		return (default_fd);
+	}
+	return (fd);
+}
 
 int	ft_exec_cmd(t_cmd *cmd, t_env_var *venv, char **env)
 {

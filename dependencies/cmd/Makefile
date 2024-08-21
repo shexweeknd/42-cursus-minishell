@@ -23,7 +23,7 @@ LIBFT_PATH	= $(DEP_PATH)/libft
 
 # LIBS
 LIBFT		= -L$(LIBFT_PATH) -lft
-LIBS		= $(LIBFT)
+LIBS		= $(LIBFT) -Wno-unused-command-line-argument
 
 # INCLUDES
 LIBFT_INC	= -I$(LIBFT_PATH)/includes

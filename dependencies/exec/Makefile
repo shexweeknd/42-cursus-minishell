@@ -33,7 +33,7 @@ CMD_PATH	= $(DEP_PATH)/cmd
 LIBFT		= -L$(LIBFT_PATH) -lft
 ENV			= -L$(ENV_PATH) -lenv
 CMD			= -L$(CMD_PATH) -lcmd
-LIBS		= $(CMD) $(ENV) $(LIBFT)
+LIBS		= $(CMD) $(ENV) $(LIBFT) -Wno-unused-command-line-argument
 
 # INCLUDES
 LIBFT_INC	= -I$(LIBFT_PATH)/includes
