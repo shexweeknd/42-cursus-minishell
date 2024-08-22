@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 02:47:59 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/19 10:25:02 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/22 11:03:20 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,19 @@ void	ft_show_ltype(t_link link_type)
 		printf(" l_type	: [AND]]\n");
 }
 
-void	ft_show_redirect(char *label, t_list *r_arg)
+void	ft_show_redirect(char *label, t_rfile *r_arg)
 {
-	t_list	*tmp;
+	t_rfile	*tmp;
 
 	tmp = r_arg;
 	while (tmp)
 	{
-		printf("%s	: [%s]\n", label, (char *)tmp->content);
+		if (tmp->option == O_RDONLY)
+			printf("%s	[IN] or [HEREDOC] : [%s]\n", label, tmp->args);
+		else if (tmp->option == (O_TRUNC | O_WRONLY | O_CREAT))
+			printf("%s	[OUT] : [%s]\n", label, tmp->args);
+		else
+			printf("%s	[APPEND] : [%s]\n", label, tmp->args);
 		tmp = tmp->next;
 	}
 }
@@ -49,13 +54,9 @@ void	ft_show_cmd(t_cmd *cmd)
 		while (cmd->args && cmd->args[i])
 			printf(" ARGS	: [%s]\n", cmd->args[i++]);
 		if (cmd->file_in)
-			ft_show_redirect(" REDIRECTION [IN]", cmd->file_in);
-		if (cmd->heredoc)
-			ft_show_redirect(" REDIRECTION [HEREDOC]", cmd->heredoc);
+			ft_show_redirect(" REDIRECTION ", cmd->file_in);
 		if (cmd->file_out)
-			ft_show_redirect(" REDIRECTION [OUT]", cmd->file_out);
-		if (cmd->file_append)
-			ft_show_redirect(" REDIRECTION [APPEND]", cmd->file_append);
+			ft_show_redirect(" REDIRECTION ", cmd->file_out);
 		ft_show_ltype(cmd->link_type);
 		printf("\n");
 		cmd = cmd->next;

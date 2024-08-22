@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/20 08:04:24 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/22 02:07:05 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ void	ft_exit(t_cmd *cmd);
 
 /* _________________________ EXEC UTILS _________________________ */
 char	*ft_search_executable(t_env_var *venv, char *exe_name);
-int		ft_exec_cmd(t_cmd *cmd, t_env_var *venv, char **env);
-int		ft_exec_cmds(t_cmd *cmd, t_env_var *venv, char **env);
+// int		ft_exec_cmd(t_cmd *cmd, t_env_var *venv, char **env);
+// int		ft_exec_cmds(t_cmd *cmd, t_env_var *venv, char **env);
+
+int		ft_multi_pipe(t_cmd *cmd, t_env_var *venv, char **envp);
 
 #endif

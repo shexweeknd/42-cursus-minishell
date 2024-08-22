@@ -19,28 +19,33 @@ int	ft_local_exe(t_cmd *cmd)
 	return (0);
 }
 
-int	ft_manage_file(int default_fd, t_list *file, int O_OPTION, int apply_all)
+void	ft_manage_redirect_file(int fd[2], int r_fd[2], t_cmd *cmd)
 {
-	int	fd;
+	t_rfile	*tmp_in;
+	t_rfile	*tmp_out;
+	int		i;
 
-	if (!file)
-		return (default_fd);
-	while (file->next)
+	i = 2;
+	
+	tmp_in = cmd->file_in;
+	while (tmp_in && tmp_in->next)
+		tmp_in = tmp_in->next;
+	tmp_out = cmd->file_out;
+	while (tmp_out && tmp_out->next)
 	{
-		if (apply_all)
-		{
-			fd = open((char *)file->content, O_OPTION);
-			close(fd);
-		}
-		file = file->next;
+		close(open(tmp_out->args, tmp_out->option));
+		tmp_out = tmp_out->next;
 	}
-	fd = open((char *)file->content, O_OPTION);
-	if (fd == -1)
-	{
-		perror("ERROR WHEN OPEN FILE\n");
-		return (default_fd);
-	}
-	return (fd);
+	if (tmp_in)
+		r_fd[0] = open(tmp_in->args, tmp_in->option);
+	if (tmp_out)
+		r_fd[1] = open(tmp_out->args, tmp_out->option);
+	if (cmd->next)
+		dup2(fd[1], STDOUT_FILENO);
+	if (r_fd[0] != -1)
+		dup2(r_fd[0], STDIN_FILENO);
+	if (r_fd[1] != -1)
+		dup2(r_fd[1], STDOUT_FILENO);
 }
 
 int	ft_exec_cmd(t_cmd *cmd, t_env_var *venv, char **env)
@@ -58,6 +63,35 @@ int	ft_exec_cmd(t_cmd *cmd, t_env_var *venv, char **env)
 	return (1);
 }
 
+int	ft_multi_pipe(t_cmd *cmd, t_env_var *venv, char **envp)
+{
+	int	i;
+	int id;
+	int fd[2];
+	int r_fd[2];
+
+	i = 2;
+	while (i)
+		r_fd[--i] = -1;
+	if (pipe(fd) == -1)
+		return (1);
+	id = fork();
+	if (id == 0)
+	{
+		ft_manage_redirect_file(fd, r_fd, cmd);
+		(close(fd[0]), close(fd[1]), ft_exec_cmd(cmd, venv, envp));
+	}
+	else
+	{
+		dup2(fd[0], STDIN_FILENO);
+		(close(fd[0]), close(fd[1]));
+		if (cmd->next)
+			ft_multi_pipe(cmd->next, venv, envp);
+		return (wait(NULL), 0);
+	}
+	return (1);
+}
+
 int	ft_exec_cmds(t_cmd *cmd, t_env_var *venv, char **envp)
 {
 	int	fd[2];
@@ -70,23 +104,17 @@ int	ft_exec_cmds(t_cmd *cmd, t_env_var *venv, char **envp)
 	desc = open("tmp.txt", O_RDWR);
 	result_id = open("result.txt", O_RDWR);
 	if (desc == -1 && result_id == -1)
-	{
-		perror("FILE DOESN'T EXIST...\n");
-		exit(1);
-	}
+		return (1);
 	if (pipe(fd) == -1)
-	{
-		perror("TUNNELING ERROR ...\n");
-		exit(1);
-	}
+		return (1);
 	id = fork();
 	if (id == 0)
 	{
-		dup2(desc, STDIN_FILENO);
+		// dup2(desc, STDIN_FILENO);
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[0]);
 		close(fd[1]);
-		execve("/usr/bin/grep", (char *[]){"/usr/bin/grep", "main", NULL}, envp);
+		execve("/usr/bin/grep", (char *[]){"/usr/bin/grep", "main", "main.c", NULL}, envp);
 	}
 	else
 	{
@@ -94,7 +122,7 @@ int	ft_exec_cmds(t_cmd *cmd, t_env_var *venv, char **envp)
 		if (id == 0)
 		{
 			dup2(fd[0], STDIN_FILENO);
-			dup2(result_id, STDOUT_FILENO);
+			// dup2(result_id, STDOUT_FILENO);
 			close(fd[0]);
 			close(fd[1]);
 			execve("/usr/bin/cat", (char *[]){"/usr/bin/cat", NULL}, envp);

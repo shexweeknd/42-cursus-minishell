@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/21 12:49:10 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/22 13:39:01 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,16 @@ int	ft_get_args_len(char *cmd)
 	int	i;
 
 	i = 0;
-	while (*cmd && !ft_is_delimiter(*cmd) && !ft_is_redirect(*cmd))
+	while (*cmd && !ft_is_delimiter(*cmd))
 	{
+		if (ft_is_redirect(*cmd))
+		{
+			while (*cmd && ft_is_redirect(*cmd))
+				cmd++;
+			cmd += _skip_space(cmd);
+			while (*cmd && !ft_is_cmd_sep(*cmd))
+				cmd++;
+		}
 		cmd += _get_info(NULL, cmd);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:28 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/19 10:46:46 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/22 10:52:22 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ t_redirect	ft_get_rtype(char *cmd)
 int	ft_get_redirect(t_cmd *_cmd, char *cmd)
 {
 	char		*tmp;
-	t_list		*l_new;
+	t_rfile		*new_rfile;
 	t_redirect	redirect_type;
+	t_lst_utils	utils;
 
 	if (!cmd)
 		return (0);
@@ -62,18 +63,15 @@ int	ft_get_redirect(t_cmd *_cmd, char *cmd)
 	if (ft_is_redirect(*cmd))
 	{
 		redirect_type = ft_get_rtype(cmd);
-		l_new = ft_lstnew(NULL);
+		new_rfile = _init_rfile(redirect_type);
+		utils = (t_lst_utils){R_FILE, _add_next_cmd, _next_cmd};
 		while (ft_isspace(*cmd) || ft_is_redirect(*cmd))
 			cmd++;
-		cmd += _get_info((char **)&l_new->content, cmd);
-		if (redirect_type == IN_1)
-			ft_add_back_((void **)&_cmd->file_in, l_new, (t_lst_utils){0});
-		if (redirect_type == IN_2)
-			ft_add_back_((void **)&_cmd->heredoc, l_new, (t_lst_utils){0});
-		if (redirect_type == OUT_1)
-			ft_add_back_((void **)&_cmd->file_out, l_new, (t_lst_utils){0});
-		if (redirect_type == OUT_2)
-			ft_add_back_((void **)&_cmd->file_append, l_new, (t_lst_utils){0});
+		cmd += _get_info((char **)&new_rfile->args, cmd);
+		if (redirect_type == IN_1 || redirect_type == IN_2)
+			ft_add_back_((void **)&_cmd->file_in, new_rfile, utils);
+		if (redirect_type == OUT_1 || redirect_type == OUT_2)
+			ft_add_back_((void **)&_cmd->file_out, new_rfile, utils);
 		return (cmd - tmp);
 	}
 	return (0);
