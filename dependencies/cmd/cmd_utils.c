@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/22 13:39:01 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/22 14:18:54 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,21 @@ int	ft_get_info_len(char *cmd)
 		return (0);
 	end = ft_is_quote(*cmd);
 	if (end != '\0')
+	{
 		cmd++;
+		i++;
+	}
 	while (*cmd && *cmd != end)
 	{
-		if ((end == '\0' && ft_is_cmd_sep(*cmd)) || ft_is_redirect(*cmd))
+		if ((end == '\0' && ft_is_cmd_sep(*cmd))\
+			|| ft_is_redirect(*cmd)\
+			|| ft_is_delimiter(*cmd))
 			return (i);
 		i++;
 		cmd++;
 	}
+	if (end != '\0')
+		i++;
 	return (i);
 }
 
@@ -65,15 +72,15 @@ int	_get_info(char **str, char *cmd)
 	is_arg = 0;
 	i = _skip_space(cmd);
 	len = ft_get_info_len(cmd + i);
-	if (ft_is_quote(*cmd))
-	{
-		i++;
-		is_arg = 1;
-	}
+	// if (ft_is_quote(*cmd))
+	// {
+	// 	i++;
+	// 	is_arg = 1;
+	// }
 	if (len && str && *str == NULL)
 		*str = ft_substr(cmd + i, 0, len);
-	if (is_arg)
-		i++;
+	// if (is_arg)
+	// 	i++;
 	i += _skip_space(cmd + i + len);
 	return (i + len);
 }

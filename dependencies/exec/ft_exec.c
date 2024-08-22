@@ -23,10 +23,7 @@ void	ft_manage_redirect_file(int fd[2], int r_fd[2], t_cmd *cmd)
 {
 	t_rfile	*tmp_in;
 	t_rfile	*tmp_out;
-	int		i;
 
-	i = 2;
-	
 	tmp_in = cmd->file_in;
 	while (tmp_in && tmp_in->next)
 		tmp_in = tmp_in->next;
@@ -66,9 +63,9 @@ int	ft_exec_cmd(t_cmd *cmd, t_env_var *venv, char **env)
 int	ft_multi_pipe(t_cmd *cmd, t_env_var *venv, char **envp)
 {
 	int	i;
-	int id;
-	int fd[2];
-	int r_fd[2];
+	int	id;
+	int	fd[2];
+	int	r_fd[2];
 
 	i = 2;
 	while (i)
@@ -78,7 +75,8 @@ int	ft_multi_pipe(t_cmd *cmd, t_env_var *venv, char **envp)
 	id = fork();
 	if (id == 0)
 	{
-		ft_manage_redirect_file(fd, r_fd, cmd); (close(fd[0]), close(fd[1]), ft_exec_cmd(cmd, venv, envp));
+		ft_manage_redirect_file(fd, r_fd, cmd);
+		(close(fd[0]), close(fd[1]), ft_exec_cmd(cmd, venv, envp));
 	}
 	else
 	{
@@ -91,43 +89,43 @@ int	ft_multi_pipe(t_cmd *cmd, t_env_var *venv, char **envp)
 	return (1);
 }
 
-int	ft_exec_cmds(t_cmd *cmd, t_env_var *venv, char **envp)
-{
-	int	fd[2];
-	int	id;
-	int	desc;
-	int	result_id;
+// int	ft_exec_cmds(t_cmd *cmd, t_env_var *venv, char **envp)
+// {
+// 	int	fd[2];
+// 	int	id;
+// 	int	desc;
+// 	int	result_id;
 
-	(void)cmd;
-	(void)venv;
-	desc = open("tmp.txt", O_RDWR);
-	result_id = open("result.txt", O_RDWR);
-	if (desc == -1 && result_id == -1)
-		return (1);
-	if (pipe(fd) == -1)
-		return (1);
-	id = fork();
-	if (id == 0)
-	{
-		// dup2(desc, STDIN_FILENO);
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[0]);
-		close(fd[1]);
-		execve("/usr/bin/grep", (char *[]){"/usr/bin/grep", "main", "main.c", NULL}, envp);
-	}
-	else
-	{
-		id = fork();
-		if (id == 0)
-		{
-			dup2(fd[0], STDIN_FILENO);
-			// dup2(result_id, STDOUT_FILENO);
-			close(fd[0]);
-			close(fd[1]);
-			execve("/usr/bin/cat", (char *[]){"/usr/bin/cat", NULL}, envp);
-		}
-		else
-			wait(NULL);
-	}
-	return (1);
-}
+// 	(void)cmd;
+// 	(void)venv;
+// 	desc = open("tmp.txt", O_RDWR);
+// 	result_id = open("result.txt", O_RDWR);
+// 	if (desc == -1 && result_id == -1)
+// 		return (1);
+// 	if (pipe(fd) == -1)
+// 		return (1);
+// 	id = fork();
+// 	if (id == 0)
+// 	{
+// 		// dup2(desc, STDIN_FILENO);
+// 		dup2(fd[1], STDOUT_FILENO);
+// 		close(fd[0]);
+// 		close(fd[1]);
+// 		execve("/usr/bin/grep", (char *[]){"/usr/bin/grep", "main", "main.c", NULL}, envp);
+// 	}
+// 	else
+// 	{
+// 		id = fork();
+// 		if (id == 0)
+// 		{
+// 			dup2(fd[0], STDIN_FILENO);
+// 			// dup2(result_id, STDOUT_FILENO);
+// 			close(fd[0]);
+// 			close(fd[1]);
+// 			execve("/usr/bin/cat", (char *[]){"/usr/bin/cat", NULL}, envp);
+// 		}
+// 		else
+// 			wait(NULL);
+// 	}
+// 	return (1);
+// }
