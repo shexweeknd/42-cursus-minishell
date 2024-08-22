@@ -78,8 +78,7 @@ int	ft_multi_pipe(t_cmd *cmd, t_env_var *venv, char **envp)
 	id = fork();
 	if (id == 0)
 	{
-		ft_manage_redirect_file(fd, r_fd, cmd);
-		(close(fd[0]), close(fd[1]), ft_exec_cmd(cmd, venv, envp));
+		ft_manage_redirect_file(fd, r_fd, cmd); (close(fd[0]), close(fd[1]), ft_exec_cmd(cmd, venv, envp));
 	}
 	else
 	{
