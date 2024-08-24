@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:22:01 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/18 11:29:32 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/23 20:27:48 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_env_var	*ft_init_var_env(void)
 	if (!r_value)
 		return (NULL);
 	r_value->name = NULL;
+	r_value->len_name = 0;
 	r_value->content = NULL;
 	r_value->next = NULL;
 	return (r_value);

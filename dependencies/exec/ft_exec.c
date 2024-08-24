@@ -68,6 +68,8 @@ int	ft_multi_pipe(t_cmd *cmd, t_env_var *venv, char **envp)
 	int	r_fd[2];
 
 	i = 2;
+	if (!cmd)
+		return (0);
 	while (i)
 		r_fd[--i] = -1;
 	if (pipe(fd) == -1)

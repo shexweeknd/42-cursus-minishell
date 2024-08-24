@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:10 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/22 13:29:35 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/23 17:02:25 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,22 @@ t_rfile	*_init_rfile(t_redirect redirect)
 t_cmd	*_init_cmd(char *cmd)
 {
 	t_cmd	*r_cmd;
-	int		arg_len;
+	int		i;
 
 	r_cmd = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
-	arg_len = ft_get_args_len(cmd);
-	if (arg_len == 0)
+	r_cmd->arg_len = ft_get_args_len(cmd);
+	if (r_cmd->arg_len == 0)
 		r_cmd->args = NULL;
 	else
 	{
-		r_cmd->args = (char **)malloc(sizeof(char *) * (arg_len + 1));
+		r_cmd->args = (char **)malloc(sizeof(char *) * (r_cmd->arg_len + 1));
 		if (!r_cmd->args)
 			return (NULL);
-		while (arg_len >= 0)
-			r_cmd->args[arg_len--] = NULL;
+		i = r_cmd->arg_len;
+		while (i >= 0)
+			r_cmd->args[i--] = NULL;
 	}
 	r_cmd->file_in = NULL;
 	r_cmd->file_out = NULL;

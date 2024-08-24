@@ -12,7 +12,7 @@ SRC_FILES	= \
 				cd.c	\
 				ft_exit.c
 
-FUNC_FILES	= exec_utils.c
+FUNC_FILES	= exec_utils.c analyse_arg.c analyse_arg_utils.c
 
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)

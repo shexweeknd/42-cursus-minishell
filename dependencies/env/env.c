@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:22:05 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/15 11:27:48 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/23 16:50:37 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ t_env_var	*ft_get_env(char **env)
 		tmp = ft_init_var_env();
 		if (!tmp)
 			return (NULL);
-		*env += ft_getstr(&tmp->name, *env, '=');
+		tmp->len_name = ft_getstr(&tmp->name, *env, '=');
+		*env += tmp->len_name;
 		ft_get_venv_content(&tmp->content, *env);
 		ft_add_back_((void **)&r_value, tmp, utils);
 		env++;
