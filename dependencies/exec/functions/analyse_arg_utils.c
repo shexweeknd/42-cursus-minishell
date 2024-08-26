@@ -1,6 +1,6 @@
 #include "ft_exec.h"
 
-int	ft_getlen_venv(char *arg)
+int	_skip_venv(char *arg)
 {
 	int	len;
 
@@ -10,42 +10,123 @@ int	ft_getlen_venv(char *arg)
 	return (len);
 }
 
+int	ft_getlen_venv(char *arg, t_env_var *venv)
+{
+	int			len;
+	char		*var_name;
+	t_env_var	*found_var;
+
+	len = _skip_venv(arg);
+	if (len == 0)
+		return (1);
+	var_name = ft_substr(arg, 0, len);
+	found_var = ft_get_env_var(venv, var_name);
+	free(var_name);
+	if (!found_var)
+		return (0);
+	len = ft_lst_content_len(found_var->content);
+	len += ft_lstsize(found_var->content) - 1;
+	return (len);
+}
+
 int	ft_new_arg_len(char *arg, t_env_var *venv)
 {
-	int			end;
 	int			len;
-	int			r_len;
 	char		*tmp;
-	t_env_var	*t_v;
 
-	end = 0;
 	len = 0;
-	r_len = 0;
-	if (*arg == '"' && arg++)
-		end = '"';
-	while (*arg && *arg != end)
+	while (*arg)
 	{
 		tmp = ft_strchr(arg, '$');
 		if (!tmp && arg++)
-			r_len++;
+			len++;
 		else
 		{
-			r_len += tmp - arg;
-			arg = ++tmp;
-			len = ft_getlen_venv(arg);
-			arg += len;
-			tmp = ft_substr(arg, 0, len);
-			t_v = ft_get_env_var(venv, tmp);
-			r_len += ft_lst_content_len(t_v->content) + (ft_lstsize(t_v->content) - 1);
+			len += (tmp++) - arg;
+			arg = tmp;
+			len += ft_getlen_venv(arg, venv);
+			arg += _skip_venv(arg);
 		}
 	}
-	return (r_len);
+	return (len);
 }
 
-int	_skip_venv(char *arg)
+int	ft_ltos(char *dest, t_list *src, char sep)
 {
-	(void)arg;
-	return (0);
+	int	i;
+	int	j;
+
+	i = 0;
+	while (src)
+	{
+		j = 0;
+		while (((char *)src->content)[j])
+			dest[i++] = ((char *)src->content)[j++];
+		if (src->next && ft_isprint(sep))
+			dest[i++] = sep;
+		src = src->next;
+	}
+	return (i);
+}
+
+int	ft_manage_venv(char *dest, char *src, t_env_var *venv, int len)
+{
+	int			i;
+	char		*tmp;
+	t_env_var	*tmp_v;
+
+	i = 0;
+	if (len == 0)
+		*(dest + i++) = '$';
+	else
+	{
+		tmp = ft_substr(src, 0, len);
+		tmp_v = ft_get_env_var(venv, tmp);
+		if (tmp_v)
+			i += ft_ltos((dest + i), tmp_v->content, ':');
+		free(tmp);
+	}
+	return (i);
+}
+
+char	*ft_init_new_arg(char *arg, t_env_var *venv, int len)
+{
+	int			i;
+	char		*r_value;
+
+	i = 0;
+	r_value = (char *)malloc(sizeof(char) * (len + 1));
+	if (!r_value)
+		return (NULL);
+	while (*arg)
+	{
+		while (*arg && *arg != '$')
+			r_value[i++] = *(arg++);
+		if (*arg && *arg == '$' && arg++)
+		{
+			len = _skip_venv(arg);
+			i += ft_manage_venv(r_value + i, arg, venv, len);
+			arg += len;
+		}
+	}
+	r_value[i] = 0;
+	return (r_value);
+}
+
+char	*ft_new_arg(char *arg, t_env_var *venv)
+{
+	char	*tmp;
+
+	if (*arg && *arg == '\'')
+		return (ft_strtrim(arg, "'"));
+	if (*arg && *arg == '"')
+	{
+		arg = ft_strtrim(arg, "\"");
+		tmp = ft_init_new_arg(arg, venv, ft_new_arg_len(arg, venv));
+		free(arg);
+		return (tmp);
+	}
+	return (arg);
 }
 
 int	ft_variable(char *arg, t_list *content)

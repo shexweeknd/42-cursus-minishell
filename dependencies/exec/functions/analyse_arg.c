@@ -13,7 +13,7 @@ void	ft_analyse_args(t_cmd *cmd, t_env_var *venv, void (*_do)())
 	int	id;
 
 	i = 1;
-	while (i < cmd->arg_len)
+	while (i < cmd->nb_arg)
 	{
 		id = fork();
 		if (id == 0)

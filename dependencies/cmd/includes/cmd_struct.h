@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:45 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/23 17:00:48 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/26 13:35:46 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_rfile
 typedef struct s_cmd
 {
 	char			**args;
-	int				arg_len;
+	int				nb_arg;
 	t_rfile			*file_in;
 	t_rfile			*file_out;
 	t_link			link_type;
