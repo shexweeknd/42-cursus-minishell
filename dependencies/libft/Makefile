@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+         #
+#    By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 11:14:27 by ballain           #+#    #+#              #
-#    Updated: 2024/08/16 13:47:00 by hramaros         ###   ########.fr        #
+#    Updated: 2024/08/23 12:02:28 by ballain          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS		= \
 SRCSBONUS	= \
 	ft_lstnew_bonus.c	ft_lstadd_front_bonus.c	ft_lstsize_bonus.c	ft_lstlast_bonus.c \
 	ft_lstadd_back_bonus.c	ft_lstdelone_bonus.c	ft_lstclear_bonus.c	ft_lstiter_bonus.c \
-	ft_lstmap_bonus.c
+	ft_lstmap_bonus.c	ft_lstjoin.c
 
 OBJS		= $(SRCS:%.c=output/%.o)
 OBJSBONUS	= $(SRCSBONUS:%.c=output/%.o)

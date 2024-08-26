@@ -6,34 +6,37 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 13:15:07 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/19 10:27:12 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/22 10:56:58 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
-static void	_free_cmd(void *value)
+static void	_free_cmd(void *value, int type)
 {
 	int			i;
+	t_lst_utils	utils;
 
 	if (!value)
 		return ;
-	i = 0;
-	if (((t_cmd *)value)->args)
+	if (type == CMD)
 	{
-		while (((t_cmd *)value)->args[i])
-			free(((t_cmd *)value)->args[i++]);
-		free(((t_cmd *)value)->args[i]);
-		free(((t_cmd *)value)->args);
+		i = 0;
+		utils = (t_lst_utils){R_FILE, _free_cmd, _next_cmd};
+		if (((t_cmd *)value)->args)
+		{
+			while (((t_cmd *)value)->args[i])
+				free(((t_cmd *)value)->args[i++]);
+			free(((t_cmd *)value)->args[i]);
+			free(((t_cmd *)value)->args);
+		}
+		if (((t_cmd *)value)->file_in)
+			_loop((void **)&((t_cmd *)value)->file_in, utils);
+		if (((t_cmd *)value)->file_out)
+			_loop((void **)&((t_cmd *)value)->file_out, utils);
 	}
-	if (((t_cmd *)value)->file_in)
-		ft_lstclear(&((t_cmd *)value)->file_in, free);
-	if (((t_cmd *)value)->file_out)
-		ft_lstclear(&((t_cmd *)value)->file_out, free);
-	if (((t_cmd *)value)->file_append)
-		ft_lstclear(&((t_cmd *)value)->file_append, free);
-	if (((t_cmd *)value)->heredoc)
-		ft_lstclear(&((t_cmd *)value)->heredoc, free);
+	if (type == R_FILE)
+		free(((t_rfile *)value)->args);
 	free(value);
 }
 

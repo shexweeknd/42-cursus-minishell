@@ -1,4 +1,9 @@
 {
+   Memcheck:Addr8
+   fun:readline
+   obj:./output/main.o
+}
+{
    readline_alloc_history_entry
    Memcheck:Leak
    match-leak-kinds: reachable

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:02:13 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/16 13:46:46 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/23 21:43:26 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,7 @@ void	free_two_dim(char **buffer);
 void	_loop(void **src, t_lst_utils utils);
 void	ft_add_front_(void **src, void *new, t_lst_utils utils);
 void	ft_add_back_(void **src, void *new, t_lst_utils utils);
+char	*ft_lstjoin(t_list *lst, char sep);
+int		ft_lst_content_len(t_list *lst);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:21:41 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/05 19:21:42 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/23 16:49:06 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 typedef struct s_env_var
 {
 	char				*name;
+	int					len_name;
 	t_list				*content;
 	struct s_env_var	*next;
 }	t_env_var;

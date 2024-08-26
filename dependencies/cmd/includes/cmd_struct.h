@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:45 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/19 10:24:49 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/23 17:00:48 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 typedef enum e_list_type
 {
 	CMD,
-	IO_ARG
+	R_FILE
 }	t_list_type;
 
 typedef enum e_link
@@ -39,13 +39,19 @@ typedef enum e_redirect
 	OUT_2
 }	t_redirect;
 
+typedef struct s_rfile
+{
+	int				option;
+	char			*args;
+	struct s_rfile	*next;
+}	t_rfile;
+
 typedef struct s_cmd
 {
 	char			**args;
-	t_list			*file_in;
-	t_list			*file_out;
-	t_list			*file_append;
-	t_list			*heredoc;
+	int				arg_len;
+	t_rfile			*file_in;
+	t_rfile			*file_out;
 	t_link			link_type;
 	struct s_cmd	*next;
 }	t_cmd;

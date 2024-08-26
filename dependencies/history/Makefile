@@ -21,7 +21,7 @@ LIBFT_PATH	= $(DEP_PATH)/libft
 
 # LIBS
 LIBFT		= -L$(LIBFT_PATH) -lft
-LIBS		= $(LIBFT)
+LIBS		= $(LIBFT) -Wno-unused-command-line-argument
 
 # INCLUDES
 LIBFT_INC	= -I$(LIBFT_PATH)/includes
@@ -35,7 +35,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 # FUNCTION
 define Compile
-	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2) $(LIBS)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2) $(LIBS) 
 endef
 
 define CreateLib

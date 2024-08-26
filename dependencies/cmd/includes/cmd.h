@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:41 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/19 10:40:19 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/22 10:47:26 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int			_get_info(char **str, char *cmd);
 
 /* --------------------- CMD EXTRA UTILS --------------------- */
 int			_skip_space(char *str);
-t_cmd		*_init_cmd(void);
+t_rfile		*_init_rfile(t_redirect redirect);
+t_cmd		*_init_cmd(char *cmd);
 void		*_next_cmd(void *value, t_list_type type);
 void		_add_next_cmd(void *value, void *next, t_list_type type);
 

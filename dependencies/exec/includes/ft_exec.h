@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/18 18:34:00 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/24 07:12:59 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <sys/types.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
 # include "env.h"
 # include "cmd.h"
@@ -34,6 +35,11 @@ void	ft_exit(t_cmd *cmd);
 
 /* _________________________ EXEC UTILS _________________________ */
 char	*ft_search_executable(t_env_var *venv, char *exe_name);
-int		ft_exec_cmd(t_cmd *cmd, t_env_var *venv, char **env);
+// int		ft_exec_cmd(t_cmd *cmd, t_env_var *venv, char **env);
+// int		ft_exec_cmds(t_cmd *cmd, t_env_var *venv, char **env);
+
+int		ft_multi_pipe(t_cmd *cmd, t_env_var *venv, char **envp);
+int		ft_variable(char *arg, t_list *content);
+int		ft_new_arg_len(char *arg, t_env_var *venv);
 
 #endif

@@ -12,7 +12,7 @@ SRC_FILES	= \
 				cd.c	\
 				ft_exit.c
 
-FUNC_FILES	= exec_utils.c
+FUNC_FILES	= exec_utils.c analyse_arg.c analyse_arg_utils.c
 
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)
@@ -33,7 +33,7 @@ CMD_PATH	= $(DEP_PATH)/cmd
 LIBFT		= -L$(LIBFT_PATH) -lft
 ENV			= -L$(ENV_PATH) -lenv
 CMD			= -L$(CMD_PATH) -lcmd
-LIBS		= $(CMD) $(ENV) $(LIBFT)
+LIBS		= $(CMD) $(ENV) $(LIBFT) -Wno-unused-command-line-argument
 
 # INCLUDES
 LIBFT_INC	= -I$(LIBFT_PATH)/includes
