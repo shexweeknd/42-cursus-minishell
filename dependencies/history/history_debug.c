@@ -6,13 +6,13 @@
 /*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:52:55 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/19 14:50:20 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/26 09:28:36 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "history.h"
 
-void	display_lchistory(t_hist_elem *hist_elem)
+void	display_lchist(t_hist_elem *hist_elem)
 {
 	printf("\033[32m[PRINTING LOCAL HISTORY]: \033[0m\n");
 	while (hist_elem)
@@ -23,7 +23,7 @@ void	display_lchistory(t_hist_elem *hist_elem)
 		hist_elem = hist_elem->next;
 	}
 }
-
+/*
 void	display_rlhistory(void)
 {
 	HIST_ENTRY	**hist_list;
@@ -56,6 +56,23 @@ void	show_formatted_rlhistory(void)
 		{
 			printf("%4d %s\n", i + 1, hist_list[i]->line);
 			i++;
+		}
+	}
+}
+*/
+
+void	show_formatted_lchist(t_hist_elem *lchist)
+{
+	int	i;
+
+	if (lchist)
+	{
+		i = 0;
+		while (lchist)
+		{
+			printf("%4d %s\n", i + 1, lchist->command);
+			i++;
+			lchist = lchist->next;
 		}
 	}
 }

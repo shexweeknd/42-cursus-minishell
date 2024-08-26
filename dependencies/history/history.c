@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:39:28 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/19 14:45:05 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/08/26 09:31:53 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,4 @@ int	set_history(t_hist_elem *hist_elem, char *file_path)
 		write_cmd_typed_after_offset(fd, hist_elem);
 	write(fd, remains, ft_strlen(remains));
 	return (free(remains), close(fd), 1);
-}
-
-// TODO WILL SERVE TO MODIFY THE LCHIST and RLHIST IN THE MEMORY
-void	modify_curr_history(void)
-{
-	printf("Modifie l'historique en memoire...\n");
-	return ;
 }
