@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/26 13:39:19 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/27 12:56:46 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,15 @@ char	*ft_search_executable(t_env_var *venv, char *exe_name);
 // int		ft_exec_cmd(t_cmd *cmd, t_env_var *venv, char **env);
 // int		ft_exec_cmds(t_cmd *cmd, t_env_var *venv, char **env);
 
+int 	ft_new_arg_len(char *arg, t_env_var *venv);
+char	*ft_init_new_arg(char *arg, t_env_var *venv, int len);
+
+
 int		ft_multi_pipe(t_cmd *cmd, t_env_var *venv, char **envp);
-int		ft_variable(char *arg, t_list *content);
 int		ft_new_arg_len(char *arg, t_env_var *venv);
 char	*ft_new_arg(char *arg, t_env_var *venv);
+
+void	ft_analyse_args(t_cmd *cmd, t_env_var *venv, void (*_do)());
+void	ft_analyse_arg(char **arg, t_env_var *venv);
 
 #endif

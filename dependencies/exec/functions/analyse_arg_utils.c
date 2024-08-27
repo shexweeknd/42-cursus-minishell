@@ -129,9 +129,3 @@ char	*ft_new_arg(char *arg, t_env_var *venv)
 	return (arg);
 }
 
-int	ft_variable(char *arg, t_list *content)
-{
-	(void)arg;
-	(void)content;
-	return (0);
-}

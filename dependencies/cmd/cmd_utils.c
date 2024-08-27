@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/23 20:51:22 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/27 09:51:18 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,9 @@ int	_get_info(char **str, char *cmd)
 {
 	int	len;
 	int	i;
-	int	is_arg;
 
 	if (!cmd)
 		return (0);
-	is_arg = 0;
 	i = _skip_space(cmd);
 	len = ft_get_info_len(cmd + i);
 	if (len && str && *str == NULL)
