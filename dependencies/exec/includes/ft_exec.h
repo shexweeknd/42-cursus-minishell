@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/27 12:56:46 by ballain          ###   ########.fr       */
+/*   Updated: 2024/08/28 16:55:41 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <sys/wait.h>
 # include "env.h"
 # include "cmd.h"
-# include "ft_exec_struct.h"
 
 /* _________________________ SRC _________________________ */
 void	cd(t_cmd *cmd);
@@ -35,18 +34,19 @@ void	ft_exit(t_cmd *cmd);
 
 /* _________________________ EXEC UTILS _________________________ */
 char	*ft_search_executable(t_env_var *venv, char *exe_name);
-// int		ft_exec_cmd(t_cmd *cmd, t_env_var *venv, char **env);
-// int		ft_exec_cmds(t_cmd *cmd, t_env_var *venv, char **env);
 
-int 	ft_new_arg_len(char *arg, t_env_var *venv);
-char	*ft_init_new_arg(char *arg, t_env_var *venv, int len);
+/* _________________________ EXEC _________________________ */
+// int		ft_exec_cmd(t_cmd *cmd, t_env_var *venv);
+int		ft_exec_cmds(t_cmd *cmd, t_env_var *venv);
 
-
-int		ft_multi_pipe(t_cmd *cmd, t_env_var *venv, char **envp);
+/* _________________________ ANALYSE ARG UTILS _________________________ */
+int		_skip_venv(char *arg);
+int		ft_getlen_venv(char *arg, t_env_var *venv);
+int		ft_ltos(char *dest, t_list *src, char sep);
 int		ft_new_arg_len(char *arg, t_env_var *venv);
-char	*ft_new_arg(char *arg, t_env_var *venv);
+int		ft_manage_venv(char *dest, char *src, t_env_var *venv, int len);
 
-void	ft_analyse_args(t_cmd *cmd, t_env_var *venv, void (*_do)());
-void	ft_analyse_arg(char **arg, t_env_var *venv);
+/* _________________________ ANALYSE ARG _________________________ */
+int		ft_analyse_args(t_cmd *cmd, t_env_var *venv);
 
 #endif

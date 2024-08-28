@@ -1,41 +1,75 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   analyse_arg.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/28 10:13:03 by ballain           #+#    #+#             */
+/*   Updated: 2024/08/28 12:28:34 by ballain          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_exec.h"
 
-void	ft_analyse_arg(char **arg, t_env_var *venv)
+static char	*ft_init_new_arg(char *arg, t_env_var *venv, int len)
+{
+	int			i;
+	char		*r_value;
+
+	i = 0;
+	r_value = (char *)malloc(sizeof(char) * (len + 1));
+	if (!r_value)
+		return (NULL);
+	while (*arg)
+	{
+		while (*arg && *arg != '$')
+			r_value[i++] = *(arg++);
+		if (*arg && *arg == '$' && arg++)
+		{
+			len = _skip_venv(arg);
+			i += ft_manage_venv(r_value + i, arg, venv, len);
+			arg += len;
+		}
+	}
+	r_value[i] = 0;
+	return (r_value);
+}
+
+static char	*ft_analyse_arg(char *arg, t_env_var *venv)
 {
 	char	*tmp;
 
-	if (!arg && !*arg && !**arg)
-		return ;
-	if (**arg && **arg == '\'')
+	tmp = NULL;
+	if (!arg)
+		return (NULL);
+	if (*arg && *arg == '\'')
+		return (ft_strtrim(arg, "'"));
+	if (*arg && (*arg == '$' || *arg == '"'))
 	{
-		tmp = ft_strtrim(*arg, "'");
-		free(*arg);
-		*arg = tmp;
+		tmp = ft_strtrim(arg, "\"");
+		arg = ft_init_new_arg(tmp, venv, ft_new_arg_len(tmp, venv));
+		return (free(tmp), arg);
 	}
-	if (**arg && **arg == '"')
-	{
-		tmp = ft_strtrim(*arg, "\"");
-		free(*arg);
-		*arg = ft_init_new_arg(tmp, venv, ft_new_arg_len(tmp, venv));
-		free(tmp);
-	}
+	return (arg);
 }
 
-void	ft_analyse_args(t_cmd *cmd, t_env_var *venv, void (*_do)())
+int	ft_analyse_args(t_cmd *cmd, t_env_var *venv)
 {
-	int	i;
-	int	id;
+	int		i;
+	char	*tmp;
 
 	i = 1;
+	tmp = NULL;
 	while (i < cmd->nb_arg)
 	{
-		id = fork();
-		if (id == 0)
+		tmp = ft_analyse_arg(cmd->args[i], venv);
+		if (tmp != cmd->args[i])
 		{
-			_do(&cmd->args[i], venv);
-			break ;
+			free(cmd->args[i]);
+			cmd->args[i] = tmp;
 		}
-		wait(NULL);
 		i++;
 	}
+	return (1);
 }

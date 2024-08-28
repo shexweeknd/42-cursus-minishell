@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   analyse_arg_utils.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/28 10:15:20 by ballain           #+#    #+#             */
+/*   Updated: 2024/08/28 11:20:38 by ballain          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_exec.h"
 
 int	_skip_venv(char *arg)
@@ -5,8 +17,11 @@ int	_skip_venv(char *arg)
 	int	len;
 
 	len = 0;
-	while (*arg && (ft_isalpha(*arg) || *arg == '_') && arg++)
+	while (*arg && (ft_isalpha(*arg) || *arg == '_'))
+	{
+		arg++;
 		len++;
+	}
 	return (len);
 }
 
@@ -26,28 +41,6 @@ int	ft_getlen_venv(char *arg, t_env_var *venv)
 		return (0);
 	len = ft_lst_content_len(found_var->content);
 	len += ft_lstsize(found_var->content) - 1;
-	return (len);
-}
-
-int	ft_new_arg_len(char *arg, t_env_var *venv)
-{
-	int			len;
-	char		*tmp;
-
-	len = 0;
-	while (*arg)
-	{
-		tmp = ft_strchr(arg, '$');
-		if (!tmp && arg++)
-			len++;
-		else
-		{
-			len += (tmp++) - arg;
-			arg = tmp;
-			len += ft_getlen_venv(arg, venv);
-			arg += _skip_venv(arg);
-		}
-	}
 	return (len);
 }
 
@@ -89,43 +82,24 @@ int	ft_manage_venv(char *dest, char *src, t_env_var *venv, int len)
 	return (i);
 }
 
-char	*ft_init_new_arg(char *arg, t_env_var *venv, int len)
+int	ft_new_arg_len(char *arg, t_env_var *venv)
 {
-	int			i;
-	char		*r_value;
+	int			len;
+	char		*tmp;
 
-	i = 0;
-	r_value = (char *)malloc(sizeof(char) * (len + 1));
-	if (!r_value)
-		return (NULL);
+	len = 0;
 	while (*arg)
 	{
-		while (*arg && *arg != '$')
-			r_value[i++] = *(arg++);
-		if (*arg && *arg == '$' && arg++)
+		tmp = ft_strchr(arg, '$');
+		if (!tmp && arg++)
+			len++;
+		else
 		{
-			len = _skip_venv(arg);
-			i += ft_manage_venv(r_value + i, arg, venv, len);
-			arg += len;
+			len += (tmp++) - arg;
+			arg = tmp;
+			len += ft_getlen_venv(arg, venv);
+			arg += _skip_venv(arg);
 		}
 	}
-	r_value[i] = 0;
-	return (r_value);
+	return (len);
 }
-
-char	*ft_new_arg(char *arg, t_env_var *venv)
-{
-	char	*tmp;
-
-	if (*arg && *arg == '\'')
-		return (ft_strtrim(arg, "'"));
-	if (*arg && *arg == '"')
-	{
-		arg = ft_strtrim(arg, "\"");
-		tmp = ft_init_new_arg(arg, venv, ft_new_arg_len(arg, venv));
-		free(arg);
-		return (tmp);
-	}
-	return (arg);
-}
-

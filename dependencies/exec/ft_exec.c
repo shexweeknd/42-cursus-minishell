@@ -1,21 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_exec.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
+/*   Updated: 2024/08/28 20:49:41 by ballain          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_exec.h"
 
-int	ft_local_exe(t_cmd *cmd)
+int	ft_buildin_cmd(t_cmd *cmd)
 {
-	if (ft_strcmp(cmd->args[0], "echo"))
-		echo(cmd);
-	if (ft_strcmp(cmd->args[0], "cd"))
-		cd(cmd);
-	if (ft_strcmp(cmd->args[0], "env"))
-		env(cmd);
-	if (ft_strcmp(cmd->args[0], "export"))
-		export(cmd);
-	if (ft_strcmp(cmd->args[0], "pwd"))
-		pwd(cmd);
-	if (ft_strcmp(cmd->args[0], "unset"))
-		unset(cmd);
-	if (ft_strcmp(cmd->args[0], "exit"))
-		ft_exit(cmd);
+	ft_show_cmd(cmd);
+	if (ft_strcmp(cmd->args[0], "echo") == 0)
+		return (echo(cmd), 1);
+	if (ft_strcmp(cmd->args[0], "cd") == 0)
+		return (cd(cmd), 1);
+	if (ft_strcmp(cmd->args[0], "env") == 0)
+		return (env(cmd), 1);
+	if (ft_strcmp(cmd->args[0], "export") == 0)
+		return (export(cmd), 1);
+	if (ft_strcmp(cmd->args[0], "pwd") == 0)
+		return (pwd(cmd), 1);
+	if (ft_strcmp(cmd->args[0], "unset") == 0)
+		return (unset(cmd), 1);
+	if (ft_strcmp(cmd->args[0], "exit") == 0)
+		return (ft_exit(cmd), 1);
 	return (0);
 }
 
@@ -37,97 +50,74 @@ void	ft_manage_redirect_file(int fd[2], int r_fd[2], t_cmd *cmd)
 		r_fd[0] = open(tmp_in->args, tmp_in->option);
 	if (tmp_out)
 		r_fd[1] = open(tmp_out->args, tmp_out->option);
-	if (cmd->next)
+	if (r_fd[0] != -1 || r_fd[1] != -1)
+	{
+		if (r_fd[0] != -1)
+			dup2(r_fd[0], STDIN_FILENO);
+		if (r_fd[1] != -1)
+			dup2(r_fd[1], STDOUT_FILENO);
+	}
+	else if (cmd->next)
 		dup2(fd[1], STDOUT_FILENO);
-	if (r_fd[0] != -1)
-		dup2(r_fd[0], STDIN_FILENO);
-	if (r_fd[1] != -1)
-		dup2(r_fd[1], STDOUT_FILENO);
 }
 
-int	ft_exec_cmd(t_cmd *cmd, t_env_var *venv, char **env)
+void	ft_close_fd(int fd[2], int r_fd[2])
 {
+	close(fd[0]);
+	close(fd[1]);
+	if (r_fd[0] != -1)
+		close(r_fd[0]);
+	if (r_fd[1] != -1)
+		close(r_fd[1]);
+}
+
+int	ft_exec_cmd(int fd[2], int r_fd[2], t_cmd *cmd, t_env_var *venv)
+{
+	int		id;
 	char	*exe;
 
 	if (!cmd->args)
 		return (0);
+	ft_manage_redirect_file(fd, r_fd, cmd);
+	ft_close_fd(fd, r_fd);
+	if (ft_buildin_cmd(cmd))
+		return (1);
 	exe = ft_search_executable(venv, cmd->args[0]);
-	if (!exe && ft_local_exe(cmd))
+	if (!exe)
 		return (0);
 	free(cmd->args[0]);
 	cmd->args[0] = exe;
-	execve(exe, cmd->args, env);
+	id = fork();
+	if (id == 0)
+		execve(exe, cmd->args, NULL);
+	else
+		wait(NULL);
 	return (1);
 }
 
-int	ft_multi_pipe(t_cmd *cmd, t_env_var *venv, char **envp)
+int	ft_exec_cmds(t_cmd *cmd, t_env_var *venv)
 {
-	int	i;
 	int	id;
 	int	fd[2];
 	int	r_fd[2];
 
-	i = 2;
 	if (!cmd)
 		return (0);
-	while (i)
-		r_fd[--i] = -1;
+	r_fd[0] = -1;
+	r_fd[1] = -1;
 	if (pipe(fd) == -1)
 		return (1);
 	id = fork();
 	if (id == 0)
-	{
-		ft_manage_redirect_file(fd, r_fd, cmd);
-		(close(fd[0]), close(fd[1]), ft_exec_cmd(cmd, venv, envp));
-	}
+		ft_exec_cmd(fd, r_fd, cmd, venv);
 	else
 	{
 		dup2(fd[0], STDIN_FILENO);
-		(close(fd[0]), close(fd[1]));
+		ft_close_fd(fd, r_fd);
 		if (cmd->next)
-			ft_multi_pipe(cmd->next, venv, envp);
+			ft_exec_cmds(cmd->next, venv);
 		return (wait(NULL), 0);
 	}
 	return (1);
 }
-
-// int	ft_exec_cmds(t_cmd *cmd, t_env_var *venv, char **envp)
-// {
-// 	int	fd[2];
-// 	int	id;
-// 	int	desc;
-// 	int	result_id;
-
-// 	(void)cmd;
-// 	(void)venv;
-// 	desc = open("tmp.txt", O_RDWR);
-// 	result_id = open("result.txt", O_RDWR);
-// 	if (desc == -1 && result_id == -1)
-// 		return (1);
-// 	if (pipe(fd) == -1)
-// 		return (1);
-// 	id = fork();
-// 	if (id == 0)
-// 	{
-// 		// dup2(desc, STDIN_FILENO);
-// 		dup2(fd[1], STDOUT_FILENO);
-// 		close(fd[0]);
-// 		close(fd[1]);
-// 		execve("/usr/bin/grep", (char *[]){"/usr/bin/grep", "main", "main.c", NULL}, envp);
-// 	}
-// 	else
-// 	{
-// 		id = fork();
-// 		if (id == 0)
-// 		{
-// 			dup2(fd[0], STDIN_FILENO);
-// 			// dup2(result_id, STDOUT_FILENO);
-// 			close(fd[0]);
-// 			close(fd[1]);
-// 			execve("/usr/bin/cat", (char *[]){"/usr/bin/cat", NULL}, envp);
-// 		}
-// 		else
-// 			wait(NULL);
-// 	}
-// 	return (1);
-// }
+// grep "main" main.c > out.txt | cat
