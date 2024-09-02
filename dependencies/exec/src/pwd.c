@@ -1,40 +1,41 @@
 #include "ft_exec.h"
 
+static int	ft_check_pwd_error(char *arg)
+{
+	char	*tmp;
+	int		error;
+
+	error = 0;
+	tmp = NULL;
+	if (!arg)
+		return (error);
+	if (*arg == '"')
+		tmp = ft_strtrim(arg, "\"");
+	else if (*arg == '\'')
+		tmp = ft_strtrim(arg, "'");
+	else
+		tmp = ft_strdup(arg);
+	if (*tmp && *tmp == '-')
+	{
+		if (*(tmp + 1) && (*(tmp + 1) != 'L' && *(tmp + 1) != 'P'))
+		{
+			error = 1;
+			printf("minishell: pwd: -%c: invalid option\n", *tmp);
+			printf("pwd: usage: pwd [-LP]\n");
+		}
+	}
+	if (tmp)
+		free(tmp);
+	return (error);
+}
+
 void	pwd(t_cmd *cmd)
 {
 	char	*cwd;
-	char	*tmp;
-	char	*to_free;
-	int		has_error;
 
-	printf("PWD HERE\n");
-	tmp = NULL;
-	to_free = NULL;
-	has_error = 0;
-	if (cmd->args[1])
-	{
-		if (*cmd->args[1] == '"')
-			tmp = ft_strtrim(cmd->args[1], "\"");
-		else if (*cmd->args[1] == '\'')
-			tmp = ft_strtrim(cmd->args[1], "'");
-		else
-			tmp = cmd->args[1];
-		if (*tmp && *tmp == '-')
-		{
-			to_free = tmp;
-			tmp++;
-			if (*tmp && (*tmp != 'L' || *tmp != 'P'))
-			{
-				has_error = 1;
-				printf("bash: pwd: -%c: invalid option\npwd: usage: pwd [-LP]\n", *tmp);
-			}
-		}
-		if (to_free && to_free != cmd->args[1])
-			free(to_free);
-	}
-	if (!has_error)
+	if (!ft_check_pwd_error(cmd->args[1]))
 	{
 		cwd = getcwd(NULL, 0);
-		(printf("%s\n", cwd), free(cmd));
+		(printf("%s\n", cwd), free(cwd));
 	}
 }
