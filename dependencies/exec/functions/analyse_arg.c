@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:13:03 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/28 12:28:34 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/02 11:24:40 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,24 @@ int	ft_analyse_args(t_cmd *cmd, t_env_var *venv)
 {
 	int		i;
 	char	*tmp;
+	t_cmd	*tmp_cmd;
 
-	i = 1;
-	tmp = NULL;
-	while (i < cmd->nb_arg)
+	tmp_cmd = cmd;
+	while (tmp_cmd)
 	{
-		tmp = ft_analyse_arg(cmd->args[i], venv);
-		if (tmp != cmd->args[i])
+		i = 1;
+		tmp = NULL;
+		while (i < tmp_cmd->nb_arg)
 		{
-			free(cmd->args[i]);
-			cmd->args[i] = tmp;
+			tmp = ft_analyse_arg(tmp_cmd->args[i], venv);
+			if (tmp != tmp_cmd->args[i])
+			{
+				free(tmp_cmd->args[i]);
+				tmp_cmd->args[i] = tmp;
+			}
+			i++;
 		}
-		i++;
+		tmp_cmd = tmp_cmd->next;
 	}
 	return (1);
 }
