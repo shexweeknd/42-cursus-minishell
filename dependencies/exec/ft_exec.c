@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/28 20:49:41 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/02 11:29:01 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	ft_exec_cmd(int fd[2], int r_fd[2], t_cmd *cmd, t_env_var *venv)
 		return (1);
 	exe = ft_search_executable(venv, cmd->args[0]);
 	if (!exe)
-		return (0);
+		return (printf("Minishell: %s: command not found\n", cmd->args[0]), 0);
 	free(cmd->args[0]);
 	cmd->args[0] = exe;
 	id = fork();
@@ -109,7 +109,7 @@ int	ft_exec_cmds(t_cmd *cmd, t_env_var *venv)
 		return (1);
 	id = fork();
 	if (id == 0)
-		ft_exec_cmd(fd, r_fd, cmd, venv);
+		return (ft_exec_cmd(fd, r_fd, cmd, venv));
 	else
 	{
 		dup2(fd[0], STDIN_FILENO);
