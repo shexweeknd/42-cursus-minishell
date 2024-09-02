@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/02 13:10:08 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/02 14:18:00 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	ft_exec_cmd(int fd[2], int r_fd[2], t_cmd *cmd, t_env_var *venv)
 		return (1);
 	exe = ft_search_executable(venv, cmd->args[0]);
 	if (!exe)
-		return (0);
+		return (printf("Minishell: %s: command not found\n", cmd->args[0]), 0);
 	free(cmd->args[0]);
 	cmd->args[0] = exe;
 	id = fork();

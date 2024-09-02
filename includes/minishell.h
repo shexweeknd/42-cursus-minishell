@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:46 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/28 09:02:25 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/02 12:26:40 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 # include "cmd.h"
 # include "env.h"
-# include "err.h"
 # include "ft_exec.h"
 # include "history.h"
+# include "m_err.h"
 # include "struct.h"
+# include "uniform.h"
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
