@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_show.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 02:47:59 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/22 11:03:20 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/02 13:51:40 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_show_redirect(char *label, t_rfile *r_arg)
 
 void	ft_show_cmd(t_cmd *cmd)
 {
-	int		i;
+	int	i;
 
 	printf("\033[0;4;32mCMD	:\033[0;0m\n");
 	while (cmd)
@@ -53,6 +53,7 @@ void	ft_show_cmd(t_cmd *cmd)
 		i = 0;
 		while (cmd->args && cmd->args[i])
 			printf(" ARGS	: [%s]\n", cmd->args[i++]);
+		printf(" ARGS_NBR: [%d]\n", cmd->nb_arg);
 		if (cmd->file_in)
 			ft_show_redirect(" REDIRECTION ", cmd->file_in);
 		if (cmd->file_out)

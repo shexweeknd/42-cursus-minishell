@@ -3,9 +3,15 @@ NAME		= libenv.a
 
 # FILES
 FILES		= env.c env_utils.c env_free.c
+FUNC_FILES 	= \
+		concatenate_contents.c \
+
+# SRC FILES
+FUNC		= $(FUNC_FILES:%.c=functions/%.c)
 
 # OBJECT FILES
 OBJS		= $(FILES:%.c=output/%.o)
+FUNC_OBJS	= $(FUNC:functions/%.c=output/%.o)
 
 # DEPENDENCIES
 DEP_PATH	= ..
@@ -43,12 +49,16 @@ output		:
 output/%.o	: %.c | output
 				$(call Compile,$<,$@)
 
-$(NAME)		: $(OBJS)
+output/%.o	: */%.c | output
+				$(call Compile,$<,$@)
+
+$(NAME)		: $(OBJS) $(FUNC_OBJS)
 				make -C $(LIBFT_PATH)
 				$(call CreateLib,$^,$@)
 
 clean		:
 				rm -rf $(OBJS)
+				rm -rf $(FUNC_OBJS)
 
 fclean		: clean
 				rm -rf $(NAME)

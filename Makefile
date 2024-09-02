@@ -33,7 +33,7 @@ HISTORY_LIB 	= -L$(HISTORY_PATH) -lhistory
 ERR_LIB 		= -L$(ERR_PATH) -lerr
 UNIFORM_LIB 	= -L$(UNIFORM_PATH) -luniform
 EXEC_LIB 		= -L$(EXEC_PATH) -lexec
-LIBS			= $(EXEC_LIB) $(HISTORY_LIB) $(ERR_LIB) $(CMD_LIB) $(ENV_LIB) $(LIBFT_LIB) -lreadline -Wno-unused-command-line-argument
+LIBS			= $(EXEC_LIB) $(HISTORY_LIB) $(ERR_LIB) $(UNIFORM_LIB) $(CMD_LIB) $(ENV_LIB) $(LIBFT_LIB) -lreadline -Wno-unused-command-line-argument
 
 # INCLUDES
 MINISH_INC		= -Iincludes
