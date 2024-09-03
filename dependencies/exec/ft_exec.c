@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/03 13:32:14 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/03 14:58:27 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,28 +94,34 @@ int	ft_exec_cmd(int fd[2], int r_fd[2], t_cmd *cmd, t_env_var *venv)
 	return (1);
 }
 
-int	ft_exec_cmds(t_cmd *cmd, t_env_var *venv)
+int	ft_exec_cmds(t_exec_params params)
 {
 	int		id;
 	int		fd[2];
 	int		r_fd[2];
 
-	if (!cmd)
+	if (!params.cmd)
 		return (0);
 	r_fd[0] = -1;
 	r_fd[1] = -1;
 	if (pipe(fd) == -1)
 		return (1);
-	id = fork();
-	if (id == 0)
+	if (params.link_type == PIPE)
 	{
-		ft_exec_cmd(fd, r_fd, cmd, venv);
-		exit(0);
+		id = fork();
+		if (id == 0)
+		{
+			if (params.read_fd != 0)
+				(dup2(params.read_fd, STDIN_FILENO), close(params.read_fd));
+			ft_exec_cmd(fd, r_fd, params.cmd, params.venv);
+			exit(0);
+		}
+
 	}
-	// if (cmd->next)
-	// 	dup2(fd[0], STDIN_FILENO);
-	ft_close_fd(fd, r_fd);
-	ft_exec_cmds(cmd->next, venv);
+	else
+		ft_exec_cmd(fd, r_fd, params.cmd, params.venv);
+	close(fd[1]);
+	ft_exec_cmds((t_exec_params){fd[0], params.cmd->next, params.venv, params.cmd->link_type});
 	wait(NULL);
 	return (0);
 }

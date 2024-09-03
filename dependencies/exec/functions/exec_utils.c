@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:13:56 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/28 10:13:57 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/03 14:27:28 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ char	*ft_search_executable(t_env_var *venv, char *exe_name)
 	path = ft_get_env_var(venv, "PATH");
 	if (!path)
 		return (NULL);
+	if (access(exe_name, F_OK | X_OK) == 0)
+			return (exe_name);
 	tmp_paths = path->content;
 	while (tmp_paths)
 	{

@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/03 12:26:45 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/03 14:54:59 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <sys/wait.h>
 # include "env.h"
 # include "cmd.h"
+# include "ft_struct_exec.h"
 
 /* _________________________ SRC _________________________ */
 void	cd(t_cmd *cmd);
@@ -37,7 +38,7 @@ char	*ft_search_executable(t_env_var *venv, char *exe_name);
 
 /* _________________________ EXEC _________________________ */
 // int		ft_exec_cmd(t_cmd *cmd, t_env_var *venv);
-int		ft_exec_cmds(t_cmd *cmd, t_env_var *venv);
+int		ft_exec_cmds(t_exec_params params);
 
 /* _________________________ ANALYSE ARG UTILS _________________________ */
 int		_skip_venv(char *arg);
