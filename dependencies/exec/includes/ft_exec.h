@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/02 12:40:29 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/03 12:26:45 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	env(t_env_var *venv);
 void	export(t_cmd *cmd);
 void	pwd(t_cmd *cmd);
 void	unset(t_cmd *cmd);
-void	ft_exit(t_cmd *cmd);
+void	ft_exit(void);
 
 /* _________________________ EXEC UTILS _________________________ */
 char	*ft_search_executable(t_env_var *venv, char *exe_name);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/02 15:55:47 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:32:14 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_buildin_cmd(t_cmd *cmd, t_env_var *venv)
 	if (ft_strcmp(cmd->args[0], "unset") == 0)
 		return (unset(cmd), 1);
 	if (ft_strcmp(cmd->args[0], "exit") == 0)
-		return (ft_exit(cmd), 1);
+		return (ft_exit(), 1);
 	return (0);
 }
 
@@ -77,7 +77,7 @@ int	ft_exec_cmd(int fd[2], int r_fd[2], t_cmd *cmd, t_env_var *venv)
 
 	if (!cmd->args)
 		return (0);
-	// ft_manage_redirect_file(fd, r_fd, cmd);ea
+	ft_manage_redirect_file(fd, r_fd, cmd);
 	ft_close_fd(fd, r_fd);
 	if (ft_buildin_cmd(cmd, venv))
 		return (1);
@@ -90,16 +90,15 @@ int	ft_exec_cmd(int fd[2], int r_fd[2], t_cmd *cmd, t_env_var *venv)
 	if (id == 0)
 		execve(exe, cmd->args, NULL);
 	else
-		wait(NULL);
+		wait(NULL), exit(0);
 	return (1);
 }
 
 int	ft_exec_cmds(t_cmd *cmd, t_env_var *venv)
 {
-	// int	id;
+	int		id;
 	int		fd[2];
 	int		r_fd[2];
-	t_cmd	*tmp;
 
 	if (!cmd)
 		return (0);
@@ -107,22 +106,16 @@ int	ft_exec_cmds(t_cmd *cmd, t_env_var *venv)
 	r_fd[1] = -1;
 	if (pipe(fd) == -1)
 		return (1);
-	tmp = cmd;
-	while (tmp)
+	id = fork();
+	if (id == 0)
 	{
-		ft_exec_cmd(fd, r_fd, tmp, venv);
-		tmp = tmp->next;
+		ft_exec_cmd(fd, r_fd, cmd, venv);
+		exit(0);
 	}
-	// id = fork();
-	// if (id == 0)
-	// 	ft_exec_cmd(fd, r_fd, cmd, venv);
-	// else
-	// {
+	// if (cmd->next)
 	// 	dup2(fd[0], STDIN_FILENO);
-	// 	ft_close_fd(fd, r_fd);
-	// 	if (cmd->next)
-	// 		ft_exec_cmds(cmd->next, venv);
-	// 	return (wait(NULL), 0);
-	// }
-	return (1);
+	ft_close_fd(fd, r_fd);
+	ft_exec_cmds(cmd->next, venv);
+	wait(NULL);
+	return (0);
 }
