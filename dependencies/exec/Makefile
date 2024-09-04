@@ -5,7 +5,7 @@ NAME		= libexec.a
 FILES		= ft_exec.c #exec_utils.c
 SRC_FILES	= \
 				echo.c	\
-				env.c	\
+				ft_env.c	\
 				export.c\
 				pwd.c	\
 				unset.c	\

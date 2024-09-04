@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/04 10:29:32 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/04 10:35:40 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 /* _________________________ SRC _________________________ */
 void	cd(t_cmd *cmd);
 void	echo(t_cmd *cmd);
-void	env(t_env_var *venv);
+void	ft_env(t_env_var *venv);
 void	export(t_cmd *cmd);
 void	pwd(t_cmd *cmd);
 void	unset(t_cmd *cmd);
