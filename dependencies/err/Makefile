@@ -3,7 +3,7 @@ NAME		= liberr.a
 
 # FILES
 FILES		= err.c
-FUNC_FILES	= display_err_utils.c
+FUNC_FILES	= unexpected_err.c
 
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)
