@@ -6,68 +6,92 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:22:05 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/04 10:34:41 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/04 20:17:12 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 
-int	ft_getstr(char **dest, char *str, char delimiter)
+int	ft_getlen_env(char **envp)
 {
-	char	*tmp;
-	int		len;
+	int	len;
 
-	if (!(*str) || !dest)
-		return (0);
-	tmp = ft_strchr(str, delimiter);
-	if (!tmp)
-		len = ft_strlen(str);
-	else
-		len = tmp - str;
-	if (!len)
-		return (0);
-	*dest = ft_substr(str, 0, len);
-	if (!(*dest))
-		return (0);
-	if (tmp)
-		len++;
+	len = 0;
+	while (*envp)
+		(len++, envp++);
 	return (len);
 }
 
-void	ft_get_venv_content(t_list **lst, char *var_env)
+int	ft_getlen_path(char *path)
 {
-	char		*tmp;
+	int	len;
 
-	while (*var_env)
+	if (!path)
+		return (0);
+	len = 1;
+	while (*path)
 	{
-		tmp = NULL;
-		var_env += ft_getstr(&tmp, var_env, ':');
-		while (*var_env && *var_env == ':')
-			var_env++;
-		if (!tmp)
-			return ;
-		ft_add_back_((void **)lst, ft_lstnew(tmp), (t_lst_utils){0});
+		while (*path && *path != ':')
+			path++;
+		if (*path == ':' && path++ && *path)
+			len++;
 	}
+	return (len);
 }
 
-t_env_var	*ft_get_env(char **env)
+char	**ft_split_path(char *src)
 {
-	t_env_var	*tmp;
-	t_env_var	*r_value;
-	t_lst_utils	utils;
+	char	**r_value;
+	char	*tmp;
+	int		i;
 
-	r_value = NULL;
-	utils = (t_lst_utils){0, _add_next_env, _next_env};
-	while (*env)
+	i = 0;
+	r_value = (char **)malloc(sizeof(char *) * (ft_getlen_path(src) + 1));
+	if (!r_value)
+		return (NULL);
+	tmp = ft_strdup(src);
+	while (*tmp)
 	{
-		tmp = ft_init_var_env();
-		if (!tmp)
-			return (NULL);
-		tmp->len_name = ft_getstr(&tmp->name, *env, '=');
-		*env += tmp->len_name;
-		ft_get_venv_content(&tmp->content, *env);
-		ft_add_back_((void **)&r_value, tmp, utils);
-		env++;
+		r_value[i++] = tmp;
+		while (*tmp && *tmp != ':')
+			tmp++;
+		if (*tmp && *tmp == ':')
+			*(tmp++) = 0;
 	}
+	r_value[i] = NULL;
 	return (r_value);
+}
+
+t_env	*ft_getenv(char **envp)
+{
+	t_env	*env;
+	char	*path;
+	int		i;
+
+	i = 0;
+	env = (t_env *)malloc(sizeof(t_env));
+	if (!env)
+		return (NULL);
+	env->var = (char **)malloc(sizeof(char *) * (ft_getlen_env(envp) + 1));
+	if (!env->var)
+		return (NULL);
+	path = getenv("PATH");
+	while (*envp)
+		env->var[i++] = ft_strdup(*(envp++));
+	env->path = ft_split_path(path);
+	free(path);
+	return (env);
+}
+
+void	ft_free_env(t_env *env)
+{
+	int	i;
+
+	i = 0;
+	while (env->var[i])
+		free(env->var[i++]);
+	free(env->var);
+	free(*(env->path));
+	free(env->path);
+	free(env);
 }

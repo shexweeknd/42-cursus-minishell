@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:13:56 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/04 10:33:44 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/04 20:50:56 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,24 @@ char	*ft_join_path(char *path, char *sep, char *name)
 	return (r_value);
 }
 
-char	*ft_search_executable(t_env_var *venv, char *exe_name)
+char	*ft_search_executable(t_env *env, char *exe_name)
 {
-	t_env_var	*path;
-	t_list		*tmp_paths;
-	char		*tmp;
+	char	*tmp;
+	int		i;
 
-	path = ft_get_env_var(venv, "PATH");
-	if (!path)
-		return (NULL);
+	i = 0;
 	if (access(exe_name, F_OK | X_OK) == 0)
 		return (exe_name);
-	tmp_paths = path->content;
-	while (tmp_paths)
+	if (!env->path)
+		return (NULL);
+	while (env->path[i])
 	{
-		tmp = ft_join_path(tmp_paths->content, "/", exe_name);
+		tmp = ft_join_path(env->path[i++], "/", exe_name);
 		if (!tmp)
 			return (NULL);
 		if (access(tmp, F_OK | X_OK) == 0)
 			return (tmp);
 		free(tmp);
-		tmp_paths = tmp_paths->next;
 	}
 	return (NULL);
 }

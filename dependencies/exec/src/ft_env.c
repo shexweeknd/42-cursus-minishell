@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 10:35:14 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/04 10:35:28 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/04 20:49:28 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
 
-void	print_content(t_list *content)
-{
-	printf("%s", (char *)content->content);
-	if (content->next)
-		printf(":");
-}
 
-void	print_env(t_env_var *venv)
+void	ft_env(t_env *env)
 {
-	printf("%s=", venv->name);
-	_loop((void **)&venv->content, (t_lst_utils){0, print_content, NULL});
-	printf("\n");
-}
+	int	i;
 
-void	ft_env(t_env_var *venv)
-{
-	_loop((void **)&venv, (t_lst_utils){0, print_env, _next_env});
+	i = 0;
+	while (env->var[i])
+		printf("%s\n", env->var[i++]);
 }

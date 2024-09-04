@@ -6,20 +6,20 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/04 10:49:30 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/04 20:31:40 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
 
-int	ft_buildin_cmd(t_cmd *cmd, t_env_var *venv)
+int	ft_builtin_cmd(t_cmd *cmd, t_env *env)
 {
 	// if (ft_strcmp(cmd->args[0], "echo") == 0)
 	// 	return (echo(cmd), 1);
 	if (ft_strcmp(cmd->args[0], "cd") == 0)
 		return (cd(cmd), 1);
 	if (ft_strcmp(cmd->args[0], "env") == 0)
-		return (ft_env(venv), 1);
+		return (ft_env(env), 1);
 	if (ft_strcmp(cmd->args[0], "export") == 0)
 		return (export(cmd), 1);
 	if (ft_strcmp(cmd->args[0], "pwd") == 0)
@@ -70,7 +70,7 @@ void	ft_close_fd(int fd[2], int r_fd[2])
 		close(r_fd[1]);
 }
 
-int	ft_exec_cmd(int fd[2], int r_fd[2], t_cmd *cmd, t_env_var *venv)
+int	ft_exec_cmd(int fd[2], int r_fd[2], t_cmd *cmd, t_env *env)
 {
 	int		id;
 	char	*exe;
@@ -79,9 +79,9 @@ int	ft_exec_cmd(int fd[2], int r_fd[2], t_cmd *cmd, t_env_var *venv)
 		return (0);
 	ft_manage_redirect_file(fd, r_fd, cmd);
 	ft_close_fd(fd, r_fd);
-	if (ft_buildin_cmd(cmd, venv))
+	if (ft_builtin_cmd(cmd, env))
 		return (1);
-	exe = ft_search_executable(venv, cmd->args[0]);
+	exe = ft_search_executable(env, cmd->args[0]);
 	if (!exe)
 		return (printf("Minishell: %s: command not found\n", cmd->args[0]), 0);
 	free(cmd->args[0]);
@@ -111,13 +111,13 @@ int	ft_exec_cmds(t_exec_params params)
 		{
 			if (params.read_fd != 0)
 				(dup2(params.read_fd, STDIN_FILENO), close(params.read_fd));
-			(ft_exec_cmd(fd, r_fd, params.cmd, params.venv), exit(0));
+			(ft_exec_cmd(fd, r_fd, params.cmd, params.env), exit(0));
 		}
 	}
 	else
-		ft_exec_cmd(fd, r_fd, params.cmd, params.venv);
+		ft_exec_cmd(fd, r_fd, params.cmd, params.env);
 	(close(fd[1]), wait(NULL));
 	ft_exec_cmds((t_exec_params) \
-			{fd[0], params.cmd->next, params.venv, params.cmd->link_type});
+			{fd[0], params.cmd->next, params.env, params.cmd->link_type});
 	return (0);
 }
