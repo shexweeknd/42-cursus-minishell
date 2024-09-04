@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/04 10:35:40 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/04 10:39:24 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_exit(void);
 char	*ft_search_executable(t_env_var *venv, char *exe_name);
 
 /* _________________________ EXEC _________________________ */
-// int		ft_exec_cmd(t_cmd *cmd, t_env_var *venv);
 int		ft_exec_cmds(t_exec_params params);
 
 /* _________________________ ANALYSE ARG UTILS _________________________ */

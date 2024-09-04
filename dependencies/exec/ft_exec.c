@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/04 10:33:11 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/04 10:49:30 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	ft_buildin_cmd(t_cmd *cmd, t_env_var *venv)
 {
-	if (ft_strcmp(cmd->args[0], "echo") == 0)
-		return (echo(cmd), 1);
+	// if (ft_strcmp(cmd->args[0], "echo") == 0)
+	// 	return (echo(cmd), 1);
 	if (ft_strcmp(cmd->args[0], "cd") == 0)
 		return (cd(cmd), 1);
 	if (ft_strcmp(cmd->args[0], "env") == 0)
-		return (env(venv), 1);
+		return (ft_env(venv), 1);
 	if (ft_strcmp(cmd->args[0], "export") == 0)
 		return (export(cmd), 1);
 	if (ft_strcmp(cmd->args[0], "pwd") == 0)
