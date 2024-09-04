@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:13:03 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/02 11:24:40 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/04 10:23:50 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ static char	*ft_analyse_arg(char *arg, t_env_var *venv)
 	tmp = NULL;
 	if (!arg)
 		return (NULL);
+	if (*arg && *arg == '$')
+	{
+		if (ft_strlen(arg) == 1)
+			return (arg);
+		else if (*(arg + 1) == '"' || *(arg + 1) == '\'')
+			arg++;
+	}
 	if (*arg && *arg == '\'')
 		return (ft_strtrim(arg, "'"));
 	if (*arg && (*arg == '$' || *arg == '"'))
