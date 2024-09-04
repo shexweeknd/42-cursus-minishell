@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/04 10:03:24 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/04 10:29:37 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,17 +107,20 @@ int	ft_exec_cmds(t_exec_params params)
 		return (1);
 	if (params.link_type == PIPE)
 	{
-		if (fork() == 0)
+		id = fork();
+		if (id == 0)
 		{
 			if (params.read_fd != 0)
 				(dup2(params.read_fd, STDIN_FILENO), close(params.read_fd));
-			(ft_exec_cmd(fd, r_fd, params.cmd, params.venv), exit(0));
+			ft_exec_cmd(fd, r_fd, params.cmd, params.venv);
+			exit(0);
 		}
+
 	}
 	else
 		ft_exec_cmd(fd, r_fd, params.cmd, params.venv);
-	(close(fd[1]), wait(NULL));
-	ft_exec_cmds((t_exec_params) \
-		{fd[0], params.cmd->next, params.venv, params.cmd->link_type});
+	close(fd[1]);
+	ft_exec_cmds((t_exec_params){fd[0], params.cmd->next, params.venv, params.cmd->link_type});
+	wait(NULL);
 	return (0);
 }

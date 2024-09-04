@@ -22,7 +22,6 @@ ENV_PATH		= $(DEP_PATH)/env
 CMD_PATH		= $(DEP_PATH)/cmd
 HISTORY_PATH	= $(DEP_PATH)/history
 ERR_PATH		= $(DEP_PATH)/err
-UNIFORM_PATH	= $(DEP_PATH)/uniform
 EXEC_PATH		= $(DEP_PATH)/exec
 
 # LIBS
@@ -31,9 +30,8 @@ ENV_LIB			= -L$(ENV_PATH) -lenv
 CMD_LIB			= -L$(CMD_PATH) -lcmd
 HISTORY_LIB 	= -L$(HISTORY_PATH) -lhistory
 ERR_LIB 		= -L$(ERR_PATH) -lerr
-UNIFORM_LIB 	= -L$(UNIFORM_PATH) -luniform
 EXEC_LIB 		= -L$(EXEC_PATH) -lexec
-LIBS			= $(EXEC_LIB) $(HISTORY_LIB) $(ERR_LIB) $(UNIFORM_LIB) $(CMD_LIB) $(ENV_LIB) $(LIBFT_LIB) -lreadline -Wno-unused-command-line-argument
+LIBS			= $(EXEC_LIB) $(HISTORY_LIB) $(ERR_LIB) $(CMD_LIB) $(ENV_LIB) $(LIBFT_LIB) -lreadline -Wno-unused-command-line-argument
 
 # INCLUDES
 MINISH_INC		= -Iincludes
@@ -42,9 +40,8 @@ ENV_INC			= -I$(ENV_PATH)/includes
 CMD_INC			= -I$(CMD_PATH)/includes
 HISTORY_INC 	= -I$(HISTORY_PATH)/includes
 ERR_INC 		= -I$(ERR_PATH)/includes
-UNIFORM_INC 	= -I$(UNIFORM_PATH)/includes
 EXEC_INC		= -I$(EXEC_PATH)/includes
-INCLUDES		= $(MINISH_INC) $(LIBFT_INC) $(ENV_INC) $(CMD_INC) $(HISTORY_INC) $(ERR_INC) $(UNIFORM_INC) $(SAVE_INC) $(EXEC_INC)
+INCLUDES		= $(MINISH_INC) $(LIBFT_INC) $(ENV_INC) $(CMD_INC) $(HISTORY_INC) $(ERR_INC) $(SAVE_INC) $(EXEC_INC)
 
 # COMPILATION CONFIG
 CC				= cc -g
@@ -61,7 +58,6 @@ define MakeLibs
 	make $(1) -C $(CMD_PATH)
 	make $(1) -C $(HISTORY_PATH)
 	make $(1) -C $(ERR_PATH)
-	make $(1) -C $(UNIFORM_PATH)
 	make $(1) -C $(EXEC_PATH)
 endef
 
