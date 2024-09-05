@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_show.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 02:47:59 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/02 13:51:40 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/05 10:18:43 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_show_ltype(t_link link_type)
 	if (link_type == OR)
 		printf(" l_type	: [OR]\n");
 	if (link_type == AND)
-		printf(" l_type	: [AND]]\n");
+		printf(" l_type	: [AND]\n");
 }
 
 void	ft_show_redirect(char *label, t_rfile *r_arg)

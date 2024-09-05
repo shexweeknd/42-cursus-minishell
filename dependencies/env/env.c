@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:22:05 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/04 20:17:12 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/05 08:43:48 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ t_env	*ft_getenv(char **envp)
 	path = getenv("PATH");
 	while (*envp)
 		env->var[i++] = ft_strdup(*(envp++));
+	env->var[i] = 0;
 	env->path = ft_split_path(path);
-	free(path);
 	return (env);
 }
 

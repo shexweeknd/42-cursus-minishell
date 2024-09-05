@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 15:26:35 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/04 20:37:08 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/05 08:46:04 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ char	*ft_getvar(t_env *env, char *var_name)
 	if (tmp && *tmp == '=')
 		tmp++;
 	if (tmp && *tmp)
-		return (ft_strdup(tmp));
+		return (tmp);
 	return (NULL);
 }
