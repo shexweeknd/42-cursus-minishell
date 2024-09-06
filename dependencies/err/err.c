@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 08:57:14 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/04 14:58:08 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/06 09:30:06 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,19 @@
 #include "m_err.h"
 #include "m_err_struct.h"
 
-int	is_unexpected_token(char *cmd)
+int	is_only_spaces(char *prompt)
 {
-	if (is_unexpected_at_start(cmd))
+	prompt += _skip_space(prompt);
+	if (!*prompt)
 		return (1);
-	// if (is_unexpected_at_middle(cmd))
-	// 	return (1);
 	return (0);
 }
 
 int	check_syntax_err(char *prompt)
 {
-	if (is_unexpected_token(prompt))
+	if (is_only_spaces(prompt))
+		return (free(prompt), 1);
+	if (is_unexpected(prompt))
 		return (free(prompt), 1);
 	return (0);
 }

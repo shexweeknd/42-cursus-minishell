@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 08:58:01 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/04 14:58:38 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/05 14:47:25 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 int		check_syntax_err(char *prompt);
 
 // UTILS FUNCTIONS FOR ERROR HANDLERS
-char	*get_link_char(t_link link);
-int		is_unexpected_at_start(char *cmd);
+void	display_unexpected_token(char *token);
+int		is_unexpected(char *prompt);
 // int		is_unexpected_at_middle(char *cmd);
 
 #endif
