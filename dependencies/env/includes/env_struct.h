@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:21:41 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/23 16:49:06 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/04 20:18:04 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 
 # include "libft.h"
 
-typedef struct s_env_var
+typedef struct s_env
 {
-	char				*name;
-	int					len_name;
-	t_list				*content;
-	struct s_env_var	*next;
-}	t_env_var;
+	char	**var;
+	char	**path;
+}	t_env;
 
 #endif

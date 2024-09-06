@@ -2,7 +2,7 @@
 NAME		= libenv.a
 
 # FILES
-FILES		= env.c env_utils.c env_free.c
+FILES		= env.c
 FUNC_FILES 	= \
 		concatenate_contents.c \
 

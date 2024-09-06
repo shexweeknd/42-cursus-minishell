@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 10:34:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/04 10:34:02 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/05 13:34:20 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 typedef struct s_exec_prams
 {
 	int			read_fd;
+	t_cmd		*src;
 	t_cmd		*cmd;
-	t_env_var	*venv;
+	t_env		*env;
 	t_link		link_type;
 }	t_exec_params;
 
