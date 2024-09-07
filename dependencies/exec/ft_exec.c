@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/05 15:11:41 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/07 09:18:02 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ int	ft_exec_cmd(int fd[2], int r_fd[2], t_cmd *cmd, t_env *env)
 		return (0);
 	ft_manage_redirect_file(fd, r_fd, cmd);
 	ft_close_fd(fd, r_fd);
-	// if (ft_builtin_cmd(cmd, env))
-	// 	return (1);
+	if (ft_builtin_cmd(cmd, env))
+		return (1);
 	exe = ft_search_executable(env, cmd->args[0]);
 	if (!exe)
 		return (printf("Minishell: %s: command not found\n", cmd->args[0]), 0);

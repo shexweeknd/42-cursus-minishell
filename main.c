@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 10:06:19 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/07 09:25:10 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/07 09:34:08 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd		*cmd;
 	t_hist_elem	*hist;
 	t_env		*venv;
-	int			id;
 
 	((void)argc, (void)argv);
 	venv = ft_getenv(envp);
@@ -37,13 +36,8 @@ int	main(int argc, char **argv, char **envp)
 		cmd = ft_get_cmds(prompt);
 		if (free(prompt), !cmd)
 			continue ;
-		ft_show_cmd(cmd);
-		id = fork();
-		if (id == 0)
-			return (ft_exec_cmds((t_exec_params){0, cmd, cmd, venv, NONE}), 0);
-		else
-			wait(NULL);
-		ft_free_cmds(cmd);
+		// ft_show_cmd(cmd);
+		cmd = (ft_exec_cmds((t_exec_params){0, cmd, cmd, venv, NONE}), ft_free_cmds(cmd), NULL);
 	}
 	return (ft_free_env(venv), 0);
 }
