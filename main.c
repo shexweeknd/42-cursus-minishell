@@ -9,14 +9,14 @@ int	main(int argc, char **argv, char **envp)
 	t_env		*venv;
 
 	venv = ft_getenv(envp);
-	hist = get_history("/home/hramaros/Documents/Cursus/Cursus_42/Minishell/dependencies/history/src/.minishell_history.txt");
+	hist = get_history("./dependencies/history/src/.minishell_history.txt");
 	while (1)
 	{
 		prompt = readline("Minishell > ");
 		hist = ft_append_hist_elem(hist, ft_strdup(prompt));
 		if (strcmp(prompt, "exit") == 0)
 			return (set_history(hist,
-					"/home/hramaros/Documents/Cursus/Cursus_42/Minishell/dependencies/history/src/.minishell_history.txt"),
+					"./dependencies/history/src/.minishell_history.txt"),
 				free(prompt), ft_free_env(venv), 0);
 		if (check_syntax_err(prompt))
 			continue ;
