@@ -3,5 +3,4 @@
 *.a
 minishell
 .gitignore
-main.c
 *.txt

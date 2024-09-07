@@ -6,14 +6,11 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 08:57:14 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/06 11:49:53 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/07 09:27:19 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cmd/includes/cmd.h"
-#include "../cmd/includes/cmd_struct.h"
 #include "m_err.h"
-#include "m_err_struct.h"
 
 int	is_only_spaces(char *prompt)
 {
