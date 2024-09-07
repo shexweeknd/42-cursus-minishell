@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 14:29:29 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/06 11:51:27 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/07 12:56:23 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ int	chev_check(char *prompt, int *flag, int chev_type)
 	return (cursor);
 }
 
-int	pipe_check(char *prompt, int *flag, int chev_type)
+int	op_check(char *prompt, int *flag, int chev_type)
 {
 	int	cursor;
 
 	cursor = chev_type;
 	cursor += _skip_space(&prompt[cursor]);
 	if (!prompt[cursor])
-		return (display_unexpected_token("|"), 1);
+		return (cursor);
 	if ((prompt[cursor] == '<' || prompt[cursor] == '>')
 		&& !(ft_is_delimiter(prompt[cursor + 1]) || ft_is_redirect(prompt[cursor
 					+ 1])))
@@ -77,10 +77,11 @@ int	is_unexpected(char *prompt)
 			prompt += chev_check(prompt, &flag, 2);
 		else if ((*prompt == '>' || *prompt == '<') && !flag)
 			prompt += chev_check(prompt, &flag, 1);
-		else if (!ft_strncmp(prompt, "||", 2) && !flag)
-			prompt += pipe_check(prompt, &flag, 2);
-		else if (*prompt == '|' && !flag)
-			prompt += pipe_check(prompt, &flag, 1);
+		else if ((!ft_strncmp(prompt, "||", 2) || !ft_strncmp(prompt, "&&", 2))
+			&& !flag)
+			prompt += op_check(prompt, &flag, 2);
+		else if ((*prompt == '|' || *prompt == '&') && !flag)
+			prompt += op_check(prompt, &flag, 1);
 		else
 			prompt++;
 	}

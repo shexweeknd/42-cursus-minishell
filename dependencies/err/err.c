@@ -6,19 +6,11 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 08:57:14 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/07 09:27:19 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/07 11:56:12 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "m_err.h"
-
-int	is_only_spaces(char *prompt)
-{
-	prompt += _skip_space(prompt);
-	if (!*prompt)
-		return (1);
-	return (0);
-}
 
 int	check_syntax_err(char *prompt)
 {

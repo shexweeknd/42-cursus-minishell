@@ -3,16 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 05:51:07 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/07 09:35:15 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/07 12:14:00 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "prompt.h"
 
-int	ft_getline(void)
+char	*get_prompt(char *msh_name, t_env *env)
 {
-	return (0);
+	char	*prompt;
+
+	prompt = NULL;
+	while (prompt == NULL || is_only_spaces(prompt))
+	{
+		free(prompt);
+		prompt = readline(msh_name);
+	}
+	if (check_syntax_err(prompt))
+		return (NULL);
+	while (is_uncomplete_prompt(prompt))
+		prompt = ft_join_prompt(prompt, env);
+	return (prompt);
 }

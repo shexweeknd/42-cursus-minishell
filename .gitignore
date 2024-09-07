@@ -4,3 +4,5 @@
 minishell
 .gitignore
 *.txt
+.*
+TODO

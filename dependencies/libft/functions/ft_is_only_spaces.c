@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   ft_is_only_spaces.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/05 19:21:45 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/07 11:21:09 by hramaros         ###   ########.fr       */
+/*   Created: 2024/09/07 11:57:24 by hramaros          #+#    #+#             */
+/*   Updated: 2024/09/07 11:58:49 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_H
-# define ENV_H
+#include "libft.h"
 
-# include "env_struct.h"
-# include "libft.h"
-# include <stdlib.h>
-
-int		ft_getlen_env(char **envp);
-int		ft_getlen_path(char *path);
-char	**ft_split_path(char *src);
-t_env	*ft_getenv(char **envp);
-char	*ft_getvar(t_env *env, char *var_name);
-void	ft_free_env(t_env *env);
-
-#endif
+int	is_only_spaces(char *str)
+{
+	while (*str == ' ')
+		str++;
+	if (!*str)
+		return (1);
+	return (0);
+}
