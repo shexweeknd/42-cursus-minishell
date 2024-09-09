@@ -1,0 +1,12 @@
+SIGNAUX:
+
+- Ctrl + C
+- Ctrl + D
+- Ctrl + \
+
+GERER les leaks d'hitory lors des executions de commandes multiples
+
+GERER '&' comme process en fond
+
+CORRIGER 'ls || ls | ls' qui quitte automatiquement
+

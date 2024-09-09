@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:39:28 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/26 09:31:53 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/09 09:13:04 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,5 @@ int	set_history(t_hist_elem *hist_elem, char *file_path)
 	else
 		write_cmd_typed_after_offset(fd, hist_elem);
 	write(fd, remains, ft_strlen(remains));
-	return (free(remains), close(fd), 1);
+	return (free_lchistory(hist_elem), free(remains), close(fd), 1);
 }
