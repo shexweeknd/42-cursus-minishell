@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/07 09:31:47 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/09 10:43:57 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,26 +36,26 @@ int	ft_get_args_len(char *cmd)
 int	ft_get_info_len(char *cmd)
 {
 	int		i;
-	char	end;
+	char	*end;
+	char	quote;
 
 	i = 0;
-	if (!cmd)
-		return (0);
-	end = ft_is_quote(*cmd);
-	if (end != '\0')
+	while (*cmd && !ft_is_cmd_sep(*cmd))
 	{
-		cmd++;
-		i++;
+		end = 0;
+		quote = ft_is_quote(*cmd);
+		if (quote)
+		{
+			end = ft_strchr((cmd + 1), quote);
+			if (end)
+			{
+				i += (++end) - cmd; 
+				cmd = end; 
+			}
+		}
+		if (!end)
+			(cmd++, i++);
 	}
-	while (*cmd && *cmd != end)
-	{
-		if (end == '\0' && (ft_is_cmd_sep(*cmd) || ft_is_redirect(*cmd)))
-			return (i);
-		i++;
-		cmd++;
-	}
-	if (end != '\0')
-		i++;
 	return (i);
 }
 
