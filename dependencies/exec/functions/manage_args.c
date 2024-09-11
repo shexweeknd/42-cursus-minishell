@@ -1,42 +1,6 @@
 #include "ft_exec.h"
 
-int	ft_has_venv(char *arg)
-{
-	while (*arg)
-	{
-		if (*arg == '$' && *(arg + 1) != '"' && !ft_isspace(*(arg + 1)))
-			return (1);
-		arg++;
-	}
-	return (0);
-}
-
-int	ft_dqoute_len(char *arg, t_env *env)
-{
-	char	*tmp;
-	int		len;
-	int		len_var;
-
-	len = 0;
-	while (*arg && *arg != '"')
-	{
-		len_var = ft_isvar(arg);
-		if (len_var)
-		{
-			tmp = ft_substr(++arg, 0, len_var);
-			len += ft_strlen(ft_getvar(env, tmp));
-			arg += (free(tmp), tmp = NULL, len_var);
-		}
-		else
-		{
-			len++;
-			arg++;
-		}
-	}
-	return (len);
-}
-
-int	ft_new_len_args(char *arg, t_env *env)
+int	ft_getlen_args(char *arg, t_env *env)
 {
 	int		len;
 	char	quote;
@@ -46,33 +10,74 @@ int	ft_new_len_args(char *arg, t_env *env)
 	while (arg && *arg)
 	{
 		quote = ft_is_quote(*arg);
-		if (quote && arg++)
+		if (quote)
 		{
-			end_quote = ft_strchr((arg), quote);
-			if (*end_quote == '"')
-				arg = ((len += ft_dqoute_len(arg, env)), ++end_quote);
-			else if (*end_quote == '\'')
+			end_quote = ft_strchr(++arg, quote);
+			if (end_quote && *end_quote == '"')
+				arg = ((len += ft_dqoute_len(&arg, env, "\"")), ++end_quote);
+			else if (end_quote && *end_quote == '\'')
 				arg = ((len += end_quote - arg), ++end_quote);
 			else
 				len++;
 		}
 		else
-		{
-			arg++;
-			len++;
-		}
+			len += ft_dqoute_len(&arg, env, "\"'");
 	}
 	return (len);
 }
 
-void	ft_manage_args(t_cmd *cmd, t_env *env)
+void	ft_addnew_args(char *dest, char *arg, t_env *env)
 {
-	int	i;
+	int		i;
+	char	quote;
+	char	*end_quote;
 
 	i = 0;
-	(void)env;
+	while (arg && *arg)
+	{
+		quote = ft_is_quote(*arg);
+		if (quote)
+		{
+			end_quote = ft_strchr(++arg, quote);
+			if (end_quote && *end_quote == '"')
+				arg = ((i += ft_dquote_add((dest + i), &arg, env, "\"")), ++end_quote);
+			else if (end_quote && *end_quote == '\'')
+			{
+				while (arg && *arg && *arg != *end_quote)
+					*(dest + i++) = *(arg++);
+				arg++;
+			}
+			else
+				i++;
+		}
+		else
+			i += ft_dquote_add((dest + i), &arg, env, "\"'");
+	}
+	*(dest + i) = 0;
+}
+
+void	*ft_manage_args(t_cmd *cmd, t_env *env)
+{
+	int		i;
+	int		len;
+	int		new_len;
+	char	*tmp;
+
+	i = 0;
 	while (cmd->args[i])
 	{
+		len = ft_strlen(cmd->args[i]);
+		new_len = ft_getlen_args(cmd->args[i], env);
+		if (len != new_len)
+		{
+			tmp = cmd->args[i];
+			cmd->args[i] = (char *)malloc(sizeof(char) * (new_len + 1));
+			if (!cmd->args[i])
+				return (NULL);
+			ft_bzero(cmd->args[i], new_len);
+			(ft_addnew_args(cmd->args[i], tmp, env), free(tmp));
+		}
 		i++;
 	}
+	return (NULL);
 }
