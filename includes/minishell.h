@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:46 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/07 11:41:33 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/11 14:44:30 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "cmd.h"
 # include "env.h"
 # include "ft_exec.h"
+# include "main_sig.h"
 # include "history.h"
 # include "m_err.h"
 # include "prompt.h"

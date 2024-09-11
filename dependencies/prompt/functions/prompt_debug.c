@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_only_spaces.c                                :+:      :+:    :+:   */
+/*   prompt_debug.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/07 11:57:24 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/09 15:31:05 by hramaros         ###   ########.fr       */
+/*   Created: 2024/09/11 14:04:01 by hramaros          #+#    #+#             */
+/*   Updated: 2024/09/11 14:04:13 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "prompt.h"
 
-int	is_only_spaces(char *str)
+void	print_prompt(t_prompt *prompt)
 {
-	if (!str)
-		return (1);
-	while (*str == ' ')
-		str++;
-	if (!*str)
-		return (1);
-	return (0);
+	printf("\n");
+	printf("Waitnl: %d\n", prompt->wait_nl);
+	printf("To_exit: %d\n", prompt->to_exit);
+	printf("To_execute: %d\n", prompt->to_execute);
+	printf("is_eof: %d\n", prompt->is_eof);
 }

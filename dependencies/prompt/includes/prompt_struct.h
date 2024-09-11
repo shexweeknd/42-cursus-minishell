@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_only_spaces.c                                :+:      :+:    :+:   */
+/*   prompt_struct.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/07 11:57:24 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/09 15:31:05 by hramaros         ###   ########.fr       */
+/*   Created: 2024/09/09 10:14:48 by hramaros          #+#    #+#             */
+/*   Updated: 2024/09/11 14:28:49 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef PROMPT_STRUCT_H
+# define PROMPT_STRUCT_H
 
-int	is_only_spaces(char *str)
+typedef struct s_prompt
 {
-	if (!str)
-		return (1);
-	while (*str == ' ')
-		str++;
-	if (!*str)
-		return (1);
-	return (0);
-}
+	char	*ps_two;
+	int		wait_nl;
+	int		to_exit;
+	int		to_execute;
+	int		is_eof;
+	char	*line;
+}			t_prompt;
+
+#endif

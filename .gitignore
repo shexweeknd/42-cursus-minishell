@@ -5,3 +5,5 @@ minishell
 .gitignore
 *.txt
 .*
+trash*
+*.out

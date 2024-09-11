@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_only_spaces.c                                :+:      :+:    :+:   */
+/*   open_stdin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/07 11:57:24 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/09 15:31:05 by hramaros         ###   ########.fr       */
+/*   Created: 2024/09/11 14:15:57 by hramaros          #+#    #+#             */
+/*   Updated: 2024/09/11 14:16:07 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "prompt.h"
 
-int	is_only_spaces(char *str)
+void	re_open_stdin(void)
 {
-	if (!str)
-		return (1);
-	while (*str == ' ')
-		str++;
-	if (!*str)
-		return (1);
-	return (0);
+	int	new_stdin;
+
+	new_stdin = open("/dev/tty", O_RDONLY);
+	if (new_stdin == -1)
+		perror("Failed to reopen STDIN");
 }

@@ -1,15 +1,9 @@
 # PROGRAM NAME
-NAME		= libprompt.a
+NAME		= libsig.a
 
 # FILES
-FILES		= prompt.c \
-			prompt_utils.c \
-			prompt_checker.c \
-			prompt_debug.c \
-			open_stdin.c \
-			get_ps_two.c \
-
-FUNC_FILES	= get_ps_two.c
+FILES		= main_sig.c
+FUNC_FILES	= 
 
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)
@@ -24,12 +18,12 @@ LIBFT_PATH	= $(DEP_PATH)/libft
 
 # LIBS
 LIBFT		= -L$(LIBFT_PATH) -lft
-LIBS		= $(LIBFT) $(ERR) -Wno-unused-command-line-argument
+LIBS		= $(LIBFT) -Wno-unused-command-line-argument
 
 # INCLUDES
 LIBFT_INC	= -I$(LIBFT_PATH)/includes
-PROMPT_INC	= -Iincludes
-INCLUDES	= $(LIBFT_INC) $(PROMPT_INC)
+MAIN_SIG_INC	= -Iincludes
+INCLUDES	= $(LIBFT_INC) $(MAIN_SIG_INC)
 
 # COMPILATION CONFIG
 CC		= cc -g
