@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/09 14:16:03 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/10 13:27:52 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ void	pwd(t_cmd *cmd);
 void	unset(t_cmd *cmd);
 void	ft_exit(void);
 
-int	ft_dqoute_len(char *arg, t_env *env);
+int		ft_new_len_args(char *arg, t_env *env);
+int		ft_isvar(char *str);
+int		ft_dqoute_len(char *arg, t_env *env);
 
 /* _________________________ EXEC UTILS _________________________ */
 char	*ft_search_executable(t_env *env, char *exe_name);

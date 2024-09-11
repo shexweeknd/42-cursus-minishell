@@ -15,26 +15,23 @@ int	ft_dqoute_len(char *arg, t_env *env)
 {
 	char	*tmp;
 	int		len;
+	int		len_var;
 
 	len = 0;
-	while (*arg && *tmp != '"')
+	while (*arg && *arg != '"')
 	{
-		if (*arg == '$')
+		len_var = ft_isvar(arg);
+		if (len_var)
 		{
-			tmp = ++arg;
-			while (*tmp && !ft_isspace(*tmp) && *tmp != '"')
-				tmp++;
-			if (tmp - arg)
-			{
-				arg = ft_substr(arg, 0, tmp - arg);
-				len += ft_strlen(ft_getvar(env, arg));
-				arg = (free(arg), tmp);
-			}
-			else
-				len++;
+			tmp = ft_substr(++arg, 0, len_var);
+			len += ft_strlen(ft_getvar(env, tmp));
+			arg += (free(tmp), tmp = NULL, len_var);
 		}
 		else
-			(len++, arg++);
+		{
+			len++;
+			arg++;
+		}
 	}
 	return (len);
 }
@@ -45,21 +42,27 @@ int	ft_new_len_args(char *arg, t_env *env)
 	char	quote;
 	char	*end_quote;
 
-	(void)env;
 	len = 0;
-	if (!arg)
-		return (len);
-	while (*arg)
+	while (arg && *arg)
 	{
 		quote = ft_is_quote(*arg);
-		if (quote)
+		if (quote && arg++)
 		{
-			end_quote = ft_strchr((arg + 1), quote);
-			// if (end_quote && quote ==)
+			end_quote = ft_strchr((arg), quote);
+			if (*end_quote == '"')
+				arg = ((len += ft_dqoute_len(arg, env)), ++end_quote);
+			else if (*end_quote == '\'')
+				arg = ((len += end_quote - arg), ++end_quote);
+			else
+				len++;
 		}
-		arg++;
+		else
+		{
+			arg++;
+			len++;
+		}
 	}
-	return (0);
+	return (len);
 }
 
 void	ft_manage_args(t_cmd *cmd, t_env *env)

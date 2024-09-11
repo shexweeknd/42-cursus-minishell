@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/09 10:43:57 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/10 13:22:24 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,15 @@ int	ft_get_info_len(char *cmd)
 			end = ft_strchr((cmd + 1), quote);
 			if (end)
 			{
-				i += (++end) - cmd; 
-				cmd = end; 
+				i += (++end) - cmd;
+				cmd = end;
 			}
 		}
 		if (!end)
-			(cmd++, i++);
+		{
+			cmd++;
+			i++;
+		}
 	}
 	return (i);
 }
