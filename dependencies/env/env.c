@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:22:05 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/05 08:43:48 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/10 13:23:11 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ int	ft_getlen_env(char **envp)
 
 	len = 0;
 	while (*envp)
-		(len++, envp++);
+	{
+		len++;
+		envp++;
+	}
 	return (len);
 }
 

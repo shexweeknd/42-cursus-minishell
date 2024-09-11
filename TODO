@@ -4,9 +4,11 @@ SIGNAUX:
 - Ctrl + D
 - Ctrl + \
 
-GERER les leaks d'hitory lors des executions de commandes multiples
+GERER les leaks d'history lors des executions de commandes multiples
 
 GERER '&' comme process en fond
 
 CORRIGER 'ls || ls | ls' qui quitte automatiquement
 
+UPDATE : 
+[FINISHED] int	ft_get_info_len(char *cmd) ==> cmd_utils.c
