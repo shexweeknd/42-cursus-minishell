@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_signal.c                                      :+:      :+:    :+:   */
+/*   main_sig.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:33:24 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/11 14:40:02 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/11 15:48:32 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,10 @@ void	main_signal_handler(int sig)
 	if (sig == SIGINT)
 	{
 		rl_replace_line("", 0);
-		printf("Handling Ctrl-C signal...\n");
+		printf("\n");
 	}
 	else if (sig == SIGQUIT)
-	{
-		rl_replace_line("", 0);
-		printf("Handling Ctrl-D signal...\n");
-	}
+		printf("\e[K");
 	rl_on_new_line();
 	rl_redisplay();
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_extra_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:10 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/26 13:35:46 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/11 16:10:28 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_cmd	*_init_cmd(char *cmd)
 	}
 	r_cmd->file_in = NULL;
 	r_cmd->file_out = NULL;
-	r_cmd->link_type = NONE;
+	r_cmd->l_type = NONE;
 	r_cmd->next = NULL;
 	return (r_cmd);
 }

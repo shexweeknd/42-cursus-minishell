@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:41 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/22 10:47:26 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/11 16:10:28 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CMD_H
 # define CMD_H
 
+# include "cmd_struct.h"
+# include "libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "cmd_struct.h"
-# include "libft.h"
 
 /* --------------------- UTILS --------------------- */
 int			ft_is_delimiter(const char c);
@@ -26,7 +26,7 @@ int			ft_is_redirect(const char c);
 int			ft_is_quote(const char c);
 
 /* --------------------- CMD SHOW --------------------- */
-void		ft_show_ltype(t_link link_type);
+void		ft_show_ltype(t_link l_type);
 void		ft_show_cmd(t_cmd *cmd);
 
 /* --------------------- CMD UTILS --------------------- */

@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_show.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 02:47:59 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/05 10:18:43 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/11 16:10:28 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
-void	ft_show_ltype(t_link link_type)
+void	ft_show_ltype(t_link l_type)
 {
-	if (link_type == BG)
+	if (l_type == BG)
 		printf(" l_type	: [BG]\n");
-	if (link_type == NONE)
+	if (l_type == NONE)
 		printf(" l_type	: [NONE]\n");
-	if (link_type == PIPE)
+	if (l_type == PIPE)
 		printf(" l_type	: [PIPE]\n");
-	if (link_type == OR)
+	if (l_type == OR)
 		printf(" l_type	: [OR]\n");
-	if (link_type == AND)
+	if (l_type == AND)
 		printf(" l_type	: [AND]\n");
 }
 
@@ -58,7 +58,7 @@ void	ft_show_cmd(t_cmd *cmd)
 			ft_show_redirect(" REDIRECTION ", cmd->file_in);
 		if (cmd->file_out)
 			ft_show_redirect(" REDIRECTION ", cmd->file_out);
-		ft_show_ltype(cmd->link_type);
+		ft_show_ltype(cmd->l_type);
 		printf("\n");
 		cmd = cmd->next;
 	}

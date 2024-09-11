@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:50 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/02 11:28:53 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/11 16:12:36 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static t_cmd	*ft_init_cmd(char *cmd)
 		else
 			cmd += ft_get_cmd_info(r_cmd, cmd);
 	}
-	r_cmd->link_type = ft_get_ltype(cmd);
+	r_cmd->l_type = ft_get_ltype(cmd);
 	r_cmd->next = NULL;
 	return (r_cmd);
 }

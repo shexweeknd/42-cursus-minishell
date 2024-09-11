@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 05:51:07 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/11 13:58:25 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/11 15:31:26 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*get_line(t_prompt *prompt, char *msh_name)
 	{
 		free(line);
 		line = readline(msh_name);
+		if (line == NULL)
+			return (free(line), NULL);
 	}
 	if (check_syntax_err(line))
 		return (NULL);

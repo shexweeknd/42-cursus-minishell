@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   manage_args.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/11 16:14:57 by hramaros          #+#    #+#             */
+/*   Updated: 2024/09/11 16:15:58 by hramaros         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_exec.h"
 
 int	ft_getlen_args(char *arg, t_env *env)
@@ -40,7 +52,8 @@ void	ft_addnew_args(char *dest, char *arg, t_env *env)
 		{
 			end_quote = ft_strchr(++arg, quote);
 			if (end_quote && *end_quote == '"')
-				arg = ((i += ft_dquote_add((dest + i), &arg, env, "\"")), ++end_quote);
+				arg = ((i += ft_dquote_add((dest + i), &arg, env, "\"")),
+						++end_quote);
 			else if (end_quote && *end_quote == '\'')
 			{
 				while (arg && *arg && *arg != *end_quote)

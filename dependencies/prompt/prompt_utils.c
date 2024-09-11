@@ -6,19 +6,23 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 11:33:07 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/11 14:32:46 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/11 16:07:51 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "prompt.h"
 
-void	init_prompt(t_prompt *prompt)
+void	init_prompt(t_prompt *prompt, char **envp, char *hist_path)
 {
+	prompt->ps_two = "> ";
+	prompt->wait_nl = 0;
 	prompt->to_exit = 0;
 	prompt->to_execute = 1;
-	prompt->wait_nl = 0;
-	prompt->ps_two = "> ";
+	prompt->is_eof = 0;
 	prompt->line = NULL;
+	prompt->cmd = NULL;
+	prompt->venv = ft_getenv(envp);
+	prompt->hist = get_history(hist_path);
 }
 
 int		g_sig_type;
@@ -67,8 +71,8 @@ char	*ft_join_line(t_prompt *prompt, char *line)
 	result = NULL;
 	new_line = NULL;
 	col_ps_two = "\033[0;32m>\033[0;0m ";
-	(signal(SIGQUIT, sig_handler), signal(SIGINT, sig_handler));
-	while (prompt->wait_nl && is_only_spaces(new_line))
+	signal(SIGINT, sig_handler);
+	while (prompt->wait_nl && (!new_line || is_only_spaces(new_line)))
 	{
 		free(new_line);
 		new_line = readline(col_ps_two);

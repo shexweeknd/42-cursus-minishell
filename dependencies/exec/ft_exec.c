@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/07 09:18:02 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/11 16:10:28 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_manage_redirect_file(int fd[2], int r_fd[2], t_cmd *cmd)
 		if (r_fd[1] != -1)
 			dup2(r_fd[1], STDOUT_FILENO);
 	}
-	else if (cmd->next && cmd->link_type == PIPE)
+	else if (cmd->next && cmd->l_type == PIPE)
 		dup2(fd[1], STDOUT_FILENO);
 }
 
@@ -96,8 +96,8 @@ int	ft_exec_cmd(int fd[2], int r_fd[2], t_cmd *cmd, t_env *env)
 
 int	ft_exec_cmds(t_exec_params params)
 {
-	int		fd[2];
-	int		r_fd[2];
+	int	fd[2];
+	int	r_fd[2];
 
 	if (!params.cmd)
 		return (0);
@@ -105,7 +105,7 @@ int	ft_exec_cmds(t_exec_params params)
 	r_fd[1] = -1;
 	if (pipe(fd) == -1)
 		return (1);
-	if (params.link_type == PIPE)
+	if (params.l_type == PIPE)
 	{
 		if (fork() == 0)
 		{
@@ -118,7 +118,7 @@ int	ft_exec_cmds(t_exec_params params)
 	else
 		ft_exec_cmd(fd, r_fd, params.cmd, params.env);
 	(close(fd[1]), wait(NULL));
-	ft_exec_cmds((t_exec_params) \
-	{fd[0], params.src, params.cmd->next, params.env, params.cmd->link_type});
+	ft_exec_cmds((t_exec_params){fd[0], params.src, params.cmd->next,
+		params.env, params.cmd->l_type});
 	return (0);
 }

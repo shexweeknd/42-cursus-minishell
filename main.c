@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 12:55:43 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/11 14:50:07 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/11 16:10:59 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,27 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_prompt	prompt;
-	t_cmd		*cmd;
-	t_hist_elem	*hist;
-	t_env		*venv;
+	t_prompt	pt;
 
 	((void)argc, (void)argv);
-	(venv = ft_getenv(envp), hist = get_history(HIST_PATH),
-		init_prompt(&prompt));
+	init_prompt(&pt, envp, HIST_PATH);
 	while (1)
 	{
-		(setup_main_signals(), get_prompt(&prompt, MSH_NAME));
-		if (prompt.line == NULL)
-			continue ;
-		hist = ft_append_hist_elem(hist, ft_strdup(prompt.line));
-		if (strcmp(prompt.line, "exit") == 0 || prompt.to_exit)
-			return (printf("exit\n"), set_history(hist, HIST_PATH),
-				free(prompt.line), ft_free_env(venv), 0);
-		cmd = ft_get_cmds(prompt.line);
-		if (free(prompt.line), !prompt.to_execute || !cmd)
+		(setup_main_signals(), get_prompt(&pt, MSH_NAME));
+		pt.hist = ft_append_hist_elem(pt.hist, ft_strdup(pt.line));
+		if (!pt.line || strcmp(pt.line, "exit") == 0 || pt.to_exit)
+			return (printf("exit\n"), set_history(pt.hist, HIST_PATH),
+				free(pt.line), ft_free_env(pt.venv), 0);
+		pt.cmd = ft_get_cmds(pt.line);
+		if (free(pt.line), !pt.to_execute || !pt.cmd)
 		{
-			ft_free_cmds(cmd);
+			ft_free_cmds(pt.cmd);
 			continue ;
 		}
-		if (prompt.to_execute)
-			ft_exec_cmds((t_exec_params){0, cmd, cmd, venv, cmd->link_type});
-		cmd = (ft_free_cmds(cmd), NULL);
+		if (pt.to_execute)
+			ft_exec_cmds((t_exec_params){0, pt.cmd, pt.cmd, pt.venv,
+				pt.cmd->l_type});
+		pt.cmd = (ft_free_cmds(pt.cmd), NULL);
 	}
-	return (free_lchistory(hist), ft_free_env(venv), 0);
+	return (free_lchistory(pt.hist), ft_free_env(pt.venv), 0);
 }
