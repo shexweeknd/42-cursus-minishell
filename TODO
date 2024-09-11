@@ -1,8 +1,8 @@
 SIGNAUX:
 
-- Ctrl + C
-- Ctrl + D
-- Ctrl + \
+- Ctrl + C [FINISHED] [TOTEST]
+- Ctrl + D [FINISHED] [TOTEST]
+- Ctrl + \ [FINISHED] [TOTEST]
 
 GERER les leaks d'history lors des executions de commandes multiples
 
