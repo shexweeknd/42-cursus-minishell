@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/11 16:14:11 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/12 10:09:36 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
+
+# define STATUS	'0'
 
 /* _________________________ SRC _________________________ */
 void	cd(t_cmd *cmd);
