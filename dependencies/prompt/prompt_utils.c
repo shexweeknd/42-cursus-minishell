@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 11:33:07 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/12 10:20:31 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/12 12:00:14 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	init_prompt(t_prompt *prompt, char **envp, char *hist_path)
 {
 	prompt->ps_two = "> ";
-	prompt->is_child = 0;
 	prompt->wait_nl = 0;
 	prompt->to_exit = 0;
 	prompt->to_execute = 1;

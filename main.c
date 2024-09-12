@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 12:55:43 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/12 10:22:43 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/12 12:01:32 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@ int	main(int argc, char **argv, char **envp)
 			ft_free_cmds(pt.cmd);
 			continue ;
 		}
-		if (pt.to_execute)
-			ft_exec_cmds((t_exec_params){0, pt.cmd, pt.cmd, pt.venv,
-				pt.cmd->l_type});
+		ft_exec_cmds((t_exec_params){0, pt.cmd, pt.cmd, pt.venv,
+			pt.cmd->l_type});
 		pt.cmd = (ft_free_cmds(pt.cmd), NULL);
 	}
 	return (free_lchistory(pt.hist), ft_free_env(pt.venv), 0);

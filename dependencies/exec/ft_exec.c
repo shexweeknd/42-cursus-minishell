@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/12 11:56:13 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/12 12:03:21 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	ft_exec_cmds(t_exec_params params)
 	r_fd[1] = -1;
 	if (pipe(fd) == -1)
 		return (1);
-	if (signal(SIGINT, do_noth), params.l_type == PIPE)
+	if (setup_child_signals(), params.l_type == PIPE)
 	{
 		if (fork() == 0)
 		{
