@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_args.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:14:57 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/11 16:15:58 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/12 19:02:53 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_getlen_args(char *arg, t_env *env)
 			else if (end_quote && *end_quote == '\'')
 				arg = ((len += end_quote - arg), ++end_quote);
 			else
-				len++;
+				len += 1;
 		}
 		else
 			len += ft_dqoute_len(&arg, env, "\"'");
@@ -52,8 +52,7 @@ void	ft_addnew_args(char *dest, char *arg, t_env *env)
 		{
 			end_quote = ft_strchr(++arg, quote);
 			if (end_quote && *end_quote == '"')
-				arg = ((i += ft_dquote_add((dest + i), &arg, env, "\"")),
-						++end_quote);
+				arg = ((i += ft_dquote_add((dest + i), &arg, env, "\"")), ++end_quote);
 			else if (end_quote && *end_quote == '\'')
 			{
 				while (arg && *arg && *arg != *end_quote)
@@ -61,7 +60,7 @@ void	ft_addnew_args(char *dest, char *arg, t_env *env)
 				arg++;
 			}
 			else
-				i++;
+				*(dest + i++) = quote;
 		}
 		else
 			i += ft_dquote_add((dest + i), &arg, env, "\"'");
@@ -83,6 +82,7 @@ void	*ft_manage_args(t_cmd *cmd, t_env *env)
 		new_len = ft_getlen_args(cmd->args[i], env);
 		if (len != new_len)
 		{
+			printf("NEW LINE	: [%d] [%s]\n", new_len, cmd->args[i]);
 			tmp = cmd->args[i];
 			cmd->args[i] = (char *)malloc(sizeof(char) * (new_len + 1));
 			if (!cmd->args[i])
