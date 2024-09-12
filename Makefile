@@ -24,7 +24,7 @@ HISTORY_PATH	= $(DEP_PATH)/history
 PROMPT_PATH		= $(DEP_PATH)/prompt
 ERR_PATH		= $(DEP_PATH)/err
 EXEC_PATH		= $(DEP_PATH)/exec
-MAIN_SIG_PATH		= $(DEP_PATH)/main_sig
+SIG_PATH		= $(DEP_PATH)/sig
 
 # LIBS
 LIBFT_LIB		= -L$(LIBFT_PATH) -lft
@@ -33,9 +33,9 @@ CMD_LIB			= -L$(CMD_PATH) -lcmd
 HISTORY_LIB 	= -L$(HISTORY_PATH) -lhistory
 PROMPT_LIB 		= -L$(PROMPT_PATH) -lprompt
 ERR_LIB 		= -L$(ERR_PATH) -lerr
-MAIN_SIG_LIB 		= -L$(MAIN_SIG_PATH) -lsig
 EXEC_LIB 		= -L$(EXEC_PATH) -lexec
-LIBS			= $(MAIN_SIG_LIB) $(EXEC_LIB) $(HISTORY_LIB) $(PROMPT_LIB) $(ERR_LIB) $(CMD_LIB) $(ENV_LIB) $(LIBFT_LIB) -lreadline -Wno-unused-command-line-argument
+SIG_LIB 		= -L$(SIG_PATH) -lsig
+LIBS			= $(EXEC_LIB) $(SIG_LIB) $(HISTORY_LIB) $(PROMPT_LIB) $(ERR_LIB) $(CMD_LIB) $(ENV_LIB) $(LIBFT_LIB) -lreadline -Wno-unused-command-line-argument
 
 # INCLUDES
 MINISH_INC		= -Iincludes
@@ -46,8 +46,8 @@ HISTORY_INC 	= -I$(HISTORY_PATH)/includes
 PROMPT_INC 		= -I$(PROMPT_PATH)/includes
 ERR_INC 		= -I$(ERR_PATH)/includes
 EXEC_INC		= -I$(EXEC_PATH)/includes
-MAIN_SIG_INC		= -I$(MAIN_SIG_PATH)/includes
-INCLUDES		= $(MINISH_INC) $(LIBFT_INC) $(ENV_INC) $(CMD_INC) $(HISTORY_INC) $(PROMPT_INC) $(ERR_INC) $(SAVE_INC) $(EXEC_INC) $(MAIN_SIG_INC)
+SIG_INC			= -I$(SIG_PATH)/includes
+INCLUDES		= $(MINISH_INC) $(LIBFT_INC) $(ENV_INC) $(CMD_INC) $(HISTORY_INC) $(PROMPT_INC) $(ERR_INC) $(SAVE_INC) $(EXEC_INC) $(SIG_INC)
 
 # COMPILATION CONFIG
 CC				= cc -g
@@ -65,8 +65,8 @@ define MakeLibs
 	make $(1) -C $(HISTORY_PATH)
 	make $(1) -C $(PROMPT_PATH)
 	make $(1) -C $(ERR_PATH)
+	make $(1) -C $(SIG_PATH)
 	make $(1) -C $(EXEC_PATH)
-	make $(1) -C $(MAIN_SIG_PATH)
 endef
 
 define CreateExe

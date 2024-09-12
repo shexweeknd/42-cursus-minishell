@@ -6,6 +6,15 @@ SIGNAUX:
 
 GERER les leaks d'history lors des executions de commandes multiples
 
+DEBUG de secondary prompt:
+'''
+    Minishell$ ls |
+    > ^C
+    Minishell$ ^C
+
+    Minishell$ 
+'''
+
 GERER '&' comme process en fond
 
 CORRIGER 'ls || ls | ls' qui quitte automatiquement

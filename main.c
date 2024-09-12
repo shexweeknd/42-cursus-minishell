@@ -6,7 +6,11 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 12:55:43 by hramaros          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/09/12 20:44:39 by ballain          ###   ########.fr       */
+=======
+/*   Updated: 2024/09/12 20:50:42 by ballain          ###   ########.fr       */
+>>>>>>> b1a737c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +35,8 @@ int	main(int argc, char **argv, char **envp)
 			ft_free_cmds(pt.cmd);
 			continue ;
 		}
-		if (pt.to_execute)
-			ft_exec_cmds((t_exec_params){0, pt.cmd, pt.cmd, pt.venv,
-				pt.cmd->l_type});
+		ft_exec_cmds((t_exec_params){0, pt.cmd, pt.cmd, pt.venv,
+			pt.cmd->l_type});
 		pt.cmd = (ft_free_cmds(pt.cmd), NULL);
 	}
 	return (free_lchistory(pt.hist), ft_free_env(pt.venv), 0);

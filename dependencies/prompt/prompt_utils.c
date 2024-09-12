@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 11:33:07 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/11 16:07:51 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/12 12:00:14 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	sig_handler(int signal)
 		close(STDIN_FILENO);
 		printf("\n");
 	}
+	rl_on_new_line();
+	rl_replace_line("", 0);
 	g_sig_type = signal;
 }
 
