@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 10:34:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/11 16:10:28 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/12 09:56:28 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 
 # include "cmd.h"
 # include "env.h"
+# include "../../sig/includes/sig.h"
 
 typedef struct s_exec_prams
 {
-	int			read_fd;
-	t_cmd		*src;
-	t_cmd		*cmd;
-	t_env		*env;
-	t_link		l_type;
-}	t_exec_params;
+	int		read_fd;
+	t_cmd	*src;
+	t_cmd	*cmd;
+	t_env	*env;
+	t_link	l_type;
+}			t_exec_params;
 
 #endif

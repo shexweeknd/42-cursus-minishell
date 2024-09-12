@@ -2,7 +2,7 @@
 NAME		= libsig.a
 
 # FILES
-FILES		= main_sig.c
+FILES		= sig.c
 FUNC_FILES	= 
 
 # SRC FILES
@@ -14,16 +14,13 @@ FUNC_OBJS	= $(FUNC:functions/%.c=output/%.o)
 
 # DEPENDENCIES
 DEP_PATH	= ..
-LIBFT_PATH	= $(DEP_PATH)/libft
 
 # LIBS
-LIBFT		= -L$(LIBFT_PATH) -lft
-LIBS		= $(LIBFT) -Wno-unused-command-line-argument
+LIBS		= -Wno-unused-command-line-argument
 
 # INCLUDES
-LIBFT_INC	= -I$(LIBFT_PATH)/includes
-MAIN_SIG_INC	= -Iincludes
-INCLUDES	= $(LIBFT_INC) $(MAIN_SIG_INC)
+SIG_INC		= -Iincludes
+INCLUDES	= $(SIG_INC)
 
 # COMPILATION CONFIG
 CC		= cc -g
@@ -52,7 +49,6 @@ output/%.o	: */%.c | output
 				$(call Compile,$<,$@)
 
 $(NAME)		: $(OBJS) $(FUNC_OBJS)
-				make -C $(LIBFT_PATH)
 				$(call CreateLib,$^,$@)
 
 clean		:
