@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:20 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/05 19:30:28 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/12 18:33:18 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 
 	i = 0;
 	len = ft_strlen(src);
-	if (size < 1)
+	if (size < 1 || !len)
 		return (len);
 	while (src[i] != '\0' && i < size - 1)
 	{
@@ -27,5 +27,5 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 		i++;
 	}
 	dst[i] = '\0';
-	return (ft_strlen(src));
+	return (len);
 }
