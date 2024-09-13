@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:33:24 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/12 12:07:39 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/12 13:46:43 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	main_signal_handler(int sig)
 {
 	if (sig == SIGINT)
-		printf("\n");
+		printf("\n\e[K");
 	else if (sig == SIGQUIT)
 		printf("\e[K");
 	rl_on_new_line();
