@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:13:56 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/04 20:50:56 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/15 19:56:41 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,11 @@ char	*ft_search_executable(t_env *env, char *exe_name)
 
 	i = 0;
 	if (access(exe_name, F_OK | X_OK) == 0)
-		return (exe_name);
+	{
+		if (ft_strncmp(exe_name, "./", 2) == 0)
+			return (exe_name);
+		return (NULL);
+	}
 	if (!env->path)
 		return (NULL);
 	while (env->path[i])

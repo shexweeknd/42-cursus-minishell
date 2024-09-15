@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 15:26:35 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/09 13:00:02 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/14 12:49:37 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ char	*ft_getvar(t_env *env, char *var_name)
 	len = ft_strlen(var_name);
 	while (env->var[i])
 	{
-		if (ft_strncmp(env->var[i], var_name, len) == 0)
+		if (ft_strncmp(env->var[i], var_name, len) == 0 && \
+			env->var[i][len] == '=')
 			break ;
 		i++;
 	}

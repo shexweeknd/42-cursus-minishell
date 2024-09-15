@@ -35,7 +35,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 # FUNCTION
 define Compile
-	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2) $(LIBS) 
+	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2) $(LIBS)
 endef
 
 define CreateLib
@@ -44,6 +44,9 @@ endef
 
 # COMMANDS
 all			: $(NAME)
+
+src			:
+				@if [ ! -d src ]; then mkdir src; fi
 
 output		:
 				@if [ ! -d output ]; then mkdir output; fi
@@ -54,7 +57,7 @@ output/%.o	: %.c | output
 output/%.o	: */%.c | output
 				$(call Compile,$<,$@)
 
-$(NAME)		: $(OBJS) $(FUNC_OBJS)
+$(NAME)		: $(OBJS) $(FUNC_OBJS) | src
 				make -C $(LIBFT_PATH)
 				$(call CreateLib,$^,$@)
 

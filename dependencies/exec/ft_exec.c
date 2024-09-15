@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/12 13:45:16 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/15 20:58:25 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	ft_close_fd(int fd[2], int r_fd[2])
 
 int	ft_exec_cmd(int fd[2], int r_fd[2], t_cmd *cmd, t_env *env)
 {
-	int		id;
 	char	*exe;
 
 	if (!cmd->args)
@@ -84,10 +83,12 @@ int	ft_exec_cmd(int fd[2], int r_fd[2], t_cmd *cmd, t_env *env)
 	exe = ft_search_executable(env, cmd->args[0]);
 	if (!exe)
 		return (printf("Minishell: %s: command not found\n", cmd->args[0]), 0);
-	free(cmd->args[0]);
-	cmd->args[0] = exe;
-	id = fork();
-	if (id == 0)
+	if (exe != cmd->args[0])
+	{
+		free(cmd->args[0]);
+		cmd->args[0] = exe;
+	}
+	if (fork() == 0)
 		execve(exe, cmd->args, env->var);
 	else
 		wait(NULL);
