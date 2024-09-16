@@ -6,12 +6,11 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 10:35:14 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/04 20:49:28 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/15 09:10:21 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
-
 
 void	ft_env(t_env *env)
 {

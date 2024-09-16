@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:14:57 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/12 19:02:53 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/15 19:57:05 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ void	ft_addnew_args(char *dest, char *arg, t_env *env)
 		{
 			end_quote = ft_strchr(++arg, quote);
 			if (end_quote && *end_quote == '"')
-				arg = ((i += ft_dquote_add((dest + i), &arg, env, "\"")), ++end_quote);
+				arg = ((i += ft_dquote_add((dest + i), &arg, env, "\"")), \
+					++end_quote);
 			else if (end_quote && *end_quote == '\'')
 			{
-				while (arg && *arg && *arg != *end_quote)
-					*(dest + i++) = *(arg++);
-				arg++;
+				ft_strlcpy(dest + i, arg, end_quote - arg + 1);
+				arg = ((i += end_quote - arg), end_quote + 1);
 			}
 			else
 				*(dest + i++) = quote;
@@ -65,7 +65,6 @@ void	ft_addnew_args(char *dest, char *arg, t_env *env)
 		else
 			i += ft_dquote_add((dest + i), &arg, env, "\"'");
 	}
-	*(dest + i) = 0;
 }
 
 void	*ft_manage_args(t_cmd *cmd, t_env *env)
@@ -82,12 +81,11 @@ void	*ft_manage_args(t_cmd *cmd, t_env *env)
 		new_len = ft_getlen_args(cmd->args[i], env);
 		if (len != new_len)
 		{
-			printf("NEW LINE	: [%d] [%s]\n", new_len, cmd->args[i]);
 			tmp = cmd->args[i];
 			cmd->args[i] = (char *)malloc(sizeof(char) * (new_len + 1));
 			if (!cmd->args[i])
 				return (NULL);
-			ft_bzero(cmd->args[i], new_len);
+			ft_bzero(cmd->args[i], new_len + 1);
 			(ft_addnew_args(cmd->args[i], tmp, env), free(tmp));
 		}
 		i++;
