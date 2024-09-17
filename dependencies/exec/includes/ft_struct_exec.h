@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_struct_exec.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 10:34:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/12 09:56:28 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/16 11:58:36 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "env.h"
 # include "../../sig/includes/sig.h"
 
-typedef struct s_exec_prams
+typedef struct s_exec_params
 {
 	int		read_fd;
 	t_cmd	*src;
@@ -25,5 +25,14 @@ typedef struct s_exec_prams
 	t_env	*env;
 	t_link	l_type;
 }			t_exec_params;
+
+typedef struct s_executable
+{
+	int		o_fd[2];
+	int		p_fd[2];
+	int		r_fd[2];
+	t_cmd	*cmd;
+	t_env	*env;
+}	t_executable;
 
 #endif
