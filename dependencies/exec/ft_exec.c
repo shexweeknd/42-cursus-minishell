@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/15 20:58:25 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/16 19:53:45 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,36 +60,36 @@ void	ft_manage_redirect_file(int fd[2], int r_fd[2], t_cmd *cmd)
 		dup2(fd[1], STDOUT_FILENO);
 }
 
-void	ft_close_fd(int fd[2], int r_fd[2])
+void	ft_close_fd(t_executable exec)
 {
-	close(fd[0]);
-	close(fd[1]);
-	if (r_fd[0] != -1)
-		close(r_fd[0]);
-	if (r_fd[1] != -1)
-		close(r_fd[1]);
+	close(exec.p_fd[0]);
+	close(exec.p_fd[1]);
+	if (exec.r_fd[0] != -1)
+		close(exec.r_fd[0]);
+	if (exec.r_fd[1] != -1)
+		close(exec.r_fd[1]);
 }
 
-int	ft_exec_cmd(int fd[2], int r_fd[2], t_cmd *cmd, t_env *env)
+int	ft_exec_cmd(t_executable exec)
 {
 	char	*exe;
 
-	if (!cmd->args)
+	if (!exec.cmd->args)
 		return (0);
-	ft_manage_redirect_file(fd, r_fd, cmd);
-	ft_close_fd(fd, r_fd);
-	if (ft_builtin_cmd(cmd, env))
+	ft_manage_redirect_file(exec.p_fd, exec.r_fd, exec.cmd);
+	ft_close_fd(exec);
+	if (ft_builtin_cmd(exec.cmd, exec.env))
 		return (1);
-	exe = ft_search_executable(env, cmd->args[0]);
+	exe = ft_search_executable(exec);
 	if (!exe)
-		return (printf("Minishell: %s: command not found\n", cmd->args[0]), 0);
-	if (exe != cmd->args[0])
+		return (printf("Minishell: %s: command not found\n", exec.cmd->args[0]), 0);
+	if (exe != exec.cmd->args[0])
 	{
-		free(cmd->args[0]);
-		cmd->args[0] = exe;
+		free(exec.cmd->args[0]);
+		exec.cmd->args[0] = exe;
 	}
 	if (fork() == 0)
-		execve(exe, cmd->args, env->var);
+		execve(exe, exec.cmd->args, exec.env->var);
 	else
 		wait(NULL);
 	return (1);
@@ -97,29 +97,25 @@ int	ft_exec_cmd(int fd[2], int r_fd[2], t_cmd *cmd, t_env *env)
 
 int	ft_exec_cmds(t_exec_params params)
 {
-	int	fd[2];
-	int	r_fd[2];
+	t_executable	exec;
 
 	if (!params.cmd)
 		return (0);
-	r_fd[0] = -1;
-	r_fd[1] = -1;
-	if (pipe(fd) == -1)
-		return (1);
+	exec = ft_init_executable(params);
 	if (setup_child_signals(), params.l_type == PIPE)
 	{
 		if (fork() == 0)
 		{
 			if (params.read_fd != 0)
 				(dup2(params.read_fd, STDIN_FILENO), close(params.read_fd));
-			ft_exec_cmd(fd, r_fd, params.cmd, params.env);
+			ft_exec_cmd(exec);
 			(ft_free_cmds(params.src), ft_free_env(params.env), exit(0));
 		}
 	}
 	else
-		ft_exec_cmd(fd, r_fd, params.cmd, params.env);
-	(close(fd[1]), wait(NULL));
-	ft_exec_cmds((t_exec_params){fd[0], params.src, params.cmd->next,
+		(ft_exec_cmd(exec), ft_reset_fd(exec));
+	(close(exec.p_fd[1]), wait(NULL));
+	ft_exec_cmds((t_exec_params){exec.p_fd[0], params.src, params.cmd->next,
 		params.env, params.cmd->l_type});
 	return (0);
 }
