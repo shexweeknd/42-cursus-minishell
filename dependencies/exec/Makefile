@@ -28,19 +28,22 @@ DEP_PATH	= ..
 LIBFT_PATH	= $(DEP_PATH)/libft
 ENV_PATH	= $(DEP_PATH)/env
 CMD_PATH	= $(DEP_PATH)/cmd
+HISTORY_PATH= $(DEP_PATH)/history
 
 # LIBS
 LIBFT		= -L$(LIBFT_PATH) -lft
 ENV			= -L$(ENV_PATH) -lenv
 CMD			= -L$(CMD_PATH) -lcmd
-LIBS		= $(CMD) $(ENV) $(LIBFT) -Wno-unused-command-line-argument
+HISTORY		= -L$(HISTORY_PATH) -lhistory
+LIBS		= $(HISTORY) $(CMD) $(ENV) $(LIBFT) -Wno-unused-command-line-argument
 
 # INCLUDES
 LIBFT_INC	= -I$(LIBFT_PATH)/includes
 ENV_INC		= -I$(ENV_PATH)/includes
 CMD_INC		= -I$(CMD_PATH)/includes
+HISTORY_INC	= -I$(HISTORY_PATH)/includes
 EXEC_INC	= -Iincludes
-INCLUDES	= $(LIBFT_INC) $(ENV_INC) $(CMD_INC) $(EXEC_INC)
+INCLUDES	= $(LIBFT_INC) $(ENV_INC) $(CMD_INC) $(EXEC_INC) $(HISTORY_INC)
 
 # COMPILATION CONFIG
 CC		= cc -g

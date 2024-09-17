@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:42 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/11 16:17:45 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/17 08:24:42 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ static int	ft_check_pwd_error(char *arg)
 	return (error);
 }
 
-void	pwd(t_cmd *cmd)
+void	pwd(t_executable exec)
 {
 	char	*cwd;
 
-	if (!ft_check_pwd_error(cmd->args[1]))
+	if (!ft_check_pwd_error(exec.cmd->args[1]))
 	{
 		cwd = getcwd(NULL, 0);
 		(printf("%s\n", cwd), free(cwd));

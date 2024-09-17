@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:50 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/11 16:12:36 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:24:59 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ static int	ft_get_cmd_info(t_cmd *_cmd, char *cmd)
 		i++;
 	tmp = cmd;
 	while (*cmd && !ft_is_delimiter(*cmd) && !ft_is_redirect(*cmd))
-	{
-		_cmd->args[i] = NULL;
-		cmd += _get_info(&_cmd->args[i++], cmd);
-	}
+		cmd += (_cmd->args[i] = NULL, _get_info(&_cmd->args[i++], cmd));
 	return (cmd - tmp);
 }
 
@@ -56,7 +53,10 @@ static t_cmd	*ft_init_cmd(char *cmd)
 t_cmd	*ft_get_cmds(char *cmd)
 {
 	t_cmd		*cmds;
+	t_cmd		*tmp;
 	t_lst_utils	actions;
+	int			i;
+	int			len;
 
 	if (!cmd)
 		return (NULL);
@@ -64,7 +64,12 @@ t_cmd	*ft_get_cmds(char *cmd)
 	cmds = NULL;
 	while (*cmd)
 	{
-		ft_add_back_((void **)(&cmds), ft_init_cmd(cmd), actions);
+		tmp = ft_init_cmd(cmd);
+		ft_add_back_((void **)(&cmds), tmp, actions);
+		i = ((len = 0), 0);
+		while (tmp->args[i])
+			len += ft_strlen(tmp->args[i++]);
+		cmd += len;
 		while (*cmd && !ft_is_delimiter(*cmd))
 			cmd++;
 		while (*cmd && ft_is_delimiter(*cmd))

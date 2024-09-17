@@ -6,28 +6,28 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/16 19:53:45 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/17 14:42:16 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
 
-int	ft_builtin_cmd(t_cmd *cmd, t_env *env)
+int	ft_builtin_cmd(t_executable exec)
 {
-	if (ft_strcmp(cmd->args[0], "echo") == 0)
-		return (echo(cmd), 1);
-	if (ft_strcmp(cmd->args[0], "cd") == 0)
-		return (cd(cmd), 1);
-	if (ft_strcmp(cmd->args[0], "env") == 0)
-		return (ft_env(env), 1);
-	if (ft_strcmp(cmd->args[0], "export") == 0)
-		return (export(cmd), 1);
-	if (ft_strcmp(cmd->args[0], "pwd") == 0)
-		return (pwd(cmd), 1);
-	if (ft_strcmp(cmd->args[0], "unset") == 0)
-		return (unset(cmd), 1);
-	if (ft_strcmp(cmd->args[0], "exit") == 0)
-		return (ft_exit(), 1);
+	if (ft_strcmp(exec.cmd->args[0], "echo") == 0)
+		return (echo(exec), 1);
+	if (ft_strcmp(exec.cmd->args[0], "cd") == 0)
+		return (cd(exec), 1);
+	if (ft_strcmp(exec.cmd->args[0], "env") == 0)
+		return (ft_env(exec), 1);
+	if (ft_strcmp(exec.cmd->args[0], "export") == 0)
+		return (export(exec), 1);
+	if (ft_strcmp(exec.cmd->args[0], "pwd") == 0)
+		return (pwd(exec), 1);
+	if (ft_strcmp(exec.cmd->args[0], "unset") == 0)
+		return (unset(exec), 1);
+	if (ft_strcmp(exec.cmd->args[0], "exit") == 0)
+		return (ft_exit(exec), 1);
 	return (0);
 }
 
@@ -78,7 +78,9 @@ int	ft_exec_cmd(t_executable exec)
 		return (0);
 	ft_manage_redirect_file(exec.p_fd, exec.r_fd, exec.cmd);
 	ft_close_fd(exec);
-	if (ft_builtin_cmd(exec.cmd, exec.env))
+	if (!exec.cmd->args[0])
+		return (1);
+	if (ft_builtin_cmd(exec))
 		return (1);
 	exe = ft_search_executable(exec);
 	if (!exe)
@@ -108,14 +110,23 @@ int	ft_exec_cmds(t_exec_params params)
 		{
 			if (params.read_fd != 0)
 				(dup2(params.read_fd, STDIN_FILENO), close(params.read_fd));
-			ft_exec_cmd(exec);
-			(ft_free_cmds(params.src), ft_free_env(params.env), exit(0));
+			(ft_exec_cmd(exec), ft_free_cmds(params.src), ft_free_env(params.env), exit(0));
+		}
+		else
+		{
+			close(exec.p_fd[1]);
+			if (params.read_fd != 0)
+				close(params.read_fd);
+			ft_exec_cmds((t_exec_params){exec.p_fd[0], params.src, params.cmd->next,
+				params.env, params.hist, params.cmd->l_type});
+			wait(NULL);
 		}
 	}
 	else
-		(ft_exec_cmd(exec), ft_reset_fd(exec));
-	(close(exec.p_fd[1]), wait(NULL));
-	ft_exec_cmds((t_exec_params){exec.p_fd[0], params.src, params.cmd->next,
-		params.env, params.cmd->l_type});
-	return (0);
+	{
+		(ft_exec_cmd(exec), ft_reset_fd(exec), close(exec.p_fd[1]));
+		ft_exec_cmds((t_exec_params){exec.p_fd[0], params.src, params.cmd->next,
+				params.env, params.hist, params.cmd->l_type});
+	}
+	return (wait(NULL), 0);
 }

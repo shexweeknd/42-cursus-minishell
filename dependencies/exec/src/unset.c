@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:49 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/11 16:17:50 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/17 08:24:49 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
 
-void	unset(t_cmd *cmd)
+void	unset(t_executable exec)
 {
-	(void)cmd;
+	(void)exec;
 }

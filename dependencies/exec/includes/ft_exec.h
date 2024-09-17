@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/16 19:52:34 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/17 13:43:11 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,26 @@
 # define STATUS	'0'
 
 /* _________________________ SRC _________________________ */
-void	cd(t_cmd *cmd);
-void	echo(t_cmd *cmd);
-void	ft_env(t_env *env);
-void	export(t_cmd *cmd);
-void	pwd(t_cmd *cmd);
-void	unset(t_cmd *cmd);
-void	ft_exit(void);
+void			cd(t_executable exec);
+void			echo(t_executable exec);
+void			ft_env(t_executable exec);
+void			export(t_executable exec);
+void			pwd(t_executable exec);
+void			unset(t_executable exec);
+void			ft_exit(t_executable exec);
 
-int		ft_isvar(char *str);
-int		ft_dqoute_len(char **arg, t_env *env, char *stop);
-int		ft_dquote_add(char *dest, char **arg, t_env *env, char *stop);
-void	*ft_manage_args(t_cmd *cmd, t_env *env);
+int				ft_isvar(char *str);
+int				ft_dqoute_len(char **arg, t_env *env, char *stop);
+int				ft_dquote_add(char *dest, char **arg, t_env *env, char *stop);
+void			*ft_manage_args(t_cmd *cmd, t_env *env);
 
 /* _________________________ EXEC UTILS _________________________ */
-void	ft_reset_fd(t_executable exec);
-char	*ft_search_executable(t_executable exec);
+void			ft_reset_fd(t_executable exec);
+char			*ft_search_executable(t_executable exec);
 t_executable	ft_init_executable(t_exec_params param);
+void			ft_free_executable(t_executable exec);
 
 /* _________________________ EXEC _________________________ */
-int		ft_exec_cmds(t_exec_params params);
+int				ft_exec_cmds(t_exec_params params);
 
 #endif

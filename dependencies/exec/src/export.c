@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:11 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/11 16:17:11 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/17 08:24:08 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
 
-void	export(t_cmd *cmd)
+void	export(t_executable exec)
 {
-	(void)cmd;
+	(void)exec;
 }

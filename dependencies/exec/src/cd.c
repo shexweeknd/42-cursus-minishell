@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:17 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/11 16:17:18 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/17 08:23:47 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
 
-void	cd(t_cmd *cmd)
+void	cd(t_executable exec)
 {
-	(void)cmd;
+	(void)exec;
 	chdir("./includes");
 }
