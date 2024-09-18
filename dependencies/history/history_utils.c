@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:54:12 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/17 14:04:13 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/17 17:31:27 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	free_lchistory(t_hist_elem *hist_elem)
 		free(hist_elem);
 		return ;
 	}
-	// rl_clear_history();
+	rl_clear_history();
 	free_lchistory(hist_elem->next);
 	free(hist_elem->command);
 	free(hist_elem);

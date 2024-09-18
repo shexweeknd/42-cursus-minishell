@@ -6,36 +6,33 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:13:56 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/17 13:41:31 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/17 21:40:26 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
 
-char	*ft_join_path(char *path, char *sep, char *name)
+char	*_join(char *str[])
 {
 	int		i;
 	int		len;
 	char	*r_value;
 
-	if (!path)
-		path = ".";
-	if (!sep)
-		sep = "/";
-	if (!name)
-		return (NULL);
 	i = 0;
-	len = ft_strlen(path) + ft_strlen(path) + ft_strlen(path) + 1;
-	r_value = (char *)malloc(sizeof(char) * len);
+	len = 0;
+	while (str[i])
+		len += ft_strlen(str[i++]);
+	r_value = (char *)malloc(sizeof(char) * (len + 1));
 	if (!r_value)
 		return (NULL);
-	while (*path)
-		r_value[i++] = *(path++);
-	while (*sep)
-		r_value[i++] = *(sep++);
-	while (*name)
-		r_value[i++] = *(name++);
-	r_value[i] = '\0';
+	i = 0;
+	while (*str)
+	{
+		while (**str)
+			r_value[i++] = *(*str)++;
+		str++;
+	}
+	r_value[i] = 0;
 	return (r_value);
 }
 
@@ -56,7 +53,8 @@ char	*ft_search_executable(t_executable exec)
 		return (NULL);
 	while (exec.env->path[i])
 	{
-		tmp = ft_join_path(exec.env->path[i++], "/", exec.cmd->args[0]);
+		tmp = _join(\
+			(char *[]){exec.env->path[i++], "/", exec.cmd->args[0], NULL});
 		if (!tmp)
 			return (NULL);
 		if (access(tmp, F_OK | X_OK) == 0)

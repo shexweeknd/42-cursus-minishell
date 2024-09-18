@@ -6,11 +6,12 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/17 14:42:16 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/17 19:27:58 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
+#include <errno.h>
 
 int	ft_builtin_cmd(t_executable exec)
 {
@@ -73,7 +74,9 @@ void	ft_close_fd(t_executable exec)
 int	ft_exec_cmd(t_executable exec)
 {
 	char	*exe;
+	int		status;
 
+	status = 0;
 	if (!exec.cmd->args)
 		return (0);
 	ft_manage_redirect_file(exec.p_fd, exec.r_fd, exec.cmd);
@@ -91,9 +94,19 @@ int	ft_exec_cmd(t_executable exec)
 		exec.cmd->args[0] = exe;
 	}
 	if (fork() == 0)
-		execve(exe, exec.cmd->args, exec.env->var);
+	{
+		if (execve(exe, exec.cmd->args, exec.env->var) == -1)
+		{
+			printf("%s\n", strerror(errno));
+			exit(EXIT_FAILURE);
+		}
+	}
 	else
-		wait(NULL);
+	{
+		wait(&status);
+		if (status)
+			printf("STATUS	: [%d]\n", status);
+	}
 	return (1);
 }
 
@@ -110,7 +123,8 @@ int	ft_exec_cmds(t_exec_params params)
 		{
 			if (params.read_fd != 0)
 				(dup2(params.read_fd, STDIN_FILENO), close(params.read_fd));
-			(ft_exec_cmd(exec), ft_free_cmds(params.src), ft_free_env(params.env), exit(0));
+			ft_exec_cmd(exec);
+			((exec.cmd = params.src), ft_free_executable(exec), exit(0));
 		}
 		else
 		{

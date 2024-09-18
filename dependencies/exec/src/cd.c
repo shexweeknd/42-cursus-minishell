@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:17 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/17 08:23:47 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/17 17:29:25 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	cd(t_executable exec)
 {
 	(void)exec;
-	chdir("./includes");
+	chdir("/home/beerus");
 }

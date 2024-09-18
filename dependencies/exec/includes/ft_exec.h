@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/17 13:43:11 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/17 20:22:17 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
+# define TILDE_PATH ""
 # define STATUS	'0'
 
 /* _________________________ SRC _________________________ */
@@ -45,6 +46,7 @@ void			ft_reset_fd(t_executable exec);
 char			*ft_search_executable(t_executable exec);
 t_executable	ft_init_executable(t_exec_params param);
 void			ft_free_executable(t_executable exec);
+char			*_join(char *str[]);
 
 /* _________________________ EXEC _________________________ */
 int				ft_exec_cmds(t_exec_params params);
