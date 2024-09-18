@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 15:26:35 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/14 12:49:37 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/18 17:05:01 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,27 +57,35 @@ char	*concatenate_content(t_list *content)
 	return (result);
 }
 
-char	*ft_getvar(t_env *env, char *var_name)
+char	*ft_search_var(t_env *env, char *var_name)
 {
 	int		i;
-	int		j;
 	int		len;
 
-	i = 0;
+	i = -1;
 	len = ft_strlen(var_name);
-	while (env->var[i])
+	while (env->var[++i])
 	{
 		if (ft_strncmp(env->var[i], var_name, len) == 0 && \
 			env->var[i][len] == '=')
 			break ;
-		i++;
 	}
-	j = 0;
-	while (env->var[i] && env->var[i][j] && env->var[i][j] != '=')
-		j++;
-	if (env->var[i] && env->var[i][j] == '=')
-		j++;
-	if (env->var[i] && env->var[i][j])
-		return (env->var[i] + j);
+	return (env->var[i]);
+}
+
+char	*ft_getvar(t_env *env, char *var_name)
+{
+	int		i;
+	char	*var;
+
+	i = 0;
+	var = ft_search_var(env, var_name);
+	if (var)
+	{
+		while (var[i++] != '=')
+			;
+		if (var + i)
+			return (var + i);
+	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/17 20:22:17 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/18 16:51:41 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <errno.h>
 
 # define TILDE_PATH ""
 # define STATUS	'0'
 
 /* _________________________ SRC _________________________ */
-void			cd(t_executable exec);
+int				cd(t_executable exec);
 void			echo(t_executable exec);
 void			ft_env(t_executable exec);
 void			export(t_executable exec);

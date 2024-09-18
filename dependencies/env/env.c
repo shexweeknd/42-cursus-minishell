@@ -6,24 +6,11 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:22:05 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/10 13:23:11 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/18 16:44:26 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
-
-int	ft_getlen_env(char **envp)
-{
-	int	len;
-
-	len = 0;
-	while (*envp)
-	{
-		len++;
-		envp++;
-	}
-	return (len);
-}
 
 int	ft_getlen_path(char *path)
 {
@@ -75,7 +62,7 @@ t_env	*ft_getenv(char **envp)
 	env = (t_env *)malloc(sizeof(t_env));
 	if (!env)
 		return (NULL);
-	env->var = (char **)malloc(sizeof(char *) * (ft_getlen_env(envp) + 1));
+	env->var = (char **)malloc(sizeof(char *) * (ft_getlen_strtab(envp) + 1));
 	if (!env->var)
 		return (NULL);
 	path = getenv("PATH");
