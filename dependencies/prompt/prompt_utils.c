@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 11:33:07 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/13 09:20:01 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/19 10:30:31 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	sig_type(char cmd, int value)
 		return (sig_type = value, sig_type);
 	else if (cmd == 'r')
 		return (sig_type = 0, sig_type);
+	return (sig_type);
 }
 
 void	sig_handler(int signal)
