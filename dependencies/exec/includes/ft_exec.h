@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/18 16:51:41 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/19 10:50:44 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 int				cd(t_executable exec);
 void			echo(t_executable exec);
 void			ft_env(t_executable exec);
-void			export(t_executable exec);
+int				export(t_executable exec);
 void			pwd(t_executable exec);
 void			unset(t_executable exec);
 void			ft_exit(t_executable exec);
