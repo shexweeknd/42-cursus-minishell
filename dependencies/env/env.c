@@ -6,27 +6,26 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:22:05 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/18 16:44:26 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/19 15:45:58 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 
-int	ft_getlen_path(char *path)
+char	*ft_search_var(t_env *env, char *var_name)
 {
-	int	len;
+	int		i;
+	int		len;
 
-	if (!path)
-		return (0);
-	len = 1;
-	while (*path)
+	i = -1;
+	len = ft_strlen(var_name);
+	while (env->var[++i])
 	{
-		while (*path && *path != ':')
-			path++;
-		if (*path == ':' && path++ && *path)
-			len++;
+		if (ft_strncmp(env->var[i], var_name, len) == 0 && \
+			env->var[i][len] == '=')
+			break ;
 	}
-	return (len);
+	return (env->var[i]);
 }
 
 char	**ft_split_path(char *src)
@@ -73,15 +72,43 @@ t_env	*ft_getenv(char **envp)
 	return (env);
 }
 
-void	ft_free_env(t_env *env)
+char	*ft_getvar(t_env *env, char *var_name)
 {
-	int	i;
+	int		i;
+	char	*var;
 
 	i = 0;
-	while (env->var[i])
-		free(env->var[i++]);
-	free(env->var);
-	free(*(env->path));
-	free(env->path);
-	free(env);
+	var = ft_search_var(env, var_name);
+	if (var)
+	{
+		while (var[i++] != '=')
+			;
+		if (var + i)
+			return (var + i);
+	}
+	return (NULL);
+}
+
+char	*ft_setvar(t_env *env, char *var_name, char *str)
+{
+	int		i;
+	int		len;
+
+	i = -1;
+	len = ft_strlen(var_name);
+	while (env->var[++i])
+	{
+		if (ft_strncmp(env->var[i], var_name, len) == 0 && \
+			env->var[i][len] == '=')
+		{
+			env->var[i] = (free(env->var[i]), ft_strdup(str));
+			if (ft_strcmp(var_name, "PATH") == 0)
+			{
+				(free(*env->path), free(env->path));
+				env->path = ft_split_path((env->var[i]));
+			}
+			return (env->var[i]);
+		}
+	}
+	return (NULL);
 }
