@@ -25,7 +25,17 @@ void	init_prompt(t_prompt *prompt, char **envp, char *hist_path)
 	prompt->hist = get_history(hist_path);
 }
 
-int		g_sig_type;
+int	sig_type(char cmd, int value)
+{
+	static int	sig_type = 0;
+
+	if (cmd == 'g')
+		return (sig_type);
+	else if (cmd == 's')
+		return (sig_type = value, sig_type);
+	else if (cmd == 'r')
+		return (sig_type = 0, sig_type);
+}
 
 void	sig_handler(int signal)
 {
@@ -36,12 +46,12 @@ void	sig_handler(int signal)
 	}
 	rl_on_new_line();
 	rl_replace_line("\e[K", 0);
-	g_sig_type = signal;
+	sig_type('s', signal);
 }
 
 void	setup_prompt_flags(t_prompt *prompt)
 {
-	if (g_sig_type == SIGINT)
+	if (sig_type('g', 0) == SIGINT)
 	{
 		prompt->wait_nl = 0;
 		prompt->to_exit = 0;
@@ -56,7 +66,7 @@ void	setup_prompt_flags(t_prompt *prompt)
 		prompt->to_execute = 0;
 		prompt->is_eof = 1;
 	}
-	g_sig_type = 0;
+	sig_type('r', 0);
 }
 
 // TODO replace '>' with content of variable $PS2
