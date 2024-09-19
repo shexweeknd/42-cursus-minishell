@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 11:36:33 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/11 16:05:32 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/19 11:27:49 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,17 @@
 
 # include "../../env/includes/env.h"
 # include "../../env/includes/env_struct.h"
-# include "../../history/includes/history.h"
 # include "../../err/includes/m_err.h"
+# include "../../history/includes/history.h"
+# include "../../sig/includes/sig.h"
 # include "libft.h"
 # include "prompt_struct.h"
 # include <signal.h>
 
+int		sig_type(char cmd, int value);
+void	sec_prompt_sig_handler(int signal);
 void	re_open_stdin(void);
+void	to_stdin(char cmd);
 
 int		is_pipe_at_end(char *line);
 int		is_uncomplete_line(char *line);

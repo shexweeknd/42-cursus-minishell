@@ -4,6 +4,7 @@ NAME		= libprompt.a
 # FILES
 FILES		= prompt.c \
 			prompt_utils.c \
+			prompt_sig_handler.c \
 			prompt_checker.c \
 			prompt_debug.c \
 			open_stdin.c \

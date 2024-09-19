@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 11:33:07 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/19 10:30:31 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/19 11:30:24 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,31 +25,6 @@ void	init_prompt(t_prompt *prompt, char **envp, char *hist_path)
 	prompt->hist = get_history(hist_path);
 }
 
-int	sig_type(char cmd, int value)
-{
-	static int	sig_type = 0;
-
-	if (cmd == 'g')
-		return (sig_type);
-	else if (cmd == 's')
-		return (sig_type = value, sig_type);
-	else if (cmd == 'r')
-		return (sig_type = 0, sig_type);
-	return (sig_type);
-}
-
-void	sig_handler(int signal)
-{
-	if (signal == SIGINT)
-	{
-		close(STDIN_FILENO);
-		printf("\n\e[K");
-	}
-	rl_on_new_line();
-	rl_replace_line("\e[K", 0);
-	sig_type('s', signal);
-}
-
 void	setup_prompt_flags(t_prompt *prompt)
 {
 	if (sig_type('g', 0) == SIGINT)
@@ -58,7 +33,7 @@ void	setup_prompt_flags(t_prompt *prompt)
 		prompt->to_exit = 0;
 		prompt->to_execute = 0;
 		prompt->is_eof = 0;
-		re_open_stdin();
+		to_stdin('o');
 	}
 	else
 	{
@@ -84,7 +59,7 @@ char	*ft_join_line(t_prompt *prompt, char *line)
 	result = NULL;
 	new_line = NULL;
 	col_ps_two = "\033[0;32m>\033[0;0m ";
-	signal(SIGINT, sig_handler);
+	signal(SIGINT, sec_prompt_sig_handler);
 	while (prompt->wait_nl && (!new_line || is_only_spaces(new_line)))
 	{
 		free(new_line);
