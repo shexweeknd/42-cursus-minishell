@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:46 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/12 09:55:55 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/20 08:56:00 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "history.h"
 # include "m_err.h"
 # include "prompt.h"
+# include "heredoc.h"
 # include "struct.h"
 # include <fcntl.h>
 # include <readline/history.h>

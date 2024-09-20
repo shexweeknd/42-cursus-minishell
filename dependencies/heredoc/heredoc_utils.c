@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt_struct.h                                    :+:      :+:    :+:   */
+/*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/09 10:14:48 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/20 08:28:42 by hramaros         ###   ########.fr       */
+/*   Created: 2024/09/20 08:53:46 by hramaros          #+#    #+#             */
+/*   Updated: 2024/09/20 11:10:02 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROMPT_STRUCT_H
-# define PROMPT_STRUCT_H
+#include "heredoc.h"
 
-typedef struct s_prompt
+int	_hd_occ(char *line)
 {
-	char		*ps_two;
-	int			wait_nl;
-	int			to_exit;
-	int			to_execute;
-	int			is_eof;
-	char		*line;
-	t_cmd		*cmd;
-	t_env		*venv;
-	t_hist_elem	*hist;
-}				t_prompt;
+	size_t	i;
+	int		result;
 
-#endif
+	result = 0;
+	i = 0;
+	while (i < ft_strlen(line) && line[i])
+	{
+		if (line[i] == '<' && line[i + 1] == '<')
+			result++;
+		i++;
+	}
+	return (result);
+}

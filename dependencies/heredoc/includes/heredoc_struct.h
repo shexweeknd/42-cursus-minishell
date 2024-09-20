@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt_struct.h                                    :+:      :+:    :+:   */
+/*   heredoc_struct.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/09 10:14:48 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/20 08:28:42 by hramaros         ###   ########.fr       */
+/*   Created: 2024/09/20 10:32:58 by hramaros          #+#    #+#             */
+/*   Updated: 2024/09/20 10:46:48 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROMPT_STRUCT_H
-# define PROMPT_STRUCT_H
+#ifndef HEREDOC_STRUCT_H
+# define HEREDOC_STRUCT_H
 
-typedef struct s_prompt
+typedef struct s_hd
 {
-	char		*ps_two;
-	int			wait_nl;
-	int			to_exit;
-	int			to_execute;
-	int			is_eof;
-	char		*line;
-	t_cmd		*cmd;
-	t_env		*venv;
-	t_hist_elem	*hist;
-}				t_prompt;
+	int			fd[2];
+	int			pos;
+	struct s_hd	*next;
+}				t_hd;
 
 #endif
