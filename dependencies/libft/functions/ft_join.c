@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   ft_join                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/05 19:21:45 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/19 12:32:20 by ballain          ###   ########.fr       */
+/*   Created: 2024/09/19 11:55:23 by ballain           #+#    #+#             */
+/*   Updated: 2024/09/19 12:44:05 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_H
-# define ENV_H
+#include "libft.h"
 
-# include "env_struct.h"
-# include "libft.h"
-# include <stdlib.h>
+char	*ft_join(char *str[])
+{
+	int		i;
+	int		len;
+	char	*r_value;
 
-int		ft_getlen_path(char *path);
-char	**ft_split_path(char *src);
-t_env	*ft_getenv(char **envp);
-char	*ft_search_var(t_env *env, char *var_name);
-char	*ft_getvar(t_env *env, char *var_name);
-char	*ft_setvar(t_env *env, char *var_name, char *str);
-void	ft_free_env(t_env *env);
-
-#endif
+	i = 0;
+	len = 0;
+	while (str[i])
+		len += ft_strlen(str[i++]);
+	r_value = (char *)malloc(sizeof(char) * (len + 1));
+	if (!r_value)
+		return (NULL);
+	i = 0;
+	while (*str)
+	{
+		while (**str)
+			r_value[i++] = *(*str)++;
+		str++;
+	}
+	r_value[i] = 0;
+	return (r_value);
+}

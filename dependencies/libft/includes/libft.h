@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:02:13 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/18 18:43:35 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/19 11:56:09 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ char	*ft_lstjoin(t_list *lst, char sep);
 int		ft_lst_content_len(t_list *lst);
 int		ft_getlen_strtab(char *tab[]);
 char	*ft_str_replace(char *src, char *to_find, char *replace, int all);
+char	*ft_join(char *str[]);
 
 #endif

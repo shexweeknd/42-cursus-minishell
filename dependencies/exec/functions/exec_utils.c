@@ -6,35 +6,11 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:13:56 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/17 21:40:26 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/19 11:55:07 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
-
-char	*_join(char *str[])
-{
-	int		i;
-	int		len;
-	char	*r_value;
-
-	i = 0;
-	len = 0;
-	while (str[i])
-		len += ft_strlen(str[i++]);
-	r_value = (char *)malloc(sizeof(char) * (len + 1));
-	if (!r_value)
-		return (NULL);
-	i = 0;
-	while (*str)
-	{
-		while (**str)
-			r_value[i++] = *(*str)++;
-		str++;
-	}
-	r_value[i] = 0;
-	return (r_value);
-}
 
 char	*ft_search_executable(t_executable exec)
 {
@@ -53,7 +29,7 @@ char	*ft_search_executable(t_executable exec)
 		return (NULL);
 	while (exec.env->path[i])
 	{
-		tmp = _join(\
+		tmp = ft_join(\
 			(char *[]){exec.env->path[i++], "/", exec.cmd->args[0], NULL});
 		if (!tmp)
 			return (NULL);
