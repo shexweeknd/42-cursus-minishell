@@ -6,21 +6,21 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:46 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/20 08:56:00 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/21 09:38:24 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "sig.h"
 # include "cmd.h"
 # include "env.h"
 # include "ft_exec.h"
+# include "hd.h"
 # include "history.h"
 # include "m_err.h"
 # include "prompt.h"
-# include "heredoc.h"
+# include "sig.h"
 # include "struct.h"
 # include <fcntl.h>
 # include <readline/history.h>

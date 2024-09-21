@@ -2,10 +2,11 @@
 NAME		= libhd.a
 
 # FILES
-FILES		= heredoc.c \
-			heredoc_utils.c \
+FILES		= hd.c \
+			hd_utils.c \
 
-FUNC_FILES	= 
+FUNC_FILES	= eof.c \
+			to_hd.c \
 
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)

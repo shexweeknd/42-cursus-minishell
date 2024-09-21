@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 11:33:07 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/20 11:08:48 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/21 08:58:29 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	init_prompt(t_prompt *prompt, char **envp, char *hist_path)
 {
-	prompt->ps_two = "> ";
 	prompt->wait_nl = 0;
 	prompt->to_exit = 0;
 	prompt->to_execute = 1;
@@ -45,8 +44,18 @@ void	setup_prompt_flags(t_prompt *prompt)
 	sig_type('r', 0);
 }
 
-// TODO replace '>' with content of variable $PS2
-// col_ps_two = get_col_ps_two(env);
+char	*get_colored_ps_two(void)
+{
+	char	*result;
+	char	*tmp;
+	char	*ps_two;
+
+	ps_two = to_ps_two('g', NULL);
+	tmp = ft_strjoin("\033[0;32m", ps_two);
+	result = ft_strjoin(tmp, "\033[0;0m");
+	return (free(tmp), result);
+}
+
 char	*ft_join_line(t_prompt *prompt, char *line)
 {
 	char	*result;
@@ -58,7 +67,7 @@ char	*ft_join_line(t_prompt *prompt, char *line)
 		return (line);
 	result = NULL;
 	new_line = NULL;
-	col_ps_two = "\033[0;32m>\033[0;0m ";
+	col_ps_two = get_colored_ps_two();
 	signal(SIGINT, sec_prompt_sig_handler);
 	while (prompt->wait_nl && (!new_line || is_only_spaces(new_line)))
 	{
@@ -73,5 +82,5 @@ char	*ft_join_line(t_prompt *prompt, char *line)
 		return (setup_prompt_flags(prompt), free(new_line), line);
 	tmp = ft_strjoin(" ", new_line);
 	result = ft_strjoin(line, tmp);
-	return (free(line), free(tmp), free(new_line), result);
+	return (free(col_ps_two), free(line), free(tmp), free(new_line), result);
 }
