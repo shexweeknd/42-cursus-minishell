@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 10:14:48 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/20 08:28:42 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/21 08:44:48 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 typedef struct s_prompt
 {
-	char		*ps_two;
 	int			wait_nl;
 	int			to_exit;
 	int			to_execute;

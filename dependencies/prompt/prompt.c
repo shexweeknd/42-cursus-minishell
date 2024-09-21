@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 05:51:07 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/20 11:08:40 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/21 08:55:35 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*get_line(t_prompt *prompt, char *msh_name)
 			return (free(line), NULL);
 	}
 	if (check_syntax_err(line))
-		return (NULL);
+		return (free(line), NULL);
 	// if (_hd_occ(line))
 	// 	process_hd(line);
 	if (is_uncomplete_line(line))
@@ -33,8 +33,8 @@ char	*get_line(t_prompt *prompt, char *msh_name)
 	while (prompt->wait_nl && is_uncomplete_line(line))
 	{
 		line = ft_join_line(prompt, line);
-		if (check_syntax_err(ft_strdup(line)))
-			return (line);
+		if (check_syntax_err(line))
+			return (free(line), line);
 	}
 	return (line);
 }

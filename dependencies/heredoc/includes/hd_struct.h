@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc_utils.c                                    :+:      :+:    :+:   */
+/*   hd_struct.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/20 08:53:46 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/20 11:10:02 by hramaros         ###   ########.fr       */
+/*   Created: 2024/09/20 10:32:58 by hramaros          #+#    #+#             */
+/*   Updated: 2024/09/21 09:37:16 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "heredoc.h"
+#ifndef HD_STRUCT_H
+# define HD_STRUCT_H
 
-int	_hd_occ(char *line)
+typedef struct s_hd
 {
-	size_t	i;
-	int		result;
+	int			fd[2];
+	int			pos;
+	struct s_hd	*next;
+}				t_hd;
 
-	result = 0;
-	i = 0;
-	while (i < ft_strlen(line) && line[i])
-	{
-		if (line[i] == '<' && line[i + 1] == '<')
-			result++;
-		i++;
-	}
-	return (result);
-}
+#endif

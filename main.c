@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 12:55:43 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/19 15:47:32 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/21 10:18:46 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ int	main(int argc, char **argv, char **envp)
 		sec_prompt_flag('r', 0);
 		pt.cmd = (ft_free_cmds(pt.cmd), NULL);
 	}
-	return (free_lchistory(pt.hist), ft_free_env(pt.venv), 0);
+	return (free_lchistory(pt.hist), ft_free_env(pt.venv),
+		0);
 }
