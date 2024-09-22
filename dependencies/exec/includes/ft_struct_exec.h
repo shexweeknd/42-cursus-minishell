@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 10:34:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/16 11:58:36 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/22 13:35:44 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,22 @@
 
 typedef struct s_exec_params
 {
-	int		read_fd;
-	t_cmd	*src;
-	t_cmd	*cmd;
-	t_env	*env;
+	int			read_fd;
+	t_cmd		*src;
+	t_cmd		*cmd;
+	t_env		*env;
+	t_hist_elem	*hist;
 	t_link	l_type;
 }			t_exec_params;
 
 typedef struct s_executable
 {
-	int		o_fd[2];
-	int		p_fd[2];
-	int		r_fd[2];
-	t_cmd	*cmd;
-	t_env	*env;
+	int			o_fd[2];
+	int			p_fd[2];
+	int			r_fd[2];
+	t_cmd		*cmd;
+	t_env		*env;
+	t_hist_elem	*hist;
 }	t_executable;
 
 #endif
