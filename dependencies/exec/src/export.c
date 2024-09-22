@@ -6,11 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:11 by hramaros          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/09/22 13:32:55 by ballain          ###   ########.fr       */
-=======
-/*   Updated: 2024/09/22 13:40:13 by ballain          ###   ########.fr       */
->>>>>>> 117db87
+/*   Updated: 2024/09/22 14:18:35 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +97,14 @@ int	export(t_executable exec)
 		if (!ft_setvar(exec.env, var_name, exec.cmd->args[i]))
 			ft_addenv(exec.env, exec.cmd->args[i]);
 		if (var_name)
+		{
+			if (!ft_strcmp(var_name, "PATH"))
+			{
+				(free(*exec.env->path), free(exec.env->path));
+				exec.env->path = ft_split_path(exec.cmd->args[i]);
+			}
 			free(var_name);
+		}
 	}
 	return (0);
 }
