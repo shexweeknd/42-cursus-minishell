@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:34 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/17 08:26:34 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/22 13:39:23 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 void	ft_exit(t_executable exec)
 {
 	(void)exec;
-	exit(0);
+	// return (printf("exit\n"), set_history(pt.hist, HIST_PATH),
+	// 			free(pt.line), ft_free_env(pt.venv), 0);
 }

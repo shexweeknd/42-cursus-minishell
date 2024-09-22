@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:11 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/19 13:21:15 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/22 13:40:13 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static int	ft_export_no_arg(char **env)
 		cp_env[i] = env[i];
 	cp_env[i] = 0;
 	return (ft_printsort_tab(cp_env), free(cp_env), 0);
-
 }
 
 static char	*ft_getvar_name(char *arg)
@@ -73,7 +72,7 @@ static int	ft_addenv(t_env *env, char *new)
 	if (!ft_strchr(new, '='))
 		return (1);
 	i = -1;
-	new_varenv = (char **)malloc(sizeof(char *) * (ft_getlen_strtab(env->var) + 2));
+	new_varenv = malloc(sizeof(char *) * (ft_getlen_strtab(env->var) + 2));
 	if (!new_varenv)
 		return (1);
 	while (env->var[++i])

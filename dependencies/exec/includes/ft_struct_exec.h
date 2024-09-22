@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 10:34:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/17 13:39:04 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/22 13:40:29 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_exec_params
 	t_cmd		*cmd;
 	t_env		*env;
 	t_hist_elem	*hist;
-	t_link		l_type;
+	t_link	l_type;
 }			t_exec_params;
 
 typedef struct s_executable

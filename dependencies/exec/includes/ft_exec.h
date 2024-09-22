@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/19 13:03:17 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/22 13:39:06 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "cmd.h"
 # include "env.h"
+# include "history.h"
 # include "ft_struct_exec.h"
 # include <fcntl.h>
 # include <stdio.h>
