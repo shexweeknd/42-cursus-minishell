@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_ps_two.c                                       :+:      :+:    :+:   */
+/*   hd.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/07 11:36:00 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/21 08:57:54 by hramaros         ###   ########.fr       */
+/*   Created: 2024/09/20 08:53:01 by hramaros          #+#    #+#             */
+/*   Updated: 2024/09/21 10:06:21 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prompt.h"
+#ifndef HD_H
+# define HD_H
 
-char	*to_ps_two(char cmd, char *value)
-{
-	static char	*ps_two = "> ";
+# include "../../prompt/includes/prompt.h"
+# include "hd_struct.h"
+# include "libft.h"
 
-	if (cmd == 's')
-		ps_two = value;
-	return (ps_two);
-}
+t_hd	*hd_cmd(char cmd, char *eof);
+void	process_hd(char *line);
+int		_hd_occ(char *line);
+char	*get_eof(char *line);
+void	fullfill_fd(int fd, char *eof);
+void	recurse_free_hd(t_hd *hd);
+
+#endif

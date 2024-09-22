@@ -6,78 +6,38 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 15:26:35 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/14 12:49:37 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/19 13:14:02 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
-#include "env_struct.h"
 
-int	get_content_size(t_list *content)
+int	ft_getlen_path(char *path)
 {
-	int	result;
+	int	len;
 
-	result = 0;
-	while (content)
+	if (!path)
+		return (0);
+	len = 1;
+	while (*path)
 	{
-		result++;
-		content = content->next;
+		while (*path && *path != ':')
+			path++;
+		if (*path == ':' && path++ && *path)
+			len++;
 	}
-	return (result);
+	return (len);
 }
 
-int	env_content_len(t_list *content)
+void	ft_free_env(t_env *env)
 {
-	int	result;
-
-	result = 0;
-	while (content)
-	{
-		result += ft_strlen(content->content);
-		content = content->next;
-	}
-	return (result);
-}
-
-char	*concatenate_content(t_list *content)
-{
-	char	*result;
-	char	*temp;
-
-	result = NULL;
-	while (content)
-	{
-		temp = ft_strjoin(result, content->content);
-		free(result);
-		content = content->next;
-		if (!content)
-			break ;
-		result = ft_strjoin(temp, ":");
-	}
-	return (result);
-}
-
-char	*ft_getvar(t_env *env, char *var_name)
-{
-	int		i;
-	int		j;
-	int		len;
+	int	i;
 
 	i = 0;
-	len = ft_strlen(var_name);
 	while (env->var[i])
-	{
-		if (ft_strncmp(env->var[i], var_name, len) == 0 && \
-			env->var[i][len] == '=')
-			break ;
-		i++;
-	}
-	j = 0;
-	while (env->var[i] && env->var[i][j] && env->var[i][j] != '=')
-		j++;
-	if (env->var[i] && env->var[i][j] == '=')
-		j++;
-	if (env->var[i] && env->var[i][j])
-		return (env->var[i] + j);
-	return (NULL);
+		free(env->var[i++]);
+	free(env->var);
+	free(*(env->path));
+	free(env->path);
+	free(env);
 }

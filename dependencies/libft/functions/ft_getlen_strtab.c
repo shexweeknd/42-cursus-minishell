@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_ps_two.c                                       :+:      :+:    :+:   */
+/*   ft_getlen_strtab.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/07 11:36:00 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/21 08:57:54 by hramaros         ###   ########.fr       */
+/*   Created: 2024/09/18 16:42:57 by ballain           #+#    #+#             */
+/*   Updated: 2024/09/18 16:42:58 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prompt.h"
+#include "libft.h"
 
-char	*to_ps_two(char cmd, char *value)
+int	ft_getlen_strtab(char *tab[])
 {
-	static char	*ps_two = "> ";
+	int	len;
 
-	if (cmd == 's')
-		ps_two = value;
-	return (ps_two);
+	len = 0;
+	while (*tab)
+	{
+		len++;
+		tab++;
+	}
+	return (len);
 }

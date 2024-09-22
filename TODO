@@ -17,7 +17,34 @@ DEBUG de secondary prompt:
 
 GERER '&' comme process en fond
 
-CORRIGER 'ls || ls | ls' qui quitte automatiquement
 
 UPDATE : 
 [FINISHED] int	ft_get_info_len(char *cmd) ==> cmd_utils.c
+[FINISHED] CORRIGER 'ls || ls | ls' qui quitte automatiquement
+[FINISHED] 'echo $? + $?'
+[FINISHED] 'echo "it works"' (doit afficher comme dans bash)
+[FINISHED] 'echo it works' (doit afficher comme dans bash)
+[FINISHED] - 'echo "cat lol.c | cat > lol.c"' (affiche 'cat lol.c | cat > lol.c' sans attendre)
+[FINISHED] - '$? || echo $?'
+[FINISHED] - 'cat | cat | ls' (affiche ls avant d'attendre le input de cat)
+[FINISHED] - '> foo' (creer foo et passe a get_line())
+[FINISHED] - '/bin/ls' (doit s'executer)
+[FINISHED] - '/bin/pwd' (doit pouvoir lancer pwd)
+[FINISHED] - 'cat /dev/random | ls' (doit executer ls sans attendre)
+
+
+MANDATORY TESTS:
+    - status
+    - 'cd ~'
+    - 'cd ~/path/of/your/choice/'
+    - 'cd .'
+    - 'cd ../'
+    - 'cd -'
+    - exit
+    - unset
+    - export
+    - heredoc
+
+
+ERROR :
+    - STATUS command not found = 127

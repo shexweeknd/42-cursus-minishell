@@ -6,40 +6,26 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:22:05 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/10 13:23:11 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/19 15:45:58 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 
-int	ft_getlen_env(char **envp)
+char	*ft_search_var(t_env *env, char *var_name)
 {
-	int	len;
+	int		i;
+	int		len;
 
-	len = 0;
-	while (*envp)
+	i = -1;
+	len = ft_strlen(var_name);
+	while (env->var[++i])
 	{
-		len++;
-		envp++;
+		if (ft_strncmp(env->var[i], var_name, len) == 0 && \
+			env->var[i][len] == '=')
+			break ;
 	}
-	return (len);
-}
-
-int	ft_getlen_path(char *path)
-{
-	int	len;
-
-	if (!path)
-		return (0);
-	len = 1;
-	while (*path)
-	{
-		while (*path && *path != ':')
-			path++;
-		if (*path == ':' && path++ && *path)
-			len++;
-	}
-	return (len);
+	return (env->var[i]);
 }
 
 char	**ft_split_path(char *src)
@@ -75,7 +61,7 @@ t_env	*ft_getenv(char **envp)
 	env = (t_env *)malloc(sizeof(t_env));
 	if (!env)
 		return (NULL);
-	env->var = (char **)malloc(sizeof(char *) * (ft_getlen_env(envp) + 1));
+	env->var = (char **)malloc(sizeof(char *) * (ft_getlen_strtab(envp) + 1));
 	if (!env->var)
 		return (NULL);
 	path = getenv("PATH");
@@ -86,15 +72,43 @@ t_env	*ft_getenv(char **envp)
 	return (env);
 }
 
-void	ft_free_env(t_env *env)
+char	*ft_getvar(t_env *env, char *var_name)
 {
-	int	i;
+	int		i;
+	char	*var;
 
 	i = 0;
-	while (env->var[i])
-		free(env->var[i++]);
-	free(env->var);
-	free(*(env->path));
-	free(env->path);
-	free(env);
+	var = ft_search_var(env, var_name);
+	if (var)
+	{
+		while (var[i++] != '=')
+			;
+		if (var + i)
+			return (var + i);
+	}
+	return (NULL);
+}
+
+char	*ft_setvar(t_env *env, char *var_name, char *str)
+{
+	int		i;
+	int		len;
+
+	i = -1;
+	len = ft_strlen(var_name);
+	while (env->var[++i])
+	{
+		if (ft_strncmp(env->var[i], var_name, len) == 0 && \
+			env->var[i][len] == '=')
+		{
+			env->var[i] = (free(env->var[i]), ft_strdup(str));
+			if (ft_strcmp(var_name, "PATH") == 0)
+			{
+				(free(*env->path), free(env->path));
+				env->path = ft_split_path((env->var[i]));
+			}
+			return (env->var[i]);
+		}
+	}
+	return (NULL);
 }

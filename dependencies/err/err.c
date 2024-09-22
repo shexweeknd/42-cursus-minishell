@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 08:57:14 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/07 11:56:12 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/21 08:55:07 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	check_syntax_err(char *prompt)
 {
 	if (is_only_spaces(prompt))
-		return (free(prompt), 1);
+		return (1);
 	if (is_unexpected(prompt))
-		return (free(prompt), 1);
+		return (1);
 	return (0);
 }

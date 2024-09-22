@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 12:55:43 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/17 05:57:54 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/21 10:18:46 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_prompt	pt;
 
-	((void)argc, (void)argv);
+	((void)argc, (void)argv, (void)envp);
 	init_prompt(&pt, envp, HIST_PATH);
 	while (1)
 	{
@@ -32,9 +32,11 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		ft_manage_args(pt.cmd, pt.venv);
-		ft_exec_cmds((t_exec_params){0, pt.cmd, pt.cmd, pt.venv,
+		ft_exec_cmds((t_exec_params){0, pt.cmd, pt.cmd, pt.venv, pt.hist,
 			pt.cmd->l_type});
+		sec_prompt_flag('r', 0);
 		pt.cmd = (ft_free_cmds(pt.cmd), NULL);
 	}
-	return (free_lchistory(pt.hist), ft_free_env(pt.venv), 0);
+	return (free_lchistory(pt.hist), ft_free_env(pt.venv),
+		0);
 }

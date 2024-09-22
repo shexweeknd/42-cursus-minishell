@@ -6,48 +6,22 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:13:56 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/22 13:33:38 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/22 13:43:19 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
 
-char	*ft_join_path(char *path, char *sep, char *name)
-{
-	int		i;
-	int		len;
-	char	*r_value;
-
-	if (!path)
-		path = ".";
-	if (!sep)
-		sep = "/";
-	if (!name)
-		return (NULL);
-	i = 0;
-	len = ft_strlen(path) + ft_strlen(path) + ft_strlen(path) + 1;
-	r_value = (char *)malloc(sizeof(char) * len);
-	if (!r_value)
-		return (NULL);
-	while (*path)
-		r_value[i++] = *(path++);
-	while (*sep)
-		r_value[i++] = *(sep++);
-	while (*name)
-		r_value[i++] = *(name++);
-	r_value[i] = '\0';
-	return (r_value);
-}
-
 char	*ft_search_executable(t_executable exec)
 {
-	char	*tmp;
 	int		i;
+	char	*tmp;
 
 	i = 0;
 	if (access(exec.cmd->args[0], F_OK | X_OK) == 0)
 	{
-		if (ft_strncmp(exec.cmd->args[0], "./", 2) == 0)
+		if (*exec.cmd->args[0] == '/' || \
+			ft_strncmp(exec.cmd->args[0], "./", 2) == 0)
 			return (exec.cmd->args[0]);
 		return (NULL);
 	}
@@ -55,7 +29,8 @@ char	*ft_search_executable(t_executable exec)
 		return (NULL);
 	while (exec.env->path[i])
 	{
-		tmp = ft_join_path(exec.env->path[i++], "/", exec.cmd->args[0]);
+		tmp = ft_join(\
+			(char *[]){exec.env->path[i++], "/", exec.cmd->args[0], NULL});
 		if (!tmp)
 			return (NULL);
 		if (access(tmp, F_OK | X_OK) == 0)
@@ -76,7 +51,15 @@ t_executable	ft_init_executable(t_exec_params param)
 	r_value.o_fd[1] = dup(STDOUT_FILENO);
 	r_value.cmd = param.cmd;
 	r_value.env = param.env;
+	r_value.hist = param.hist;
 	return (r_value);
+}
+
+void	ft_free_executable(t_executable exec)
+{
+	ft_free_cmds(exec.cmd);
+	ft_free_env(exec.env);
+	free_lchistory(exec.hist);
 }
 
 void	ft_reset_fd(t_executable exec)

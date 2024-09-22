@@ -6,7 +6,11 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 10:34:02 by ballain           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/09/22 13:35:44 by ballain          ###   ########.fr       */
+=======
+/*   Updated: 2024/09/22 13:40:29 by ballain          ###   ########.fr       */
+>>>>>>> 117db87
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +19,7 @@
 
 # include "cmd.h"
 # include "env.h"
+# include "history.h"
 # include "../../sig/includes/sig.h"
 
 typedef struct s_exec_params

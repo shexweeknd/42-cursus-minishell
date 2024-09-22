@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_ps_two.c                                       :+:      :+:    :+:   */
+/*   hd_struct.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/07 11:36:00 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/21 08:57:54 by hramaros         ###   ########.fr       */
+/*   Created: 2024/09/20 10:32:58 by hramaros          #+#    #+#             */
+/*   Updated: 2024/09/21 09:37:16 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prompt.h"
+#ifndef HD_STRUCT_H
+# define HD_STRUCT_H
 
-char	*to_ps_two(char cmd, char *value)
+typedef struct s_hd
 {
-	static char	*ps_two = "> ";
+	int			fd[2];
+	int			pos;
+	struct s_hd	*next;
+}				t_hd;
 
-	if (cmd == 's')
-		ps_two = value;
-	return (ps_two);
-}
+#endif

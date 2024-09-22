@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_ps_two.c                                       :+:      :+:    :+:   */
+/*   hd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/07 11:36:00 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/21 08:57:54 by hramaros         ###   ########.fr       */
+/*   Created: 2024/09/20 08:53:46 by hramaros          #+#    #+#             */
+/*   Updated: 2024/09/21 09:36:58 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prompt.h"
+#include "hd.h"
 
-char	*to_ps_two(char cmd, char *value)
+int	_hd_occ(char *line)
 {
-	static char	*ps_two = "> ";
+	size_t	i;
+	int		result;
 
-	if (cmd == 's')
-		ps_two = value;
-	return (ps_two);
+	result = 0;
+	i = 0;
+	while (i < ft_strlen(line) && line[i])
+	{
+		if (line[i] == '<' && line[i + 1] == '<')
+			result++;
+		i++;
+	}
+	return (result);
 }

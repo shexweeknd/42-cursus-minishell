@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:39:23 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/05 19:30:34 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/18 17:41:37 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	len_little = ft_strlen(little);
 	if (len_little == 0)
 		return ((char *)big);
-	while (big[i] != '\0' && i < len)
+	while (big && *big != '\0' && i < len)
 	{
-		if (ft_strncmp(&big[i], little, len_little) == 0)
+		if (ft_strncmp(big, little, len_little) == 0)
 		{
 			if ((i + len_little) <= len)
-				return ((char *)(&big[i]));
+				return ((char *)(big));
 		}
 		i++;
+		big++;
 	}
 	return (0);
 }

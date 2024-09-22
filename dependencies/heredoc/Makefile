@@ -1,16 +1,12 @@
 # PROGRAM NAME
-NAME		= libprompt.a
+NAME		= libhd.a
 
 # FILES
-FILES		= prompt.c \
-			prompt_utils.c \
-			prompt_sig_handler.c \
-			prompt_checker.c \
-			prompt_debug.c \
-			open_stdin.c \
-			get_ps_two.c \
+FILES		= hd.c \
+			hd_utils.c \
 
-FUNC_FILES	= get_ps_two.c
+FUNC_FILES	= eof.c \
+			to_hd.c \
 
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)

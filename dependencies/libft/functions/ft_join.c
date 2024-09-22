@@ -1,20 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   ft_join                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/11 16:17:34 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/22 13:39:23 by ballain          ###   ########.fr       */
+/*   Created: 2024/09/19 11:55:23 by ballain           #+#    #+#             */
+/*   Updated: 2024/09/19 12:44:05 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_exec.h"
+#include "libft.h"
 
-void	ft_exit(t_executable exec)
+char	*ft_join(char *str[])
 {
-	(void)exec;
-	// return (printf("exit\n"), set_history(pt.hist, HIST_PATH),
-	// 			free(pt.line), ft_free_env(pt.venv), 0);
+	int		i;
+	int		len;
+	char	*r_value;
+
+	i = 0;
+	len = 0;
+	while (str[i])
+		len += ft_strlen(str[i++]);
+	r_value = (char *)malloc(sizeof(char) * (len + 1));
+	if (!r_value)
+		return (NULL);
+	i = 0;
+	while (*str)
+	{
+		while (**str)
+			r_value[i++] = *(*str)++;
+		str++;
+	}
+	r_value[i] = 0;
+	return (r_value);
 }
