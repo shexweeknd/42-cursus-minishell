@@ -6,12 +6,11 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/22 13:46:24 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/23 21:01:46 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
-#include <errno.h>
 
 int	ft_builtin_cmd(t_executable exec)
 {
@@ -32,45 +31,6 @@ int	ft_builtin_cmd(t_executable exec)
 	return (0);
 }
 
-void	ft_manage_redirect_file(int fd[2], int r_fd[2], t_cmd *cmd)
-{
-	t_rfile	*tmp_in;
-	t_rfile	*tmp_out;
-
-	tmp_in = cmd->file_in;
-	while (tmp_in && tmp_in->next)
-		tmp_in = tmp_in->next;
-	tmp_out = cmd->file_out;
-	while (tmp_out && tmp_out->next)
-	{
-		close(open(tmp_out->args, tmp_out->option));
-		tmp_out = tmp_out->next;
-	}
-	if (tmp_in)
-		r_fd[0] = open(tmp_in->args, tmp_in->option);
-	if (tmp_out)
-		r_fd[1] = open(tmp_out->args, tmp_out->option);
-	if (r_fd[0] != -1 || r_fd[1] != -1)
-	{
-		if (r_fd[0] != -1)
-			dup2(r_fd[0], STDIN_FILENO);
-		if (r_fd[1] != -1)
-			dup2(r_fd[1], STDOUT_FILENO);
-	}
-	else if (cmd->next && cmd->l_type == PIPE)
-		dup2(fd[1], STDOUT_FILENO);
-}
-
-void	ft_close_fd(t_executable exec)
-{
-	close(exec.p_fd[0]);
-	close(exec.p_fd[1]);
-	if (exec.r_fd[0] != -1)
-		close(exec.r_fd[0]);
-	if (exec.r_fd[1] != -1)
-		close(exec.r_fd[1]);
-}
-
 int	ft_exec_cmd(t_executable exec)
 {
 	char	*exe;
@@ -79,35 +39,27 @@ int	ft_exec_cmd(t_executable exec)
 	status = 0;
 	if (!exec.cmd->args)
 		return (0);
-	ft_manage_redirect_file(exec.p_fd, exec.r_fd, exec.cmd);
-	ft_close_fd(exec);
+	ft_manage_redirect_file(exec.p_fd, exec.cmd);
 	if (!exec.cmd->args[0])
 		return (1);
 	if (ft_builtin_cmd(exec))
 		return (1);
 	exe = ft_search_executable(exec);
 	if (!exe)
-		return (printf("Minishell: %s: command not found\n", exec.cmd->args[0]), 0);
+		return (printf("Minishell: %s: command not found\n", exec.cmd->args[0]), 127);
 	if (exe != exec.cmd->args[0])
 	{
 		free(exec.cmd->args[0]);
 		exec.cmd->args[0] = exe;
 	}
 	if (fork() == 0)
-	{
-		if (execve(exe, exec.cmd->args, exec.env->var) == -1)
-		{
-			printf("%s\n", strerror(errno));
-			exit(EXIT_FAILURE);
-		}
-	}
+		execve(exe, exec.cmd->args, exec.env->var);
 	else
 	{
 		wait(&status);
-		if (status)
-			printf("STATUS	: [%d]\n", status);
+		printf("RESULT STATUS	: [%d]\n", status);
 	}
-	return (1);
+	return (status);
 }
 
 int	ft_exec_cmds(t_exec_params params)
@@ -123,24 +75,19 @@ int	ft_exec_cmds(t_exec_params params)
 		{
 			if (params.read_fd != 0)
 				(dup2(params.read_fd, STDIN_FILENO), close(params.read_fd));
-			ft_exec_cmd(exec);
-			((exec.cmd = params.src), ft_free_executable(exec), exit(0));
+			ft_pipe_status(exec.s_fd, ft_exec_cmd(exec), 1);
+			(ft_free_executable(exec, params.src), exit(0));
 		}
 		else
 		{
-			close(exec.p_fd[1]);
 			if (params.read_fd != 0)
 				close(params.read_fd);
-			ft_exec_cmds((t_exec_params){exec.p_fd[0], params.src, params.cmd->next,
-				params.env, params.hist, params.cmd->l_type});
-			wait(NULL);
+			set_status(ft_pipe_status(exec.s_fd, 0, 0));
+			ft_next_cmds(exec.p_fd, params);
 		}
 	}
 	else
-	{
-		(ft_exec_cmd(exec), ft_reset_fd(exec), close(exec.p_fd[1]));
-		ft_exec_cmds((t_exec_params){exec.p_fd[0], params.src, params.cmd->next,
-				params.env, params.hist, params.cmd->l_type});
-	}
-	return (wait(NULL), 0);
+		(ft_exec_cmd(exec), ft_reset_fd(exec), ft_next_cmds(exec.p_fd, params));
+	return (0);
 }
+
