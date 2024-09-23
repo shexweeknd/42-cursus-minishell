@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hd_struct.h                                        :+:      :+:    :+:   */
+/*   hd_err.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/20 10:32:58 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/23 16:04:09 by hramaros         ###   ########.fr       */
+/*   Created: 2024/09/23 10:29:12 by hramaros          #+#    #+#             */
+/*   Updated: 2024/09/23 10:31:35 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HD_STRUCT_H
-# define HD_STRUCT_H
+#include "hd.h"
 
-typedef struct s_hd
+int	hd_err(char *line)
 {
-	int				fd[2];
-	size_t			size;
-	int				pos;
-	struct s_hd		*next;
-}					t_hd;
+	int	flag;
 
-typedef struct s_eofs
-{
-	char			*eof;
-	struct s_eofs	*next;
-}					t_eofs;
-
-#endif
+	flag = 0;
+	while (*line && !flag)
+	{
+		if (!ft_strncmp(line, "<<", 2) && !flag)
+			line += chev_check(line, &flag, 2);
+		else
+			line++;
+	}
+	return (flag);
+}

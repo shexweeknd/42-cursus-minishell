@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 08:58:01 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/07 12:46:27 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/23 13:00:19 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../../cmd/includes/cmd.h"
 # include "../../cmd/includes/cmd_struct.h"
+# include "../../heredoc/includes/hd.h"
 # include "libft.h"
 # include <readline/history.h>
 # include <readline/readline.h>
@@ -24,6 +25,6 @@ int		check_syntax_err(char *prompt);
 
 // UTILS FUNCTIONS FOR PARSING ERROR
 void	display_unexpected_token(char *token);
-int		is_unexpected(char *prompt);
+int		is_unexpected(char *prompt, int lvl);
 
 #endif

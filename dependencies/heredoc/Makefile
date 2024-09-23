@@ -7,6 +7,8 @@ FILES		= hd.c \
 
 FUNC_FILES	= eof.c \
 			to_hd.c \
+			get_doc.c \
+			hd_debug.c \
 
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)

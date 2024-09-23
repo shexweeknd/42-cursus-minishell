@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hd_struct.h                                        :+:      :+:    :+:   */
+/*   get_doc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/20 10:32:58 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/23 16:04:09 by hramaros         ###   ########.fr       */
+/*   Created: 2024/09/23 10:18:07 by hramaros          #+#    #+#             */
+/*   Updated: 2024/09/23 10:21:24 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HD_STRUCT_H
-# define HD_STRUCT_H
+#include "hd.h"
 
-typedef struct s_hd
+char	*get_hd(int fd, size_t size)
 {
-	int				fd[2];
-	size_t			size;
-	int				pos;
-	struct s_hd		*next;
-}					t_hd;
+	char	*result;
+	int		i;
 
-typedef struct s_eofs
-{
-	char			*eof;
-	struct s_eofs	*next;
-}					t_eofs;
-
-#endif
+	result = malloc(sizeof(char) * (size + 1));
+	if (!result)
+		return (result);
+	i = 0;
+	while (size && read(fd, &result[i], 1) > 0)
+	{
+		size--;
+		i++;
+	}
+	result[i] = '\0';
+	return (close(fd), result);
+}

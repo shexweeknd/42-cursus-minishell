@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:46 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/21 09:38:24 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/23 13:45:00 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,5 @@
 # include <unistd.h>
 
 # define MSH_NAME "\033[0;32mMinishell$\033[0;0m "
-# define HIST_PATH "./dependencies/history/src/minishell_history.txt"
 
 #endif

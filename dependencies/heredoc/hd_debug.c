@@ -1,51 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hd_utils.c                                         :+:      :+:    :+:   */
+/*   hd_debug.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/20 08:53:46 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/23 13:52:44 by hramaros         ###   ########.fr       */
+/*   Created: 2024/09/23 08:48:28 by hramaros          #+#    #+#             */
+/*   Updated: 2024/09/23 10:16:35 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hd.h"
 
-int	_hd_occ(char *line)
+void	putstr_from_fd(int fd, int size)
 {
-	size_t	i;
-	int		result;
+	char	c;
 
-	result = 0;
-	i = 0;
-	while (i < ft_strlen(line) && line[i])
+	while (size && read(fd, &c, 1) > 0 && c)
 	{
-		if (line[i] == '<' && line[i + 1] == '<')
-			result++;
-		i++;
+		write(STDOUT_FILENO, &c, 1);
+		size--;
 	}
-	return (result);
 }
 
-void	recurse_free_hd(t_hd *hd)
+void	print_hd(t_hd *hd)
 {
-	if (!hd)
+	while (hd)
 	{
-		free(hd);
-		return ;
+		printf("[hd nbr]: %d\n", hd->pos);
+		write(STDOUT_FILENO, "[hd content]:\n", 18);
+		write(STDOUT_FILENO, "------\n", 8);
+		putstr_from_fd(hd->fd[0], hd->size);
+		write(STDOUT_FILENO, "------\n", 8);
+		printf("\n\n");
+		hd = hd->next;
 	}
-	recurse_free_hd(hd->next);
-	free(hd);
-	return ;
-}
-
-void	recurse_close_hd(t_hd *hd)
-{
-	if (!hd)
-		return ;
-	close(hd->fd[0]);
-	close(hd->fd[1]);
-	recurse_close_hd(hd->next);
-	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:52:30 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/21 10:11:36 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:10:15 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,35 +27,26 @@ int	ft_iseof(char *line, char *eof)
 	return (0);
 }
 
-void	fullfill_fd(int fd, char *eof)
+size_t	fullfill_fd(int fd, char *eof)
 {
+	size_t	buffer_size;
 	char	*line;
 
+	buffer_size = 0;
 	while (1)
 	{
 		line = readline(to_ps_two('g', NULL));
 		if (ft_iseof(line, eof))
 		{
 			free(line);
-			return ;
+			return (buffer_size);
 		}
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
+		buffer_size += ft_strlen(line) + 1;
 		free(line);
 	}
-	return ;
-}
-
-void	recurse_free_hd(t_hd *hd)
-{
-	if (!hd)
-	{
-		free(hd);
-		return ;
-	}
-	recurse_free_hd(hd->next);
-	free(hd);
-	return ;
+	return (buffer_size);
 }
 
 int	skip_hd(char *line)
@@ -74,23 +65,14 @@ int	skip_hd(char *line)
 		}
 		result++;
 	}
-	return (0);
+	return (result);
 }
 
-// TOTEST
-void	process_hd(char *line)
+// TODO: ca remplit juste les hd dans le static a chaque fois qu'on l'appelle
+void	process_hd(t_eofs *eofs)
 {
 	t_hd	*hd;
-	char	*eof;
 
-	eof = get_eof(line);
-	if (!eof)
-		return ;
-	hd = hd_cmd('g', NULL);
-	if (!hd)
-		hd = hd_cmd('i', eof);
-	hd = hd_cmd('a', eof);
-	line += skip_hd(line);
-	free(eof);
-	process_hd(line);
+	(void)hd;
+	(void)eofs;
 }

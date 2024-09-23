@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 12:55:43 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/23 21:05:54 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/23 21:38:20 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ int	main(int argc, char **argv, char **envp)
 	{
 		(setup_main_signals(), get_prompt(&pt, MSH_NAME));
 		pt.hist = ft_append_hist_elem(pt.hist, ft_strdup(pt.line));
-		if (!pt.line || strcmp(pt.line, "exit") == 0 || pt.to_exit)
-			return (printf("exit\n"), set_history(pt.hist, HIST_PATH),
-				free(pt.line), ft_free_env(pt.venv), 0);
+		if (is_exit(pt.line) || pt.to_exit)
+			return (exit_msh(&pt), 0);
 		pt.cmd = ft_get_cmds(pt.line);
 		if (free(pt.line), !pt.to_execute || !pt.cmd)
 		{
@@ -37,6 +36,5 @@ int	main(int argc, char **argv, char **envp)
 		sec_prompt_flag('r', 0);
 		pt.cmd = (ft_free_cmds(pt.cmd), NULL);
 	}
-	return (free_lchistory(pt.hist), ft_free_env(pt.venv),
-		0);
+	return (free_lchistory(pt.hist), ft_free_env(pt.venv), 0);
 }
