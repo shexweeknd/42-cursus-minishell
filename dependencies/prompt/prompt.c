@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 05:51:07 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/21 08:55:35 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/23 10:23:57 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ char	*get_line(t_prompt *prompt, char *msh_name)
 	}
 	if (check_syntax_err(line))
 		return (free(line), NULL);
-	// if (_hd_occ(line))
-	// 	process_hd(line);
+	if (_hd_occ(line))
+		(process_hd(line), print_hd(hd_cmd('g', NULL)),
+			recurse_free_hd(hd_cmd('g', NULL)));
 	if (is_uncomplete_line(line))
 		prompt->wait_nl = 1;
 	while (prompt->wait_nl && is_uncomplete_line(line))

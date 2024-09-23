@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 09:31:35 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/21 09:39:07 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/23 09:20:51 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ char	*get_eof(char *line)
 	char	*result;
 
 	i = 0;
-	while (line[i])
+	while (line[i] && line[i + 1])
 	{
-		if (!ft_strcmp(&line[i], "<<"))
+		if (!ft_strncmp(&line[i], "<<", 2))
 		{
 			i += 2;
 			while (ft_isspace(line[i]))
@@ -40,8 +40,9 @@ char	*get_eof(char *line)
 			if (!result)
 				return (NULL);
 			j = 0;
-			while (!ft_isspace(line[i]))
+			while (line[i] && !ft_isspace(line[i]))
 				result[j++] = line[i++];
+			result[j] = '\0';
 			return (result);
 		}
 		i++;

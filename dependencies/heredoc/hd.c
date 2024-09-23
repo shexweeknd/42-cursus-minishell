@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:52:30 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/21 10:11:36 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/23 10:11:08 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,26 @@ int	ft_iseof(char *line, char *eof)
 	return (0);
 }
 
-void	fullfill_fd(int fd, char *eof)
+size_t	fullfill_fd(int fd, char *eof)
 {
+	size_t	buffer_size;
 	char	*line;
 
+	buffer_size = 0;
 	while (1)
 	{
 		line = readline(to_ps_two('g', NULL));
 		if (ft_iseof(line, eof))
 		{
 			free(line);
-			return ;
+			return (buffer_size);
 		}
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
+		buffer_size += ft_strlen(line) + 1;
 		free(line);
 	}
-	return ;
+	return (buffer_size);
 }
 
 void	recurse_free_hd(t_hd *hd)
@@ -55,6 +58,16 @@ void	recurse_free_hd(t_hd *hd)
 	}
 	recurse_free_hd(hd->next);
 	free(hd);
+	return ;
+}
+
+void	recurse_close_hd(t_hd *hd)
+{
+	if (!hd)
+		return ;
+	close(hd->fd[0]);
+	close(hd->fd[1]);
+	recurse_close_hd(hd->next);
 	return ;
 }
 
@@ -74,7 +87,7 @@ int	skip_hd(char *line)
 		}
 		result++;
 	}
-	return (0);
+	return (result);
 }
 
 // TOTEST
@@ -89,7 +102,8 @@ void	process_hd(char *line)
 	hd = hd_cmd('g', NULL);
 	if (!hd)
 		hd = hd_cmd('i', eof);
-	hd = hd_cmd('a', eof);
+	else
+		hd = hd_cmd('a', eof);
 	line += skip_hd(line);
 	free(eof);
 	process_hd(line);
