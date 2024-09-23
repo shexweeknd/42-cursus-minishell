@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:52:30 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/23 13:52:37 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:10:15 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,21 +68,11 @@ int	skip_hd(char *line)
 	return (result);
 }
 
-// TOTEST
-void	process_hd(char *line)
+// TODO: ca remplit juste les hd dans le static a chaque fois qu'on l'appelle
+void	process_hd(t_eofs *eofs)
 {
 	t_hd	*hd;
-	char	*eof;
 
-	eof = get_eof(line);
-	if (!eof)
-		return ;
-	hd = hd_cmd('g', NULL);
-	if (!hd)
-		hd = hd_cmd('i', eof);
-	else
-		hd = hd_cmd('a', eof);
-	line += skip_hd(line);
-	free(eof);
-	process_hd(line);
+	(void)hd;
+	(void)eofs;
 }

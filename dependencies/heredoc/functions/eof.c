@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 09:31:35 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/23 09:20:51 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:18:14 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,38 @@ char	*get_eof(char *line)
 		i++;
 	}
 	return (NULL);
+}
+
+void	free_eofs(t_eofs *eofs)
+{
+	if (!eofs)
+		return ;
+	free(eofs->eof);
+	free_eofs(eofs->next);
+	free(eofs);
+	return ;
+}
+
+t_eofs	*append_eofs(t_eofs *eofs, char *eof)
+{
+	t_eofs	*eofs_start;
+
+	eofs_start = eofs;
+	if (!eofs)
+	{
+		eofs = malloc(sizeof(t_eofs));
+		if (!eofs)
+			return (NULL);
+		eofs->eof = eof;
+		eofs->next = NULL;
+	}
+	while (eofs->next)
+		eofs = eofs->next;
+	eofs->next = malloc(sizeof(t_eofs));
+	eofs = eofs->next;
+	if (!eofs)
+		return (NULL);
+	eofs->eof = eof;
+	eofs->next = NULL;
+	return (eofs_start);
 }
