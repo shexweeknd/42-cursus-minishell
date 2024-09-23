@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_struct_exec.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 10:34:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/22 13:45:54 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/23 13:54:06 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_STRUCT_EXEC_H
 # define FT_STRUCT_EXEC_H
 
+# include "../../sig/includes/sig.h"
 # include "cmd.h"
 # include "env.h"
 # include "history.h"
-# include "../../sig/includes/sig.h"
 
 typedef struct s_exec_params
 {
@@ -25,8 +25,8 @@ typedef struct s_exec_params
 	t_cmd		*cmd;
 	t_env		*env;
 	t_hist_elem	*hist;
-	t_link	l_type;
-}			t_exec_params;
+	t_link		l_type;
+}				t_exec_params;
 
 typedef struct s_executable
 {
@@ -36,6 +36,6 @@ typedef struct s_executable
 	t_cmd		*cmd;
 	t_env		*env;
 	t_hist_elem	*hist;
-}	t_executable;
+}				t_executable;
 
 #endif

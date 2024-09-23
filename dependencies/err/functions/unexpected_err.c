@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 14:29:29 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/23 12:59:35 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/23 13:55:26 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	op_check(char *prompt, int *flag, int chev_type, int lvl)
 		return (cursor);
 	if ((prompt[cursor] == '<' || prompt[cursor] == '>')
 		&& !(ft_is_delimiter(prompt[cursor + 1]) || ft_is_redirect(prompt[cursor
-				+ 1])) && lvl)
+					+ 1])) && lvl)
 	{
 		display_unexpected_token("newline");
 		*flag = 1;

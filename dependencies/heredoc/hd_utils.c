@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:53:46 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/21 09:36:58 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/23 13:52:44 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,26 @@ int	_hd_occ(char *line)
 		i++;
 	}
 	return (result);
+}
+
+void	recurse_free_hd(t_hd *hd)
+{
+	if (!hd)
+	{
+		free(hd);
+		return ;
+	}
+	recurse_free_hd(hd->next);
+	free(hd);
+	return ;
+}
+
+void	recurse_close_hd(t_hd *hd)
+{
+	if (!hd)
+		return ;
+	close(hd->fd[0]);
+	close(hd->fd[1]);
+	recurse_close_hd(hd->next);
+	return ;
 }

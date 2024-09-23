@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 11:33:07 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/21 08:58:29 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/23 13:51:49 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ char	*ft_join_line(t_prompt *prompt, char *line)
 		new_line = readline(col_ps_two);
 		if (!new_line)
 			break ;
-		// if (_hd_occ(new_line))
-		// 	process_hd(new_line);
 	}
 	if (new_line == NULL)
 		return (setup_prompt_flags(prompt), free(new_line), line);
