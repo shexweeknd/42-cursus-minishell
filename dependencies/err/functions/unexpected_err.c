@@ -6,22 +6,23 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 14:29:29 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/07 12:56:23 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/23 12:59:35 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cmd/includes/cmd.h"
 #include "../includes/m_err.h"
 
-int	chev_check(char *prompt, int *flag, int chev_type)
+int	chev_check(char *prompt, int *flag, int chev_type, int lvl)
 {
 	int	cursor;
 
 	cursor = chev_type;
 	cursor += _skip_space(&prompt[cursor]);
-	if (ft_is_delimiter(prompt[cursor]) || ft_is_redirect(prompt[cursor]))
+	if (!lvl && (ft_is_delimiter(prompt[cursor])
+			|| ft_is_redirect(prompt[cursor])))
 		return (*flag = 1, display_unexpected_token(&prompt[cursor]), 0);
-	if (!prompt[cursor])
+	if (!prompt[cursor] && lvl)
 	{
 		display_unexpected_token("newline");
 		*flag = 1;
@@ -29,7 +30,7 @@ int	chev_check(char *prompt, int *flag, int chev_type)
 	return (cursor);
 }
 
-int	op_check(char *prompt, int *flag, int chev_type)
+int	op_check(char *prompt, int *flag, int chev_type, int lvl)
 {
 	int	cursor;
 
@@ -39,7 +40,7 @@ int	op_check(char *prompt, int *flag, int chev_type)
 		return (cursor);
 	if ((prompt[cursor] == '<' || prompt[cursor] == '>')
 		&& !(ft_is_delimiter(prompt[cursor + 1]) || ft_is_redirect(prompt[cursor
-					+ 1])))
+				+ 1])) && lvl)
 	{
 		display_unexpected_token("newline");
 		*flag = 1;
@@ -63,7 +64,7 @@ int	check_op_at_start(char *prompt)
 	return (1);
 }
 
-int	is_unexpected(char *prompt)
+int	is_unexpected(char *prompt, int lvl)
 {
 	int	flag;
 
@@ -74,14 +75,14 @@ int	is_unexpected(char *prompt)
 	{
 		if ((!ft_strncmp(prompt, ">>", 2) || !ft_strncmp(prompt, "<<", 2))
 			&& !flag)
-			prompt += chev_check(prompt, &flag, 2);
+			prompt += chev_check(prompt, &flag, 2, lvl);
 		else if ((*prompt == '>' || *prompt == '<') && !flag)
-			prompt += chev_check(prompt, &flag, 1);
+			prompt += chev_check(prompt, &flag, 1, lvl);
 		else if ((!ft_strncmp(prompt, "||", 2) || !ft_strncmp(prompt, "&&", 2))
 			&& !flag)
-			prompt += op_check(prompt, &flag, 2);
+			prompt += op_check(prompt, &flag, 2, lvl);
 		else if ((*prompt == '|' || *prompt == '&') && !flag)
-			prompt += op_check(prompt, &flag, 1);
+			prompt += op_check(prompt, &flag, 1, lvl);
 		else
 			prompt++;
 	}
