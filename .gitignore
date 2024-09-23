@@ -7,3 +7,4 @@ minishell
 .*
 trash*
 *.out
+main.c
