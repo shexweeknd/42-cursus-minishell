@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/22 13:45:41 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/23 13:47:03 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_EXEC_H
 # define FT_EXEC_H
 
+# include "../../prompt/includes/prompt.h"
 # include "cmd.h"
 # include "env.h"
-# include "history.h"
 # include "ft_struct_exec.h"
+# include "history.h"
+# include <errno.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -24,10 +26,9 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
-# include <errno.h>
 
 # define TILDE_PATH ""
-# define STATUS	'0'
+# define STATUS '0'
 
 /* _________________________ SRC _________________________ */
 void			pwd(t_executable exec);
@@ -37,7 +38,9 @@ void			ft_env(t_executable exec);
 int				export(t_executable exec);
 int				unset(t_executable exec);
 void			ft_exit(t_executable exec);
+void			exit_msh(t_prompt *pt);
 
+int				is_exit(char *line);
 int				ft_isvar(char *str);
 int				ft_dqoute_len(char **arg, t_env *env, char *stop);
 int				ft_dquote_add(char *dest, char **arg, t_env *env, char *stop);
