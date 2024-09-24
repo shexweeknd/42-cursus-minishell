@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_struct_exec.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 10:34:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/23 13:54:06 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/23 21:37:33 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_executable
 {
 	int			o_fd[2];
 	int			p_fd[2];
-	int			r_fd[2];
+	int			s_fd[2];
 	t_cmd		*cmd;
 	t_env		*env;
 	t_hist_elem	*hist;

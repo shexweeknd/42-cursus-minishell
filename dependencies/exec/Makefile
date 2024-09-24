@@ -4,15 +4,20 @@ NAME		= libexec.a
 # FILES
 FILES		= ft_exec.c #exec_utils.c
 SRC_FILES	= \
-				echo.c	\
+				echo.c		\
 				ft_env.c	\
-				export.c\
-				pwd.c	\
-				unset.c	\
-				cd.c	\
+				export.c	\
+				pwd.c		\
+				unset.c		\
+				cd.c		\
 				ft_exit.c
 
-FUNC_FILES	= exec_utils.c manage_args.c manage_args_utils.c
+FUNC_FILES	= \
+				exec_utils.c		\
+				manage_args.c		\
+				manage_args_utils.c	\
+				ft_status.c			\
+				ft_file_descriptor.c
 
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)

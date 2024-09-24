@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/23 13:47:03 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/23 21:37:37 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,22 @@ int				ft_dquote_add(char *dest, char **arg, t_env *env, char *stop);
 void			*ft_manage_args(t_cmd *cmd, t_env *env);
 
 /* _________________________ EXEC UTILS _________________________ */
-void			ft_reset_fd(t_executable exec);
 char			*ft_search_executable(t_executable exec);
 t_executable	ft_init_executable(t_exec_params param);
-void			ft_free_executable(t_executable exec);
-char			*_join(char *str[]);
+void			ft_free_executable(t_executable exec, t_cmd *cmd);
+void			ft_next_cmds(int fd[2], t_exec_params params);
 
 /* _________________________ EXEC _________________________ */
 int				ft_exec_cmds(t_exec_params params);
+
+/* _________________________ STATUS _________________________ */
+int				status(int new_status, int change);
+int				get_status(void);
+void			set_status(int new_status);
+
+/* _________________________ FD _________________________ */
+void			ft_reset_fd(t_executable exec);
+void			ft_manage_redirect_file(int fd[2], t_cmd *cmd);
+int				ft_pipe_status(int fd[0], int value, int send);
 
 #endif

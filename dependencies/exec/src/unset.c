@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:49 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/22 14:15:33 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/22 19:53:30 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	ft_delvar(t_env *env, char *var_name)
 	new_env[j] = 0;
 	env->var = (free(env->var), new_env);
 	if (!ft_strcmp(var_name, "PATH"))
-		*env->path = (free(*env->path), ft_strdup(""));
+		(free(*env->path), free(env->path));
 	return (0);
 }
 

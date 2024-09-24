@@ -12,13 +12,13 @@ DEBUG de secondary prompt:
     > ^C
     Minishell$ ^C
 
-    Minishell$ 
+    Minishell$
 '''
 
 GERER '&' comme process en fond
 
 
-UPDATE : 
+UPDATE :
 [FINISHED] int	ft_get_info_len(char *cmd) ==> cmd_utils.c
 [FINISHED] CORRIGER 'ls || ls | ls' qui quitte automatiquement
 [FINISHED] 'echo $? + $?'
@@ -31,18 +31,18 @@ UPDATE :
 [FINISHED] - '/bin/ls' (doit s'executer)
 [FINISHED] - '/bin/pwd' (doit pouvoir lancer pwd)
 [FINISHED] - 'cat /dev/random | ls' (doit executer ls sans attendre)
+[FINISHED] - 'cd ~'
+[FINISHED] - 'cd ~/path/of/your/choice/'
+[FINISHED] - 'cd .'
+[FINISHED] - 'cd ../'
+[FINISHED] - 'cd -'
+[FINISHED] - unset
+[FINISHED] - export
 
 
 MANDATORY TESTS:
     - status
-    - 'cd ~'
-    - 'cd ~/path/of/your/choice/'
-    - 'cd .'
-    - 'cd ../'
-    - 'cd -'
     - exit
-    - unset
-    - export
     - heredoc
 
 

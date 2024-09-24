@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:17 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/22 13:50:20 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/22 20:50:55 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ void	ft_save_path(t_env *env, char *path)
 	else
 		tmp = ft_strdup(path);
 	path = (free(path), ft_setpath(tmp));
+	if (!ft_strlen(path))
+		path[0] = '/';
 	tmp = (free(tmp), ft_strjoin("PWD=", path));
 	(ft_setvar(env, "PWD", tmp), free(tmp), free(path));
 }
