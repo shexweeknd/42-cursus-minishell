@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:22:05 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/19 15:45:58 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 09:07:14 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 char	*ft_search_var(t_env *env, char *var_name)
 {
-	int		i;
-	int		len;
+	int	i;
+	int	len;
 
 	i = -1;
 	len = ft_strlen(var_name);
 	while (env->var[++i])
 	{
-		if (ft_strncmp(env->var[i], var_name, len) == 0 && \
-			env->var[i][len] == '=')
+		if (ft_strncmp(env->var[i], var_name, len) == 0
+			&& env->var[i][len] == '=')
 			break ;
 	}
 	return (env->var[i]);
@@ -83,7 +83,7 @@ char	*ft_getvar(t_env *env, char *var_name)
 	{
 		while (var[i++] != '=')
 			;
-		if (var + i)
+		if (*(var + i))
 			return (var + i);
 	}
 	return (NULL);
@@ -91,15 +91,15 @@ char	*ft_getvar(t_env *env, char *var_name)
 
 char	*ft_setvar(t_env *env, char *var_name, char *str)
 {
-	int		i;
-	int		len;
+	int	i;
+	int	len;
 
 	i = -1;
 	len = ft_strlen(var_name);
 	while (env->var[++i])
 	{
-		if (ft_strncmp(env->var[i], var_name, len) == 0 && \
-			env->var[i][len] == '=')
+		if (ft_strncmp(env->var[i], var_name, len) == 0
+			&& env->var[i][len] == '=')
 		{
 			env->var[i] = (free(env->var[i]), ft_strdup(str));
 			if (ft_strcmp(var_name, "PATH") == 0)

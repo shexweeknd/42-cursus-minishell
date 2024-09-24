@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 08:48:28 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/23 10:16:35 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/24 08:09:55 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_hd(t_hd *hd)
 	while (hd)
 	{
 		printf("[hd nbr]: %d\n", hd->pos);
-		write(STDOUT_FILENO, "[hd content]:\n", 18);
+		write(STDOUT_FILENO, "[hd content]:\n", 15);
 		write(STDOUT_FILENO, "------\n", 8);
 		putstr_from_fd(hd->fd[0], hd->size);
 		write(STDOUT_FILENO, "------\n", 8);
