@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:49 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/22 19:53:30 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 15:19:19 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,16 @@ static int	ft_delvar(t_env *env, char *var_name)
 int	unset(t_executable exec)
 {
 	int		i;
+	int		status;
 
 	if (!exec.cmd->args[1])
 		return (0);
-	i = 0;
+	status = ((i = 0), i);
 	while (exec.cmd->args[++i])
 	{
+		status = ft_check_valid_var(exec.cmd->args[i], status);
 		if (ft_search_var(exec.env, exec.cmd->args[i]))
 			ft_delvar(exec.env, exec.cmd->args[i]);
 	}
-	return (0);
+	return (status);
 }

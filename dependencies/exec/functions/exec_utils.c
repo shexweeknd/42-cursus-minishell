@@ -6,11 +6,21 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:13:56 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/24 13:52:06 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 15:15:53 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
+
+int	ft_check_valid_var(char *var, int status)
+{
+	if (ft_isdigit(*var))
+	{
+		printf("minishell: export: `%s': not a valid identifier\n", var);
+		return (1);
+	}
+	return (status);
+}
 
 char	*ft_search_executable(t_executable exec)
 {

@@ -6,11 +6,65 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:14:57 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/22 13:53:46 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 15:49:38 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
+
+int	ft_dqoute_len(char **arg, t_env *env, char *stop)
+{
+	int		len;
+	int		lenv;
+
+	len = 0;
+	while (**arg && !ft_strchr(stop, **arg))
+	{
+		lenv = ft_isvar(*arg);
+		if (lenv)
+		{
+			if ((*arg)++ && (!**arg || \
+				(!ft_strcmp(stop, "\"") && ft_strchr(stop, **arg))))
+				return ((len += lenv), len);
+			if (ft_strchr(stop, **arg))
+				return (len);
+			if (**arg == '?')
+				len += ((*arg += 1), ft_getlen_status());
+			else
+				*arg += ((len += ft_lenvar(*arg, env, lenv)), lenv);
+		}
+		else
+			len += ((*arg += 1), 1);
+	}
+	return (len);
+}
+
+int	ft_dquote_add(char *dest, char **arg, t_env *env, char *stop)
+{
+	int		i;
+	int		lenv;
+
+	i = 0;
+	while (**arg && ft_strchr(stop, **arg) == NULL)
+	{
+		lenv = ft_isvar(*arg);
+		if (lenv)
+		{
+			(*arg)++;
+			if (!**arg || (!ft_strcmp(stop, "\"") && ft_strchr(stop, **arg)))
+				return ((dest[i] = '$'), (i += lenv), i);
+			else if (ft_strchr(stop, **arg))
+				break ;
+			else if (**arg == '?')
+				i += ((*arg += 1), ft_add_status(dest));
+			else
+				*arg += ((i += ft_cpvar((dest + i), *arg, env, lenv)), lenv);
+		}
+		else
+			*arg += ((dest[i++] = **arg), 1);
+	}
+	return (i);
+}
 
 int	ft_getlen_args(char *arg, t_env *env)
 {

@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:24:30 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/24 11:08:41 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 15:55:07 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,56 +57,30 @@ int	ft_cpvar(char *dest, char *arg, t_env *env, int lenv)
 	return (free(tmp), ft_strlcpy(dest, var, ft_strlen(var) + 1));
 }
 
-int	ft_dqoute_len(char **arg, t_env *env, char *stop)
+int	ft_getlen_status(void)
 {
-	int		len;
-	int		lenv;
+	int	status;
+	int	len;
 
-	len = 0;
-	while (**arg && !ft_strchr(stop, **arg))
-	{
-		lenv = ft_isvar(*arg);
-		if (lenv)
-		{
-			if ((*arg)++ && (!**arg || \
-				(!ft_strcmp(stop, "\"") && ft_strchr(stop, **arg))))
-				return ((len += lenv), len);
-			if (ft_strchr(stop, **arg))
-				return (len);
-			if (**arg == '?')
-				len += ((*arg += 1), 1);
-			else
-				*arg += ((len += ft_lenvar(*arg, env, lenv)), lenv);
-		}
-		else
-			len += ((*arg += 1), 1);
-	}
+	len = ((status = get_status()), 0);
+	if (!status)
+		return (1);
+	while (status)
+		status /= (len++, 10);
 	return (len);
 }
 
-int	ft_dquote_add(char *dest, char **arg, t_env *env, char *stop)
+int	ft_add_status(char *dest)
 {
-	int		i;
-	int		lenv;
+	int	status;
+	int	len;
+	int	r_len;
 
-	i = 0;
-	while (**arg && ft_strchr(stop, **arg) == NULL)
+	r_len = ((status = get_status()), (len = ft_getlen_status()), len);
+	while (len)
 	{
-		lenv = ft_isvar(*arg);
-		if (lenv)
-		{
-			(*arg)++;
-			if (!**arg || (!ft_strcmp(stop, "\"") && ft_strchr(stop, **arg)))
-				return ((dest[i] = '$'), (i += lenv), i);
-			else if (ft_strchr(stop, **arg))
-				break ;
-			else if (**arg == '?')
-				dest[i++] = ((*arg += 1), get_status());
-			else
-				*arg += ((i += ft_cpvar((dest + i), *arg, env, lenv)), lenv);
-		}
-		else
-			*arg += ((dest[i++] = **arg), 1);
+		*(dest + (--len)) = (status % 10) + '0';
+		status /= 10;
 	}
-	return (i);
+	return (r_len);
 }

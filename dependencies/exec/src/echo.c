@@ -6,13 +6,13 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:16:48 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/17 10:03:38 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 14:19:03 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
 
-void	echo(t_executable exec)
+int	echo(t_executable exec)
 {
 	int	i;
 	int	end;
@@ -29,4 +29,5 @@ void	echo(t_executable exec)
 			printf("%s", exec.cmd->args[i++]);
 	}
 	printf("%c", end);
+	return (0);
 }
