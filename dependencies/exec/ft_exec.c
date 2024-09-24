@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/24 13:52:14 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 15:19:34 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,18 @@
 
 int	ft_builtin_cmd(t_executable exec)
 {
-
 	if (ft_strcmp(exec.cmd->args[0], "echo") == 0)
-		return (echo(exec), 1);
+		return (set_status(echo(exec)), 1);
 	if (ft_strcmp(exec.cmd->args[0], "cd") == 0)
-		return (cd(exec), 1);
+		return (set_status(cd(exec)), 1);
 	if (ft_strcmp(exec.cmd->args[0], "env") == 0)
-		return (ft_env(exec), 1);
+		return (set_status(ft_env(exec)), 1);
 	if (ft_strcmp(exec.cmd->args[0], "export") == 0)
-		return (export(exec), 1);
+		return (set_status(export(exec)), 1);
 	if (ft_strcmp(exec.cmd->args[0], "pwd") == 0)
-		return (pwd(exec), 1);
+		return (set_status(pwd(exec)), 1);
 	if (ft_strcmp(exec.cmd->args[0], "unset") == 0)
-		return (unset(exec), 1);
+		return (set_status(unset(exec)), 1);
 	if (ft_strcmp(exec.cmd->args[0], "exit") == 0)
 		return (ft_exit(exec), 1);
 	return (0);
@@ -44,15 +43,17 @@ int	ft_exec_cmd(t_executable exec)
 	if (!exec.cmd->args[0])
 		return (0);
 	if (ft_builtin_cmd(exec))
-		return (1);
+		return (get_status());
 	exe = ft_search_executable(exec);
 	if (!exe)
 		return (printf("Minishell: %s: command not found\n", exec.cmd->args[0]), 127);
 	if (exe != exec.cmd->args[0])
 		exec.cmd->args[0] = (free(exec.cmd->args[0]), exe);
 	if (fork() == 0)
+	{
 		if (execve(exe, exec.cmd->args, exec.env->var) == -1)
 			(printf("%s\n", strerror(errno)), exit(EXIT_FAILURE));
+	}
 	else
 		(wait(&status), ft_print_status(status));
 	return (status);

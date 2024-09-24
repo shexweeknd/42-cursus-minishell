@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:11 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/22 14:18:35 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 15:17:43 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,25 +86,24 @@ static int	ft_addenv(t_env *env, char *new)
 int	export(t_executable exec)
 {
 	int		i;
+	int		status;
 	char	*var_name;
 
 	if (!exec.cmd->args[1])
 		return (ft_export_no_arg(exec.env->var));
-	i = 0;
+	status = ((i = 0), i);
 	while (exec.cmd->args[++i])
 	{
 		var_name = ft_getvar_name(exec.cmd->args[i]);
+		status = ft_check_valid_var(exec.cmd->args[i], status);
 		if (!ft_setvar(exec.env, var_name, exec.cmd->args[i]))
 			ft_addenv(exec.env, exec.cmd->args[i]);
-		if (var_name)
+		if (!ft_strcmp(var_name, "PATH"))
 		{
-			if (!ft_strcmp(var_name, "PATH"))
-			{
-				(free(*exec.env->path), free(exec.env->path));
-				exec.env->path = ft_split_path(exec.cmd->args[i]);
-			}
-			free(var_name);
+			(free(*exec.env->path), free(exec.env->path));
+			exec.env->path = ft_split_path(exec.cmd->args[i]);
 		}
+		free(var_name);
 	}
-	return (0);
+	return (status);
 }

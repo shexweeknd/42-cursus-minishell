@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/24 13:16:06 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 15:48:31 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,22 @@
 # include <unistd.h>
 
 /* _________________________ SRC _________________________ */
-void			pwd(t_executable exec);
+int				pwd(t_executable exec);
 int				cd(t_executable exec);
-void			echo(t_executable exec);
-void			ft_env(t_executable exec);
+int				echo(t_executable exec);
+int				ft_env(t_executable exec);
 int				export(t_executable exec);
 int				unset(t_executable exec);
 void			ft_exit(t_executable exec);
 void			exit_msh(t_prompt *pt);
 
+/* _________________________ MANAGE ARGS _________________________ */
 int				is_exit(char *line);
 int				ft_isvar(char *str);
+int				ft_lenvar(char *arg, t_env *env, int lenv);
+int				ft_cpvar(char *dest, char *arg, t_env *env, int lenv);
+int				ft_getlen_status(void);
+int				ft_add_status(char *dest);
 int				ft_dqoute_len(char **arg, t_env *env, char *stop);
 int				ft_dquote_add(char *dest, char **arg, t_env *env, char *stop);
 void			*ft_manage_args(t_cmd *cmd, t_env *env);
@@ -48,7 +53,7 @@ char			*ft_search_executable(t_executable exec);
 t_executable	ft_init_executable(t_exec_params param);
 void			ft_free_executable(t_executable exec, t_cmd *cmd);
 void			ft_next_cmds(int fd[2], t_exec_params params);
-
+int				ft_check_valid_var(char *var, int status);
 /* _________________________ EXEC _________________________ */
 int				ft_exec_cmds(t_exec_params params);
 

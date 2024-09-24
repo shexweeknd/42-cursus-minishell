@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:42 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/17 08:24:42 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 15:04:23 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	ft_check_pwd_error(char *arg)
 	return (error);
 }
 
-void	pwd(t_executable exec)
+int	pwd(t_executable exec)
 {
 	char	*cwd;
 
@@ -50,4 +50,5 @@ void	pwd(t_executable exec)
 		cwd = getcwd(NULL, 0);
 		(printf("%s\n", cwd), free(cwd));
 	}
+	return (0);
 }
