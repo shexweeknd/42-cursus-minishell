@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:13:56 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/24 15:15:53 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 16:00:45 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,3 @@ void	ft_next_cmds(int fd[2], t_exec_params params)
 					params.env, params.hist, params.cmd->l_type});
 	wait(NULL);
 }
-
