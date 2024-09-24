@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:52:30 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 09:54:17 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:12:05 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,17 @@ size_t	fullfill_fd(int fd, char *eof)
 	size_t	buffer_size;
 	char	*line;
 
+	line = NULL;
 	buffer_size = 0;
 	while (1)
 	{
 		line = readline(to_ps_two('g', NULL));
+		if (!line)
+			break ;
 		if (ft_iseof(line, eof))
 		{
 			free(line);
-			return (buffer_size);
+			break ;
 		}
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
@@ -72,7 +75,9 @@ size_t	fullfill_fd(int fd, char *eof)
 void	process_hd(t_eofs *eofs)
 {
 	t_hd	*hd;
+	t_eofs	*eofs_addr;
 
+	eofs_addr = eofs;
 	hd = hd_cmd('g', NULL);
 	while (eofs)
 	{
@@ -82,4 +87,6 @@ void	process_hd(t_eofs *eofs)
 			hd_cmd('a', eofs->eof);
 		eofs = eofs->next;
 	}
+	// print_hd(hd);
+	free_eofs(eofs_addr);
 }

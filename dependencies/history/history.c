@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:39:28 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 12:14:41 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 13:37:23 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ t_hist_elem	*new_history(char *command, int position)
 	return (result);
 }
 
-// USED FOR PARSING HISTORY FROM THE FILE
 t_hist_elem	*get_history(char *file_path)
 {
 	t_hist_elem	*result;

@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   history_setters.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 15:20:51 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 13:24:50 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 13:37:18 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "history.h"
 
-// USED FOR POSITIONNING THE CURSOR TO THE OFFSET
 void	go_to_offset(int fd, t_hist_elem *hist_elem)
 {
 	char	buf;
@@ -62,7 +61,6 @@ static char	*ft_super_strjoin_and_free(char *remains, char *buffer)
 	return (result);
 }
 
-// USED FOR GETTING ALL THE THINGS AFTER THE OFFSET
 char	*get_things_after_offset(int fd)
 {
 	char	*result;
