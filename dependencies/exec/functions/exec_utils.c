@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:13:56 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/23 20:54:15 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 12:02:16 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ char	*ft_search_executable(t_executable exec)
 			return (tmp);
 		free(tmp);
 	}
-	return (exec.cmd->args[0]);
+	set_status(127);
+	return (NULL);
 }
 
 t_executable	ft_init_executable(t_exec_params param)

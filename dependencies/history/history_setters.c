@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history_setters.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 15:20:51 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/19 14:38:45 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/24 12:53:33 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,9 @@ void	write_cmd_typed_after_offset(int fd, t_hist_elem *hist)
 		write(fd, "\n", 1);
 		hist = hist->next;
 	}
+}
+
+void	set_hist_path(char *path)
+{
+	hist_path(path, 1);
 }

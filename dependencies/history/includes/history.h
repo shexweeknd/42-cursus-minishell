@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:38:41 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/23 13:45:16 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:16:16 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <readline/readline.h>
 # include <stdio.h>
 
-# define HIST_PATH "./dependencies/history/src/minishell_history.txt"
+# define HIST_PATH "/dependencies/history/src/minishell_history.txt"
 
 enum					e_hist_err_status
 {
@@ -56,6 +56,7 @@ void					write_cmd_typed_after_offset(int fd, t_hist_elem *hist);
 void					*get_next_history(t_hist_elem *src);
 void					add_back_history(t_hist_elem *src, t_hist_elem *new);
 void					free_lchistory(t_hist_elem *hist_elem);
+char					*hist_path(char *new_path, int save);
 
 // debugging functions
 void					show_formatted_lchist(t_hist_elem *lchist);

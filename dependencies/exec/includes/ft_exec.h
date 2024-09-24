@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/23 21:37:37 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 13:16:06 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,6 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
-
-# define TILDE_PATH ""
-# define STATUS '0'
 
 /* _________________________ SRC _________________________ */
 void			pwd(t_executable exec);
@@ -55,10 +52,14 @@ void			ft_next_cmds(int fd[2], t_exec_params params);
 /* _________________________ EXEC _________________________ */
 int				ft_exec_cmds(t_exec_params params);
 
+/* _________________________ PATH _________________________ */
+char			*get_rootpath(void);
+void			set_rootpath(char *new_root_path);
+
 /* _________________________ STATUS _________________________ */
-int				status(int new_status, int change);
 int				get_status(void);
 void			set_status(int new_status);
+void			ft_print_status(int status);
 
 /* _________________________ FD _________________________ */
 void			ft_reset_fd(t_executable exec);
