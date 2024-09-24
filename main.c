@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 12:55:43 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 13:18:05 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 14:08:50 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	main(int argc, char **argv, char **envp)
 	t_prompt	pt;
 
 	((void)argc, (void)argv, (void)envp);
-	set_rootpath(getenv("PWD"));
-	init_prompt(&pt, envp, HIST_PATH);
+	set_rootpath(ft_strjoin(getenv("PWD"), HIST_PATH));
+	init_prompt(&pt, envp, get_rootpath());
 	while (1)
 	{
 		(setup_main_signals(), get_prompt(&pt, MSH_NAME));
@@ -37,5 +37,6 @@ int	main(int argc, char **argv, char **envp)
 		sec_prompt_flag('r', 0);
 		pt.cmd = (ft_free_cmds(pt.cmd), NULL);
 	}
+	free(get_rootpath());
 	return (free_lchistory(pt.hist), ft_free_env(pt.venv), 0);
 }

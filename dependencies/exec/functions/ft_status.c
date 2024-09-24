@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:11:21 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/24 11:58:37 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 13:40:25 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,4 @@ void	ft_print_status(int status)
 		else if (WTERMSIG(status) == SIGSEGV)
 			printf("segmentation fault\n");
 	}
-	else
-		printf("STATUS	: [%d]\n", status);
 }

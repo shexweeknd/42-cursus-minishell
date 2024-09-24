@@ -16,6 +16,6 @@ int	main(void)
 	// i = 0;
 	// while (i < 10)
 	test = NULL;
-	printf("%c\n", test[1]);
+	*test = '0';
 	return (0);
 }
