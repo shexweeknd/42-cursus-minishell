@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:34 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 13:19:07 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 14:10:21 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,8 @@ int	is_exit(char *line)
 
 void	exit_msh(t_prompt *pt)
 {
-	char	*wd;
-
-	wd = ft_strjoin(get_rootpath(), HIST_PATH);
 	printf("exit\n");
-	(set_history(pt->hist, wd), free(wd));
+	(set_history(pt->hist, get_rootpath()), free(get_rootpath()));
 	free(pt->line);
 	ft_free_env(pt->venv);
 }

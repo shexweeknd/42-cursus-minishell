@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/24 12:00:53 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 13:52:14 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	ft_builtin_cmd(t_executable exec)
 {
+
 	if (ft_strcmp(exec.cmd->args[0], "echo") == 0)
 		return (echo(exec), 1);
 	if (ft_strcmp(exec.cmd->args[0], "cd") == 0)
@@ -41,31 +42,19 @@ int	ft_exec_cmd(t_executable exec)
 		return (0);
 	ft_manage_redirect_file(exec.p_fd, exec.cmd);
 	if (!exec.cmd->args[0])
-		return (1);
+		return (0);
 	if (ft_builtin_cmd(exec))
 		return (1);
 	exe = ft_search_executable(exec);
-	// if (!exe)
-	// 	return (printf("Minishell: %s: command not found\n", exec.cmd->args[0]), 127);
+	if (!exe)
+		return (printf("Minishell: %s: command not found\n", exec.cmd->args[0]), 127);
 	if (exe != exec.cmd->args[0])
-	{
-		free(exec.cmd->args[0]);
-		exec.cmd->args[0] = exe;
-	}
+		exec.cmd->args[0] = (free(exec.cmd->args[0]), exe);
 	if (fork() == 0)
-	{
 		if (execve(exe, exec.cmd->args, exec.env->var) == -1)
-		{
-			printf("%s\n", strerror(errno));
-			exit(EXIT_FAILURE);
-		}
-	}
+			(printf("%s\n", strerror(errno)), exit(EXIT_FAILURE));
 	else
-	{
-		wait(&status);
-		ft_print_status(status);
-		// printf("RESULT STATUS	: [%d]\n", status);
-	}
+		(wait(&status), ft_print_status(status));
 	return (status);
 }
 
@@ -94,7 +83,7 @@ int	ft_exec_cmds(t_exec_params params)
 		}
 	}
 	else
-		(ft_exec_cmd(exec), ft_reset_fd(exec), ft_next_cmds(exec.p_fd, params));
+		(set_status(ft_exec_cmd(exec)), ft_reset_fd(exec), ft_next_cmds(exec.p_fd, params));
 	return (0);
 }
 

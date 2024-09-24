@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:17 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 12:08:22 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 13:45:15 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int	cd(t_executable exec)
 		if (chdir(path) == -1)
 		{
 			printf("minishell: cd: %s: %s\n", path, strerror(errno));
-			free(path);
+			return (free(path), 1);
 		}
 		else
 			ft_save_path(exec.env, path);
