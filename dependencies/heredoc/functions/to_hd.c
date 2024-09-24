@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 09:32:19 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/23 10:12:32 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:28:11 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_hd(t_hd **hd_addr, char *eof)
 	hd = *hd_addr;
 	if (hd)
 		return ;
-	hd = (t_hd *)malloc(sizeof(hd));
+	hd = (t_hd *)malloc(sizeof(t_hd));
 	if (!hd)
 		return ;
 	pipe(hd->fd);
@@ -58,10 +58,7 @@ t_hd	*hd_cmd(char cmd, char *eof)
 	if (cmd == 'g')
 		return (hd);
 	if (cmd == 'i')
-	{
-		init_hd(&hd, eof);
-		return (hd);
-	}
+		return (init_hd(&hd, eof), hd);
 	if (cmd == 'a')
 		return (add_hd(&hd, eof), hd);
 	if (cmd == 'f')

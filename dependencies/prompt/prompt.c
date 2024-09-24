@@ -6,13 +6,12 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 05:51:07 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/23 13:15:11 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:17:33 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "prompt.h"
 
-// TODO process heredoc if valid format before syntax error
 char	*get_line(t_prompt *prompt, char *msh_name)
 {
 	char	*line;
@@ -23,7 +22,7 @@ char	*get_line(t_prompt *prompt, char *msh_name)
 		free(line);
 		line = readline(msh_name);
 		if (line == NULL)
-			return (prompt->to_exit = 1, free(line), NULL);
+			return (prompt->to_exit = 1, NULL);
 	}
 	if (check_syntax_err(line))
 		return (line);

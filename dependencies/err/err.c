@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 08:57:14 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 09:59:15 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:36:58 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ int	skip_hd_eof(char *line)
 		result++;
 	while (!ft_isspace(line[result]))
 	{
-		if (ft_is_delimiter(line[result]) || ft_is_redirect(line[result]))
+		if (!line[result] || ft_is_delimiter(line[result])
+			|| ft_is_redirect(line[result]))
 			break ;
 		result++;
 	}
@@ -114,20 +115,20 @@ int	hd_check_syntax_err(char *prompt)
 	{
 		// check les commandes before le heredoc
 		if (!hd_valid_before(prompt))
-			return (process_hd(eofs), free_eofs(eofs), 1);
+			return (process_hd(eofs), 1);
 		prompt += skip_until_hd(prompt);
 		// check le heredoc en question: [<<] [non_op_token]
 		if (!is_valid_hd(prompt))
-			return (process_hd(eofs), free_eofs(eofs), 1);
+			return (process_hd(eofs), 1);
 		//- si tout est correct devant le hd alors on ajoute les eof a la liste des eof (liste de char*)
 		eofs = append_eofs(eofs, get_eof(prompt));
 		if (!eofs)
-			return (process_hd(eofs), free_eofs(eofs), 1);
+			return (process_hd(eofs), 1);
 		// - on passe au check du char apres le non_op_token
 		prompt += skip_hd_eof(prompt);
 	}
 	// on process les fd grace a la liste des eofs char *
-	return (process_hd(eofs), free_eofs(eofs), 0);
+	return (process_hd(eofs), 0);
 }
 
 int	check_syntax_err(char *prompt)
