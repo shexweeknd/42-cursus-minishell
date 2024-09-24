@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:50:45 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 12:54:19 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 13:24:57 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,4 @@ t_hist_elem	*ft_get_history_offsetted(t_hist_elem *elem)
 	while (!elem->is_offset && elem->next)
 		elem = elem->next;
 	return (elem);
-}
-
-char	*get_hist_path(void)
-{
-	return (hist_path(NULL, 0));
 }

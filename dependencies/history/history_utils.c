@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:54:12 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 12:56:07 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 13:24:45 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,4 @@ void	free_lchistory(t_hist_elem *hist_elem)
 	free(hist_elem->command);
 	free(hist_elem);
 	return ;
-}
-
-char	*hist_path(char *new_path, int save)
-{
-	static char	*path = "/dependencies/history/src/minishell_history.txt";
-
-	if (save)
-		path = new_path;
-	return (path);
 }
