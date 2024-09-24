@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 09:31:35 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 11:36:05 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:37:19 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ char	*get_eof(char *line)
 			if (!result)
 				return (NULL);
 			j = 0;
-			while (line[i] && !ft_isspace(line[i]))
+			while (line[i] && !ft_isspace(line[i]) && !ft_is_delimiter(line[i])
+				&& !ft_is_redirect(line[i]))
 				result[j++] = line[i++];
 			result[j] = '\0';
 			return (result);
@@ -64,6 +65,8 @@ t_eofs	*append_eofs(t_eofs *eofs, char *eof)
 {
 	t_eofs	*eofs_start;
 
+	if (!eof)
+		return (eofs);
 	if (!eofs)
 	{
 		eofs = malloc(sizeof(t_eofs));
@@ -82,5 +85,5 @@ t_eofs	*append_eofs(t_eofs *eofs, char *eof)
 		return (NULL);
 	eofs->eof = eof;
 	eofs->next = NULL;
-	return (free(eof), eofs_start);
+	return (eofs_start);
 }

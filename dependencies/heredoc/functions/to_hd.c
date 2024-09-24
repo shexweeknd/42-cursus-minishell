@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 09:32:19 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 13:28:11 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:17:17 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	add_hd(t_hd **hd_addr, char *eof)
 		hd = hd->next;
 		pos++;
 	}
-	hd->next = (t_hd *)malloc(sizeof(hd));
+	hd->next = (t_hd *)malloc(sizeof(t_hd));
 	if (!hd->next)
 		return ;
 	hd = hd->next;
@@ -62,7 +62,7 @@ t_hd	*hd_cmd(char cmd, char *eof)
 	if (cmd == 'a')
 		return (add_hd(&hd, eof), hd);
 	if (cmd == 'f')
-		return (recurse_free_hd(hd), NULL);
+		return (recurse_free_hd(hd), hd = NULL, NULL);
 	if (cmd == 'p')
 		return (print_hd(hd), NULL);
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:52:30 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 13:12:05 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:43:22 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ size_t	fullfill_fd(int fd, char *eof)
 	return (buffer_size);
 }
 
-// TODO: ca remplit juste les hd dans le static a chaque fois qu'on l'appelle
 void	process_hd(t_eofs *eofs)
 {
 	t_hd	*hd;
@@ -82,11 +81,10 @@ void	process_hd(t_eofs *eofs)
 	while (eofs)
 	{
 		if (!hd)
-			hd_cmd('i', eofs->eof);
+			hd = hd_cmd('i', eofs->eof);
 		else
-			hd_cmd('a', eofs->eof);
+			hd = hd_cmd('a', eofs->eof);
 		eofs = eofs->next;
 	}
-	// print_hd(hd);
 	free_eofs(eofs_addr);
 }

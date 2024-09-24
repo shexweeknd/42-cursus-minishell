@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 14:29:29 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 08:45:05 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:49:23 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,12 @@ int	op_check(char *prompt, int *flag, int chev_type, int lvl)
 	if (!prompt[cursor])
 		return (cursor);
 	if ((prompt[cursor] == '<' || prompt[cursor] == '>')
-		&& !(ft_is_delimiter(prompt[cursor + 1]) || ft_is_redirect(prompt[cursor
-					+ 1])) && lvl)
+		&& is_only_spaces(&prompt[cursor + 1]) && lvl)
 	{
 		display_unexpected_token("newline");
 		*flag = 1;
 	}
-	else if (ft_is_delimiter(prompt[cursor]) || ft_is_redirect(prompt[cursor]))
+	else if (ft_is_delimiter(prompt[cursor]))
 		return (*flag = 1, display_unexpected_token(&prompt[cursor]), 0);
 	return (cursor);
 }
@@ -61,6 +60,13 @@ int	check_op_at_start(char *prompt)
 		return (display_unexpected_token(&prompt[cursor]), 0);
 	else if (prompt[cursor] == '|' || prompt[cursor] == '&')
 		return (display_unexpected_token(&prompt[cursor]), 0);
+	else if ((!ft_strncmp(&prompt[cursor], ">>", 2)
+			|| !ft_strncmp(&prompt[cursor], "<<", 2))
+		&& is_only_spaces(&prompt[cursor + 2]))
+		return (display_unexpected_token("newline"), 0);
+	else if ((prompt[cursor] == '>' || prompt[cursor] == '<')
+		&& is_only_spaces(&prompt[cursor + 2]))
+		return (display_unexpected_token("newline"), 0);
 	return (1);
 }
 

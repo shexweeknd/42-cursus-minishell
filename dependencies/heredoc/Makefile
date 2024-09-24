@@ -8,6 +8,8 @@ FILES		= hd.c \
 FUNC_FILES	= eof.c \
 			to_hd.c \
 			get_doc.c \
+			hd_err.c \
+			hd_cleaner.c \
 			hd_debug.c \
 
 # SRC FILES

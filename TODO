@@ -44,7 +44,8 @@ MANDATORY TESTS:
     - status
     - exit
     - heredoc
-
+    - '> <<eof'
+    - ' >> sl >> | eof'
 
 ERROR :
     - STATUS command not found = 127

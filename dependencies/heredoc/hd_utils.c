@@ -6,11 +6,40 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:53:46 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/23 13:52:44 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:43:41 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hd.h"
+
+int	skip_until_hd(char *line)
+{
+	int	result;
+
+	result = 0;
+	while (line[result] && ft_strncmp(&line[result], "<<", 2))
+		result++;
+	return (result);
+}
+
+int	skip_hd_eof(char *line)
+{
+	int	result;
+
+	result = 0;
+	if (!ft_strncmp(line, "<<", 2))
+		result += 2;
+	while (ft_isspace(line[result]))
+		result++;
+	while (!ft_isspace(line[result]))
+	{
+		if (!line[result] || ft_is_delimiter(line[result])
+			|| ft_is_redirect(line[result]))
+			break ;
+		result++;
+	}
+	return (result);
+}
 
 int	_hd_occ(char *line)
 {
@@ -26,26 +55,4 @@ int	_hd_occ(char *line)
 		i++;
 	}
 	return (result);
-}
-
-void	recurse_free_hd(t_hd *hd)
-{
-	if (!hd)
-	{
-		free(hd);
-		return ;
-	}
-	recurse_free_hd(hd->next);
-	free(hd);
-	return ;
-}
-
-void	recurse_close_hd(t_hd *hd)
-{
-	if (!hd)
-		return ;
-	close(hd->fd[0]);
-	close(hd->fd[1]);
-	recurse_close_hd(hd->next);
-	return ;
 }

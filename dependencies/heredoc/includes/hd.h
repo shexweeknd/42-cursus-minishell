@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:53:01 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/23 16:19:07 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:46:27 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,28 @@
 # include "hd_struct.h"
 # include "libft.h"
 
-t_hd	*hd_cmd(char cmd, char *eof);
+// MAIN HD_CREATE FUNC
 void	process_hd(t_eofs *eofs);
-int		_hd_occ(char *line);
+t_hd	*hd_cmd(char cmd, char *eof);
+
+// HD_UTILS
 size_t	fullfill_fd(int fd, char *eof);
 char	*get_hd(int fd, size_t size);
+int		_hd_occ(char *line);
+char	*get_eof(char *line);
+t_eofs	*append_eofs(t_eofs *eofs, char *eof);
+
+// PRE_PARSING FUNC
+int		hd_check_syntax_err(char *prompt);
+int		skip_until_hd(char *line);
+int		skip_hd_eof(char *line);
+
+// CLEANUP FUNC
+void	free_eofs(t_eofs *eofs);
 void	recurse_free_hd(t_hd *hd);
 void	recurse_close_hd(t_hd *hd);
 
-char	*get_eof(char *line);
-t_eofs	*append_eofs(t_eofs *eofs, char *eof);
-void	free_eofs(t_eofs *eofs);
-
+// DEBUG FUNC
 void	print_hd(t_hd *hd);
 
 #endif
