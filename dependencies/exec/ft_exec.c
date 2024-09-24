@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/23 21:01:46 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 12:00:53 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,26 @@ int	ft_exec_cmd(t_executable exec)
 	if (ft_builtin_cmd(exec))
 		return (1);
 	exe = ft_search_executable(exec);
-	if (!exe)
-		return (printf("Minishell: %s: command not found\n", exec.cmd->args[0]), 127);
+	// if (!exe)
+	// 	return (printf("Minishell: %s: command not found\n", exec.cmd->args[0]), 127);
 	if (exe != exec.cmd->args[0])
 	{
 		free(exec.cmd->args[0]);
 		exec.cmd->args[0] = exe;
 	}
 	if (fork() == 0)
-		execve(exe, exec.cmd->args, exec.env->var);
+	{
+		if (execve(exe, exec.cmd->args, exec.env->var) == -1)
+		{
+			printf("%s\n", strerror(errno));
+			exit(EXIT_FAILURE);
+		}
+	}
 	else
 	{
 		wait(&status);
-		printf("RESULT STATUS	: [%d]\n", status);
+		ft_print_status(status);
+		// printf("RESULT STATUS	: [%d]\n", status);
 	}
 	return (status);
 }

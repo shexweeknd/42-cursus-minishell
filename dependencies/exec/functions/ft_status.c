@@ -6,13 +6,13 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:11:21 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/23 07:38:46 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 11:58:37 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
 
-int	_status(int new_status, int change)
+static int	_status(int new_status, int change)
 {
 	static int	value = 0;
 
@@ -29,4 +29,17 @@ int	get_status(void)
 void	set_status(int new_status)
 {
 	_status(new_status, 1);
+}
+
+void	ft_print_status(int status)
+{
+	if (WIFSIGNALED(status))
+	{
+		if (WCOREDUMP(status))
+			printf("segmentation fault (core dump)\n");
+		else if (WTERMSIG(status) == SIGSEGV)
+			printf("segmentation fault\n");
+	}
+	else
+		printf("STATUS	: [%d]\n", status);
 }

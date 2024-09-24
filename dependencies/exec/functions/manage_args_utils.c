@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:24:30 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/22 13:33:41 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/24 11:08:41 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	ft_dquote_add(char *dest, char **arg, t_env *env, char *stop)
 			else if (ft_strchr(stop, **arg))
 				break ;
 			else if (**arg == '?')
-				dest[i++] = ((*arg += 1), STATUS);
+				dest[i++] = ((*arg += 1), get_status());
 			else
 				*arg += ((i += ft_cpvar((dest + i), *arg, env, lenv)), lenv);
 		}

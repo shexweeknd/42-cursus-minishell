@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:34 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/23 13:59:36 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:19:07 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ int	is_exit(char *line)
 
 void	exit_msh(t_prompt *pt)
 {
+	char	*wd;
+
+	wd = ft_strjoin(get_rootpath(), HIST_PATH);
 	printf("exit\n");
-	set_history(pt->hist, HIST_PATH);
+	(set_history(pt->hist, wd), free(wd));
 	free(pt->line);
 	ft_free_env(pt->venv);
 }
