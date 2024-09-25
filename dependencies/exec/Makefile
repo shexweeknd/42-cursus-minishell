@@ -98,6 +98,7 @@ clean		:
 				$(call Makelibs, clean)
 				rm -rf $(OBJS)
 				rm -rf $(FUNC_OBJS)
+				rm -rf $(SRC_OBJS)
 
 fclean		: clean
 				$(call Makelibs, fclean)

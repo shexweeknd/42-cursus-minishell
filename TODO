@@ -44,8 +44,8 @@ MANDATORY TESTS:
     - status
     - exit
     - heredoc
-    - '> <<eof'
-    - ' >> sl >> | eof'
+    - approche sur le hd fichier temp 'cat << e && cat << e'
+    - gestion des leaks pour : <<e | <<l
 
 ERROR :
-    - STATUS command not found = 127
+    [URGENT] - STATUS command not found = 127
