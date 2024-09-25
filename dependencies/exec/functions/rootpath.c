@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rootpath.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:00:26 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/24 16:00:30 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/25 16:59:12 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static char	*rootpath(char *new_path, int save)
 
 	if (save)
 		path = new_path;
+	if (save == 'f')
+		return (free(new_path), NULL);
 	return (path);
 }
 

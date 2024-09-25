@@ -46,6 +46,7 @@ MANDATORY TESTS:
     - heredoc
     - '> <<eof'
     - ' >> sl >> | eof'
+    - gestion des leaks pour : <<e | <<l
 
 ERROR :
     - STATUS command not found = 127
