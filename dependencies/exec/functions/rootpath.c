@@ -18,8 +18,6 @@ static char	*rootpath(char *new_path, int save)
 
 	if (save)
 		path = new_path;
-	if (save == 'f')
-		return (free(new_path), NULL);
 	return (path);
 }
 
