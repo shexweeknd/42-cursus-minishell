@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   hd_err.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 10:29:12 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 15:39:03 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:00:27 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hd.h"
+
+int	is_valid_hd(char *line)
+{
+	int	flag;
+	int	lvl;
+
+	lvl = 0;
+	flag = 0;
+	if (!ft_strncmp(line, "<<", 2))
+	{
+		chev_check(line, &flag, 2, lvl);
+	}
+	return (!flag);
+}
 
 int	valid_before_hd(char *line, int lvl)
 {
@@ -44,20 +58,6 @@ int	is_hd_uncomplete(char *line)
 			return (1);
 	}
 	return (0);
-}
-
-int	is_valid_hd(char *line)
-{
-	int	flag;
-	int	lvl;
-
-	lvl = 0;
-	flag = 0;
-	if (!ft_strncmp(line, "<<", 2))
-	{
-		chev_check(line, &flag, 2, lvl);
-	}
-	return (!flag);
 }
 
 int	hd_check_syntax_err(char *prompt)

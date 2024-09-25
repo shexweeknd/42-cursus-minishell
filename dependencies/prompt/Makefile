@@ -2,15 +2,14 @@
 NAME		= libprompt.a
 
 # FILES
-FILES		= prompt.c \
-			prompt_utils.c \
-			prompt_sig_handler.c \
-			prompt_checker.c \
-			prompt_debug.c \
-			open_stdin.c \
-			get_ps_two.c \
+FILES		= \
+				prompt.c			\
+				prompt_utils.c 		\
 
-FUNC_FILES	= get_ps_two.c
+FUNC_FILES	= \
+				prompt_checker.c 	\
+				prompt_debug.c 		\
+				open_stdin.c
 
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)
@@ -22,15 +21,33 @@ FUNC_OBJS	= $(FUNC:functions/%.c=output/%.o)
 # DEPENDENCIES
 DEP_PATH	= ..
 LIBFT_PATH	= $(DEP_PATH)/libft
-
-# LIBS
-LIBFT		= -L$(LIBFT_PATH) -lft
-LIBS		= $(LIBFT) $(ERR) -Wno-unused-command-line-argument
+ENV_PATH	= $(DEP_PATH)/env
+ERR_PATH	= $(DEP_PATH)/err
+HD_PATH		= $(DEP_PATH)/heredoc
+HIST_PATH	= $(DEP_PATH)/history
+SIG_PATH	= $(DEP_PATH)/sig
+STATUS_PATH	= $(DEP_PATH)/status
 
 # INCLUDES
-LIBFT_INC	= -I$(LIBFT_PATH)/includes
 PROMPT_INC	= -Iincludes
-INCLUDES	= $(LIBFT_INC) $(PROMPT_INC)
+TEMPLATES	= -I$(DEP_PATH)/templates
+LIBFT_INC	= -I$(LIBFT_PATH)/includes
+ENV_INC		= -I$(ENV_PATH)/includes
+HIST_INC 	= -I$(HIST_PATH)/includes
+ERR_INC 	= -I$(ERR_PATH)/includes
+SIG_INC		= -I$(SIG_PATH)/includes
+STATUS_INC	= -I$(STATUS_PATH)/includes
+HD_INC		= -I$(HD_PATH)/includes
+INCLUDES	= \
+				$(TEMPLATES)	\
+				$(LIBFT_INC)	\
+				$(SIG_INC)		\
+				$(ENV_INC)		\
+				$(HIST_INC)		\
+				$(ERR_INC)		\
+				$(STATUS_INC)	\
+				$(HD_INC)		\
+				$(PROMPT_INC)
 
 # COMPILATION CONFIG
 CC		= cc -g
@@ -39,7 +56,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 # FUNCTION
 define Compile
-	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2) $(LIBS) 
+	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2)
 endef
 
 define CreateLib

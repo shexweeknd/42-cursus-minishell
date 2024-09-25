@@ -3,7 +3,7 @@ NAME		= libstatus.a
 
 # FILES
 FILES		= ft_status.c
-FUNC_FILES	= 
+FUNC_FILES	=
 
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)
@@ -14,9 +14,6 @@ FUNC_OBJS	= $(FUNC:functions/%.c=output/%.o)
 
 # DEPENDENCIES
 DEP_PATH	= ..
-
-# LIBS
-LIBS		= -Wno-unused-command-line-argument
 
 # INCLUDES
 STATUS_INC	= -Iincludes
@@ -29,7 +26,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 # FUNCTION
 define Compile
-	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2) $(LIBS) 
+	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2)
 endef
 
 define CreateLib

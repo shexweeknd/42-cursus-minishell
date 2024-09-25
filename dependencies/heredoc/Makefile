@@ -4,7 +4,7 @@ NAME		= libhd.a
 # FILES
 FILES		= hd.c \
 			hd_utils.c \
-			
+
 FUNC_FILES	= eof.c \
 			to_hd.c \
 			get_doc.c \
@@ -23,15 +23,24 @@ FUNC_OBJS	= $(FUNC:functions/%.c=output/%.o)
 # DEPENDENCIES
 DEP_PATH	= ..
 LIBFT_PATH	= $(DEP_PATH)/libft
-
-# LIBS
-LIBFT		= -L$(LIBFT_PATH) -lft
-LIBS		= $(LIBFT) $(ERR) -Wno-unused-command-line-argument
+ERR_PATH	= $(DEP_PATH)/err
+STATUS_PATH	= $(DEP_PATH)/status
+SIG_PATH	= $(DEP_PATH)/sig
 
 # INCLUDES
+HD_INC		= -Iincludes
+TEMPLATES	= -I$(DEP_PATH)/templates
 LIBFT_INC	= -I$(LIBFT_PATH)/includes
-PROMPT_INC	= -Iincludes
-INCLUDES	= $(LIBFT_INC) $(PROMPT_INC)
+ERR_INC		= -I$(ERR_PATH)/includes
+STATUS_INC	= -I$(STATUS_PATH)/includes
+SIG_INC		= -I$(SIG_PATH)/includes
+INCLUDES	= \
+				$(TEMPLATES)	\
+				$(LIBFT_INC)	\
+				$(ERR_INC)		\
+				$(STATUS_INC)	\
+				$(SIG_INC)	\
+				$(HD_INC)
 
 # COMPILATION CONFIG
 CC		= cc -g
@@ -40,7 +49,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 # FUNCTION
 define Compile
-	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2) $(LIBS) 
+	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2)
 endef
 
 define CreateLib
@@ -48,7 +57,10 @@ define CreateLib
 endef
 
 # COMMANDS
-all			: $(NAME)
+all			: $(NAME) | tmp
+
+tmp			:
+				@if [ ! -d tmp ]; then mkdir tmp; fi
 
 output		:
 				@if [ ! -d output ]; then mkdir output; fi

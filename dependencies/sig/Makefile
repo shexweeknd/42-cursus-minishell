@@ -2,8 +2,8 @@
 NAME		= libsig.a
 
 # FILES
-FILES		= sig.c
-FUNC_FILES	= 
+FILES		= sig.c sig_utils.c
+FUNC_FILES	=
 
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)
@@ -14,13 +14,14 @@ FUNC_OBJS	= $(FUNC:functions/%.c=output/%.o)
 
 # DEPENDENCIES
 DEP_PATH	= ..
-
-# LIBS
-LIBS		= -Wno-unused-command-line-argument
+STATUS_PATH	= $(DEP_PATH)/status
 
 # INCLUDES
 SIG_INC		= -Iincludes
-INCLUDES	= $(SIG_INC)
+STATUS_INC	= -I$(STATUS_PATH)/includes
+INCLUDES	= \
+				$(STATUS_INC)	\
+				$(SIG_INC)
 
 # COMPILATION CONFIG
 CC		= cc -g
@@ -29,7 +30,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 # FUNCTION
 define Compile
-	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2) $(LIBS) 
+	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2)
 endef
 
 define CreateLib

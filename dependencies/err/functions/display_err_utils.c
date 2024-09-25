@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   display_err_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 10:46:07 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/06 11:48:13 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:04:33 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cmd/includes/cmd.h"
-#include "../includes/m_err.h"
+#include "m_err.h"
 
 void	display_unexpected_chev(char *token)
 {

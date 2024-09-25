@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_extra_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:10 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/11 16:10:28 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:49:53 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
-
-int	_skip_space(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (i);
-	while (ft_isspace(*(str++)))
-		i++;
-	return (i);
-}
 
 t_rfile	*_init_rfile(t_redirect redirect)
 {

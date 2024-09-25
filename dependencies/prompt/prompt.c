@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 05:51:07 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/25 11:18:34 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/25 21:58:23 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	get_prompt(t_prompt *prompt, char *msh_name)
 	if (is_uncomplete_line(prompt->line) && prompt->is_eof)
 		printf("\033[0;32m%s:\033[0;0m%s\n", "Minishell",
 			" syntax error: unexpected end of file");
-	if (_hd_occ(prompt->line))
-		hd_cmd('f', NULL);
+	// if (_hd_occ(prompt->line))
+	// 	hd_cmd('f', NULL);
 	if (sig_type('g', 0) == SIGINT)
 		prompt->to_execute = 0;
 }

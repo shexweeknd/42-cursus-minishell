@@ -31,39 +31,45 @@ FUNC_OBJS	= $(FUNC:functions/%.c=output/%.o)
 # DEPENDENCIES
 DEP_PATH	= ..
 LIBFT_PATH	= $(DEP_PATH)/libft
+STATUS_PATH	= $(DEP_PATH)/status
 ENV_PATH	= $(DEP_PATH)/env
 CMD_PATH	= $(DEP_PATH)/cmd
-HISTORY_PATH= $(DEP_PATH)/history
-
-# LIBS
-LIBFT		= -L$(LIBFT_PATH) -lft
-ENV			= -L$(ENV_PATH) -lenv
-CMD			= -L$(CMD_PATH) -lcmd
-HISTORY		= -L$(HISTORY_PATH) -lhistory
-LIBS		= $(HISTORY) $(CMD) $(ENV) $(LIBFT) -Wno-unused-command-line-argument
+HIST_PATH	= $(DEP_PATH)/history
+SIG_PATH	= $(DEP_PATH)/sig
+HD_PATH		= $(DEP_PATH)/heredoc
+ERR_PATH	= $(DEP_PATH)/err
 
 # INCLUDES
+EXEC_INC	= -Iincludes
+TEMPLATES	= -I$(DEP_PATH)/templates
 LIBFT_INC	= -I$(LIBFT_PATH)/includes
+STATUS_INC	= -I$(STATUS_PATH)/includes
 ENV_INC		= -I$(ENV_PATH)/includes
 CMD_INC		= -I$(CMD_PATH)/includes
-HISTORY_INC	= -I$(HISTORY_PATH)/includes
-EXEC_INC	= -Iincludes
-INCLUDES	= $(LIBFT_INC) $(ENV_INC) $(CMD_INC) $(EXEC_INC) $(HISTORY_INC)
+HIST_INC	= -I$(HIST_PATH)/includes
+SIG_INC		= -I$(SIG_PATH)/includes
+HD_INC		= -I$(HD_PATH)/includes
+ERR_INC		= -I$(ERR_PATH)/includes
+INCLUDES	= \
+				$(LIBFT_INC)	\
+				$(TEMPLATES)	\
+				$(STATUS_INC)	\
+				$(ENV_INC)		\
+				$(HIST_INC)		\
+				$(HD_INC)		\
+				$(ERR_INC)		\
+				$(SIG_INC)		\
+				$(CMD_INC)		\
+				$(EXEC_INC)
 
 # COMPILATION CONFIG
-CC		= cc -g
-AR		= ar rcs
-CFLAGS	= -Wall -Wextra -Werror
+CC			= cc -g
+AR			= ar rcs
+CFLAGS		= -Wall -Wextra -Werror
 
 # FUNCTION
 define Compile
-	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2) $(LIBS)
-endef
-
-define MakeLibs
-	make $(1) -C $(LIBFT_PATH)
-	make $(1) -C $(ENV_PATH)
-	make $(1) -C $(CMD_PATH)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2)
 endef
 
 define CreateLib
@@ -86,7 +92,6 @@ output/%.o	: src/%.c | output
 				$(call Compile,$<,$@)
 
 $(NAME)		: $(OBJS) $(SRC_OBJS) $(FUNC_OBJS)
-				$(call Makelibs)
 				$(call CreateLib,$^,$@)
 
 clean		:

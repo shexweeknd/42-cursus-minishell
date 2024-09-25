@@ -16,15 +16,24 @@ FUNC_OBJS	= $(FUNC:functions/%.c=output/%.o)
 # DEPENDENCIES
 DEP_PATH	= ..
 LIBFT_PATH	= $(DEP_PATH)/libft
-
-# LIBS
-LIBFT		= -L$(LIBFT_PATH) -lft
-LIBS		= $(LIBFT) -Wno-unused-command-line-argument
+STATUS_PATH	= $(DEP_PATH)/status
+SIG_PATH	= $(DEP_PATH)/sig
+HD_PATH		= $(DEP_PATH)/heredoc
 
 # INCLUDES
+ERR_INC		= -Iincludes
+TEMPLATES	= -I$(DEP_PATH)/templates
 LIBFT_INC	= -I$(LIBFT_PATH)/includes
-ERR_INC	= -Iincludes
-INCLUDES	= $(LIBFT_INC) $(ERR_INC)
+STATUS_INC	= -I$(STATUS_PATH)/includes
+SIG_INC		= -I$(SIG_PATH)/includes
+HD_INC		= -I$(HD_PATH)/includes
+INCLUDES	= \
+				$(TEMPLATES)	\
+				$(LIBFT_INC)	\
+				$(STATUS_INC)	\
+				$(HD_INC)		\
+				$(SIG_INC)		\
+				$(ERR_INC)
 
 # COMPILATION CONFIG
 CC		= cc -g
@@ -33,7 +42,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 # FUNCTION
 define Compile
-	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2) $(LIBS) 
+	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2)
 endef
 
 define CreateLib
