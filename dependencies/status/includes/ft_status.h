@@ -6,12 +6,12 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 09:40:01 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/25 09:56:17 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/25 13:03:54 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_STATUS
-# define FT_STATUS
+#ifndef FT_STATUS_H
+# define FT_STATUS_H
 
 # include <signal.h>
 # include <stdio.h>

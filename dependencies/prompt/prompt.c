@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 05:51:07 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/24 14:39:01 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/25 11:18:34 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,22 @@ char	*get_line(t_prompt *prompt, char *msh_name)
 		if (line == NULL)
 			return (prompt->to_exit = 1, NULL);
 	}
-	if (check_syntax_err(line))
-		return (line);
-	if (is_uncomplete_line(line))
+	if (check_syntax_err(line, 1))
+		return (prompt->to_execute = 0, line);
+	if (!get_status() && is_uncomplete_line(line))
 		prompt->wait_nl = 1;
 	while (prompt->wait_nl && is_uncomplete_line(line))
 	{
 		line = ft_join_line(prompt, line);
-		if (check_syntax_err(line))
-			break ;
+		if (check_syntax_err(line, 0))
+			return (prompt->to_execute = 0, line);
 	}
 	return (line);
 }
 
 void	get_prompt(t_prompt *prompt, char *msh_name)
 {
+	sig_type('s', 0);
 	prompt->wait_nl = 0;
 	prompt->to_exit = 0;
 	prompt->to_execute = 1;
@@ -49,4 +50,6 @@ void	get_prompt(t_prompt *prompt, char *msh_name)
 			" syntax error: unexpected end of file");
 	if (_hd_occ(prompt->line))
 		hd_cmd('f', NULL);
+	if (sig_type('g', 0) == SIGINT)
+		prompt->to_execute = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:36:15 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/25 08:37:43 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/25 10:28:35 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ void	sec_prompt_sig_handler(int signal)
 	rl_replace_line("\e[K", 0);
 	sig_type('s', signal);
 	sec_prompt_flag('s', 1);
+	set_status(130);
 }

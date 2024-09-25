@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 08:58:01 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 08:52:47 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/25 11:19:11 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <readline/readline.h>
 # include <stdio.h>
 
-int		check_syntax_err(char *prompt);
+int		check_syntax_err(char *prompt, int with_hd);
 
 int		check_op_at_start(char *prompt);
 int		chev_check(char *prompt, int *flag, int chev_type, int lvl);

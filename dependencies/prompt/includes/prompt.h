@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 11:36:33 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/25 09:31:50 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/25 10:26:05 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	*to_ps_two(char cmd, char *value);
 char	*ft_join_line(t_prompt *prompt, char *line);
 void	init_prompt(t_prompt *prompt, char **env, char *hist_path);
 void	get_prompt(t_prompt *prompt, char *msh_name);
+void	setup_prompt_flags(t_prompt *prompt);
 
 void	print_prompt(t_prompt *prompt);
 
