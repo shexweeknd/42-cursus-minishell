@@ -3,8 +3,7 @@ NAME		= libenv.a
 
 # FILES
 FILES		= env.c
-FUNC_FILES 	= \
-		concatenate_contents.c \
+FUNC_FILES 	= env_utils.c
 
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)
@@ -17,23 +16,23 @@ FUNC_OBJS	= $(FUNC:functions/%.c=output/%.o)
 DEP_PATH	= ..
 LIBFT_PATH	= $(DEP_PATH)/libft
 
-# LIBS
-LIBFT		= -L$(LIBFT_PATH) -lft
-LIBS		= $(LIBFT) -Wno-unused-command-line-argument
-
 # INCLUDES
-LIBFT_INC	= -I$(LIBFT_PATH)/includes
 ENV_INC		= -Iincludes
-INCLUDES	= $(LIBFT_INC) $(ENV_INC)
+TEMPLATES	= -I$(DEP_PATH)/templates
+LIBFT_INC	= -I$(LIBFT_PATH)/includes
+INCLUDES	= \
+				$(TEMPLATES)	\
+				$(LIBFT_INC)	\
+				$(ENV_INC)
 
 # COMPILATION CONFIG
-CC		= cc -g
-AR		= ar rcs
-CFLAGS	= -Wall -Wextra -Werror
+CC			= cc -g
+AR			= ar rcs
+CFLAGS		= -Wall -Wextra -Werror
 
 # FUNCTION
 define Compile
-	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2) $(LIBS)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2)
 endef
 
 define CreateLib

@@ -3,25 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:46 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/25 09:58:10 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:39:33 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "cmd.h"
+# include "libft.h"
 # include "env.h"
-# include "ft_exec.h"
 # include "ft_status.h"
 # include "hd.h"
-# include "history.h"
 # include "m_err.h"
-# include "prompt.h"
 # include "sig.h"
+# include "history.h"
+# include "prompt.h"
+# include "cmd.h"
+# include "ft_exec.h"
 # include "struct.h"
 # include <fcntl.h>
 # include <readline/history.h>

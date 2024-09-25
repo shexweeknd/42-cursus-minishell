@@ -19,14 +19,11 @@ FUNC_OBJS	= $(FUNC:functions/%.c=output/%.o)
 DEP_PATH	= ..
 LIBFT_PATH	= $(DEP_PATH)/libft
 
-# LIBS
-LIBFT		= -L$(LIBFT_PATH) -lft
-LIBS		= $(LIBFT) -Wno-unused-command-line-argument
-
 # INCLUDES
-LIBFT_INC	= -I$(LIBFT_PATH)/includes
 HISTORY_INC	= -Iincludes
-INCLUDES	= $(LIBFT_INC) $(HISTORY_INC)
+TEMPLATES	= -I$(DEP_PATH)/templates
+LIBFT_INC	= -I$(LIBFT_PATH)/includes
+INCLUDES	= $(LIBFT_INC) $(TEMPLATES) $(HISTORY_INC)
 
 # COMPILATION CONFIG
 CC		= cc -g
@@ -35,7 +32,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 # FUNCTION
 define Compile
-	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2) $(LIBS)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $(1) -o $(2)
 endef
 
 define CreateLib
@@ -58,7 +55,6 @@ output/%.o	: */%.c | output
 				$(call Compile,$<,$@)
 
 $(NAME)		: $(OBJS) $(FUNC_OBJS) | src
-				make -C $(LIBFT_PATH)
 				$(call CreateLib,$^,$@)
 
 clean		:

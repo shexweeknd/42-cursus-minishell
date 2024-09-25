@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/25 09:44:27 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:31:36 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_EXEC_H
 # define FT_EXEC_H
 
-# include "../../prompt/includes/prompt.h"
-# include "../../status/includes/ft_status.h"
+# include "libft.h"
+# include "exec_struct.h"
+# include "prompt_struct.h"
+# include "ft_status.h"
 # include "cmd.h"
 # include "env.h"
-# include "ft_struct_exec.h"
 # include "history.h"
 # include <errno.h>
 # include <fcntl.h>

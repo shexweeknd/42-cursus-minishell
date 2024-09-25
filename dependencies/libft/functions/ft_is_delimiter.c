@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   getline.h                                          :+:      :+:    :+:   */
+/*   ft_is_delimiter.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/10 05:50:53 by ballain           #+#    #+#             */
-/*   Updated: 2024/08/10 05:50:54 by ballain          ###   ########.fr       */
+/*   Created: 2024/09/25 16:28:53 by ballain           #+#    #+#             */
+/*   Updated: 2024/09/25 16:28:53 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GETLINE_H
-# define GETLINE_H
+#include "libft.h"
 
-#endif
+int	ft_is_delimiter(const char c)
+{
+	return (c == '|' || c == '&');
+}

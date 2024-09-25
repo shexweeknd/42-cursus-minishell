@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_struct_exec.h                                   :+:      :+:    :+:   */
+/*   exec_struct.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 10:34:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/25 09:33:05 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/25 21:20:11 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_STRUCT_EXEC_H
 # define FT_STRUCT_EXEC_H
 
-# include "../../sig/includes/sig.h"
-# include "cmd.h"
-# include "env.h"
-# include "history.h"
+# include "cmd_struct.h"
+# include "env_struct.h"
+# include "hist_struct.h"
 
 typedef struct s_exec_params
 {

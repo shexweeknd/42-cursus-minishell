@@ -6,24 +6,19 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:41 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/17 17:42:17 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/25 21:47:14 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CMD_H
 # define CMD_H
 
-# include "cmd_struct.h"
 # include "libft.h"
+# include "hd.h"
+# include "cmd_struct.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-
-/* --------------------- UTILS --------------------- */
-int			ft_is_delimiter(const char c);
-int			ft_is_cmd_sep(const char c);
-int			ft_is_redirect(const char c);
-int			ft_is_quote(const char c);
 
 /* --------------------- CMD SHOW --------------------- */
 void		ft_show_ltype(t_link l_type);
@@ -33,6 +28,7 @@ void		ft_show_cmd(t_cmd *cmd);
 int			ft_get_args_len(char *cmd);
 int			ft_get_info_len(char *cmd);
 int			_get_info(char **str, char *cmd);
+int			_get_hdinfo(char **str, char *cmd);
 
 /* --------------------- CMD EXTRA UTILS --------------------- */
 int			_skip_space(char *str);

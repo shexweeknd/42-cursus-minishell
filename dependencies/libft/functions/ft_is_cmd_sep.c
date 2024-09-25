@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   err.c                                              :+:      :+:    :+:   */
+/*   ft_is_cmd_sep.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/28 08:57:14 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/25 19:02:13 by ballain          ###   ########.fr       */
+/*   Created: 2024/09/25 16:30:11 by ballain           #+#    #+#             */
+/*   Updated: 2024/09/25 16:30:12 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "m_err.h"
+#include "libft.h"
 
-int	check_syntax_err(char *prompt, int with_hd)
+int	ft_is_cmd_sep(const char c)
 {
-	int	flag;
-
-	flag = 0;
-	if (is_only_spaces(prompt))
-		flag = 1;
-	if (_hd_occ(prompt) && with_hd)
-		flag = hd_check_syntax_err(prompt);
-	else if (!flag && is_unexpected(prompt, 0))
-		flag = 1;
-	if (!flag && is_unexpected(prompt, 1))
-		flag = 1;
-	if (flag && (get_status() == 0))
-		set_status(2);
-	return (flag);
+	return (ft_isspace(c) || ft_is_delimiter(c));
 }

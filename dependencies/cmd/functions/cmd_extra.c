@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_extra.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:28 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/04 14:20:04 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/25 21:48:02 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ int	ft_get_redirect(t_cmd *_cmd, char *cmd)
 		utils = (t_lst_utils){R_FILE, _add_next_cmd, _next_cmd};
 		while (ft_isspace(*cmd) || ft_is_redirect(*cmd))
 			cmd++;
-		cmd += _get_info((char **)&new_rfile->args, cmd);
+		if (redirect_type == IN_2)
+			cmd += _get_hdinfo((char **)&new_rfile->args, cmd);
+		else
+			cmd += _get_info((char **)&new_rfile->args, cmd);
 		if (redirect_type == IN_1 || redirect_type == IN_2)
 			ft_add_back_((void **)&_cmd->file_in, new_rfile, utils);
 		if (redirect_type == OUT_1 || redirect_type == OUT_2)

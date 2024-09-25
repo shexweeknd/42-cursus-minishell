@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:38:41 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 13:25:03 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/25 17:54:54 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,12 @@
 # define HISTORY_H
 
 # include "libft.h"
+# include "hist_struct.h"
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdio.h>
 
 # define HIST_PATH "/dependencies/history/src/minishell_history.txt"
-
-enum					e_hist_err_status
-{
-	ERROR_READ_STATUS,
-	ERROR_WRITE_STATUS,
-	SUCCESS_READ_STATUS,
-	SUCCESS_WRITE_STATUS
-};
-
-typedef struct s_hist_elem
-{
-	int					is_offset;
-	int					line_nbr;
-	char				*command;
-	struct s_hist_elem	*next;
-}						t_hist_elem;
 
 // principal functions
 t_hist_elem				*get_history(char *file_path);

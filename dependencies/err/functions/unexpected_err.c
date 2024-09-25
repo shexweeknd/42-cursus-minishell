@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   unexpected_err.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 14:29:29 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 15:49:23 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:23:02 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cmd/includes/cmd.h"
-#include "../includes/m_err.h"
+#include "m_err.h"
 
 int	chev_check(char *prompt, int *flag, int chev_type, int lvl)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:02:13 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/23 10:05:43 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:12:09 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,12 @@ char	*ft_join(char *str[]);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+int		ft_is_quote(const char c);
+int		ft_is_cmd_sep(const char c);
+int		ft_is_redirect(const char c);
+int		ft_is_delimiter(const char c);
+int		_skip_space(char *str);
+
+char	*to_ps_two(char cmd, char *value);
 
 #endif

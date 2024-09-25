@@ -38,11 +38,23 @@ ERR_LIB 		= -L$(ERR_PATH) -lerr
 EXEC_LIB 		= -L$(EXEC_PATH) -lexec
 SIG_LIB 		= -L$(SIG_PATH) -lsig
 STATUS_LIB 		= -L$(STATUS_PATH) -lstatus
-HEREDOC_LIB 		= -L$(HEREDOC_PATH) -lhd
-LIBS			= $(EXEC_LIB) $(SIG_LIB) $(HISTORY_LIB) $(PROMPT_LIB) $(ERR_LIB) $(CMD_LIB) $(ENV_LIB) $(LIBFT_LIB) $(STATUS_LIB) $(HEREDOC_LIB) -lreadline -Wno-unused-command-line-argument
+HEREDOC_LIB 	= -L$(HEREDOC_PATH) -lhd
+LIBS			= \
+					$(EXEC_LIB)		\
+					$(CMD_LIB)		\
+					$(PROMPT_LIB)	\
+					$(ERR_LIB)		\
+					$(HEREDOC_LIB)	\
+					$(HISTORY_LIB)	\
+					$(STATUS_LIB)	\
+					$(SIG_LIB)		\
+					$(ENV_LIB)		\
+					$(LIBFT_LIB)	\
+					-lreadline -Wno-unused-command-line-argument
 
 # INCLUDES
 MINISH_INC		= -Iincludes
+TEMPLATES		= -I$(DEP_PATH)/templates
 LIBFT_INC		= -I$(LIBFT_PATH)/includes
 ENV_INC			= -I$(ENV_PATH)/includes
 CMD_INC			= -I$(CMD_PATH)/includes
@@ -51,9 +63,21 @@ PROMPT_INC 		= -I$(PROMPT_PATH)/includes
 ERR_INC 		= -I$(ERR_PATH)/includes
 EXEC_INC		= -I$(EXEC_PATH)/includes
 SIG_INC			= -I$(SIG_PATH)/includes
-STATUS_INC			= -I$(STATUS_PATH)/includes
-HEREDOC_INC			= -I$(HEREDOC_PATH)/includes
-INCLUDES		= $(MINISH_INC) $(LIBFT_INC) $(ENV_INC) $(CMD_INC) $(HISTORY_INC) $(PROMPT_INC) $(ERR_INC) $(SAVE_INC) $(EXEC_INC) $(SIG_INC) $(STATUS_INC) $(HEREDOC_INC)
+STATUS_INC		= -I$(STATUS_PATH)/includes
+HEREDOC_INC		= -I$(HEREDOC_PATH)/includes
+INCLUDES		= \
+					$(LIBFT_INC)	\
+					$(TEMPLATES)	\
+					$(SIG_INC)		\
+					$(ENV_INC)		\
+					$(ERR_INC)		\
+					$(HEREDOC_INC)	\
+					$(HISTORY_INC)	\
+					$(STATUS_INC)	\
+					$(PROMPT_INC)	\
+					$(CMD_INC)		\
+					$(EXEC_INC)		\
+					$(MINISH_INC)
 
 # COMPILATION CONFIG
 CC				= cc -g
@@ -67,18 +91,18 @@ endef
 define MakeLibs
 	make $(1) -C $(LIBFT_PATH)
 	make $(1) -C $(ENV_PATH)
-	make $(1) -C $(CMD_PATH)
-	make $(1) -C $(HISTORY_PATH)
-	make $(1) -C $(PROMPT_PATH)
-	make $(1) -C $(ERR_PATH)
 	make $(1) -C $(SIG_PATH)
 	make $(1) -C $(STATUS_PATH)
+	make $(1) -C $(HISTORY_PATH)
 	make $(1) -C $(HEREDOC_PATH)
+	make $(1) -C $(ERR_PATH)
+	make $(1) -C $(PROMPT_PATH)
+	make $(1) -C $(CMD_PATH)
 	make $(1) -C $(EXEC_PATH)
 endef
 
 define CreateExe
-	$(call MakeLibs)
+	$(call MakeLibs,all)
 	$(CC) $(CFLAGS) $(1) -o $(2) $(LIBS)
 endef
 
@@ -115,11 +139,11 @@ push\:%		: fclean
 
 ## Clean
 clean		:
-				$(call MakeLibs, clean)
+				$(call MakeLibs,clean)
 				rm -rf $(OBJS)
 
 fclean		: clean
-				$(call MakeLibs, fclean)
+				$(call MakeLibs,fclean)
 				rm -rf $(NAME)
 
 re			: fclean all

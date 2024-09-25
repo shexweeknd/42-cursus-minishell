@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt_sig_handler.c                               :+:      :+:    :+:   */
+/*   sig_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/19 10:36:15 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/25 10:28:35 by hramaros         ###   ########.fr       */
+/*   Created: 2024/09/25 18:22:44 by ballain           #+#    #+#             */
+/*   Updated: 2024/09/25 18:22:47 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prompt.h"
+#include "sig.h"
 
 void	to_stdin(char cmd)
 {
@@ -38,7 +38,7 @@ int	sig_type(char cmd, int value)
 	return (sig_type);
 }
 
-void	sec_prompt_sig_handler(int signal)
+void	sec_sig_handler(int signal)
 {
 	if (signal == SIGINT)
 	{

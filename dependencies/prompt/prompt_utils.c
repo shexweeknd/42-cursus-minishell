@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 11:33:07 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/25 13:04:55 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:21:31 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*ft_join_line(t_prompt *prompt, char *line)
 	result = NULL;
 	new_line = NULL;
 	col_ps_two = get_colored_ps_two();
-	(set_status(0), signal(SIGINT, sec_prompt_sig_handler));
+	(set_status(0), signal(SIGINT, sec_sig_handler));
 	while (prompt->wait_nl && (!new_line || is_only_spaces(new_line)))
 	{
 		free(new_line);
