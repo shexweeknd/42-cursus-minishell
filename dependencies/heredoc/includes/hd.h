@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:53:01 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 14:46:27 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/25 09:45:31 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define HD_H
 
 # include "../../prompt/includes/prompt.h"
+# include "../../status/includes/ft_status.h"
 # include "hd_struct.h"
 # include "libft.h"
 
@@ -37,6 +38,9 @@ int		skip_hd_eof(char *line);
 void	free_eofs(t_eofs *eofs);
 void	recurse_free_hd(t_hd *hd);
 void	recurse_close_hd(t_hd *hd);
+
+// SIG FUNC
+void	hd_prompt_sig_handler(int signal);
 
 // DEBUG FUNC
 void	print_hd(t_hd *hd);

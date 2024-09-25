@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 11:36:33 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/21 09:38:07 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/25 09:31:50 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include "../../heredoc/includes/hd.h"
 # include "../../history/includes/history.h"
 # include "../../sig/includes/sig.h"
+# include "../includes/prompt_struct.h"
 # include "libft.h"
-# include "prompt_struct.h"
 # include <signal.h>
 
 int		sig_type(char cmd, int value);

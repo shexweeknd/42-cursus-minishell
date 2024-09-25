@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_status.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:11:21 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/24 14:45:17 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/25 09:39:46 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_exec.h"
+#include "ft_status.h"
 
 static int	_status(int new_status, int change)
 {

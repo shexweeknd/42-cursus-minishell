@@ -1,44 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt_sig_handler.c                               :+:      :+:    :+:   */
+/*   hd_sig.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/19 10:36:15 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/25 08:37:43 by hramaros         ###   ########.fr       */
+/*   Created: 2024/09/25 08:43:22 by hramaros          #+#    #+#             */
+/*   Updated: 2024/09/25 09:20:26 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prompt.h"
+#include "hd.h"
 
-void	to_stdin(char cmd)
-{
-	static int	fd = 0;
-
-	if (cmd == 'c')
-	{
-		fd = dup(STDIN_FILENO);
-		close(STDIN_FILENO);
-	}
-	else if (cmd == 'o')
-		(dup(fd), close(fd));
-}
-
-int	sig_type(char cmd, int value)
-{
-	static int	sig_type = 0;
-
-	if (cmd == 'g')
-		return (sig_type);
-	else if (cmd == 's')
-		return (sig_type = value, sig_type);
-	else if (cmd == 'r')
-		return (sig_type = 0, sig_type);
-	return (sig_type);
-}
-
-void	sec_prompt_sig_handler(int signal)
+void	hd_prompt_sig_handler(int signal)
 {
 	if (signal == SIGINT)
 	{
@@ -47,6 +21,5 @@ void	sec_prompt_sig_handler(int signal)
 	}
 	rl_on_new_line();
 	rl_replace_line("\e[K", 0);
-	sig_type('s', signal);
-	sec_prompt_flag('s', 1);
+	set_status(130);
 }

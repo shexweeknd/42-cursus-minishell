@@ -1,17 +1,9 @@
 # PROGRAM NAME
-NAME		= libhd.a
+NAME		= libstatus.a
 
 # FILES
-FILES		= hd.c \
-			hd_utils.c \
-			
-FUNC_FILES	= eof.c \
-			to_hd.c \
-			get_doc.c \
-			hd_err.c \
-			hd_sig.c \
-			hd_cleaner.c \
-			hd_debug.c \
+FILES		= ft_status.c
+FUNC_FILES	= 
 
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)
@@ -22,16 +14,13 @@ FUNC_OBJS	= $(FUNC:functions/%.c=output/%.o)
 
 # DEPENDENCIES
 DEP_PATH	= ..
-LIBFT_PATH	= $(DEP_PATH)/libft
 
 # LIBS
-LIBFT		= -L$(LIBFT_PATH) -lft
-LIBS		= $(LIBFT) $(ERR) -Wno-unused-command-line-argument
+LIBS		= -Wno-unused-command-line-argument
 
 # INCLUDES
-LIBFT_INC	= -I$(LIBFT_PATH)/includes
-PROMPT_INC	= -Iincludes
-INCLUDES	= $(LIBFT_INC) $(PROMPT_INC)
+STATUS_INC	= -Iincludes
+INCLUDES	= $(STATUS_INC)
 
 # COMPILATION CONFIG
 CC		= cc -g
@@ -60,7 +49,6 @@ output/%.o	: */%.c | output
 				$(call Compile,$<,$@)
 
 $(NAME)		: $(OBJS) $(FUNC_OBJS)
-				make -C $(LIBFT_PATH)
 				$(call CreateLib,$^,$@)
 
 clean		:

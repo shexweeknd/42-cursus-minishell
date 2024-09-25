@@ -17,7 +17,6 @@ FUNC_FILES	= \
 				exec_utils.c		\
 				manage_args.c		\
 				manage_args_utils.c	\
-				ft_status.c			\
 				ft_file_descriptor.c
 
 # SRC FILES

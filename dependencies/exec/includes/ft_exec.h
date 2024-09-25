@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/24 15:48:31 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/25 09:44:27 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_EXEC_H
 
 # include "../../prompt/includes/prompt.h"
+# include "../../status/includes/ft_status.h"
 # include "cmd.h"
 # include "env.h"
 # include "ft_struct_exec.h"
@@ -60,11 +61,6 @@ int				ft_exec_cmds(t_exec_params params);
 /* _________________________ PATH _________________________ */
 char			*get_rootpath(void);
 void			set_rootpath(char *new_root_path);
-
-/* _________________________ STATUS _________________________ */
-int				get_status(void);
-void			set_status(int new_status);
-void			ft_print_status(int status);
 
 /* _________________________ FD _________________________ */
 void			ft_reset_fd(t_executable exec);

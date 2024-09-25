@@ -25,6 +25,7 @@ PROMPT_PATH		= $(DEP_PATH)/prompt
 ERR_PATH		= $(DEP_PATH)/err
 EXEC_PATH		= $(DEP_PATH)/exec
 SIG_PATH		= $(DEP_PATH)/sig
+STATUS_PATH		= $(DEP_PATH)/status
 HEREDOC_PATH		= $(DEP_PATH)/heredoc
 
 # LIBS
@@ -36,8 +37,9 @@ PROMPT_LIB 		= -L$(PROMPT_PATH) -lprompt
 ERR_LIB 		= -L$(ERR_PATH) -lerr
 EXEC_LIB 		= -L$(EXEC_PATH) -lexec
 SIG_LIB 		= -L$(SIG_PATH) -lsig
+STATUS_LIB 		= -L$(STATUS_PATH) -lstatus
 HEREDOC_LIB 		= -L$(HEREDOC_PATH) -lhd
-LIBS			= $(EXEC_LIB) $(SIG_LIB) $(HISTORY_LIB) $(PROMPT_LIB) $(ERR_LIB) $(CMD_LIB) $(ENV_LIB) $(LIBFT_LIB) $(HEREDOC_LIB) -lreadline -Wno-unused-command-line-argument
+LIBS			= $(EXEC_LIB) $(SIG_LIB) $(HISTORY_LIB) $(PROMPT_LIB) $(ERR_LIB) $(CMD_LIB) $(ENV_LIB) $(LIBFT_LIB) $(STATUS_LIB) $(HEREDOC_LIB) -lreadline -Wno-unused-command-line-argument
 
 # INCLUDES
 MINISH_INC		= -Iincludes
@@ -49,8 +51,9 @@ PROMPT_INC 		= -I$(PROMPT_PATH)/includes
 ERR_INC 		= -I$(ERR_PATH)/includes
 EXEC_INC		= -I$(EXEC_PATH)/includes
 SIG_INC			= -I$(SIG_PATH)/includes
+STATUS_INC			= -I$(STATUS_PATH)/includes
 HEREDOC_INC			= -I$(HEREDOC_PATH)/includes
-INCLUDES		= $(MINISH_INC) $(LIBFT_INC) $(ENV_INC) $(CMD_INC) $(HISTORY_INC) $(PROMPT_INC) $(ERR_INC) $(SAVE_INC) $(EXEC_INC) $(SIG_INC) $(HEREDOC_INC)
+INCLUDES		= $(MINISH_INC) $(LIBFT_INC) $(ENV_INC) $(CMD_INC) $(HISTORY_INC) $(PROMPT_INC) $(ERR_INC) $(SAVE_INC) $(EXEC_INC) $(SIG_INC) $(STATUS_INC) $(HEREDOC_INC)
 
 # COMPILATION CONFIG
 CC				= cc -g
@@ -69,6 +72,7 @@ define MakeLibs
 	make $(1) -C $(PROMPT_PATH)
 	make $(1) -C $(ERR_PATH)
 	make $(1) -C $(SIG_PATH)
+	make $(1) -C $(STATUS_PATH)
 	make $(1) -C $(HEREDOC_PATH)
 	make $(1) -C $(EXEC_PATH)
 endef
