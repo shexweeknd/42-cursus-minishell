@@ -6,7 +6,7 @@
 #    By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 11:14:27 by ballain           #+#    #+#              #
-#    Updated: 2024/09/25 19:49:46 by ballain          ###   ########.fr        #
+#    Updated: 2024/09/26 10:15:11 by ballain          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,8 @@ SRCS		= \
 				ft_is_redirect.c		\
 				ft_is_delimiter.c		\
 				ft_skip_space.c			\
-				get_ps_two.c
+				get_ps_two.c			\
+				ft_nblen.c
 
 SRCSBONUS	= \
 	ft_lstnew_bonus.c	ft_lstadd_front_bonus.c	ft_lstsize_bonus.c	ft_lstlast_bonus.c \

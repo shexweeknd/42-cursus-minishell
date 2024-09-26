@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:41 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/25 21:47:14 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 10:11:51 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ void		ft_show_cmd(t_cmd *cmd);
 int			ft_get_args_len(char *cmd);
 int			ft_get_info_len(char *cmd);
 int			_get_info(char **str, char *cmd);
-int			_get_hdinfo(char **str, char *cmd);
+int			_get_hdinfo(t_cmd *_cmd, char **str, char *cmd);
+char		*ft_init_tmp_name(int index);
+
 
 /* --------------------- CMD EXTRA UTILS --------------------- */
 int			_skip_space(char *str);

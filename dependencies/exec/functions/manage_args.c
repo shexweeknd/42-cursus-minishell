@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:14:57 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 15:49:38 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 09:51:26 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_dqoute_len(char **arg, t_env *env, char *stop)
 			if (ft_strchr(stop, **arg))
 				return (len);
 			if (**arg == '?')
-				len += ((*arg += 1), ft_getlen_status());
+				len += ((*arg += 1), ft_nblen(get_status()));
 			else
 				*arg += ((len += ft_lenvar(*arg, env, lenv)), lenv);
 		}

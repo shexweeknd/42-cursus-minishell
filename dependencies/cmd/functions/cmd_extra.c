@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:28 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/25 21:48:02 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 10:14:32 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_get_redirect(t_cmd *_cmd, char *cmd)
 		while (ft_isspace(*cmd) || ft_is_redirect(*cmd))
 			cmd++;
 		if (redirect_type == IN_2)
-			cmd += _get_hdinfo((char **)&new_rfile->args, cmd);
+			cmd += _get_hdinfo(_cmd, (char **)&new_rfile->args, cmd);
 		else
 			cmd += _get_info((char **)&new_rfile->args, cmd);
 		if (redirect_type == IN_1 || redirect_type == IN_2)
