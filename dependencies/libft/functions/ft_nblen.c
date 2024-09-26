@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:46:45 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/26 09:48:20 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 13:02:19 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,3 @@ int	ft_nblen(int nb)
 		nb /= (len++, 10);
 	return (len);
 }
-
