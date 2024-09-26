@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/25 22:09:43 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 09:09:08 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,16 @@ int	_get_info(char **str, char *cmd)
 char	*ft_get_hdvalue(t_hd *hd, int i)
 {
 	int		fd;
-	char	buffer[2048];
+	char	*buffer;
 
 	(void)i;
 	fd = open("hd.txt", O_WRONLY | O_CREAT);
 	if (fd == -1)
 		return (NULL);
-	ft_bzero(buffer, 2048);
+	buffer = (char *)malloc(sizeof(char) * (hd->size + 1));
+	if (!buffer)
+		return (NULL);
+	ft_bzero(buffer, hd->size + 1);
 	close(hd->fd[1]);
 	read(hd->fd[0], buffer, hd->size);
 	close(hd->fd[0]);
@@ -108,7 +111,6 @@ int	_get_hdinfo(char **str, char *cmd)
 		return (0);
 	j = i_hd;
 	hd = hd_cmd('g', NULL);
-	printf("here\n");
 	while (j--)
 		hd = hd->next;
 	i = _skip_space(cmd);
