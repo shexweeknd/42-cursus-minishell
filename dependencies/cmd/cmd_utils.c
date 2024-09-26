@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/26 12:29:56 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 13:02:37 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,29 +77,6 @@ int	_get_info(char **str, char *cmd)
 	return (i + len);
 }
 
-char	*ft_init_tmp_name(int index)
-{
-	int		i;
-	int		j;
-	int		len;
-	char	*tmp_name;
-
-	i = 0;
-	j = ((len = ft_nblen(index)), len);
-	tmp_name = (char *)malloc(sizeof(char) * (len + 9));
-	if (!tmp_name)
-		return (NULL);
-	i += ft_strlcpy(tmp_name, "tmp_", 5);
-	while (index)
-	{
-		tmp_name[i + --j] = (index % 10) + '0';
-		index /= 10;
-	}
-	i += len;
-	ft_strlcpy(tmp_name + i, ".txt", 5);
-	return (tmp_name);
-}
-
 char	*ft_get_hdvalue(t_cmd *_cmd, t_hd *hd)
 {
 	int				fd;
@@ -133,7 +110,6 @@ int	_get_hdinfo(t_cmd *_cmd, char **str, char *cmd)
 	int			len;
 	t_hd		*hd;
 	static int	i_hd = 0;
-
 
 	if (!cmd)
 		return (0);

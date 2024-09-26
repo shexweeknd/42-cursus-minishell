@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:17:58 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/23 07:35:06 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 13:58:46 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,15 @@ int	ft_pipe_status(int fd[0], int value, int send)
 	if (send)
 	{
 		close(fd[0]);
-		write(fd[1], &value, sizeof(int));
+		if (write(fd[1], &value, sizeof(int)) == -1)
+			return (close(fd[1]), 1);
 		close(fd[1]);
 	}
 	else
 	{
 		close(fd[1]);
-		read(fd[0], &value, sizeof(int));
+		if (read(fd[0], &value, sizeof(int)) == -1)
+			return (close(fd[0]), 1);
 		close(fd[0]);
 		return (value);
 	}
