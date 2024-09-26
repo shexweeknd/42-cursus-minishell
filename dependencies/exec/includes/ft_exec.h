@@ -20,6 +20,7 @@
 # include "history.h"
 # include "libft.h"
 # include "prompt_struct.h"
+# include <stdbool.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <stdio.h>

@@ -18,6 +18,8 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
+#include <stdarg.h>
+#include <unistd.h>
 # include <sys/stat.h>
 # include <unistd.h>
 
@@ -59,8 +61,9 @@ char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
-void	ft_putchar_fd(char c, int fd);
-void	ft_putstr_fd(char *s, int fd);
+int	    ft_printf_fd(const char *str, ...);
+int 	ft_putchar_fd(char c, int fd);
+int 	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 t_list	*ft_lstnew(void *content);
@@ -84,8 +87,6 @@ int		ft_lst_content_len(t_list *lst);
 int		ft_getlen_strtab(char *tab[]);
 char	*ft_str_replace(char *src, char *to_find, char *replace, int all);
 char	*ft_join(char *str[]);
-void	ft_putchar_fd(char c, int fd);
-void	ft_putstr_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 int		ft_is_quote(const char c);
 int		ft_is_cmd_sep(const char c);

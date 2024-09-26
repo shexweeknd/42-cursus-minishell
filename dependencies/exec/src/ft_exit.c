@@ -19,21 +19,21 @@ int valid_exit_args(t_cmd *cmd)
 		printf("ltype: pipe\n");
 	if (!cmd->args[1])
 	{
-		if (!cmd->next)
+		if (isatty(STDIN_FILENO))
 			printf("exit\n");
 		return (1);
 	}
 	// valide si arg n'est pas digit donc set status a get_status puis retourne get_status
 	if (!ft_isnbr(cmd->args[1]))
 	{
-		if (!cmd->next)
+		if (isatty(STDIN_FILENO))
 			printf("exit\n");
-		return (printf("\033[0;32m%s:\033[0;0m exit: %s%s", MSH_LOG, cmd->args[1], ": numeric argument required\n"),
+		return (ft_printf_fd("\033[0;32m%s:\033[0;0m exit: %s%s", 2, MSH_LOG, cmd->args[1], ": numeric argument required\n"),
 				set_status(2), 1);
 	}
 	// non valide si too many args
 	else if (cmd->args[2])
-		return (printf("\033[0;32m%s:\033[0;0m exit: %s", MSH_LOG,
+		return (ft_printf_fd("\033[0;32m%s:\033[0;0m exit: %s", 2, MSH_LOG,
 					   ": too many arguments\n"),
 				set_status(ft_atoi(cmd->args[1])), 0);
 	return (0);
