@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 12:55:43 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/26 12:43:34 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 13:55:46 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!pt.to_execute && (free(pt.line), 1))
 			continue ;
 		pt.cmd = ft_get_cmds(pt.line);
-		if (!pt.cmd)
+		if ((free(pt.line), 1) && !pt.cmd)
 			continue ;
 		ft_manage_args(pt.cmd, pt.venv);
 		ft_exec_cmds((t_exec_params){0, pt.cmd, pt.cmd, pt.venv, pt.hist,

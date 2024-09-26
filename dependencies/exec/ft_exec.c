@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/26 11:50:37 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:04:35 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int	ft_exec_cmds(t_exec_params params)
 			if (params.read_fd != 0)
 				(dup2(params.read_fd, STDIN_FILENO), close(params.read_fd));
 			ft_pipe_status(exec.s_fd, ft_exec_cmd(exec), 1);
-			(ft_free_executable(exec, params.src), exit(0));
+			(ft_free_executable(exec, params.src), free(get_rootpath()),
+				exit(get_status()));
 		}
 		else
 		{

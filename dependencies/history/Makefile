@@ -60,6 +60,7 @@ $(NAME)		: $(OBJS) $(FUNC_OBJS) | src
 clean		:
 				rm -rf $(OBJS)
 				rm -rf $(FUNC_OBJS)
+				rm -rf src
 
 fclean		: clean
 				rm -rf $(NAME)
