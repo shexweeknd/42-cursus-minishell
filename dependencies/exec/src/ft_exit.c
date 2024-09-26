@@ -12,7 +12,7 @@
 
 #include "ft_exec.h"
 
-// TODO ameliorer
+// TOTEST
 int valid_exit_args(t_cmd *cmd)
 {
 	if (cmd->l_type == PIPE)
@@ -23,7 +23,6 @@ int valid_exit_args(t_cmd *cmd)
 			printf("exit\n");
 		return (1);
 	}
-	// valide si arg n'est pas digit donc set status a get_status puis retourne get_status
 	if (!ft_isnbr(cmd->args[1]))
 	{
 		if (isatty(STDIN_FILENO))
@@ -31,7 +30,6 @@ int valid_exit_args(t_cmd *cmd)
 		return (ft_printf_fd("\033[0;32m%s:\033[0;0m exit: %s%s", 2, MSH_LOG, cmd->args[1], ": numeric argument required\n"),
 				set_status(2), 1);
 	}
-	// non valide si too many args
 	else if (cmd->args[2])
 		return (ft_printf_fd("\033[0;32m%s:\033[0;0m exit: %s", 2, MSH_LOG,
 					   ": too many arguments\n"),

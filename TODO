@@ -38,11 +38,10 @@ UPDATE :
 [FINISHED] - 'cd -'
 [FINISHED] - unset
 [FINISHED] - export
-
+[FINISHED] - status
 
 MANDATORY TESTS:
-    - status
-    - exit
-    - heredoc [EXECUTION LEFT]
+    - exit [TOTEST]
+    - heredoc [EXECUTION && TEST LEFT]
     - approche sur le hd fichier temp 'cat << e && cat << e'
     - gestion des leaks pour : <<e | <<l
