@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:52:30 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/25 18:26:01 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 09:03:05 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,24 @@ size_t	fullfill_fd(int fd, char *eof)
 {
 	size_t	buffer_size;
 	char	*line;
+	char	*warn_msg;
 
+	warn_msg = ": warning: here-document at line 1 delimited by end-of-file";
 	line = NULL;
 	buffer_size = 0;
 	while (1)
 	{
 		line = readline(to_ps_two('g', NULL));
-		if (!line)
+		if (!line || ft_iseof(line, eof))
 			break ;
-		if (ft_iseof(line, eof))
-		{
-			free(line);
-			break ;
-		}
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		buffer_size += ft_strlen(line) + 1;
 		free(line);
 	}
-	return (buffer_size);
+	if (!line && !get_status())
+		printf("%s%s (wanted `%s')\n", warn_msg, MSH_LOG, eof);
+	return (close(fd), free(line), buffer_size);
 }
 
 void	process_hd(t_eofs *eofs)

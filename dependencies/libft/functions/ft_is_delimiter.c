@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_is_delimiter.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 16:28:53 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/25 22:27:46 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 09:00:28 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

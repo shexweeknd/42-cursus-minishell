@@ -43,9 +43,6 @@ UPDATE :
 MANDATORY TESTS:
     - status
     - exit
-    - heredoc
+    - heredoc [EXECUTION LEFT]
     - approche sur le hd fichier temp 'cat << e && cat << e'
     - gestion des leaks pour : <<e | <<l
-
-ERROR :
-    [URGENT] - STATUS command not found = 127

@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 12:55:43 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/26 09:08:47 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 09:35:12 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv, char **envp)
 	init_prompt(&pt, envp, get_rootpath());
 	while (1)
 	{
-		(setup_main_signals(), get_prompt(&pt, MSH_NAME));
+		(setup_main_signals(), get_prompt(&pt, MSH_PROMPT));
 		pt.hist = ft_append_hist_elem(pt.hist, ft_strdup(pt.line));
 		if (is_exit(pt.line) || pt.to_exit)
 			return (exit_msh(&pt), 0);
@@ -34,7 +34,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_exec_cmds((t_exec_params){0, pt.cmd, pt.cmd, pt.venv, pt.hist,
 			pt.cmd->l_type});
 		sec_prompt_flag('r', 0);
-		pt.cmd = (set_status(0), ft_free_cmds(pt.cmd), NULL);
+		pt.cmd = (ft_free_cmds(pt.cmd), NULL);
 	}
 	free(get_rootpath());
 	return (free_lchistory(pt.hist), ft_free_env(pt.venv), 0);
