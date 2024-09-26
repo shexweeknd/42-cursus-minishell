@@ -23,8 +23,8 @@ int	main(int argc, char **argv, char **envp)
 	{
 		(setup_main_signals(), get_prompt(&pt, MSH_PROMPT));
 		pt.hist = ft_append_hist_elem(pt.hist, ft_strdup(pt.line));
-		if (is_exit(pt.line) || pt.to_exit)
-			return (exit_msh(&pt), 0);
+		if (pt.to_exit)
+			return (exit(get_status()), 0);
 		if (!pt.to_execute && (free(pt.line), 1))
 			continue ;
 		pt.cmd = ft_get_cmds(pt.line);

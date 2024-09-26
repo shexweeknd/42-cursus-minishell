@@ -37,10 +37,8 @@ int				ft_env(t_executable exec);
 int				export(t_executable exec);
 int				unset(t_executable exec);
 void			ft_exit(t_executable exec);
-void			exit_msh(t_prompt *pt);
 
 /* _________________________ MANAGE ARGS _________________________ */
-int				is_exit(char *line);
 int				ft_isvar(char *str);
 int				ft_lenvar(char *arg, t_env *env, int lenv);
 int				ft_cpvar(char *dest, char *arg, t_env *env, int lenv);

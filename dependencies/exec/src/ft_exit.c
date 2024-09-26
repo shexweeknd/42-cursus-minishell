@@ -12,70 +12,43 @@
 
 #include "ft_exec.h"
 
-void	ft_exit(t_executable exec)
+// TODO ameliorer
+int valid_exit_args(t_cmd *cmd)
 {
-	(void)exec;
-}
-
-size_t	_skip_nbr(char *line)
-{
-	size_t	nbr_len;
-
-	nbr_len = 0;
-	while (ft_isspace(*line))
-		nbr_len++;
-	while (ft_isdigit(line[nbr_len]))
-		nbr_len++;
-	return (nbr_len);
-}
-
-int	is_valid_exit_args(char *line)
-{
-	int	index;
-
-	index = 0;
-	if (!line[index] || is_only_spaces(line))
+	if (cmd->l_type == PIPE)
+		printf("ltype: pipe\n");
+	if (!cmd->args[1])
+	{
+		if (!cmd->next)
+			printf("exit\n");
 		return (1);
-	while (ft_isspace(line[index]))
-		index++;
-	if (!ft_isdigit(line[index]))
-		return (printf("\033[0;32m%s:\033[0;0m exit: %c%s", MSH_LOG,
-				line[index], ": numeric argument required\n"), set_status(2),
-			0);
-	if (ft_isdigit(line[index]) && ft_isnbr(&line[index]))
-		set_status(ft_atoi(&line[index]));
-	index += _skip_nbr(&line[index]);
-	if (line[index])
+	}
+	// valide si arg n'est pas digit donc set status a get_status puis retourne get_status
+	if (!ft_isnbr(cmd->args[1]))
+	{
+		if (!cmd->next)
+			printf("exit\n");
+		return (printf("\033[0;32m%s:\033[0;0m exit: %s%s", MSH_LOG, cmd->args[1], ": numeric argument required\n"),
+				set_status(2), 1);
+	}
+	// non valide si too many args
+	else if (cmd->args[2])
 		return (printf("\033[0;32m%s:\033[0;0m exit: %s", MSH_LOG,
-				": too many arguments\n"), set_status(1), 0);
-	return (1);
-}
-
-int	is_exit(char *line)
-{
-	int	index;
-
-	if (!line)
-		return (0);
-	index = 0;
-	while (line[index] && ft_isspace(line[index]))
-		index++;
-	if (!ft_strncmp(&line[index], "exit", 4))
-		if (is_valid_exit_args(&line[index + 4]))
-			return (1);
+					   ": too many arguments\n"),
+				set_status(ft_atoi(cmd->args[1])), 0);
 	return (0);
 }
 
-// TODO COMPLETE AND TEST
-void	exit_msh(t_prompt *pt)
+void ft_exit(t_executable exec)
 {
-	char	*wd;
+	char *wd;
 
 	wd = ft_strjoin(get_rootpath(), HIST_PATH);
-	printf("exit\n");
-	(set_history(pt->hist, wd), free(wd));
-	free(pt->line);
-	ft_free_env(pt->venv);
-	ft_free_cmds(pt->cmd);
-	exit(get_status());
+	if (valid_exit_args(exec.cmd))
+	{
+		(set_history(exec.hist, wd), free(wd));
+		ft_free_env(exec.env);
+		ft_free_cmds(exec.cmd);
+		exit(get_status());
+	}
 }
