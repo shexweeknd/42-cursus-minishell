@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 11:33:07 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/25 18:21:31 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 14:26:23 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ char	*ft_join_line(t_prompt *prompt, char *line)
 	if (_hd_occ(new_line) && hd_check_syntax_err(new_line))
 		return (free(col_ps_two), free(new_line), line);
 	if (new_line == NULL)
-		return (setup_prompt_flags(prompt), free(new_line), line);
+		return (setup_prompt_flags(prompt), free(col_ps_two), free(new_line),
+			line);
 	tmp = ft_strjoin(" ", new_line);
 	result = ft_strjoin(line, tmp);
 	return (free(col_ps_two), free(line), free(tmp), free(new_line), result);

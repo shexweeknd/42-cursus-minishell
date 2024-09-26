@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+         #
+#    By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 11:14:27 by ballain           #+#    #+#              #
-#    Updated: 2024/09/26 10:15:11 by ballain          ###   ########.fr        #
+#    Updated: 2024/09/26 16:42:22 by hramaros         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS		= \
 				ft_strtrim.c			\
 				ft_calloc.c				\
 				ft_isdigit.c			\
+				ft_isnbr.c 				\
 				ft_memcpy.c				\
 				ft_putnbr_fd.c			\
 				ft_striteri.c			\

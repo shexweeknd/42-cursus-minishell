@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:34 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/26 12:51:39 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 17:09:21 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,42 @@
 void	ft_exit(t_executable exec)
 {
 	(void)exec;
+}
+
+size_t	_skip_nbr(char *line)
+{
+	size_t	nbr_len;
+
+	nbr_len = 0;
+	while (ft_isspace(*line))
+		nbr_len++;
+	while (ft_isdigit(line[nbr_len]))
+		nbr_len++;
+	return (nbr_len);
+}
+
+int	is_valid_exit_args(char *line)
+{
+	int	index;
+	int	result;
+
+	index = 0;
+	result = 0;
+	if (!line[index] || is_only_spaces(line))
+		return (0);
+	while (ft_isspace(line[index]))
+		index++;
+	if (!ft_isdigit(line[index]))
+		return (printf("\033[0;32m%s:\033[0;0m exit: %c%s", MSH_LOG,
+				line[index], ": numeric argument required\n"), set_status(2),
+			0);
+	if (ft_isdigit(line[index]) && ft_isnbr(&line[index]))
+		set_status(ft_atoi(&line[index]));
+	index += _skip_nbr(&line[index]);
+	if (line[index])
+		return (printf("\033[0;32m%s:\033[0;0m exit: %s", MSH_LOG,
+				": too many arguments\n"), set_status(1), 0);
+	return (1);
 }
 
 int	is_exit(char *line)
@@ -26,25 +62,18 @@ int	is_exit(char *line)
 		return (0);
 	result = 0;
 	index = 0;
-	while (line[index])
-	{
-		if (!ft_strncmp(&line[index], "exit", 4))
-		{
-			index += 4;
-			if (!line[index] || ft_isspace(line[index]))
-				result = 1;
-			while (line[index] && ft_isspace(line[index]))
-				index++;
-			if (line[index] && !ft_isdigit(line[index]))
-				printf("\033[0;32m%s:\033[0;0m exit: %c%s", "Minishell",
-					line[index], ": numeric argument required\n");
-			return (result);
-		}
+	while (line[index] && ft_isspace(line[index]))
 		index++;
+	if (!ft_strncmp(&line[index], "exit", 4))
+	{
+		index += 4;
+		if (is_valid_exit_args(&line[index + 4]))
+			return (1);
 	}
-	return (result);
+	return (0);
 }
 
+// TODO COMPLETE AND TEST
 void	exit_msh(t_prompt *pt)
 {
 	char	*wd;
@@ -54,4 +83,6 @@ void	exit_msh(t_prompt *pt)
 	(set_history(pt->hist, wd), free(wd));
 	free(pt->line);
 	ft_free_env(pt->venv);
+	ft_free_cmds(pt->cmd);
+	exit(get_status());
 }

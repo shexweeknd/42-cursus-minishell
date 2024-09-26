@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history_debug.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42Antananari    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:52:55 by hramaros          #+#    #+#             */
-/*   Updated: 2024/08/26 09:28:36 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:25:20 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	display_lchist(t_hist_elem *hist_elem)
 		hist_elem = hist_elem->next;
 	}
 }
+
 /*
 void	display_rlhistory(void)
 {
