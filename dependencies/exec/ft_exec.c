@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/25 22:34:28 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 11:50:37 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_exec_cmd(t_executable exec)
 		return (get_status());
 	exe = ft_search_executable(exec);
 	if (!exe)
-		return (printf("Minishell: %s: command not found\n", exec.cmd->args[0]), 127);
+		return (get_status());
 	if (exe != exec.cmd->args[0])
 		exec.cmd->args[0] = (free(exec.cmd->args[0]), exe);
 	if (fork() == 0)
@@ -84,6 +84,7 @@ int	ft_exec_cmds(t_exec_params params)
 		}
 	}
 	else
-		(set_status(ft_exec_cmd(exec)), ft_reset_fd(exec), ft_next_cmds(exec.p_fd, params));
+		(set_status(ft_exec_cmd(exec)), ft_reset_fd(exec),
+			ft_next_cmds(exec.p_fd, params));
 	return (0);
 }

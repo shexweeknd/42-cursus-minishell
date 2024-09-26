@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:13:56 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/24 16:00:45 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 11:51:32 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_check_valid_var(char *var, int status)
 {
 	if (ft_isdigit(*var))
 	{
-		printf("minishell: export: `%s': not a valid identifier\n", var);
+		printf("%s: export: `%s': not a valid identifier\n", MSH_LOG, var);
 		return (1);
 	}
 	return (status);
@@ -24,30 +24,27 @@ int	ft_check_valid_var(char *var, int status)
 
 char	*ft_search_executable(t_executable exec)
 {
-	int		i;
 	char	*tmp;
 
-	i = 0;
-	if (access(exec.cmd->args[0], F_OK | X_OK) == 0)
-	{
-		if (*exec.cmd->args[0] == '/' || \
-			ft_strncmp(exec.cmd->args[0], "./", 2) == 0)
-			return (exec.cmd->args[0]);
-		return (NULL);
-	}
 	if (!exec.env->path)
 		return (NULL);
-	while (exec.env->path[i])
+	if (*exec.cmd->args[0] != '/' && ft_strncmp(exec.cmd->args[0], "./", 2)
+		&& ft_strncmp(exec.cmd->args[0], "~/", 2))
 	{
-		tmp = ft_join(\
-			(char *[]){exec.env->path[i++], "/", exec.cmd->args[0], NULL});
-		if (!tmp)
-			return (NULL);
-		if (access(tmp, F_OK | X_OK) == 0)
+		tmp = is_exec_from_path(&exec);
+		if (tmp == NULL)
+			return (cmd_found(exec.cmd->args[0], 1), tmp);
+		if (tmp)
 			return (tmp);
-		free(tmp);
 	}
-	return (NULL);
+	else if (*exec.cmd->args[0] == '/' || ft_strncmp(exec.cmd->args[0], "./", 2)
+		|| ft_strncmp(exec.cmd->args[0], "~/", 2))
+	{
+		if (!cmd_found(exec.cmd->args[0], 0)
+			|| !cmd_executable(exec.cmd->args[0], 0))
+			return (NULL);
+	}
+	return (exec.cmd->args[0]);
 }
 
 t_executable	ft_init_executable(t_exec_params param)
@@ -74,7 +71,7 @@ void	ft_free_executable(t_executable exec, t_cmd *cmd)
 void	ft_next_cmds(int fd[2], t_exec_params params)
 {
 	close(fd[1]);
-	ft_exec_cmds((t_exec_params){fd[0], params.src, params.cmd->next, \
-					params.env, params.hist, params.cmd->l_type});
+	ft_exec_cmds((t_exec_params){fd[0], params.src, params.cmd->next,
+		params.env, params.hist, params.cmd->l_type});
 	wait(NULL);
 }
