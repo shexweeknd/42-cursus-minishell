@@ -32,12 +32,10 @@ size_t	_skip_nbr(char *line)
 int	is_valid_exit_args(char *line)
 {
 	int	index;
-	int	result;
 
 	index = 0;
-	result = 0;
 	if (!line[index] || is_only_spaces(line))
-		return (0);
+		return (1);
 	while (ft_isspace(line[index]))
 		index++;
 	if (!ft_isdigit(line[index]))
@@ -56,20 +54,15 @@ int	is_valid_exit_args(char *line)
 int	is_exit(char *line)
 {
 	int	index;
-	int	result;
 
 	if (!line)
 		return (0);
-	result = 0;
 	index = 0;
 	while (line[index] && ft_isspace(line[index]))
 		index++;
 	if (!ft_strncmp(&line[index], "exit", 4))
-	{
-		index += 4;
 		if (is_valid_exit_args(&line[index + 4]))
 			return (1);
-	}
 	return (0);
 }
 
