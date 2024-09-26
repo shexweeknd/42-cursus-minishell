@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   exec_struct.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 10:34:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/25 21:20:11 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 09:04:35 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_STRUCT_EXEC_H
-# define FT_STRUCT_EXEC_H
+#ifndef EXEC_STRUCT_H
+# define EXEC_STRUCT_H
 
 # include "cmd_struct.h"
 # include "env_struct.h"

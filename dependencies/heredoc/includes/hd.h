@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   hd.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:53:01 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/25 21:33:18 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 08:44:08 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HD_H
 # define HD_H
 
-# include "libft.h"
-# include "hd_struct.h"
-# include "m_err.h"
 # include "ft_status.h"
+# include "hd_struct.h"
+# include "libft.h"
+# include "m_err.h"
+# include "msh_mac.h"
 # include "sig.h"
 
 # define HD_PATH "/dependencies/heredoc/tmp"
