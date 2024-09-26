@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/25 19:31:36 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 09:49:19 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int				is_exit(char *line);
 int				ft_isvar(char *str);
 int				ft_lenvar(char *arg, t_env *env, int lenv);
 int				ft_cpvar(char *dest, char *arg, t_env *env, int lenv);
-int				ft_getlen_status(void);
 int				ft_add_status(char *dest);
 int				ft_dqoute_len(char **arg, t_env *env, char *stop);
 int				ft_dquote_add(char *dest, char **arg, t_env *env, char *stop);

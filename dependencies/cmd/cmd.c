@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:50 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/17 10:24:59 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 12:37:40 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ t_cmd	*ft_get_cmds(char *cmd)
 		while (*cmd && ft_is_delimiter(*cmd))
 			cmd++;
 	}
+	hd_cmd('f', NULL);
 	return (cmds);
 }

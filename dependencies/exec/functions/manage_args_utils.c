@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:24:30 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/24 15:55:07 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 09:50:49 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,15 @@ int	ft_cpvar(char *dest, char *arg, t_env *env, int lenv)
 	return (free(tmp), ft_strlcpy(dest, var, ft_strlen(var) + 1));
 }
 
-int	ft_getlen_status(void)
-{
-	int	status;
-	int	len;
-
-	len = ((status = get_status()), 0);
-	if (!status)
-		return (1);
-	while (status)
-		status /= (len++, 10);
-	return (len);
-}
-
 int	ft_add_status(char *dest)
 {
 	int	status;
 	int	len;
 	int	r_len;
 
-	r_len = ((status = get_status()), (len = ft_getlen_status()), len);
+	status = get_status();
+	len = ft_nblen(status);
+	r_len = len;
 	while (len)
 	{
 		*(dest + (--len)) = (status % 10) + '0';

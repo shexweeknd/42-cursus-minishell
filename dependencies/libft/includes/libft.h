@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:02:13 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/25 18:12:09 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 09:48:37 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ int		ft_is_delimiter(const char c);
 int		_skip_space(char *str);
 
 char	*to_ps_two(char cmd, char *value);
+int		ft_nblen(int nb);
 
 #endif

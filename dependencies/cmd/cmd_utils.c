@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/26 09:09:08 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/26 12:29:56 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,28 +77,56 @@ int	_get_info(char **str, char *cmd)
 	return (i + len);
 }
 
-char	*ft_get_hdvalue(t_hd *hd, int i)
+char	*ft_init_tmp_name(int index)
 {
-	int		fd;
-	char	*buffer;
+	int		i;
+	int		j;
+	int		len;
+	char	*tmp_name;
 
-	(void)i;
-	fd = open("hd.txt", O_WRONLY | O_CREAT);
-	if (fd == -1)
+	i = 0;
+	j = ((len = ft_nblen(index)), len);
+	tmp_name = (char *)malloc(sizeof(char) * (len + 9));
+	if (!tmp_name)
 		return (NULL);
-	buffer = (char *)malloc(sizeof(char) * (hd->size + 1));
-	if (!buffer)
-		return (NULL);
-	ft_bzero(buffer, hd->size + 1);
-	close(hd->fd[1]);
-	read(hd->fd[0], buffer, hd->size);
-	close(hd->fd[0]);
-	write(fd, buffer, hd->size);
-	close(fd);
-	return (ft_strdup("hd.txt"));
+	i += ft_strlcpy(tmp_name, "tmp_", 5);
+	while (index)
+	{
+		tmp_name[i + --j] = (index % 10) + '0';
+		index /= 10;
+	}
+	i += len;
+	ft_strlcpy(tmp_name + i, ".txt", 5);
+	return (tmp_name);
 }
 
-int	_get_hdinfo(char **str, char *cmd)
+char	*ft_get_hdvalue(t_cmd *_cmd, t_hd *hd)
+{
+	int				fd;
+	char			*buffer;
+	char			*tmp_name;
+	static t_cmd	*tmp = NULL;
+	static int		i = 0;
+
+	if (tmp != _cmd)
+		tmp = (i++, _cmd);
+	tmp_name = ft_init_tmp_name(i);
+	fd = open(tmp_name, O_WRONLY | O_CREAT, 0777);
+	if (fd == -1)
+		return (NULL);
+	buffer = (char *)malloc(sizeof(char) * (hd->size));
+	if (!buffer)
+		return (NULL);
+	ft_bzero(buffer, hd->size);
+	read(hd->fd[0], buffer, hd->size);
+	write(fd, buffer, hd->size);
+	(close(hd->fd[0]), close(fd), free(buffer));
+	if (!hd || !hd->next)
+		i = 1;
+	return (tmp_name);
+}
+
+int	_get_hdinfo(t_cmd *_cmd, char **str, char *cmd)
 {
 	int			i;
 	int			j;
@@ -116,8 +144,10 @@ int	_get_hdinfo(char **str, char *cmd)
 	i = _skip_space(cmd);
 	len = ft_get_info_len(cmd + i);
 	if (len && str && *str == NULL)
-		*str = ft_get_hdvalue(hd, i);
+		*str = ft_get_hdvalue(_cmd, hd);
 	i += _skip_space(cmd + i + len);
 	i_hd++;
+	if (!hd || !hd->next)
+		i_hd = 0;
 	return (i + len);
 }
