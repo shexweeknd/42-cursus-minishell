@@ -17,7 +17,8 @@ FUNC_FILES	= \
 				exec_utils.c		\
 				manage_args.c		\
 				manage_args_utils.c	\
-				ft_file_descriptor.c
+				ft_file_descriptor.c \
+				exec_checker.c
 
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)
