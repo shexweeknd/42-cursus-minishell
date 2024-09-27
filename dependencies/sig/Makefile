@@ -14,13 +14,13 @@ FUNC_OBJS	= $(FUNC:functions/%.c=output/%.o)
 
 # DEPENDENCIES
 DEP_PATH	= ..
-STATUS_PATH	= $(DEP_PATH)/status
+STATIC_PATH	= $(DEP_PATH)/static
 
 # INCLUDES
 SIG_INC		= -Iincludes
-STATUS_INC	= -I$(STATUS_PATH)/includes
+STATIC_INC	= -I$(STATIC_PATH)/includes
 INCLUDES	= \
-				$(STATUS_INC)	\
+				$(STATIC_INC)	\
 				$(SIG_INC)
 
 # COMPILATION CONFIG

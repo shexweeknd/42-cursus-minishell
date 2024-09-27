@@ -6,14 +6,14 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:37:40 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/25 20:40:02 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/27 11:41:53 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SIG_H
 # define SIG_H
 
-# include "ft_status.h"
+# include "ft_static.h"
 # include <readline/readline.h>
 # include <signal.h>
 # include <unistd.h>

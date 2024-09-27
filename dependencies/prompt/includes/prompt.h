@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 11:36:33 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/25 20:36:23 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/27 11:43:07 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "env.h"
 # include "hd.h"
 # include "history.h"
-# include "ft_status.h"
+# include "ft_static.h"
 # include <signal.h>
 
 void	re_open_stdin(void);
