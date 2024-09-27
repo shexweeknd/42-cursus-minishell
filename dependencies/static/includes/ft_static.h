@@ -6,15 +6,15 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 09:40:01 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 18:09:50 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/27 18:20:00 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_STATIC_H
 # define FT_STATIC_H
 
-# include "msh_mac.h"
 # include "libft.h"
+# include "msh_mac.h"
 # include <signal.h>
 # include <stdio.h>
 # include <sys/stat.h>
