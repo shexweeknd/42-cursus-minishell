@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_static.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 09:40:01 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 12:21:52 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/27 15:43:39 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_STATIC_H
 # define FT_STATIC_H
 
-# include "msh_mac.h"
 # include "libft.h"
+# include "msh_mac.h"
 # include <signal.h>
 # include <stdio.h>
 # include <sys/stat.h>
@@ -39,6 +39,6 @@ char	*get_hdpath(void);
 
 /* _________________________ STATICS _________________________ */
 void	ft_init_paths(char *cwd);
-void	ft_clear_paths();
+void	ft_clear_paths(void);
 
 #endif
