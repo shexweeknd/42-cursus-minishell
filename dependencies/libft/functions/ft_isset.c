@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_isset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 18:31:03 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/27 08:12:54 by hramaros         ###   ########.fr       */
+/*   Created: 2024/09/27 08:06:28 by hramaros          #+#    #+#             */
+/*   Updated: 2024/09/27 08:06:36 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_putchar_fd(char c, int fd)
+int	ft_isset(const char *str, char *set)
 {
-	return (write(fd, &c, 1));
+	int	index;
+
+	while (*str)
+	{
+		index = 0;
+		while (set[index])
+		{
+			if (*str == set[index])
+				return (1);
+			index++;
+		}
+		str++;
+	}
+	return (0);
 }

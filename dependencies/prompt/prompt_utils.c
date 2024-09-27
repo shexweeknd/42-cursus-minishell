@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 11:33:07 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/26 14:26:23 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 08:15:49 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,27 +61,25 @@ char	*ft_join_line(t_prompt *prompt, char *line)
 	char	*result;
 	char	*tmp;
 	char	*new_line;
-	char	*col_ps_two;
 
 	if (prompt->wait_nl == 0)
 		return (line);
 	result = NULL;
 	new_line = NULL;
-	col_ps_two = get_colored_ps_two();
 	(set_status(0), signal(SIGINT, sec_sig_handler));
 	while (prompt->wait_nl && (!new_line || is_only_spaces(new_line)))
 	{
 		free(new_line);
-		new_line = readline(col_ps_two);
+		new_line = readline(to_ps_two('g', NULL));
 		if (!new_line)
 			break ;
 	}
 	if (_hd_occ(new_line) && hd_check_syntax_err(new_line))
-		return (free(col_ps_two), free(new_line), line);
+		return (free(new_line), line);
 	if (new_line == NULL)
-		return (setup_prompt_flags(prompt), free(col_ps_two), free(new_line),
+		return (setup_prompt_flags(prompt), free(new_line),
 			line);
 	tmp = ft_strjoin(" ", new_line);
 	result = ft_strjoin(line, tmp);
-	return (free(col_ps_two), free(line), free(tmp), free(new_line), result);
+	return (free(line), free(tmp), free(new_line), result);
 }

@@ -1,45 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   ft_printf_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:34 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/26 17:09:21 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 08:10:28 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-int	ft_isset(const char *str, char *set)
-{
-	int	index;
-
-	while (*str)
-	{
-		index = 0;
-		while (set[index])
-		{
-			if (*str == set[index])
-				return (1);
-			index++;
-		}
-		str++;
-	}
-	return (0);
-}
-
-int	is_decimal(char *base)
-{
-	while (*base)
-	{
-		if (*base < 48 || *base > 57)
-			return (0);
-		base++;
-	}
-	return (1);
-}
 
 int	recurse_nbr(long nbr, char *base, int fd)
 {
@@ -111,10 +82,10 @@ int	ft_printf_fd(const char *str, ...)
 {
 	va_list	ap;
 	int		printed;
-    int     fd;
+	int		fd;
 
 	va_start(ap, str);
-    fd = va_arg(ap, int);
+	fd = va_arg(ap, int);
 	printed = 0;
 	while (*str)
 	{

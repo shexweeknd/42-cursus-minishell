@@ -6,7 +6,7 @@
 #    By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 11:14:27 by ballain           #+#    #+#              #
-#    Updated: 2024/09/26 16:42:22 by hramaros         ###   ########.fr        #
+#    Updated: 2024/09/27 08:10:47 by hramaros         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,8 @@ SRCS		= \
 				ft_putendl_fd.c			\
 				ft_putnbr_fd.c			\
 				ft_putstr_fd.c			\
+				ft_isset.c 				\
+				ft_isdecimal.c			\
 				ft_printf_fd.c			\
 				ft_strcmp.c				\
 				get_next_line.c			\

@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/26 14:12:28 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 08:19:26 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,22 @@ int	ft_exec_cmd(t_executable exec)
 	return (status);
 }
 
+void	exec_cmds_child(t_exec_params *params, t_executable *exec)
+{
+	if (params->read_fd != 0)
+		(dup2(params->read_fd, STDIN_FILENO), close(params->read_fd));
+	ft_pipe_status(exec->s_fd, ft_exec_cmd(*exec), 1);
+	(ft_free_executable(*exec, params->src), exit(get_status()));
+}
+
+void	exec_cmds_parent(t_exec_params *params, t_executable *exec)
+{
+	if (params->read_fd != 0)
+		close(params->read_fd);
+	set_status(ft_pipe_status(exec->s_fd, 0, 0));
+	ft_next_cmds(exec->p_fd, *params);
+}
+
 int	ft_exec_cmds(t_exec_params params)
 {
 	t_executable	exec;
@@ -69,19 +85,9 @@ int	ft_exec_cmds(t_exec_params params)
 	if (setup_child_signals(), params.l_type == PIPE)
 	{
 		if (fork() == 0)
-		{
-			if (params.read_fd != 0)
-				(dup2(params.read_fd, STDIN_FILENO), close(params.read_fd));
-			ft_pipe_status(exec.s_fd, ft_exec_cmd(exec), 1);
-			(ft_free_executable(exec, params.src), exit(get_status()));
-		}
+			exec_cmds_child(&params, &exec);
 		else
-		{
-			if (params.read_fd != 0)
-				close(params.read_fd);
-			set_status(ft_pipe_status(exec.s_fd, 0, 0));
-			ft_next_cmds(exec.p_fd, params);
-		}
+			exec_cmds_parent(&params, &exec);
 	}
 	else
 		(set_status(ft_exec_cmd(exec)), ft_reset_fd(exec),

@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:02:13 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/26 16:42:47 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 08:11:47 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@
 # include "libft_struct.h"
 # include <ctype.h>
 # include <fcntl.h>
+# include <stdarg.h>
 # include <stdio.h>
 # include <stdlib.h>
-#include <stdarg.h>
-#include <unistd.h>
 # include <sys/stat.h>
 # include <unistd.h>
 
@@ -32,6 +31,8 @@ int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isnbr(char *str);
 int		ft_isprint(int c);
+int		ft_isdecimal(char *base);
+int		ft_isset(const char *str, char *set);
 int		is_only_spaces(char *str);
 void	*ft_memset(void *s, int c, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
@@ -61,9 +62,9 @@ char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
-int	    ft_printf_fd(const char *str, ...);
-int 	ft_putchar_fd(char c, int fd);
-int 	ft_putstr_fd(char *s, int fd);
+int		ft_printf_fd(const char *str, ...);
+int		ft_putchar_fd(char c, int fd);
+int		ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 t_list	*ft_lstnew(void *content);
