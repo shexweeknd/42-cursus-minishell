@@ -40,16 +40,16 @@ UPDATE :
 [FINISHED] - export
 [FINISHED] - status
 [FINISHED] - $HOME
+[FINISHED] - unset $PATH --> ls --> core dumped (hramaros + ballain)
+[FINISHED] - Ctrl + D must print exit (hramaros)
+[FINISHED] - exit [TOTEST]
+[FINISHED] - heredoc [EXECUTION && TEST LEFT]
+[FINISHED] - fix le history qui ne marche pas
 
 MANDATORY:
-    - exit [TOTEST]
-    - heredoc [EXECUTION && TEST LEFT]
-    - fix le history qui ne marche pas
     - approche sur le hd fichier temp 'cat << e && cat << e'
     - gestion des leaks pour : <<e | <<l
 
 TODO:
-    - Ctrl + D must print exit (hramaros)
     - $SHLVL (ballain)
-    - unset $PATH --> ls --> core dumped (hramaros + ballain)
     - > file.txt (persmission a ajouter -rw-r--r--) (ballain)

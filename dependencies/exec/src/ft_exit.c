@@ -5,14 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/11 16:17:34 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 12:30:14 by ballain          ###   ########.fr       */
+/*   Created: 2024/09/27 13:43:12 by ballain           #+#    #+#             */
+/*   Updated: 2024/09/27 13:44:46 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
 
-// TOTEST
 int	valid_exit_args(t_cmd *cmd)
 {
 	if (!cmd->args[1])
@@ -38,11 +37,13 @@ int	valid_exit_args(t_cmd *cmd)
 
 void	ft_exit(t_executable exec)
 {
-	if (valid_exit_args(exec.cmd))
+	if (!exec.cmd || valid_exit_args(exec.cmd))
 	{
 		set_history(exec.hist, get_histpath());
 		ft_free_env(exec.env);
 		ft_free_cmds(exec.cmd);
+		if (!exec.cmd)
+			printf("exit\n");
 		exit(get_status());
 		ft_clear_paths();
 	}

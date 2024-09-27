@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/28 10:13:56 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/27 12:23:41 by ballain          ###   ########.fr       */
+/*   Created: 2024/09/27 13:42:58 by ballain           #+#    #+#             */
+/*   Updated: 2024/09/27 13:52:16 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,16 @@ char	*ft_search_executable(t_executable exec)
 {
 	char	*tmp;
 
-	if (!exec.env->path || is_directory(exec.cmd->args[0]))
+	if (is_directory(exec.cmd->args[0]) || (!exec.env->path
+			&& (!cmd_found(exec.cmd->args[0], 0)
+				|| !cmd_executable(exec.cmd->args[0], 0))))
 		return (NULL);
-	if (*exec.cmd->args[0] != '/' && ft_strncmp(exec.cmd->args[0], "./", 2)
+	else if (*exec.cmd->args[0] != '/' && ft_strncmp(exec.cmd->args[0], "./", 2)
 		&& ft_strncmp(exec.cmd->args[0], "~/", 2))
 	{
 		tmp = is_exec_from_path(&exec);
 		if (tmp == NULL)
-			return (cmd_found(exec.cmd->args[0], 1), tmp);
+			return (cmd_found(exec.cmd->args[0], 1), NULL);
 		if (tmp)
 			return (tmp);
 	}
@@ -73,6 +75,10 @@ void	ft_free_executable(t_executable exec, t_cmd *cmd)
 void	ft_next_cmds(int fd[2], t_exec_params params)
 {
 	close(fd[1]);
+	if (params.l_type == AND && get_status() != 0)
+		return ;
+	if (params.l_type == OR && get_status() == 0)
+		return ;
 	ft_exec_cmds((t_exec_params){fd[0], params.src, params.cmd->next,
 		params.env, params.hist, params.cmd->l_type});
 	wait(NULL);

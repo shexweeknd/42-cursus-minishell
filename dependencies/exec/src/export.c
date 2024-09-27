@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:11 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 15:17:43 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/27 13:08:09 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ int	export(t_executable exec)
 			ft_addenv(exec.env, exec.cmd->args[i]);
 		if (!ft_strcmp(var_name, "PATH"))
 		{
-			(free(*exec.env->path), free(exec.env->path));
+			if (exec.env->path)
+				(free(*exec.env->path), free(exec.env->path));
 			exec.env->path = ft_split_path(exec.cmd->args[i]);
 		}
 		free(var_name);
