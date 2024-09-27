@@ -13,7 +13,6 @@ SRC_FILES	= \
 				ft_exit.c
 
 FUNC_FILES	= \
-				rootpath.c				\
 				exec_utils.c		\
 				manage_args.c		\
 				manage_args_utils.c	\
@@ -32,7 +31,7 @@ FUNC_OBJS	= $(FUNC:functions/%.c=output/%.o)
 # DEPENDENCIES
 DEP_PATH	= ..
 LIBFT_PATH	= $(DEP_PATH)/libft
-STATUS_PATH	= $(DEP_PATH)/status
+STATIC_PATH	= $(DEP_PATH)/static
 ENV_PATH	= $(DEP_PATH)/env
 CMD_PATH	= $(DEP_PATH)/cmd
 HIST_PATH	= $(DEP_PATH)/history
@@ -44,7 +43,7 @@ ERR_PATH	= $(DEP_PATH)/err
 EXEC_INC	= -Iincludes
 TEMPLATES	= -I$(DEP_PATH)/templates
 LIBFT_INC	= -I$(LIBFT_PATH)/includes
-STATUS_INC	= -I$(STATUS_PATH)/includes
+STATIC_INC	= -I$(STATIC_PATH)/includes
 ENV_INC		= -I$(ENV_PATH)/includes
 CMD_INC		= -I$(CMD_PATH)/includes
 HIST_INC	= -I$(HIST_PATH)/includes
@@ -54,7 +53,7 @@ ERR_INC		= -I$(ERR_PATH)/includes
 INCLUDES	= \
 				$(LIBFT_INC)	\
 				$(TEMPLATES)	\
-				$(STATUS_INC)	\
+				$(STATIC_INC)	\
 				$(ENV_INC)		\
 				$(HIST_INC)		\
 				$(HD_INC)		\

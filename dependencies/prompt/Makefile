@@ -26,7 +26,7 @@ ERR_PATH	= $(DEP_PATH)/err
 HD_PATH		= $(DEP_PATH)/heredoc
 HIST_PATH	= $(DEP_PATH)/history
 SIG_PATH	= $(DEP_PATH)/sig
-STATUS_PATH	= $(DEP_PATH)/status
+STATIC_PATH	= $(DEP_PATH)/static
 
 # INCLUDES
 PROMPT_INC	= -Iincludes
@@ -36,7 +36,7 @@ ENV_INC		= -I$(ENV_PATH)/includes
 HIST_INC 	= -I$(HIST_PATH)/includes
 ERR_INC 	= -I$(ERR_PATH)/includes
 SIG_INC		= -I$(SIG_PATH)/includes
-STATUS_INC	= -I$(STATUS_PATH)/includes
+STATIC_INC	= -I$(STATIC_PATH)/includes
 HD_INC		= -I$(HD_PATH)/includes
 INCLUDES	= \
 				$(TEMPLATES)	\
@@ -45,7 +45,7 @@ INCLUDES	= \
 				$(ENV_INC)		\
 				$(HIST_INC)		\
 				$(ERR_INC)		\
-				$(STATUS_INC)	\
+				$(STATIC_INC)	\
 				$(HD_INC)		\
 				$(PROMPT_INC)
 

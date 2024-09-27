@@ -1,12 +1,10 @@
 # PROGRAM NAME
-NAME		= libstatus.a
+NAME		= libstatic.a
 
 # FILES
-FILES		= ft_status.c
-FUNC_FILES	=
-
-# SRC FILES
-FUNC		= $(FUNC_FILES:%.c=functions/%.c)
+FILES		= \
+				ft_rootpath.c	\
+				ft_status.c
 
 # OBJECT FILES
 OBJS		= $(FILES:%.c=output/%.o)

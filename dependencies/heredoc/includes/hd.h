@@ -3,24 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   hd.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:53:01 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/26 11:09:37 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 11:55:37 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HD_H
 # define HD_H
 
-# include "ft_status.h"
+# include "ft_static.h"
 # include "hd_struct.h"
 # include "libft.h"
 # include "m_err.h"
 # include "msh_mac.h"
 # include "sig.h"
-
-# define HD_PATH "/dependencies/heredoc/tmp"
 
 // MAIN HD_CREATE FUNC
 void	process_hd(t_eofs *eofs);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:46 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/26 08:43:25 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 11:48:15 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "cmd.h"
 # include "env.h"
 # include "ft_exec.h"
-# include "ft_status.h"
+# include "ft_static.h"
 # include "hd.h"
 # include "history.h"
 # include "libft.h"

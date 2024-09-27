@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rootpath.c                                         :+:      :+:    :+:   */
+/*   ft_histpath.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 16:00:26 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/25 16:59:12 by hramaros         ###   ########.fr       */
+/*   Created: 2024/09/27 11:54:35 by ballain           #+#    #+#             */
+/*   Updated: 2024/09/27 11:54:39 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_exec.h"
+#include "ft_static.h"
 
-static char	*rootpath(char *new_path, int save)
+static char	*histpath(char *new_path, int save)
 {
 	static char	*path = NULL;
 
@@ -21,12 +21,12 @@ static char	*rootpath(char *new_path, int save)
 	return (path);
 }
 
-char	*get_rootpath(void)
+char	*get_histpath(void)
 {
-	return (rootpath(NULL, 0));
+	return (histpath(NULL, 0));
 }
 
-void	set_rootpath(char *new_root_path)
+void	set_histpath(char *new_root_path)
 {
-	rootpath(new_root_path, 1);
+	histpath(new_root_path, 1);
 }
