@@ -46,3 +46,10 @@ MANDATORY:
     - fix le history qui ne marche pas
     - approche sur le hd fichier temp 'cat << e && cat << e'
     - gestion des leaks pour : <<e | <<l
+
+TODO:
+    - $HOME (hramaros)
+    - Ctrl + D must print exit (hramaros)
+    - $SHLVL (ballain)
+    - unset $PATH --> ls --> core dumped (hramaros + ballain)
+    - > file.txt (persmission a ajouter -rw-r--r--) (ballain)

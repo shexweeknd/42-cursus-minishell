@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/27 08:24:50 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 10:33:12 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	exec_cmds_parent(t_exec_params *params, t_executable *exec)
 {
 	if (params->read_fd != 0)
 		close(params->read_fd);
-	set_status(ft_pipe_status(exec->s_fd, 0, 0));
 	ft_next_cmds(exec->p_fd, *params);
+	set_status(ft_pipe_status(exec->s_fd, 0, 0));
 }
 
 int	ft_exec_cmds(t_exec_params params)

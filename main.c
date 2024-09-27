@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 12:55:43 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/26 14:07:56 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 10:53:00 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_prompt	pt;
+	char		*hist_path;
 
 	((void)argc, (void)argv, (void)envp);
 	set_rootpath(getenv("PWD"));
-	init_prompt(&pt, envp, get_rootpath());
+	hist_path = ft_strjoin(get_rootpath(), HIST_PATH);
+	init_prompt(&pt, envp, hist_path);
+	free(hist_path);
 	while (1)
 	{
 		(setup_main_signals(), get_prompt(&pt, MSH_PROMPT));

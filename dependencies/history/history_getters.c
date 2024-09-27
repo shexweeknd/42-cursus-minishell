@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history_getters.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:50:45 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 13:24:57 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/27 10:40:20 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_hist_elem	*ft_get_history_offsetted(t_hist_elem *elem)
 		return (elem);
 	if (!elem->next && !elem->is_offset)
 		return (NULL);
-	while (!elem->is_offset && elem->next)
+	while (elem && !elem->is_offset)
 		elem = elem->next;
 	return (elem);
 }
