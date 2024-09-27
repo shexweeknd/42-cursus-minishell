@@ -6,11 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 12:55:43 by hramaros          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/09/27 13:26:06 by hramaros         ###   ########.fr       */
-=======
-/*   Updated: 2024/09/27 12:22:45 by ballain          ###   ########.fr       */
->>>>>>> 07e1964 (mise en place des statics)
+/*   Updated: 2024/09/27 13:41:46 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
