@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:52:55 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/26 14:25:20 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 08:39:27 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,44 +23,6 @@ void	display_lchist(t_hist_elem *hist_elem)
 		hist_elem = hist_elem->next;
 	}
 }
-
-/*
-void	display_rlhistory(void)
-{
-	HIST_ENTRY	**hist_list;
-	int			i;
-
-	printf("\033[31m[PRINTING READLINE HISTORY]: \033[0m\n");
-	i = 0;
-	hist_list = history_list();
-	if (hist_list)
-	{
-		while (hist_list[i])
-		{
-			printf("\033[31mCommand \033[0m: %s\n", hist_list[i]->line);
-			printf("\033[31mLine number \033[0m: %d\n\n", i);
-			i++;
-		}
-	}
-}
-
-void	show_formatted_rlhistory(void)
-{
-	HIST_ENTRY	**hist_list;
-	int			i;
-
-	hist_list = history_list();
-	if (hist_list)
-	{
-		i = 0;
-		while (hist_list[i])
-		{
-			printf("%4d %s\n", i + 1, hist_list[i]->line);
-			i++;
-		}
-	}
-}
-*/
 
 void	show_formatted_lchist(t_hist_elem *lchist)
 {

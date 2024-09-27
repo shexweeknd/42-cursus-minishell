@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:42 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 15:04:23 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/27 08:32:29 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static int	ft_check_pwd_error(char *arg)
 		if (*(tmp + 1) && (*(tmp + 1) != 'L' && *(tmp + 1) != 'P'))
 		{
 			error = 1;
-			printf("minishell: pwd: -%c: invalid option\n", *tmp);
-			printf("pwd: usage: pwd [-LP]\n");
+			ft_printf_fd("%s: pwd: -%c: invalid option\n", 2, MSH_LOG, *tmp);
+			ft_printf_fd("pwd: usage: pwd [-LP]\n");
 		}
 	}
 	if (tmp)

@@ -40,8 +40,9 @@ UPDATE :
 [FINISHED] - export
 [FINISHED] - status
 
-MANDATORY TESTS:
+MANDATORY:
     - exit [TOTEST]
     - heredoc [EXECUTION && TEST LEFT]
+    - fix le history qui ne marche pas
     - approche sur le hd fichier temp 'cat << e && cat << e'
     - gestion des leaks pour : <<e | <<l

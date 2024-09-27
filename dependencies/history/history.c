@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:39:28 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/25 20:00:24 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/27 08:42:40 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,16 @@ t_hist_elem	*new_history(char *command, int position)
 	t_hist_elem	*result;
 
 	if (!command)
-		return (printf("The command to parse in history is null.\n"), NULL);
+	{
+		ft_printf_fd("The command to parse in history is null.\n", 2);
+		return (NULL);
+	}
 	result = malloc(sizeof(t_hist_elem));
 	if (!result)
-		return (printf("Failed to malloc the command history."), NULL);
+	{
+		ft_printf_fd("Failed to malloc the command history.", 2);
+		return (NULL);
+	}
 	result->command = ft_strdup(command);
 	result->line_nbr = position;
 	result->is_offset = 0;
@@ -51,7 +57,6 @@ t_hist_elem	*get_history(char *file_path)
 	return (close(fd), result);
 }
 
-// WILL SERVE TO WRITE THE HISTORY TO THE FILE
 int	set_history(t_hist_elem *hist_elem, char *file_path)
 {
 	int		fd;
@@ -59,13 +64,13 @@ int	set_history(t_hist_elem *hist_elem, char *file_path)
 
 	fd = open(file_path, O_RDWR | O_CREAT, 0644);
 	if (fd < 0)
-		return (printf("Failed to write the history\n"), 0);
+		return (ft_printf_fd("Failed to write the history\n", 2), 0);
 	go_to_offset(fd, ft_get_history_offsetted(hist_elem));
 	remains = get_things_after_offset(fd);
 	close(fd);
 	fd = open(file_path, O_RDWR | O_CREAT, 0644);
 	if (fd < 0)
-		return (printf("Failed to write the history\n"), 0);
+		return (ft_printf_fd("Failed to write the history\n", 2), 0);
 	go_to_offset(fd, ft_get_history_offsetted(hist_elem));
 	if (ft_get_history_offsetted(hist_elem))
 		write_cmd_typed_after_offset(fd,

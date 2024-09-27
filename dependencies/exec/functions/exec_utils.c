@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:13:56 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/26 13:54:54 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/27 08:25:46 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	ft_check_valid_var(char *var, int status)
 {
 	if (ft_isdigit(*var))
 	{
-		printf("%s: export: `%s': not a valid identifier\n", MSH_LOG, var);
+		ft_printf_fd("%s: export: `%s': not a valid identifier\n", 2, MSH_LOG,
+			var);
 		return (1);
 	}
 	return (status);

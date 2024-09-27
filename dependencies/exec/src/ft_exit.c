@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:34 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 08:14:23 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 08:30:46 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 // TOTEST
 int	valid_exit_args(t_cmd *cmd)
 {
-	if (cmd->l_type == PIPE)
-		printf("ltype: pipe\n");
 	if (!cmd->args[1])
 	{
 		if (isatty(STDIN_FILENO))

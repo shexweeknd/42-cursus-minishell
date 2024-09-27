@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/27 08:19:26 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 08:24:50 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_exec_cmd(t_executable exec)
 	if (fork() == 0)
 	{
 		if (execve(exe, exec.cmd->args, exec.env->var) == -1)
-			(printf("%s\n", strerror(errno)), exit(EXIT_FAILURE));
+			(ft_printf_fd("%s\n", 2, strerror(errno)), exit(EXIT_FAILURE));
 	}
 	else
 		(wait(&status), ft_print_status(status));

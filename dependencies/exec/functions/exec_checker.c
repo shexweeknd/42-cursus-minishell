@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:28:57 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/26 11:44:24 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 08:43:04 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	p_exec_log(char *msg, char *file_exe)
 {
-	printf("%s: %s: %s\n", MSH_LOG, msg, file_exe);
+	ft_printf_fd("%s: %s: %s\n", 2, MSH_LOG, msg, file_exe);
 }
 
 int	cmd_found(char *file_exe, int simulate)

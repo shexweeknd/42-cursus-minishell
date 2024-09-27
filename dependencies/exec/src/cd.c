@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:17 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 13:45:15 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/27 08:46:22 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,13 @@ char	*ft_getpath(t_executable exec, char *home_path, char *old_path)
 	char	*path;
 
 	if (ft_getlen_strtab(exec.cmd->args) > 2)
-		return (printf("minishell: cd: trop d'arguments\n"), NULL);
-	else if (!exec.cmd->args[1] || \
-			(exec.cmd->args[1] && *exec.cmd->args[1] == '~'))
+		return (ft_printf_fd("%s: cd: too many arguments\n", 2, MSH_LOG), NULL);
+	else if (!exec.cmd->args[1] || (exec.cmd->args[1]
+			&& *exec.cmd->args[1] == '~'))
 	{
 		if (!home_path)
-			path = ((printf("minishell: cd : « HOME » non défini\n"), NULL));
+			path = ((ft_printf_fd("%s: cd : « HOME » undefined\n", 2, MSH_LOG),
+						NULL));
 		else if (exec.cmd->args[1])
 			path = ft_str_replace(exec.cmd->args[1], "~", home_path, 0);
 		else
@@ -75,7 +76,8 @@ char	*ft_getpath(t_executable exec, char *home_path, char *old_path)
 	else if (!ft_strcmp(exec.cmd->args[1], "-"))
 	{
 		if (!old_path)
-			path = ((printf("minishell: cd : « OLDPWD » non défini\n"), NULL));
+			path = ((ft_printf_fd("%s: cd : « OLDPWD » undefined\n", 2,
+							MSH_LOG), NULL));
 		else
 			path = ft_strdup(old_path);
 	}
@@ -120,7 +122,7 @@ int	cd(t_executable exec)
 	{
 		if (chdir(path) == -1)
 		{
-			printf("minishell: cd: %s: %s\n", path, strerror(errno));
+			ft_printf_fd("%s: cd: %s: %s\n", 2, MSH_LOG, path, strerror(errno));
 			return (free(path), 1);
 		}
 		else
