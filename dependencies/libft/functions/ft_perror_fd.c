@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_statics.c                                       :+:      :+:    :+:   */
+/*   ft_perror_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/27 18:09:19 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/27 18:10:05 by ballain          ###   ########.fr       */
+/*   Created: 2024/09/27 17:11:59 by ballain           #+#    #+#             */
+/*   Updated: 2024/09/27 17:12:59 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_static.h"
+#include "libft.h"
 
-void	ft_init_paths(char *cwd)
+void	ft_perror_fd(int fd, char *var[])
 {
-	set_rootpath(cwd);
-	get_hdpath();
-	get_histpath();
-}
+	int	i;
 
-void	ft_clear_paths(void)
-{
-	free(get_hdpath());
-	free(get_histpath());
+	i = -1;
+	while (var[++i])
+		write(fd, var[i], ft_strlen(var[i]));
+	write(fd, "\n", 1);
 }

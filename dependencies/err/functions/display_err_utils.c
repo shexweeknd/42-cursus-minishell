@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_err_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 10:46:07 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 08:24:20 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 18:06:04 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,23 @@ void	display_unexpected_chev(char *token)
 	char	*msg;
 
 	msg = ": syntax error near unexpected token ";
+	ft_perror_fd(2, (char *[]){MSH_LOG, msg, "`", token, "'", NULL});
 	if (!ft_strncmp(token, ">>", 2))
-		ft_printf_fd("%s%s`%.2s'\n", 2, MSH_LOG, msg, token);
+		ft_perror_fd(2, (char *[]){MSH_LOG, msg, "`", token, "'", NULL});
 	else if (!ft_strncmp(token, ">|", 2))
-		ft_printf_fd("%s%s`%.2s'\n", 2, MSH_LOG, msg, token);
+		ft_perror_fd(2, (char *[]){MSH_LOG, msg, "`", token, "'", NULL});
 	else if (!ft_strncmp(token, ">", 1))
-		ft_printf_fd("%s%s`%.1s'\n", 2, MSH_LOG, msg, token);
+		ft_perror_fd(2, (char *[]){MSH_LOG, msg, "`", token, "'", NULL});
 	else if (!ft_strncmp(token, "<<<", 3))
-		ft_printf_fd("%s%s`%.3s'\n", 2, MSH_LOG, msg, token);
+		ft_perror_fd(2, (char *[]){MSH_LOG, msg, "`", token, "'", NULL});
 	else if (!ft_strncmp(token, "<<", 2))
-		ft_printf_fd("%s%s`%.2s'\n", 2, MSH_LOG, msg, token);
+		ft_perror_fd(2, (char *[]){MSH_LOG, msg, "`", token, "'", NULL});
 	else if (!ft_strncmp(token, "<>", 2))
-		ft_printf_fd("%s%s`%.2s'\n", 2, MSH_LOG, msg, token);
+		ft_perror_fd(2, (char *[]){MSH_LOG, msg, "`", token, "'", NULL});
 	else if (!ft_strncmp(token, "<", 1))
-		ft_printf_fd("%s%s`%.1s'\n", 2, MSH_LOG, msg, token);
+		ft_perror_fd(2, (char *[]){MSH_LOG, msg, "`", token, "'", NULL});
 	else if (!ft_strncmp(token, "newline", 7))
-		ft_printf_fd("%s%s`%.7s'\n", 2, MSH_LOG, msg, token);
+		ft_perror_fd(2, (char *[]){MSH_LOG, msg, "`", token, "'", NULL});
 }
 
 void	display_unexpected_pipe(char *token)
@@ -41,11 +42,11 @@ void	display_unexpected_pipe(char *token)
 
 	msg = ": syntax error near unexpected token ";
 	if (!ft_strncmp(token, "||", 2))
-		ft_printf_fd("%s%s`%.2s'\n", 2, MSH_LOG, msg, token);
+		ft_perror_fd(2, (char *[]){MSH_LOG, msg, "`", token, "'", NULL});
 	else if (!ft_strncmp(token, "|&", 2))
-		ft_printf_fd("%s%s`%.2s'\n", 2, MSH_LOG, msg, token);
+		ft_perror_fd(2, (char *[]){MSH_LOG, msg, "`", token, "'", NULL});
 	else if (!ft_strncmp(token, "|", 1))
-		ft_printf_fd("%s%s`%.1s'\n", 2, MSH_LOG, msg, token);
+		ft_perror_fd(2, (char *[]){MSH_LOG, msg, "`", token, "'", NULL});
 	return ;
 }
 
@@ -55,9 +56,9 @@ void	display_unexpected_and(char *token)
 
 	msg = ": syntax error near unexpected token ";
 	if (!ft_strncmp(token, "&&", 2))
-		ft_printf_fd("%s%s`%.2s'\n", 2, MSH_LOG, msg, token);
+		ft_perror_fd(2, (char *[]){MSH_LOG, msg, "`", token, "'", NULL});
 	else if (!ft_strncmp(token, "&", 1))
-		ft_printf_fd("%s%s`%.1s'\n", 2, MSH_LOG, msg, token);
+		ft_perror_fd(2, (char *[]){MSH_LOG, msg, "`", token, "'", NULL});
 	return ;
 }
 

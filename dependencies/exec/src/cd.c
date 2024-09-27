@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:17 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 08:46:22 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 18:15:19 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,12 @@ char	*ft_getpath(t_executable exec, char *home_path, char *old_path)
 	char	*path;
 
 	if (ft_getlen_strtab(exec.cmd->args) > 2)
-		return (ft_printf_fd("%s: cd: too many arguments\n", 2, MSH_LOG), NULL);
+		return (ft_error_cd(1), NULL);
 	else if (!exec.cmd->args[1] || (exec.cmd->args[1]
 			&& *exec.cmd->args[1] == '~'))
 	{
 		if (!home_path)
-			path = ((ft_printf_fd("%s: cd : « HOME » undefined\n", 2, MSH_LOG),
-						NULL));
+			path = (ft_error_cd(2), NULL);
 		else if (exec.cmd->args[1])
 			path = ft_str_replace(exec.cmd->args[1], "~", home_path, 0);
 		else
@@ -76,8 +75,7 @@ char	*ft_getpath(t_executable exec, char *home_path, char *old_path)
 	else if (!ft_strcmp(exec.cmd->args[1], "-"))
 	{
 		if (!old_path)
-			path = ((ft_printf_fd("%s: cd : « OLDPWD » undefined\n", 2,
-							MSH_LOG), NULL));
+			path = (ft_error_cd(3), NULL);
 		else
 			path = ft_strdup(old_path);
 	}
@@ -122,7 +120,8 @@ int	cd(t_executable exec)
 	{
 		if (chdir(path) == -1)
 		{
-			ft_printf_fd("%s: cd: %s: %s\n", 2, MSH_LOG, path, strerror(errno));
+			ft_perror_fd(2, (char *[]){MSH_LOG, ": cd: ", \
+				path, ": ", strerror(errno), NULL});
 			return (free(path), 1);
 		}
 		else

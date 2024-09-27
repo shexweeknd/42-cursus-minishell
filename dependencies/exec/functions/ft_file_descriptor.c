@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:17:58 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/27 11:34:42 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/27 18:15:55 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,15 @@ int	ft_pipe_status(int fd[0], int value, int send)
 		return (value);
 	}
 	return (0);
+}
+
+void	ft_error_cd(int type)
+{
+	if (type == 1)
+		ft_perror_fd(2, (char *[]){MSH_LOG, ": cd: too many arguments", NULL});
+	else if (type == 2)
+		ft_perror_fd(2, (char *[]){MSH_LOG, ": cd : « HOME » undefined", NULL});
+	else if (type == 3)
+		ft_perror_fd(2, (char *[]){MSH_LOG, ": cd : « OLDPWD » undefined", \
+		NULL});
 }

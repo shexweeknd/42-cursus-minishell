@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/27 13:15:40 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:20:13 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	ft_exec_cmd(t_executable exec)
 	if (fork() == 0)
 	{
 		if (execve(exe, exec.cmd->args, exec.env->var) == -1)
-			(ft_printf_fd("%s\n", 2, strerror(errno)), exit(EXIT_FAILURE));
+			(ft_perror_fd(2, (char *[]){strerror(errno), "\n", NULL}), \
+			exit(EXIT_FAILURE));
 	}
 	else
 		(wait(&status), ft_print_status(status));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_checker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:28:57 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 11:41:03 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 18:07:47 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	p_exec_log(char *msg, char *file_exe)
 {
-	ft_printf_fd("%s: %s: %s\n", 2, MSH_LOG, msg, file_exe);
+	ft_perror_fd(2, (char *[]){MSH_LOG, ": ", msg, ": ", file_exe, NULL});
 }
 
 int	cmd_found(char *file_exe, int simulate)
@@ -50,7 +50,8 @@ int	is_directory(const char *path)
 	dir = opendir(path);
 	if (dir)
 	{
-		ft_printf_fd("%s: %s: Is a directory\n", 2, MSH_LOG, path);
+		ft_perror_fd(2, \
+			(char *[]){MSH_LOG, ": ", (char *)path, ": Is a directory", NULL});
 		return (closedir(dir), set_status(126), 1);
 	}
 	return (0);

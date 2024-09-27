@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:42 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 08:32:29 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 18:08:21 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
+
+void	ft_pwd_error(int type, char value)
+{
+	char	tmp[2];
+
+	tmp[0] = value;
+	tmp[1] = 0;
+	if (type == 1)
+		ft_perror_fd(2, (char *[]){MSH_LOG, ": pwd: -", \
+		tmp, ": invalid option", NULL});
+	else if (type == 2)
+		ft_perror_fd(1, (char *[]){"pwd: usage: pwd [-LP]", NULL});
+}
 
 static int	ft_check_pwd_error(char *arg)
 {
@@ -32,8 +45,8 @@ static int	ft_check_pwd_error(char *arg)
 		if (*(tmp + 1) && (*(tmp + 1) != 'L' && *(tmp + 1) != 'P'))
 		{
 			error = 1;
-			ft_printf_fd("%s: pwd: -%c: invalid option\n", 2, MSH_LOG, *tmp);
-			ft_printf_fd("pwd: usage: pwd [-LP]\n");
+			ft_pwd_error(1, *tmp);
+			ft_pwd_error(2, 0);
 		}
 	}
 	if (tmp)

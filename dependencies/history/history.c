@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:39:28 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 08:42:40 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 18:11:54 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@ t_hist_elem	*new_history(char *command, int position)
 
 	if (!command)
 	{
-		ft_printf_fd("The command to parse in history is null.\n", 2);
+		ft_perror_fd(2, (char *[]){"The command to parse in history is null.", \
+		NULL});
 		return (NULL);
 	}
 	result = malloc(sizeof(t_hist_elem));
 	if (!result)
 	{
-		ft_printf_fd("Failed to malloc the command history.", 2);
+		ft_perror_fd(2, (char *[]){"Failed to malloc the command history.", \
+		NULL});
 		return (NULL);
 	}
 	result->command = ft_strdup(command);
@@ -64,13 +66,15 @@ int	set_history(t_hist_elem *hist_elem, char *file_path)
 
 	fd = open(file_path, O_RDWR | O_CREAT, 0644);
 	if (fd < 0)
-		return (ft_printf_fd("Failed to write the history\n", 2), 0);
+		return (ft_perror_fd(2, (char *[]){"Failed to write the history", \
+			NULL}), 0);
 	go_to_offset(fd, ft_get_history_offsetted(hist_elem));
 	remains = get_things_after_offset(fd);
 	close(fd);
 	fd = open(file_path, O_RDWR | O_CREAT, 0644);
 	if (fd < 0)
-		return (ft_printf_fd("Failed to write the history\n", 2), 0);
+		return (ft_perror_fd(2, (char *[]){"Failed to write the history", \
+			NULL}), 0);
 	go_to_offset(fd, ft_get_history_offsetted(hist_elem));
 	if (ft_get_history_offsetted(hist_elem))
 		write_cmd_typed_after_offset(fd,

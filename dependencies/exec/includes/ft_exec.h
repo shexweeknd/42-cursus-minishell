@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/27 11:59:05 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/27 18:15:47 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ int				ft_exec_cmds(t_exec_params params);
 void			ft_reset_fd(t_executable exec);
 void			ft_manage_redirect_file(int fd[2], t_cmd *cmd);
 int				ft_pipe_status(int fd[0], int value, int send);
+void			ft_error_cd(int type);
 
 #endif

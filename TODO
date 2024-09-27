@@ -53,3 +53,7 @@ MANDATORY:
 TODO:
     - $SHLVL (ballain)
     - > file.txt (persmission a ajouter -rw-r--r--) (ballain)
+
+RM  :
+    error chelou dans ft_exit
+    besoin de precision sur le second error dans pwd a propos de ft_printf_fd sans fd dans le parametre

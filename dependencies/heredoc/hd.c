@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:52:30 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 08:46:37 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 18:00:16 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ size_t	fullfill_fd(int fd, char *eof)
 		free(line);
 	}
 	if (!line && !get_status())
-		ft_printf_fd("%s%s (wanted `%s')\n", 2, warn_msg, MSH_LOG, eof);
+		ft_perror_fd(2, (char *[]){warn_msg, MSH_LOG, " (wanted `", eof, "')", \
+			NULL});
 	return (close(fd), free(line), buffer_size);
 }
 

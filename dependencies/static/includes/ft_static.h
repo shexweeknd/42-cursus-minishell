@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 09:40:01 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 12:21:52 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/27 18:09:50 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ char	*get_hdpath(void);
 
 /* _________________________ STATICS _________________________ */
 void	ft_init_paths(char *cwd);
-void	ft_clear_paths();
+void	ft_clear_paths(void);
 
 #endif
