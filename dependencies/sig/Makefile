@@ -15,12 +15,17 @@ FUNC_OBJS	= $(FUNC:functions/%.c=output/%.o)
 # DEPENDENCIES
 DEP_PATH	= ..
 STATIC_PATH	= $(DEP_PATH)/static
+LIBFT_PATH	= $(DEP_PATH)/libft
 
 # INCLUDES
 SIG_INC		= -Iincludes
+TEMPLATES	= -I$(DEP_PATH)/templates
+LIBFT_INC	= -I$(LIBFT_PATH)/includes
 STATIC_INC	= -I$(STATIC_PATH)/includes
 INCLUDES	= \
+				$(LIBFT_INC)	\
 				$(STATIC_INC)	\
+				$(TEMPLATES)	\
 				$(SIG_INC)
 
 # COMPILATION CONFIG

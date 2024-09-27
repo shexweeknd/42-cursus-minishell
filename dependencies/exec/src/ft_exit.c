@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:34 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 08:30:46 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 12:30:14 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,12 @@ int	valid_exit_args(t_cmd *cmd)
 
 void	ft_exit(t_executable exec)
 {
-	char	*wd;
-
-	wd = ft_strjoin(get_rootpath(), HIST_PATH);
 	if (valid_exit_args(exec.cmd))
 	{
-		(set_history(exec.hist, wd), free(wd));
+		set_history(exec.hist, get_histpath());
 		ft_free_env(exec.env);
 		ft_free_cmds(exec.cmd);
 		exit(get_status());
+		ft_clear_paths();
 	}
 }

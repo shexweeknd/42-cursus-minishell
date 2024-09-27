@@ -1,26 +1,35 @@
 # PROGRAM NAME
-NAME		= libstatic.a
+NAME			= libstatic.a
 
 # FILES
-FILES		= \
-				ft_rootpath.c	\
-				ft_status.c
+FILES			= \
+					ft_rootpath.c	\
+					ft_hdpath.c		\
+					ft_histpath.c	\
+					ft_status.c		\
+					ft_statics.c
 
 # OBJECT FILES
-OBJS		= $(FILES:%.c=output/%.o)
-FUNC_OBJS	= $(FUNC:functions/%.c=output/%.o)
+OBJS			= $(FILES:%.c=output/%.o)
+FUNC_OBJS		= $(FUNC:functions/%.c=output/%.o)
 
 # DEPENDENCIES
-DEP_PATH	= ..
+DEP_PATH		= ..
+LIBFT_PATH		= $(DEP_PATH)/libft
 
 # INCLUDES
-STATUS_INC	= -Iincludes
-INCLUDES	= $(STATUS_INC)
+STATIC_INC		= -Iincludes
+TEMPLATES		= -I$(DEP_PATH)/templates
+LIBFT_INC		= -I$(LIBFT_PATH)/includes
+INCLUDES		= \
+					$(TEMPLATES)	\
+					$(LIBFT_INC)	\
+					$(STATIC_INC)
 
 # COMPILATION CONFIG
-CC		= cc -g
-AR		= ar rcs
-CFLAGS	= -Wall -Wextra -Werror
+CC				= cc -g
+AR				= ar rcs
+CFLAGS			= -Wall -Wextra -Werror
 
 # FUNCTION
 define Compile

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:13:56 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/27 11:25:52 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 12:23:41 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	ft_free_executable(t_executable exec, t_cmd *cmd)
 	ft_free_cmds(cmd);
 	ft_free_env(exec.env);
 	free_lchistory(exec.hist);
+	ft_clear_paths();
 }
 
 void	ft_next_cmds(int fd[2], t_exec_params params)

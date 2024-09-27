@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/26 13:02:37 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/27 12:37:51 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	*ft_get_hdvalue(t_cmd *_cmd, t_hd *hd)
 	if (tmp != _cmd)
 		tmp = (i++, _cmd);
 	tmp_name = ft_init_tmp_name(i);
-	fd = open(tmp_name, O_WRONLY | O_CREAT, 0777);
+	fd = open(tmp_name, O_WRONLY | O_TRUNC | O_CREAT, 0777);
 	if (fd == -1)
 		return (NULL);
 	buffer = (char *)malloc(sizeof(char) * (hd->size));

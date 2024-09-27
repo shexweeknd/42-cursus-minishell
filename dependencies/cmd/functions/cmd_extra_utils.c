@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:10 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/27 11:33:01 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/27 12:35:50 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	*ft_init_tmp_name(int index)
 	int		j;
 	int		len;
 	char	*tmp_name;
+	char	*r_name;
 
 	i = 0;
 	j = ((len = ft_nblen(index)), len);
@@ -32,7 +33,8 @@ char	*ft_init_tmp_name(int index)
 	}
 	i += len;
 	ft_strlcpy(tmp_name + i, ".txt", 5);
-	return (tmp_name);
+	r_name = ft_join((char *[]){get_hdpath(), "/", tmp_name, NULL});
+	return (free(tmp_name), r_name);
 }
 
 t_rfile	*_init_rfile(t_redirect redirect)
