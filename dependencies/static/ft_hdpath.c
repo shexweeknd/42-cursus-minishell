@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_mac.h                                          :+:      :+:    :+:   */
+/*   ft_hdpath.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 08:39:08 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 11:56:30 by ballain          ###   ########.fr       */
+/*   Created: 2024/09/27 11:54:28 by ballain           #+#    #+#             */
+/*   Updated: 2024/09/27 11:54:42 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MSH_MAC_H
-# define MSH_MAC_H
+#include "ft_static.h"
 
-# define MSH_PROMPT "\033[0;32mMinishell$\033[0;0m "
-# define MSH_LOG "\033[0;32mMinishell\033[0;0m"
-# define HIST_PATH "/dependencies/history/src/minishell_history.txt"
-# define HD_PATH "/dependencies/heredoc/tmp"
+static char	*hdpath(char *new_path, int save)
+{
+	static char	*path = NULL;
 
-#endif
+	if (save)
+		path = new_path;
+	return (path);
+}
+
+char	*get_hdpath(void)
+{
+	return (hdpath(NULL, 0));
+}
+
+void	set_hdpath(char *new_root_path)
+{
+	hdpath(new_root_path, 1);
+}

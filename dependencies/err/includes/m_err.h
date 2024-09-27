@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   m_err.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 08:58:01 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/26 09:00:48 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 11:45:10 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef M_ERR_H
 # define M_ERR_H
 
-# include "ft_status.h"
+# include "ft_static.h"
 # include "hd.h"
 # include "libft.h"
 # include <readline/history.h>

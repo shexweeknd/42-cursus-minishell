@@ -6,7 +6,11 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/09/27 11:37:11 by hramaros         ###   ########.fr       */
+=======
+/*   Updated: 2024/09/27 11:38:20 by ballain          ###   ########.fr       */
+>>>>>>> 89d7016 (mise en place des statics)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +20,7 @@
 # include "cmd.h"
 # include "env.h"
 # include "exec_struct.h"
-# include "ft_status.h"
+# include "ft_static.h"
 # include "history.h"
 # include "libft.h"
 # include "prompt_struct.h"
@@ -65,10 +69,6 @@ int				is_directory(const char *path);
 
 /* _________________________ EXEC _________________________ */
 int				ft_exec_cmds(t_exec_params params);
-
-/* _________________________ PATH _________________________ */
-char			*get_rootpath(void);
-void			set_rootpath(char *new_root_path);
 
 /* _________________________ FD _________________________ */
 void			ft_reset_fd(t_executable exec);
