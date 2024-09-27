@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:13:56 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/27 11:25:52 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 13:08:51 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,16 @@ char	*ft_search_executable(t_executable exec)
 {
 	char	*tmp;
 
-	if (!exec.env->path || is_directory(exec.cmd->args[0]))
+	if (is_directory(exec.cmd->args[0]) || (!exec.env->path
+			&& (!cmd_found(exec.cmd->args[0], 0)
+				|| !cmd_executable(exec.cmd->args[0], 0))))
 		return (NULL);
-	if (*exec.cmd->args[0] != '/' && ft_strncmp(exec.cmd->args[0], "./", 2)
+	else if (*exec.cmd->args[0] != '/' && ft_strncmp(exec.cmd->args[0], "./", 2)
 		&& ft_strncmp(exec.cmd->args[0], "~/", 2))
 	{
 		tmp = is_exec_from_path(&exec);
 		if (tmp == NULL)
-			return (cmd_found(exec.cmd->args[0], 1), tmp);
+			return (cmd_found(exec.cmd->args[0], 1), NULL);
 		if (tmp)
 			return (tmp);
 	}

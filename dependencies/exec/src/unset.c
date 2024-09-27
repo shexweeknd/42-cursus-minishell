@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:49 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 15:19:19 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/27 11:46:42 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static int	ft_delvar(t_env *env, char *var_name)
 	len = ft_strlen(var_name);
 	while (env->var[++i])
 	{
-		if (ft_strncmp(env->var[i], var_name, len) == 0 && \
-			env->var[i][len] == '=')
+		if (ft_strncmp(env->var[i], var_name, len) == 0
+			&& env->var[i][len] == '=')
 			free(env->var[i]);
 		else
 			new_env[j++] = env->var[i];
@@ -36,14 +36,14 @@ static int	ft_delvar(t_env *env, char *var_name)
 	new_env[j] = 0;
 	env->var = (free(env->var), new_env);
 	if (!ft_strcmp(var_name, "PATH"))
-		(free(*env->path), free(env->path));
+		(free(*env->path), free(env->path), env->path = NULL);
 	return (0);
 }
 
 int	unset(t_executable exec)
 {
-	int		i;
-	int		status;
+	int	i;
+	int	status;
 
 	if (!exec.cmd->args[1])
 		return (0);

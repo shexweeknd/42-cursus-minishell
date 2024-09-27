@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:34 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 08:30:46 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 13:27:28 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,13 @@ void	ft_exit(t_executable exec)
 	char	*wd;
 
 	wd = ft_strjoin(get_rootpath(), HIST_PATH);
-	if (valid_exit_args(exec.cmd))
+	if (!exec.cmd || valid_exit_args(exec.cmd))
 	{
 		(set_history(exec.hist, wd), free(wd));
 		ft_free_env(exec.env);
 		ft_free_cmds(exec.cmd);
+		if (!exec.cmd)
+			printf("exit\n");
 		exit(get_status());
 	}
 }

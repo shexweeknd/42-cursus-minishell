@@ -40,6 +40,8 @@ UPDATE :
 [FINISHED] - export
 [FINISHED] - status
 [FINISHED] - $HOME
+[FINISHED] - unset $PATH --> ls --> core dumped (hramaros + ballain)
+[FINISHED] - Ctrl + D must print exit (hramaros)
 
 MANDATORY:
     - exit [TOTEST]
@@ -49,7 +51,5 @@ MANDATORY:
     - gestion des leaks pour : <<e | <<l
 
 TODO:
-    - Ctrl + D must print exit (hramaros)
     - $SHLVL (ballain)
-    - unset $PATH --> ls --> core dumped (hramaros + ballain)
     - > file.txt (persmission a ajouter -rw-r--r--) (ballain)

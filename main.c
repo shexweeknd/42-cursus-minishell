@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 12:55:43 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 10:53:00 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 13:26:06 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	main(int argc, char **argv, char **envp)
 		(setup_main_signals(), get_prompt(&pt, MSH_PROMPT));
 		pt.hist = ft_append_hist_elem(pt.hist, ft_strdup(pt.line));
 		if (pt.to_exit)
-			return (exit(get_status()), 0);
+			return (ft_exit((t_executable){{0, 0}, {0, 0}, {0, 0}, NULL,
+					pt.venv, pt.hist}), 0);
 		if (!pt.to_execute && (free(pt.line), 1))
 			continue ;
 		pt.cmd = ft_get_cmds(pt.line);
