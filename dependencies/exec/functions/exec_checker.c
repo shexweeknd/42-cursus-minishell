@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:28:57 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 08:43:04 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/27 11:41:03 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,19 @@ int	cmd_executable(char *file_exe, int simulate)
 		return (1);
 	p_exec_log("Permission denied", file_exe);
 	return (set_status(126), 0);
+}
+
+int	is_directory(const char *path)
+{
+	DIR	*dir;
+
+	dir = opendir(path);
+	if (dir)
+	{
+		ft_printf_fd("%s: %s: Is a directory\n", 2, MSH_LOG, path);
+		return (closedir(dir), set_status(126), 1);
+	}
+	return (0);
 }
 
 char	*is_exec_from_path(t_executable *exec)

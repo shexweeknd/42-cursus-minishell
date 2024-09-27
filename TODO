@@ -39,6 +39,7 @@ UPDATE :
 [FINISHED] - unset
 [FINISHED] - export
 [FINISHED] - status
+[FINISHED] - $HOME
 
 MANDATORY:
     - exit [TOTEST]
@@ -48,7 +49,6 @@ MANDATORY:
     - gestion des leaks pour : <<e | <<l
 
 TODO:
-    - $HOME (hramaros)
     - Ctrl + D must print exit (hramaros)
     - $SHLVL (ballain)
     - unset $PATH --> ls --> core dumped (hramaros + ballain)

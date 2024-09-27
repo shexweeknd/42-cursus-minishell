@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/26 12:48:28 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/27 11:37:11 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@
 # include "history.h"
 # include "libft.h"
 # include "prompt_struct.h"
-# include <stdbool.h>
+# include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/stat.h>
@@ -60,6 +61,7 @@ void			p_exec_log(char *msg, char *file_exe);
 int				cmd_found(char *file_exe, int simulate);
 int				cmd_executable(char *file_exe, int simulate);
 char			*is_exec_from_path(t_executable *exec);
+int				is_directory(const char *path);
 
 /* _________________________ EXEC _________________________ */
 int				ft_exec_cmds(t_exec_params params);
