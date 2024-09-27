@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 12:55:43 by hramaros          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/09/27 13:26:06 by hramaros         ###   ########.fr       */
+=======
+/*   Updated: 2024/09/27 12:22:45 by ballain          ###   ########.fr       */
+>>>>>>> 07e1964 (mise en place des statics)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +19,10 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_prompt	pt;
-	char		*hist_path;
 
 	((void)argc, (void)argv, (void)envp);
-	set_rootpath(getenv("PWD"));
-	hist_path = ft_strjoin(get_rootpath(), HIST_PATH);
-	init_prompt(&pt, envp, hist_path);
-	free(hist_path);
+	ft_init_paths(getenv("PWD"));
+	init_prompt(&pt, envp, get_histpath());
 	while (1)
 	{
 		(setup_main_signals(), get_prompt(&pt, MSH_PROMPT));

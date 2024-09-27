@@ -6,27 +6,17 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:54:35 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/27 11:54:39 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/27 12:29:05 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_static.h"
 
-static char	*histpath(char *new_path, int save)
+char	*get_histpath(void)
 {
 	static char	*path = NULL;
 
-	if (save)
-		path = new_path;
+	if (!path)
+		path = ft_strjoin(get_rootpath(), HIST_PATH);
 	return (path);
-}
-
-char	*get_histpath(void)
-{
-	return (histpath(NULL, 0));
-}
-
-void	set_histpath(char *new_root_path)
-{
-	histpath(new_root_path, 1);
 }

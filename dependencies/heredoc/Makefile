@@ -76,6 +76,7 @@ $(NAME)		: $(OBJS) $(FUNC_OBJS)
 				$(call CreateLib,$^,$@)
 
 clean		:
+				rm -rf tmp
 				rm -rf $(OBJS)
 				rm -rf $(FUNC_OBJS)
 

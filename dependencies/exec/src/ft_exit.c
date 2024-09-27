@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:34 by hramaros          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/09/27 13:27:28 by hramaros         ###   ########.fr       */
+=======
+/*   Updated: 2024/09/27 12:30:14 by ballain          ###   ########.fr       */
+>>>>>>> 07e1964 (mise en place des statics)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +42,21 @@ int	valid_exit_args(t_cmd *cmd)
 
 void	ft_exit(t_executable exec)
 {
+<<<<<<< HEAD
 	char	*wd;
 
 	wd = ft_strjoin(get_rootpath(), HIST_PATH);
 	if (!exec.cmd || valid_exit_args(exec.cmd))
+=======
+	if (valid_exit_args(exec.cmd))
+>>>>>>> 07e1964 (mise en place des statics)
 	{
-		(set_history(exec.hist, wd), free(wd));
+		set_history(exec.hist, get_histpath());
 		ft_free_env(exec.env);
 		ft_free_cmds(exec.cmd);
 		if (!exec.cmd)
 			printf("exit\n");
 		exit(get_status());
+		ft_clear_paths();
 	}
 }
