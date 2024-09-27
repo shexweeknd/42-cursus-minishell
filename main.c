@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 12:55:43 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 13:42:41 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/27 20:38:03 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

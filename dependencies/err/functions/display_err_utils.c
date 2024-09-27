@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_err_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 10:46:07 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 18:06:04 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/27 20:22:08 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	display_unexpected_chev(char *token)
 	char	*msg;
 
 	msg = ": syntax error near unexpected token ";
-	ft_perror_fd(2, (char *[]){MSH_LOG, msg, "`", token, "'", NULL});
 	if (!ft_strncmp(token, ">>", 2))
 		ft_perror_fd(2, (char *[]){MSH_LOG, msg, "`", token, "'", NULL});
 	else if (!ft_strncmp(token, ">|", 2))

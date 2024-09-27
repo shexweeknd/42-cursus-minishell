@@ -6,7 +6,7 @@ SIGNAUX:
 
 GERER les leaks d'history lors des executions de commandes multiples
 
-DEBUG de secondary prompt:
+[FINISHED] DEBUG de secondary prompt:
 '''
     Minishell$ ls |
     > ^C
@@ -25,7 +25,6 @@ UPDATE :
 [FINISHED] 'echo "it works"' (doit afficher comme dans bash)
 [FINISHED] 'echo it works' (doit afficher comme dans bash)
 [FINISHED] - 'echo "cat lol.c | cat > lol.c"' (affiche 'cat lol.c | cat > lol.c' sans attendre)
-[FINISHED] - '$? || echo $?'
 [FINISHED] - 'cat | cat | ls' (affiche ls avant d'attendre le input de cat)
 [FINISHED] - '> foo' (creer foo et passe a get_line())
 [FINISHED] - '/bin/ls' (doit s'executer)
@@ -45,14 +44,18 @@ UPDATE :
 [FINISHED] - exit [TOTEST]
 [FINISHED] - heredoc [EXECUTION && TEST LEFT]
 [FINISHED] - fix le history qui ne marche pas
+[FINISHED] - > file.txt (persmission a ajouter -rw-r--r--) (ballain)
+[FINISHED] - approche sur le hd fichier temp 'cat << e && cat << e'
 
 MANDATORY:
-    - approche sur le hd fichier temp 'cat << e && cat << e'
     - gestion des leaks pour : <<e | <<l
+    - gestion des leaks pour : 'cat /dev/random | ls'
+    - gestion des leaks pour : 'exit | exit'
 
 TODO:
+    - '$? || echo $?' (doit faire le passage de status vers la droite)
     - $SHLVL (ballain)
-    - > file.txt (persmission a ajouter -rw-r--r--) (ballain)
+    - ls | exit --> echo $? (hramaros)
 
 RM  :
     error chelou dans ft_exit
