@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:43:12 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/28 11:36:06 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/28 15:52:55 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,12 @@ void	ft_exit(t_executable exec)
 {
 	if (!exec.cmd || valid_exit_args(exec.cmd))
 	{
-		set_history(exec.hist, get_histpath());
-		ft_free_env(exec.env);
-		ft_free_cmds(exec.cmd);
+		if (exec.hist)
+			set_history(exec.hist, get_histpath());
+		if (exec.env)
+			ft_free_env(exec.env);
+		if (exec.cmd)
+			ft_free_cmds(exec.cmd);
 		if (!exec.cmd)
 			printf("exit\n");
 		ft_clear_paths();

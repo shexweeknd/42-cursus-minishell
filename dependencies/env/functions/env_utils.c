@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 15:26:35 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 12:01:41 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/28 15:57:05 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,14 @@ void	ft_free_env(t_env *env)
 	int	i;
 
 	i = 0;
-	while (env->var[i])
+	while (env && env->var && env->var[i])
 		free(env->var[i++]);
-	free(env->var);
+	if (env && env->var)
+		free(env->var);
 	if (env->path)
 		free(*(env->path));
-	free(env->path);
-	free(env);
+	if (env && env->path)
+		free(env->path);
+	if (env)
+		free(env);
 }

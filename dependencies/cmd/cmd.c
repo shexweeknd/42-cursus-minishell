@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:50 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/26 12:37:40 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 15:54:05 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_cmd	*ft_get_cmds(char *cmd)
 		tmp = ft_init_cmd(cmd);
 		ft_add_back_((void **)(&cmds), tmp, actions);
 		i = ((len = 0), 0);
-		while (tmp->args[i])
+		while (tmp && tmp->args && tmp->args[i])
 			len += ft_strlen(tmp->args[i++]);
 		cmd += len;
 		while (*cmd && !ft_is_delimiter(*cmd))

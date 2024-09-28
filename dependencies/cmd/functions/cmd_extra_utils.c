@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:10 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/27 12:35:50 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 15:56:17 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_cmd	*_init_cmd(char *cmd)
 	int		i;
 
 	r_cmd = (t_cmd *)malloc(sizeof(t_cmd));
-	if (!cmd)
+	if (!r_cmd)
 		return (NULL);
 	r_cmd->nb_arg = ft_get_args_len(cmd);
 	if (r_cmd->nb_arg == 0)

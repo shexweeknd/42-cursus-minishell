@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 05:51:07 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/28 11:03:42 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/28 16:12:11 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ char	*get_line(t_prompt *prompt, char *msh_name)
 	line = NULL;
 	while (line == NULL || is_only_spaces(line))
 	{
-		free(line);
+		if (line)
+			free(line);
 		line = readline(msh_name);
 		if (line == NULL)
 			return (prompt->to_exit = 1, NULL);

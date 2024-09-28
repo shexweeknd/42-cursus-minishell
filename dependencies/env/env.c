@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:22:05 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/24 13:20:20 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 15:47:22 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**ft_split_path(char *src)
 	if (!r_value)
 		return (NULL);
 	tmp = ft_strdup(src);
-	while (*tmp)
+	while (tmp && *tmp)
 	{
 		r_value[i++] = tmp;
 		while (*tmp && *tmp != ':')

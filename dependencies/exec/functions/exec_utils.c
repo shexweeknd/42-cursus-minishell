@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:42:58 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/28 14:31:07 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/28 16:04:33 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ char	*ft_search_executable(t_executable exec)
 	char	*tmp;
 
 	exec.cmd->args[0] = subst_home(exec.cmd->args[0], exec.env);
-	if (is_directory(exec.cmd->args[0]) || (!exec.env->path
-			&& (!cmd_found(exec.cmd->args[0], 0)
+	if ((!exec.cmd || !exec.cmd->args) || is_directory(exec.cmd->args[0]) || \
+		((!exec.env || !exec.env->path) && (!cmd_found(exec.cmd->args[0], 0) \
 				|| !cmd_executable(exec.cmd->args[0], 0))))
 		return (NULL);
 	else if (*exec.cmd->args[0] != '/' && ft_strncmp(exec.cmd->args[0], "./", 2)
