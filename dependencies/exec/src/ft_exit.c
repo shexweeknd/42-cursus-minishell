@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:43:12 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/28 09:28:42 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 11:35:15 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	valid_exit_args(t_cmd *cmd)
 			set_status(ft_atoi(cmd->args[1])), 0);
 	if (cmd->args[1] && ft_isnbr(cmd->args[1]))
 		set_status(ft_atoi(cmd->args[1]));
-	printf("STATUS	: [%d]\n", get_status());
 	return (1);
 }
 
