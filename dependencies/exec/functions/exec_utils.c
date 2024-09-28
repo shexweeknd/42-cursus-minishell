@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:42:58 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/28 11:21:45 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 11:25:28 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	ft_check_valid_var(char *var, int status)
 {
 	if (ft_isdigit(*var))
 	{
-		ft_perror_fd(2, (char *[]){MSH_LOG, ": export: `", \
-			var, "': not a valid identifier", NULL});
+		ft_perror_fd(2, (char *[]){MSH_LOG, ": export: `", var,
+			"': not a valid identifier", NULL});
 		return (1);
 	}
 	return (status);
@@ -84,8 +84,8 @@ void	ft_next_cmds(int fd[2], t_exec_params params)
 		return ;
 	if (params.l_type == OR && get_status() == 0)
 		return ;
-	_free_cmd(params.cmd, CMD);
-	ft_exec_cmds((t_exec_params){fd[0], next,
-		params.env, params.hist, l_type});
+	if (params.cmd)
+		_free_cmd(params.cmd, CMD);
+	ft_exec_cmds((t_exec_params){fd[0], next, params.env, params.hist, l_type});
 	wait(NULL);
 }
