@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_checker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:28:57 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 18:07:47 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 13:15:59 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	p_exec_log(char *msg, char *file_exe)
 {
-	ft_perror_fd(2, (char *[]){MSH_LOG, ": ", msg, ": ", file_exe, NULL});
+	ft_perror_fd(2, (char *[]){MSH_LOG, ": ", file_exe, ": ", msg, NULL});
 }
 
 int	cmd_found(char *file_exe, int simulate)
@@ -47,11 +47,13 @@ int	is_directory(const char *path)
 {
 	DIR	*dir;
 
+	if (is_only_spaces((char *)path))
+		return (cmd_found((char *)path, 1), 1);
 	dir = opendir(path);
 	if (dir)
 	{
-		ft_perror_fd(2, \
-			(char *[]){MSH_LOG, ": ", (char *)path, ": Is a directory", NULL});
+		ft_perror_fd(2, (char *[]){MSH_LOG, ": ", (char *)path,
+			": Is a directory", NULL});
 		return (closedir(dir), set_status(126), 1);
 	}
 	return (0);
