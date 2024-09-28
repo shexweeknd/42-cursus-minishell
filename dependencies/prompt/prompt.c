@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 05:51:07 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/27 18:04:01 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 11:03:42 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	get_prompt(t_prompt *prompt, char *msh_name)
 	prompt->line = get_line(prompt, msh_name);
 	if (is_uncomplete_line(prompt->line) && prompt->is_eof)
 		ft_perror_fd(2, (char *[]){"\033[0;32m", MSH_LOG, ":\033[0;0m\
-syntax error: unexpected end of file", NULL});
+			syntax error: unexpected end of file", NULL});
 	if ((get_status() == 2) && _hd_occ(prompt->line))
 		hd_cmd('f', NULL);
 	if (sig_type('g', 0) == SIGINT)
