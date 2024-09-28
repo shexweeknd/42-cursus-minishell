@@ -48,34 +48,5 @@ UPDATE :
 [FINISHED] - approche sur le hd fichier temp 'cat << e && cat << e'
 [FINISHED] - '$? || echo $?' (doit faire le passage de status vers la droite)
 
-MANDATORY:
-    - gestion des leaks pour : <<e | <<l
-    - gestion des leaks pour : 'cat /dev/random | ls'
-
-    - gestion des leaks pour : 'exit | exit'
-        ==2564843== 5 bytes in 1 blocks are still reachable in loss record 1 of 67
-        ==2564843==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-        ==2564843==    by 0x409F1F: ft_substr (ft_substr.c:41)
-        ==2564843==    by 0x404C2E: _get_info (cmd_utils.c:75)
-        ==2564843==    by 0x404A1D: ft_get_cmd_info (cmd.c:27)
-        ==2564843==    by 0x4048E6: ft_init_cmd (cmd.c:46)
-        ==2564843==    by 0x40469F: ft_get_cmds (cmd.c:67)
-        ==2564843==    by 0x40144B: main (main.c:31)
-
-        ==2569420== 16 bytes in 1 blocks are still reachable in loss record 9 of 66
-        ==2569420==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-        ==2569420==    by 0x4055D7: _init_cmd (cmd_extra_utils.c:71)
-        ==2569420==    by 0x404845: ft_init_cmd (cmd.c:38)
-        ==2569420==    by 0x40469F: ft_get_cmds (cmd.c:67)
-        ==2569420==    by 0x40144B: main (main.c:31)
-
-        ==2569420== 48 bytes in 1 blocks are still reachable in loss record 18 of 66
-        ==2569420==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-        ==2569420==    by 0x405575: _init_cmd (cmd_extra_utils.c:63)
-        ==2569420==    by 0x404845: ft_init_cmd (cmd.c:38)
-        ==2569420==    by 0x40469F: ft_get_cmds (cmd.c:67)
-        ==2569420==    by 0x40144B: main (main.c:31)
-
 TODO:
     - $SHLVL (ballain)
-    - ls | exit --> echo $? (hramaros)

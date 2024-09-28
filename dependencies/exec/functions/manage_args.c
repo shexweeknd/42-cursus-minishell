@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:14:57 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/28 08:47:43 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 10:45:18 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,8 @@ void	*ft_manage_args(t_cmd *cmd, t_env *env)
 	i = -1;
 	while (cmd->args[++i])
 	{
+		if (get_status() == 13)
+			set_status(0);
 		new_len = ft_getlen_args(cmd->args[i], env);
 		if (new_len != (int)ft_strlen(cmd->args[i]))
 		{
