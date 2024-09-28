@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:33:24 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 08:41:48 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/28 11:51:42 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ void	main_signal_handler(int sig)
 		printf("\e[K");
 	}
 	else if (sig == SIGQUIT)
-		printf("\e[K");
+		printf("\033[K");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
+	set_status(130);
 }
 
 void	child_signal_handler(int sig)
