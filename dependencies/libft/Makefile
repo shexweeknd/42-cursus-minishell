@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+         #
+#    By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 11:14:27 by ballain           #+#    #+#              #
-#    Updated: 2024/09/27 17:12:34 by ballain          ###   ########.fr        #
+#    Updated: 2024/09/28 07:07:09 by hramaros         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,6 @@ SRCS		= \
 				ft_putstr_fd.c			\
 				ft_isset.c 				\
 				ft_isdecimal.c			\
-				ft_printf_fd.c			\
 				ft_strcmp.c				\
 				get_next_line.c			\
 				get_next_line_utils.c	\

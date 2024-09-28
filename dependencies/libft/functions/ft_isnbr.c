@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:37:40 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/26 17:00:00 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/28 07:25:46 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	ft_isnbr(char *str)
 		str++;
 	if (!*str)
 		return (0);
+	if (*str == '-' || *str == '+')
+		str++;
 	while (ft_isdigit(*str))
 	{
 		str++;

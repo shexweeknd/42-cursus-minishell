@@ -3,35 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_status.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:11:21 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/27 11:50:07 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 07:18:23 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_static.h"
 
-static int	_status(int new_status, int change)
+static unsigned char	_status(unsigned char new_status, int change)
 {
-	static int	value = 0;
+	static unsigned char	value = 0;
 
 	if (change)
 		value = new_status;
 	return (value);
 }
 
-int	get_status(void)
+unsigned char	get_status(void)
 {
 	return (_status(0, 0));
 }
 
-void	set_status(int new_status)
+void	set_status(unsigned char new_status)
 {
 	_status(new_status, 1);
 }
 
-void	ft_print_status(int status)
+void	ft_print_status(unsigned char status)
 {
 	if (WIFSIGNALED(status))
 	{

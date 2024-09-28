@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:43:12 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/27 17:45:41 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 07:32:56 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,21 @@
 
 int	valid_exit_args(t_cmd *cmd)
 {
+	if (isatty(STDIN_FILENO))
+		printf("exit\n");
 	if (!cmd->args[1])
-	{
-		if (isatty(STDIN_FILENO))
-			printf("exit\n");
 		return (1);
-	}
 	if (!ft_isnbr(cmd->args[1]))
-	{
-		if (isatty(STDIN_FILENO))
-			printf("exit\n");
-		return (ft_perror_fd(2, (char *[]){\
-			"\033[0;32m", MSH_LOG, ":\033[0;0m exit: ", cmd->args[1], \
-			": numeric argument required", NULL}), set_status(2), 1);
-	}
+		return (ft_perror_fd(2, (char *[]){"\033[0;32m", MSH_LOG,
+				":\033[0;0m exit: ", cmd->args[1],
+				": numeric argument required", NULL}), set_status(2), 1);
 	else if (cmd->args[2])
-		return (ft_printf_fd("\033[0;32m%s:\033[0;0m exit: %s", 2, MSH_LOG,
-				": too many arguments\n"), set_status(ft_atoi(cmd->args[1])),
-			0);
-	return (0);
+		return (ft_perror_fd(2, (char *[]){"\033[0;32m", MSH_LOG,
+				":\033[0;0m exit: too many arguments", NULL}),
+			set_status(ft_atoi(cmd->args[1])), 0);
+	if (cmd->args[1] && ft_isnbr(cmd->args[1]))
+		set_status(ft_atoi(cmd->args[1]));
+	return (1);
 }
 
 void	ft_exit(t_executable exec)
@@ -44,7 +40,7 @@ void	ft_exit(t_executable exec)
 		ft_free_cmds(exec.cmd);
 		if (!exec.cmd)
 			printf("exit\n");
-		exit(get_status());
 		ft_clear_paths();
+		exit(get_status());
 	}
 }
