@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 11:57:24 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/28 11:03:29 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/28 11:30:42 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int	is_only_spaces(char *str)
 {
 	if (!str)
 		return (0);
-	while (*str == ' ')
+	while (*str && (*str == ' ' || !ft_isprint(*str)))
 		str++;
-	if (!*str || (*str >= 9 && *str <= 13))
+	if (!*str)
 		return (1);
 	return (0);
 }
