@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:42:58 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/28 09:54:31 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 11:21:45 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	ft_next_cmds(int fd[2], t_exec_params params)
 		return ;
 	if (params.l_type == OR && get_status() == 0)
 		return ;
-	if (params.cmd)
 	_free_cmd(params.cmd, CMD);
 	ft_exec_cmds((t_exec_params){fd[0], next,
 		params.env, params.hist, l_type});
