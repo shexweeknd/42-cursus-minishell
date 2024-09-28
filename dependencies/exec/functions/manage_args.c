@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:14:57 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/26 09:51:26 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 08:47:43 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,26 +126,20 @@ void	*ft_manage_args(t_cmd *cmd, t_env *env)
 	int		i;
 	int		new_len;
 	char	*tmp;
-	t_cmd	*tmp_cmd;
 
-	tmp_cmd = cmd;
-	while (tmp_cmd)
+	i = -1;
+	while (cmd->args[++i])
 	{
-		i = -1;
-		while (tmp_cmd->args[++i])
+		new_len = ft_getlen_args(cmd->args[i], env);
+		if (new_len != (int)ft_strlen(cmd->args[i]))
 		{
-			new_len = ft_getlen_args(tmp_cmd->args[i], env);
-			if (new_len != (int)ft_strlen(tmp_cmd->args[i]))
-			{
-				tmp = tmp_cmd->args[i];
-				tmp_cmd->args[i] = (char *)malloc(sizeof(char) * (new_len + 1));
-				if (!tmp_cmd->args[i])
-					return (NULL);
-				ft_bzero(tmp_cmd->args[i], new_len + 1);
-				(ft_addnew_args(tmp_cmd->args[i], tmp, env), free(tmp));
-			}
+			tmp = cmd->args[i];
+			cmd->args[i] = (char *)malloc(sizeof(char) * (new_len + 1));
+			if (!cmd->args[i])
+				return (NULL);
+			ft_bzero(cmd->args[i], new_len + 1);
+			(ft_addnew_args(cmd->args[i], tmp, env), free(tmp));
 		}
-		tmp_cmd = tmp_cmd->next;
 	}
 	return (cmd);
 }

@@ -6,13 +6,13 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 13:15:07 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/17 17:42:20 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 09:54:08 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
-static void	_free_cmd(void *value, int type)
+void	_free_cmd(void *value, int type)
 {
 	int			i;
 	t_lst_utils	utils;

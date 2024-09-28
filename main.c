@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 12:55:43 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 20:38:03 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/28 09:32:44 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,9 @@ int	main(int argc, char **argv, char **envp)
 		pt.cmd = ft_get_cmds(pt.line);
 		if ((free(pt.line), 1) && !pt.cmd)
 			continue ;
-		ft_manage_args(pt.cmd, pt.venv);
-		ft_exec_cmds((t_exec_params){0, pt.cmd, pt.cmd, pt.venv, pt.hist,
+		ft_exec_cmds((t_exec_params){0, pt.cmd, pt.venv, pt.hist,
 			pt.cmd->l_type});
 		sec_prompt_flag('r', 0);
-		pt.cmd = (ft_free_cmds(pt.cmd), NULL);
 	}
 	return (free_lchistory(pt.hist), ft_free_env(pt.venv), 0);
 }

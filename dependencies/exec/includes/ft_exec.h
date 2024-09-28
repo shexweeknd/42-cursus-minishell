@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/27 18:15:47 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 09:09:25 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void			*ft_manage_args(t_cmd *cmd, t_env *env);
 /* _________________________ EXEC UTILS _________________________ */
 char			*ft_search_executable(t_executable exec);
 t_executable	ft_init_executable(t_exec_params param);
-void			ft_free_executable(t_executable exec, t_cmd *cmd);
+void			ft_free_executable(t_executable exec);
 void			ft_next_cmds(int fd[2], t_exec_params params);
 int				ft_check_valid_var(char *var, int status);
 

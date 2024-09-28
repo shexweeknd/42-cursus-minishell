@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_struct.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 10:34:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/26 09:04:35 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/28 09:08:08 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 typedef struct s_exec_params
 {
 	int			read_fd;
-	t_cmd		*src;
 	t_cmd		*cmd;
 	t_env		*env;
 	t_hist_elem	*hist;

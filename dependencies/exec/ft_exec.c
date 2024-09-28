@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/27 17:20:13 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 09:24:32 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	ft_exec_cmd(t_executable exec)
 	char	*exe;
 	int		status;
 
-	status = 0;
 	if (!exec.cmd->args)
 		return (0);
+	status = (ft_manage_args(exec.cmd, exec.env), 0);
 	ft_manage_redirect_file(exec.p_fd, exec.cmd);
 	if (!exec.cmd->args[0])
 		return (0);
@@ -60,15 +60,15 @@ int	ft_exec_cmd(t_executable exec)
 	return (status);
 }
 
-void	exec_cmds_child(t_exec_params *params, t_executable *exec)
+void	exec_cmds_left(t_exec_params *params, t_executable *exec)
 {
 	if (params->read_fd != 0)
 		(dup2(params->read_fd, STDIN_FILENO), close(params->read_fd));
 	ft_pipe_status(exec->s_fd, ft_exec_cmd(*exec), 1);
-	(ft_free_executable(*exec, params->src), exit(get_status()));
+	(ft_free_executable(*exec), exit(get_status()));
 }
 
-void	exec_cmds_parent(t_exec_params *params, t_executable *exec)
+void	exec_cmds_right(t_exec_params *params, t_executable *exec)
 {
 	if (params->read_fd != 0)
 		close(params->read_fd);
@@ -86,12 +86,17 @@ int	ft_exec_cmds(t_exec_params params)
 	if (setup_child_signals(), params.l_type == PIPE)
 	{
 		if (fork() == 0)
-			exec_cmds_child(&params, &exec);
+			exec_cmds_left(&params, &exec);
 		else
-			exec_cmds_parent(&params, &exec);
+			exec_cmds_right(&params, &exec);
 	}
 	else
-		(set_status(ft_exec_cmd(exec)), ft_reset_fd(exec),
-			ft_next_cmds(exec.p_fd, params));
+	{
+		if (params.l_type == OR && get_status() != 0)
+			ft_exec_cmd(exec);
+		else
+			set_status(ft_exec_cmd(exec));
+		(ft_reset_fd(exec), ft_next_cmds(exec.p_fd, params));
+	}
 	return (0);
 }

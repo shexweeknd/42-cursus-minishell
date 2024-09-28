@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:42:58 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/27 17:26:42 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 09:54:31 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ t_executable	ft_init_executable(t_exec_params param)
 	return (r_value);
 }
 
-void	ft_free_executable(t_executable exec, t_cmd *cmd)
+void	ft_free_executable(t_executable exec)
 {
-	ft_free_cmds(cmd);
+	ft_free_cmds(exec.cmd);
 	ft_free_env(exec.env);
 	free_lchistory(exec.hist);
 	ft_clear_paths();
@@ -74,12 +74,19 @@ void	ft_free_executable(t_executable exec, t_cmd *cmd)
 
 void	ft_next_cmds(int fd[2], t_exec_params params)
 {
+	t_cmd	*next;
+	t_link	l_type;
+
+	next = params.cmd->next;
+	l_type = params.cmd->l_type;
 	close(fd[1]);
 	if (params.l_type == AND && get_status() != 0)
 		return ;
 	if (params.l_type == OR && get_status() == 0)
 		return ;
-	ft_exec_cmds((t_exec_params){fd[0], params.src, params.cmd->next,
-		params.env, params.hist, params.cmd->l_type});
+	if (params.cmd)
+	_free_cmd(params.cmd, CMD);
+	ft_exec_cmds((t_exec_params){fd[0], next,
+		params.env, params.hist, l_type});
 	wait(NULL);
 }

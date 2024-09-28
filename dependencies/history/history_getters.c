@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history_getters.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:50:45 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 10:40:20 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/28 09:57:23 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
