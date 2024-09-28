@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:24:30 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/26 09:50:49 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 13:47:35 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,33 @@ int	ft_add_status(char *dest)
 		status /= 10;
 	}
 	return (r_len);
+}
+
+char	**ft_filter_args(char **args)
+{
+	int		i;
+	int		j;
+	int		len;
+	char	**new_args;
+
+	i = ((len = 0), -1);
+	while (args[++i])
+	{
+		if (ft_strlen(args[i]))
+			len++;
+	}
+	if (i == len)
+		return (args);
+	i = ((j = 0), -1);
+	new_args = (char **)malloc(sizeof(char *) * (len + 1));
+	if (!new_args)
+		return (NULL);
+	while (args[++i])
+	{
+		if (ft_strlen(args[i]))
+			new_args[j++] = args[i];
+		else
+			args[i] = (free(args[i]), NULL);
+	}
+	return (free(args), new_args);
 }

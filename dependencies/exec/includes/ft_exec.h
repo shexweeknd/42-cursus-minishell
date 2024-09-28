@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/28 09:09:25 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 13:46:33 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int				ft_add_status(char *dest);
 int				ft_dqoute_len(char **arg, t_env *env, char *stop);
 int				ft_dquote_add(char *dest, char **arg, t_env *env, char *stop);
 void			*ft_manage_args(t_cmd *cmd, t_env *env);
+char			**ft_filter_args(char **args);
 
 /* _________________________ EXEC UTILS _________________________ */
 char			*ft_search_executable(t_executable exec);

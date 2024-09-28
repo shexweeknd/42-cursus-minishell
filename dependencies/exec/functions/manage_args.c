@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:14:57 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/28 10:45:18 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 13:46:57 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,5 +143,6 @@ void	*ft_manage_args(t_cmd *cmd, t_env *env)
 			(ft_addnew_args(cmd->args[i], tmp, env), free(tmp));
 		}
 	}
+	cmd->args = ft_filter_args(cmd->args);
 	return (cmd);
 }

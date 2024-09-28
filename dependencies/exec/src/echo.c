@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:16:48 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 14:19:03 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 13:49:18 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	echo(t_executable exec)
 
 	i = 1;
 	end = '\n';
-	if (exec.cmd->args[i] && ft_strcmp(exec.cmd->args[i], "-n") == 0)
+	while (exec.cmd->args[i] && ft_strcmp(exec.cmd->args[i], "-n") == 0)
 		i += ((end = 0), 1);
 	while (exec.cmd->args[i])
 	{
