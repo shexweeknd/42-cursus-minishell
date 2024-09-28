@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/28 11:22:06 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 12:57:07 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ int	ft_exec_cmd(t_executable exec)
 	{
 		if (execve(exe, exec.cmd->args, exec.env->var) == -1)
 			(ft_perror_fd(2, (char *[]){strerror(errno), "\n", NULL}), \
-			exit(EXIT_FAILURE));
+				exit(EXIT_FAILURE));
 	}
 	else
-		(wait(&status), ft_print_status(status), ft_setvar(exec.env, "_", exe));
-	return (status);
+		(wait(&status), ft_setvar(exec.env, "_", exe));
+	return (ft_exit_status(status));
 }
 
 void	exec_cmds_left(t_exec_params *params, t_executable *exec)

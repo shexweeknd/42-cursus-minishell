@@ -47,34 +47,22 @@ UPDATE :
 [FINISHED] - > file.txt (persmission a ajouter -rw-r--r--) (ballain)
 [FINISHED] - approche sur le hd fichier temp 'cat << e && cat << e'
 [FINISHED] - '$? || echo $?' (doit faire le passage de status vers la droite)
+[FINISHED] bash-5.1$ /bin/ls 8
+    /bin/ls: cannot access '8': No such file or directory
+    bash-5.1$ echo $? ==> 2
+    cat [no-args] ou grep [something] --> echo $? (devient 2)
+    Minishell$ cat 
+        ^\Quit (core dumped)
+        segmentation fault (core dump)
+        Minishell$
+        (doit seulement afficher core dumped)
 
 TODO:
-    - $SHLVL (ballain)
-    
-    -
-    bash-5.1$ /bin/ls 8
-    /bin/ls: cannot access '8': No such file or directory
-    bash-5.1$ echo $?
-    2
-
-    -
-    cat [no-args] || grep [something] --> echo $? (devient 2)
-
-    -
-    Minishell$ cat 
-    ^\Quit (core dumped)
-    segmentation fault (core dump)
-    Minishell$
-
-    (doit seulement afficher core dumped)
-
     - [hramaros]
     Minishell$ ''
     
     (doit printer "bash: : command not found")
 
-    - [hramaros]
-    Minishell$ $2 ls
 
 TODO BEFORE VOGSPHERERE:
     - supprimer: sujet.pdf

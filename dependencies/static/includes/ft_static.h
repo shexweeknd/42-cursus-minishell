@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_static.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 09:40:01 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/28 07:33:27 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/28 12:58:00 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void			set_rootpath(char *new_root_path);
 /* _________________________ STATUS _________________________ */
 unsigned char	get_status(void);
 void			set_status(unsigned char new_status);
-void			ft_print_status(unsigned char status);
+int				ft_exit_status(int status);
 
 /* _________________________ HIST _________________________ */
 char			*get_histpath(void);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_status.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:11:21 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/28 07:18:23 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/28 12:59:37 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,16 @@ void	set_status(unsigned char new_status)
 	_status(new_status, 1);
 }
 
-void	ft_print_status(unsigned char status)
+int	ft_exit_status(int status)
 {
 	if (WIFSIGNALED(status))
 	{
-		if (WCOREDUMP(status))
-			printf("segmentation fault (core dump)\n");
-		else if (WTERMSIG(status) == SIGSEGV)
+		if (WTERMSIG(status) == SIGSEGV)
 			printf("segmentation fault\n");
+		if (WTERMSIG(status) == SIGINT)
+			return (130);
+		if (WTERMSIG(status) == SIGQUIT)
+			return (131);
 	}
+	return (WEXITSTATUS(status));
 }
