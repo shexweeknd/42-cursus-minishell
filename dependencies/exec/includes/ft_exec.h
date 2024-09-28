@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/28 13:46:33 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/28 14:32:21 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_executable	ft_init_executable(t_exec_params param);
 void			ft_free_executable(t_executable exec);
 void			ft_next_cmds(int fd[2], t_exec_params params);
 int				ft_check_valid_var(char *var, int status);
+char			*subst_home(char *src, t_env *env);
 
 /* _________________________ EXEC STATUS _________________________ */
 void			p_exec_log(char *msg, char *file_exe);

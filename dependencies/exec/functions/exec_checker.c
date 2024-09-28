@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:28:57 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/28 13:15:59 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/28 14:03:31 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	cmd_found(char *file_exe, int simulate)
 	}
 	if (access(file_exe, F_OK) == 0)
 		return (1);
-	p_exec_log("command not found", file_exe);
+	p_exec_log("No such file or directory", file_exe);
 	return (set_status(127), 0);
 }
 

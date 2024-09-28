@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:42:58 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/28 13:10:58 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/28 14:31:07 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*ft_search_executable(t_executable exec)
 {
 	char	*tmp;
 
+	exec.cmd->args[0] = subst_home(exec.cmd->args[0], exec.env);
 	if (is_directory(exec.cmd->args[0]) || (!exec.env->path
 			&& (!cmd_found(exec.cmd->args[0], 0)
 				|| !cmd_executable(exec.cmd->args[0], 0))))
