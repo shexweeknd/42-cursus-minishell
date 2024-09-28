@@ -79,3 +79,6 @@ MANDATORY:
 TODO:
     - $SHLVL (ballain)
     - ls | exit --> echo $? (hramaros)
+
+TODO BEFORE VOGSPHERERE:
+    - supprimer: sujet.pdf, dossier testfile, dossier .vscode, */*.o et */*.a \( -name "*.o" -o -name "*.a" \)
