@@ -74,3 +74,12 @@ TODO:
 TODO BEFORE VOGSPHERERE:
     - supprimer: sujet.pdf, TODO, README.md
     - verifier tous les header de fichiers
+
+
+MANDATORY : 
+            paramattre vide 
+            "$? $?"
+            "$USER"
+            export "nom espacer"=value
+            make -n
+            

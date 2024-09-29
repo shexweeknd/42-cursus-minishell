@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:24:30 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/28 13:47:35 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/29 11:55:31 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,6 @@ char	**ft_filter_args(char **args)
 			new_args[j++] = args[i];
 		else
 			args[i] = (free(args[i]), NULL);
-	}
-	return (free(args), new_args);
+	};
+	return ((new_args[j] = 0), free(args), new_args);
 }
