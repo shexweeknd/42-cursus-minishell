@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:14:57 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/28 13:46:57 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/29 12:02:49 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_dquote_add(char *dest, char **arg, t_env *env, char *stop)
 			else if (ft_strchr(stop, **arg))
 				break ;
 			else if (**arg == '?')
-				i += ((*arg += 1), ft_add_status(dest));
+				i += ((*arg += 1), ft_add_status(dest + i));
 			else
 				*arg += ((i += ft_cpvar((dest + i), *arg, env, lenv)), lenv);
 		}
@@ -133,7 +133,7 @@ void	*ft_manage_args(t_cmd *cmd, t_env *env)
 		if (get_status() == 13)
 			set_status(0);
 		new_len = ft_getlen_args(cmd->args[i], env);
-		if (new_len != (int)ft_strlen(cmd->args[i]))
+		if (ft_strchr(cmd->args[i], '$') || new_len != (int)ft_strlen(cmd->args[i]))
 		{
 			tmp = cmd->args[i];
 			cmd->args[i] = (char *)malloc(sizeof(char) * (new_len + 1));
