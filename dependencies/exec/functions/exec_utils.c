@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:42:58 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/29 12:22:16 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/29 19:10:40 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,17 @@ int	ft_check_valid_var(char *var, int status)
 	int	has_error;
 
 	has_error = ((i = 0), i);
-	if (ft_isdigit(var[i++]))
+	if (var && ft_isdigit(var[i++]))
 		has_error = 1;
-	while (!has_error && var && var[i])
+	while (var && var[i] && var[i] != '=')
 	{
-		if (!ft_isalnum(var[i]) || var[i] != '_')
+		if (!ft_isalnum(var[i]) && var[i] != '_')
 			has_error = 1;
 		i++;
 	}
-	if (has_error)
+	if (var && var[i] && var[i] == '=')
+		var[i] = 0;
+	if (has_error && var)
 	{
 		ft_perror_fd(2, (char *[]){MSH_LOG, ": export: `", var,
 			"': not a valid identifier", NULL});

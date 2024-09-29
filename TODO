@@ -57,9 +57,9 @@ UPDATE :
 [FINISHED] - $ export "52"=42 ==> (Minishell: export: `52=42': not a valid identifier)
 [FINISHED] - $ export "52MSH"=42 ==> (Minishell: export: `52MSH=42': not a valid identifier)
 
-[FINISHED] -    
+[FINISHED] -
             cat [no-args] ou grep [something] --> echo $? (devient 2)
-            Minishell$ cat 
+            Minishell$ cat
             ^\Quit (core dumped)
 
 [FINISHED] - [hramaros]
@@ -76,10 +76,14 @@ TODO BEFORE VOGSPHERERE:
     - verifier tous les header de fichiers
 
 
-MANDATORY : 
-            paramattre vide 
+MANDATORY :
+            paramattre vide
             "$? $?"
             "$USER"
             export "nom espacer"=value
             make -n
-            
+
+
+
+TEST :
+		export "test=test"=TEST

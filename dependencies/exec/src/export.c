@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:11 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 13:08:09 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/29 18:54:25 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ static char	*ft_getvar_name(char *arg)
 	char	*equal;
 
 	equal = ft_strchr(arg, '=');
-	if (equal)
-		return (ft_substr(arg, 0, equal - arg));
+	if (equal && (equal - arg) != 0)
+		return (ft_substr(arg, 0, ++equal - arg));
 	return (NULL);
 }
 
@@ -95,10 +95,10 @@ int	export(t_executable exec)
 	while (exec.cmd->args[++i])
 	{
 		var_name = ft_getvar_name(exec.cmd->args[i]);
-		status = ft_check_valid_var(exec.cmd->args[i], status);
+		status = ft_check_valid_var(var_name, status);
 		if (!ft_setvar(exec.env, var_name, exec.cmd->args[i]))
 			ft_addenv(exec.env, exec.cmd->args[i]);
-		if (!ft_strcmp(var_name, "PATH"))
+		if (var_name && !ft_strcmp(var_name, "PATH"))
 		{
 			if (exec.env->path)
 				(free(*exec.env->path), free(exec.env->path));

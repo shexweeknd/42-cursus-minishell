@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/29 12:25:59 by ballain          ###   ########.fr       */
+/*   Updated: 2024/09/29 18:48:04 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	ft_exec_cmd(t_executable exec)
 		exec.cmd->args[0] = (free(exec.cmd->args[0]), exe);
 	if (fork() == 0)
 	{
-		ft_show_cmd(exec.cmd);
 		if (execve(exe, exec.cmd->args, exec.env->var) == -1)
 			(ft_perror_fd(2, (char *[]){strerror(errno), "\n", NULL}), \
 				exit(EXIT_FAILURE));
