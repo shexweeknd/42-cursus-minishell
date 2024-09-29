@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:33:24 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/28 11:51:42 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/09/29 12:11:13 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	sec_prompt_flag(char cmd, int value)
 	return (result);
 }
 
-void	main_signal_handler(int sig)
+void	main_sig_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
@@ -33,8 +33,6 @@ void	main_signal_handler(int sig)
 			printf("\n\e[K");
 		printf("\e[K");
 	}
-	else if (sig == SIGQUIT)
-		printf("\033[K");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
@@ -46,13 +44,16 @@ void	child_signal_handler(int sig)
 	if (sig == SIGINT)
 		printf("\n");
 	else if (sig == SIGQUIT)
+	{
+		printf("\e[K");
 		printf("Quit (core dumped)\n");
+	}
 }
 
 void	setup_main_signals(void)
 {
-	signal(SIGINT, main_signal_handler);
-	signal(SIGQUIT, main_signal_handler);
+	signal(SIGINT, main_sig_handler);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	setup_child_signals(void)
