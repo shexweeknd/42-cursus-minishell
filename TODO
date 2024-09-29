@@ -62,5 +62,5 @@ UPDATE :
             (doit printer "bash: : command not found")
 
 TODO BEFORE VOGSPHERERE:
-    - supprimer: sujet.pdf
+    - supprimer: sujet.pdf, TODO, README.md
     - verifier tous les header de fichiers
