@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/28 14:32:21 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:55:30 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int				unset(t_executable exec);
 void			ft_exit(t_executable exec);
 
 /* _________________________ MANAGE ARGS _________________________ */
-int				ft_isvar(char *str);
 int				ft_lenvar(char *arg, t_env *env, int lenv);
 int				ft_cpvar(char *dest, char *arg, t_env *env, int lenv);
 int				ft_add_status(char *dest);
@@ -73,5 +72,7 @@ void			ft_reset_fd(t_executable exec);
 void			ft_manage_redirect_file(int fd[2], t_cmd *cmd);
 int				ft_pipe_status(int fd[0], int value, int send);
 void			ft_error_cd(int type);
+
+int				ft_save_cmd_in_env(t_executable exec);
 
 #endif

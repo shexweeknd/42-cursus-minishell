@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_struct.h                                       :+:      :+:    :+:   */
+/*   ft_isvar.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/05 19:21:41 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/07 13:27:01 by ballain          ###   ########.fr       */
+/*   Created: 2024/10/07 13:35:25 by ballain           #+#    #+#             */
+/*   Updated: 2024/10/07 13:35:51 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_STRUCT_H
-# define ENV_STRUCT_H
+#include "libft.h"
 
-typedef struct s_env
+int	ft_isvar(char *str)
 {
-	char	**var;
-	char	**path;
-}	t_env;
+	int	len;
 
-#endif
+	len = 0;
+	if (!str)
+		return (0);
+	if (*str == '$' && str++)
+	{
+		if (!*str || *str == '?' || ft_isdigit(*str) || \
+			(!ft_isalpha(*str) && *str != '_'))
+			return (1);
+		while (*str && (ft_isalpha(*str) || *str == '_'))
+		{
+			str++;
+			len++;
+		}
+		return (len);
+	}
+	return (0);
+}

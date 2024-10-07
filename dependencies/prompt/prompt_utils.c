@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 11:33:07 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 08:15:49 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:05:52 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_prompt(t_prompt *prompt, char **envp, char *hist_path)
 	prompt->cmd = NULL;
 	prompt->venv = ft_getenv(envp);
 	prompt->hist = get_history(hist_path);
+	setsenv(prompt->venv);
 }
 
 void	setup_prompt_flags(t_prompt *prompt)

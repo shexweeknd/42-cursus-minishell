@@ -3,16 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+         #
+#    By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 11:14:27 by ballain           #+#    #+#              #
-#    Updated: 2024/09/28 07:07:09 by hramaros         ###   ########.fr        #
+#    Updated: 2024/10/07 13:36:55 by ballain          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= libft.a
 SRCS		= \
 				ft_atoi.c				\
+				ft_isvar.c				\
 				ft_isalpha.c			\
 				ft_memchr.c				\
 				ft_strchr.c				\

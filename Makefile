@@ -46,9 +46,9 @@ LIBS			= \
 					$(ERR_LIB)		\
 					$(HEREDOC_LIB)	\
 					$(HISTORY_LIB)	\
-					$(STATIC_LIB)	\
 					$(SIG_LIB)		\
 					$(ENV_LIB)		\
+					$(STATIC_LIB)	\
 					$(LIBFT_LIB)	\
 					-lreadline -Wno-unused-command-line-argument
 

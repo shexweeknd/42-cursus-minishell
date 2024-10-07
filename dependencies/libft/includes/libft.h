@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:02:13 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/28 07:06:57 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:36:39 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 void	ft_bzero(void *s, size_t n);
 size_t	ft_get_occ(char *str, char c);
+int		ft_isvar(char *str);
 int		ft_isspace(const int c);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);

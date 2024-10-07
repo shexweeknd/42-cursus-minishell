@@ -3,6 +3,8 @@ NAME			= libstatic.a
 
 # FILES
 FILES			= \
+					ft_senv.c		\
+					ft_rootpath.c	\
 					ft_rootpath.c	\
 					ft_hdpath.c		\
 					ft_histpath.c	\

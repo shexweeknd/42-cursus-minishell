@@ -6,33 +6,11 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:24:30 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/29 11:55:31 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/07 14:30:48 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
-
-int	ft_isvar(char *str)
-{
-	int	len;
-
-	len = 0;
-	if (!str)
-		return (0);
-	if (*str == '$' && str++)
-	{
-		if (!*str || *str == '?' || ft_isdigit(*str) || \
-			(!ft_isalpha(*str) && *str != '_'))
-			return (1);
-		while (*str && (ft_isalpha(*str) || *str == '_'))
-		{
-			str++;
-			len++;
-		}
-		return (len);
-	}
-	return (0);
-}
 
 int	ft_lenvar(char *arg, t_env *env, int lenv)
 {
@@ -99,6 +77,6 @@ char	**ft_filter_args(char **args)
 			new_args[j++] = args[i];
 		else
 			args[i] = (free(args[i]), NULL);
-	};
+	}
 	return ((new_args[j] = 0), free(args), new_args);
 }

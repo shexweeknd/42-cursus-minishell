@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 09:40:01 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/28 12:58:00 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/07 13:32:40 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_STATIC_H
 
 # include "libft.h"
+# include "env_struct.h"
 # include "msh_mac.h"
 # include <signal.h>
 # include <stdio.h>
@@ -40,5 +41,10 @@ char			*get_hdpath(void);
 /* _________________________ STATICS _________________________ */
 void			ft_init_paths(char *cwd);
 void			ft_clear_paths(void);
+
+/* _________________________ STATICS _________________________ */
+void			setsenv(t_env *env);
+t_env			*getsenv(void);
+char			*getvar(char *var_name);
 
 #endif

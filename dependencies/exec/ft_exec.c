@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/29 18:48:04 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/07 14:55:48 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_exec_cmd(t_executable exec)
 				exit(EXIT_FAILURE));
 	}
 	else
-		(wait(&status), ft_setvar(exec.env, "_", exe));
+		(wait(&status), ft_save_cmd_in_env(exec));
 	return (ft_exit_status(status));
 }
 

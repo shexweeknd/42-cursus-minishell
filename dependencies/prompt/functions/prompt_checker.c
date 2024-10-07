@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_checker.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:18:04 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/11 14:18:18 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:46:39 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	is_and_at_end(char *line)
 	return (0);
 }
 
-// TODO FORENSICS OF PROMPT THAT DISPLAYS PS2
 int	is_uncomplete_line(char *line)
 {
 	if (!line)
