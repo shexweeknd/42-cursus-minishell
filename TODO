@@ -4,19 +4,7 @@ SIGNAUX:
 - Ctrl + D [FINISHED] [TOTEST]
 - Ctrl + \ [FINISHED] [TOTEST]
 
-GERER les leaks d'history lors des executions de commandes multiples
-
-[FINISHED] DEBUG de secondary prompt:
-'''
-    Minishell$ ls |
-    > ^C
-    Minishell$ ^C
-
-    Minishell$
-'''
-
 GERER '&' comme process en fond
-
 
 UPDATE :
 [FINISHED] int	ft_get_info_len(char *cmd) ==> cmd_utils.c
@@ -71,10 +59,17 @@ TODO:
         $ export "LVL" = 42 ==> (Minishell: export: `=': not a valid identifier Minishell: export: `42': not a valid identifier) [manome segfault ny minishell antsika]
         $ export "MSH52"=42 ==> doit fonctionner
 
+    ECHO: (lignes 75-83 `800 tests pour minishell.xlsx`)
+    - 'echo -nnnnn' (ne doit rien afficher)
+    - 'echo -n -nnn -nnnn' (ne doit rien afficher)
+    ...
+
+    ECHO: (lignes 88 `800 tests pour minishell.xlsx`)
+    - 'echo $:$= | cat -e' (comportement non conforme a bash, misy leaks)
+
 TODO BEFORE VOGSPHERERE:
     - supprimer: sujet.pdf, TODO, README.md
     - verifier tous les header de fichiers
-
 
 MANDATORY :
             paramattre vide
@@ -85,3 +80,10 @@ MANDATORY :
 
 TEST :
 		export "test=test"=TEST
+
+URGENT :
+    - j'ai push un fichier supp.supp qui permet de supprimer l'affichage de tous les leaks de readline, ainsi que de la librairie libreadline, la commande pour tester avec la suppression est:
+
+    bash-5.1$ valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=supp.supp -s ./minishell
+
+    - j'ai push le fichier `800 tests pour minishell.xlsx` pour qu'on puisse voir tous les tests importants
