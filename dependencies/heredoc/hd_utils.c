@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:53:46 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/07 14:33:48 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/08 12:33:28 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ int	ft_write_hd(int fd, char *line)
 {
 	int		len;
 	int		lenv;
-	int		status;
+	char	*status;
 
-	status = get_status();
+	status = ft_itoa(get_status());
 	len = 0;
 	while (line && *line)
 	{
@@ -87,7 +87,7 @@ int	ft_write_hd(int fd, char *line)
 			if (!*line)
 				return (write(fd, "$", 1), ++len);
 			else if (*line == '?')
-				len += (write(fd, &status, sizeof(int)), ft_nblen(status));
+				len += (write(fd, status, ft_strlen(status)), ft_strlen(status));
 			else
 				len += ft_write_var_hd(fd, line, lenv);
 			line += lenv;
@@ -95,5 +95,5 @@ int	ft_write_hd(int fd, char *line)
 		else
 			len += (write(fd, line++, 1), 1);
 	}
-	return (len);
+	return (free(status), len);
 }

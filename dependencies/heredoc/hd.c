@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:52:30 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/07 14:31:35 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/08 13:14:10 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,7 @@ void	process_hd(t_eofs *eofs)
 	signal(SIGINT, sec_sig_handler);
 	eofs_addr = eofs;
 	hd = hd_cmd('g', NULL);
-	set_status(0);
-	while (eofs && (get_status() == 0))
+	while (eofs)
 	{
 		if (!hd)
 			hd = hd_cmd('i', eofs->eof);
@@ -87,7 +86,5 @@ void	process_hd(t_eofs *eofs)
 			hd = hd_cmd('a', eofs->eof);
 		eofs = eofs->next;
 	}
-	if (get_status() != 0)
-		(hd_cmd('f', NULL), to_stdin('o'));
 	free_eofs(eofs_addr);
 }
