@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_hd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 09:32:19 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/24 14:17:17 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/09 09:15:57 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_hd	*hd_cmd(char cmd, char *eof)
 		return (init_hd(&hd, eof), hd);
 	if (cmd == 'a')
 		return (add_hd(&hd, eof), hd);
-	if (cmd == 'f')
+	if (cmd == 'f' && hd)
 		return (recurse_free_hd(hd), hd = NULL, NULL);
 	if (cmd == 'p')
 		return (print_hd(hd), NULL);

@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:52:30 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/09 07:54:49 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/09 09:27:44 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ size_t	fullfill_fd(int fd, char *eof)
 		line = readline(to_ps_two('g', NULL));
 		if (!line || ft_iseof(line, eof))
 			break ;
-		// if (ft_is_quote(*eof))
-		buffer_size = (write(fd, line, ft_strlen(line)), ft_strlen(line) + 1);
-		// else
 		// 	buffer_size += ft_write_hd(fd, line) + 1;
+		// else
+		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
+		buffer_size = ft_strlen(line) + 1;
 		free(line);
 	}
 	if (!line && !get_status())
@@ -81,6 +81,8 @@ void	process_hd(t_eofs *eofs)
 	signal(SIGINT, sec_sig_handler);
 	eofs_addr = eofs;
 	hd = hd_cmd('g', NULL);
+	if (get_status() == 130)
+		set_status(0);
 	while (eofs)
 	{
 		if (!hd)
@@ -89,5 +91,7 @@ void	process_hd(t_eofs *eofs)
 			hd = hd_cmd('a', eofs->eof);
 		eofs = eofs->next;
 	}
+	if (get_status() != 0)
+		hd = (hd_cmd('f', NULL), to_stdin('o'), NULL);
 	free_eofs(eofs_addr);
 }
