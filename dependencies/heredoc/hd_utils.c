@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:53:46 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/08 12:33:28 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/09 07:51:42 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ int	ft_write_hd(int fd, char *line)
 			if (!*line)
 				return (write(fd, "$", 1), ++len);
 			else if (*line == '?')
-				len += (write(fd, status, ft_strlen(status)), ft_strlen(status));
+				len += (write(fd, status, ft_strlen(status)), \
+				ft_strlen(status));
 			else
 				len += ft_write_var_hd(fd, line, lenv);
 			line += lenv;

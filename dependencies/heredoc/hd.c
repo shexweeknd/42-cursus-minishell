@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:52:30 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/09 07:46:37 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/09 07:54:49 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ size_t	fullfill_fd(int fd, char *eof)
 		line = readline(to_ps_two('g', NULL));
 		if (!line || ft_iseof(line, eof))
 			break ;
-		buffer_size += ft_write_hd(fd, line) + 1;
+		// if (ft_is_quote(*eof))
+		buffer_size = (write(fd, line, ft_strlen(line)), ft_strlen(line) + 1);
+		// else
+		// 	buffer_size += ft_write_hd(fd, line) + 1;
 		write(fd, "\n", 1);
 		free(line);
 	}
