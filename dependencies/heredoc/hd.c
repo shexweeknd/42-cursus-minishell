@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:52:30 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/09 09:27:44 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/10 14:52:03 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	skip_hd(char *line)
 	return (result);
 }
 
-size_t	fullfill_fd(int fd, char *eof)
+size_t	fullfill_fd(int fd, t_eofs *eof)
 {
 	size_t	buffer_size;
 	char	*line;
@@ -58,18 +58,19 @@ size_t	fullfill_fd(int fd, char *eof)
 	while (1)
 	{
 		line = readline(to_ps_two('g', NULL));
-		if (!line || ft_iseof(line, eof))
+		if (!line || ft_iseof(line, eof->eof))
 			break ;
-		// 	buffer_size += ft_write_hd(fd, line) + 1;
-		// else
-		write(fd, line, ft_strlen(line));
+		if (eof->have_expanded)
+			buffer_size += ft_write_hd(fd, line) + 1;
+		else
+			write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
-		buffer_size = ft_strlen(line) + 1;
+		buffer_size += ft_strlen(line) + 1;
 		free(line);
 	}
 	if (!line && !get_status())
-		ft_perror_fd(2, (char *[]){warn_msg, MSH_LOG, " (wanted `", eof, "')", \
-			NULL});
+		ft_perror_fd(2, (char *[]){warn_msg, MSH_LOG, \
+		" (wanted `", eof->eof, "')", NULL});
 	return (close(fd), free(line), buffer_size);
 }
 
@@ -81,17 +82,13 @@ void	process_hd(t_eofs *eofs)
 	signal(SIGINT, sec_sig_handler);
 	eofs_addr = eofs;
 	hd = hd_cmd('g', NULL);
-	if (get_status() == 130)
-		set_status(0);
 	while (eofs)
 	{
 		if (!hd)
-			hd = hd_cmd('i', eofs->eof);
+			hd = hd_cmd('i', eofs);
 		else
-			hd = hd_cmd('a', eofs->eof);
+			hd = hd_cmd('a', eofs);
 		eofs = eofs->next;
 	}
-	if (get_status() != 0)
-		hd = (hd_cmd('f', NULL), to_stdin('o'), NULL);
 	free_eofs(eofs_addr);
 }

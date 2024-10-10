@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:17:58 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/28 10:03:29 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/10 18:54:02 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,39 @@ void	ft_reset_fd(t_executable exec)
 	dup2(exec.o_fd[1], STDOUT_FILENO);
 }
 
-void	ft_manage_redirect_file(int fd[2], t_cmd *cmd)
+int	ft_open_file(t_rfile *file, int *error)
+{
+	if (is_directory(file->args))
+		return ((*error = 1), -1);
+	return (open(file->args, file->option, 0644));
+}
+
+int	ft_manage_redirect_file(int fd[2], t_cmd *cmd)
 {
 	t_rfile	*tmp_in;
 	t_rfile	*tmp_out;
+	int		error;
 
+	error = (close(fd[0]), 0);
 	tmp_in = cmd->file_in;
 	while (tmp_in && tmp_in->next)
 		tmp_in = tmp_in->next;
 	tmp_out = cmd->file_out;
-	while (tmp_out && tmp_out->next)
-		tmp_out = (close(open(tmp_out->args, tmp_out->option, 0644)), \
-					tmp_out->next);
-	if (tmp_in)
-		fd[0] = (close(fd[0]), open(tmp_in->args, tmp_in->option, 0644));
+	while (tmp_out && tmp_out->next && !error)
+		tmp_out = (close(ft_open_file(tmp_out, &error)), tmp_out->next);
+	if (tmp_in && !error)
+		fd[0] = ft_open_file(tmp_in, &error);
 	else
-		fd[0] = (close(fd[0]), -1);
-	if (tmp_out)
-		fd[1] = (close(fd[1]), open(tmp_out->args, tmp_out->option, 0644));
+		fd[0] = -1;
+	if (tmp_out && !error)
+		fd[1] = (close(fd[1]), ft_open_file(tmp_out, &error));
 	else if (!(cmd->next && cmd->l_type == PIPE))
 		fd[1] = (close(fd[1]), -1);
 	if (fd[0] != -1)
 		(dup2(fd[0], STDIN_FILENO), close(fd[0]));
 	if (fd[1] != -1)
 		(dup2(fd[1], STDOUT_FILENO), close(fd[1]));
+	return (!error);
 }
 
 int	ft_pipe_status(int fd[0], int value, int send)

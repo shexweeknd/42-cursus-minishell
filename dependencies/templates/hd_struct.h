@@ -23,6 +23,7 @@ typedef struct s_hd
 
 typedef struct s_eofs
 {
+	int				have_expanded;
 	char			*eof;
 	struct s_eofs	*next;
 }					t_eofs;

@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 05:51:07 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/09 09:02:04 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/10 14:48:14 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,9 @@ void	get_prompt(t_prompt *prompt, char *msh_name)
 	if ((get_status() == 2) && _hd_occ(prompt->line))
 		hd_cmd('f', NULL);
 	if (sig_type('g', 0) == SIGINT)
+	{
 		prompt->to_execute = 0;
+		hd_cmd('f', NULL);
+		to_stdin('o');
+	}
 }

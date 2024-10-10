@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:53:46 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/09 07:51:42 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/10 13:21:56 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	ft_write_var_hd(int fd, char *line, int lenv)
 
 	if (*line != '_' && !ft_isalpha(*line))
 		return (write(fd, (line - 1), 2), 2);
-	tmp = ft_substr(line, 0, lenv + 1);
+	tmp = ft_substr(line, 0, lenv);
 	var = getvar(tmp);
 	len = ft_strlen(var);
 	return (free(tmp), write(fd, var, len), len);

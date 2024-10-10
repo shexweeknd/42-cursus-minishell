@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:53:01 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/07 14:32:21 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/10 12:28:03 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,14 @@
 
 // MAIN HD_CREATE FUNC
 void	process_hd(t_eofs *eofs);
-t_hd	*hd_cmd(char cmd, char *eof);
+t_hd	*hd_cmd(char cmd, t_eofs *eof);
 
 // HD_UTILS
 int		ft_write_hd(int fd, char *line);
-size_t	fullfill_fd(int fd, char *eof);
+size_t	fullfill_fd(int fd, t_eofs *eof);
 char	*get_hd(int fd, size_t size);
 int		_hd_occ(char *line);
-char	*get_eof(char *line);
-t_eofs	*append_eofs(t_eofs *eofs, char *eof);
+t_eofs	*append_eofs(t_eofs *eofs, char *prompt);
 
 // PRE_PARSING FUNC
 int		hd_check_syntax_err(char *prompt);

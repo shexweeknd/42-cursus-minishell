@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:24:30 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/07 14:30:48 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/10 17:55:15 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,33 @@ int	ft_add_status(char *dest)
 		status /= 10;
 	}
 	return (r_len);
+}
+
+int	ft_dqoute_len(char **arg, t_env *env, char *stop)
+{
+	int		len;
+	int		lenv;
+
+	len = 0;
+	while (**arg && !ft_strchr(stop, **arg))
+	{
+		lenv = ft_isvar(*arg);
+		if (lenv)
+		{
+			if ((*arg)++ && (!**arg || \
+				(!ft_strcmp(stop, "\"") && ft_strchr(stop, **arg))))
+				return ((len += lenv), len);
+			if (ft_strchr(stop, **arg))
+				return (len);
+			if (**arg == '?')
+				len += ((*arg += 1), ft_nblen(get_status()));
+			else
+				*arg += ((len += ft_lenvar(*arg, env, lenv)), lenv);
+		}
+		else
+			len += ((*arg += 1), 1);
+	}
+	return (len);
 }
 
 char	**ft_filter_args(char **args)

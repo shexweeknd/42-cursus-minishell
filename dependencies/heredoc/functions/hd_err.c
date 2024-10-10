@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 10:29:12 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/09 09:02:00 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/10 12:14:45 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	hd_check_syntax_err(char *prompt)
 			return (process_hd(eofs), 0);
 		if (!is_valid_hd(prompt))
 			return (process_hd(eofs), 1);
-		eofs = append_eofs(eofs, get_eof(prompt));
+		eofs = append_eofs(eofs, prompt);
 		if (!eofs)
 			return (process_hd(eofs), 1);
 		prompt += skip_hd_eof(prompt);

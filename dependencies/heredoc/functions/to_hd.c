@@ -6,13 +6,13 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 09:32:19 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/09 09:15:57 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/10 12:27:19 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hd.h"
 
-void	init_hd(t_hd **hd_addr, char *eof)
+void	init_hd(t_hd **hd_addr, t_eofs *eof)
 {
 	t_hd	*hd;
 
@@ -29,7 +29,7 @@ void	init_hd(t_hd **hd_addr, char *eof)
 	*hd_addr = hd;
 }
 
-void	add_hd(t_hd **hd_addr, char *eof)
+static void	add_hd(t_hd **hd_addr, t_eofs *eof)
 {
 	t_hd	*hd;
 	int		pos;
@@ -51,7 +51,7 @@ void	add_hd(t_hd **hd_addr, char *eof)
 	hd->next = NULL;
 }
 
-t_hd	*hd_cmd(char cmd, char *eof)
+t_hd	*hd_cmd(char cmd, t_eofs *eof)
 {
 	static t_hd	*hd;
 
