@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:43:12 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/28 15:52:55 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/14 11:34:47 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	valid_exit_args(t_cmd *cmd)
 				": numeric argument required", NULL}), set_status(2), 1);
 	else if (cmd->args[2])
 		return (ft_perror_fd(2, (char *[]){"\033[0;32m", MSH_LOG,
-				":\033[0;0m exit: too many arguments", NULL}),
-			set_status(ft_atoi(cmd->args[1])), 0);
+				":\033[0;0m exit: too many arguments", NULL}), set_status(1),
+			0);
 	if (cmd->args[1] && ft_isnbr(cmd->args[1]))
 		set_status(ft_atoi(cmd->args[1]));
 	return (1);

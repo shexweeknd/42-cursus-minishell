@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:33:24 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/29 12:11:13 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/14 09:30:14 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	child_signal_handler(int sig)
 	else if (sig == SIGQUIT)
 	{
 		printf("\e[K");
-		printf("Quit (core dumped)\n");
+		if (isatty(STDIN_FILENO))
+			printf("Quit (core dumped)\n");
 	}
 }
 

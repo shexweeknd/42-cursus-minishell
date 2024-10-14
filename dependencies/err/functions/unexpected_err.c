@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unexpected_err.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 14:29:29 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/25 16:23:02 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/14 07:51:02 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	check_op_at_start(char *prompt)
 		&& is_only_spaces(&prompt[cursor + 2]))
 		return (display_unexpected_token("newline"), 0);
 	else if ((prompt[cursor] == '>' || prompt[cursor] == '<')
-		&& is_only_spaces(&prompt[cursor + 2]))
+		&& is_only_spaces(&prompt[cursor + 1]))
 		return (display_unexpected_token("newline"), 0);
 	return (1);
 }

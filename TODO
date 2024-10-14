@@ -53,6 +53,8 @@ UPDATE :
 [FINISHED] - [hramaros]
             Minishell$ ''
             (doit printer "bash: : command not found")
+        
+[FINISHED] - export "test=test"=TEST
 
 TODO:
     - 'export' builtin errors handling:
@@ -80,12 +82,56 @@ MANDATORY :
 
             cat << "e" => shouldn't interpret expanded
 
-TEST :
-		export "test=test"=TEST
+TESTS UNSOLVED :
+        echo -nnnnn (wrong output)
+        echo $:$= | cat -e (wrong output + LEAKS)
+        echo " $ " | cat -e (wrong output + LEAKS)
+        echo "" $HOME (wrong output)
+        echo '' $HOME (wrong output)
+        echo "$DONTEXIST" "Makefile" (wrong output)
+        echo $=HOME (wrong output)
+        ?$HOME (ft_search_executable: hramaros)
+        test/minishell (doit pouvoir lancer minishell ou bien No S F o Dir: hramaros)
+        "$HOMEdskjhfkdshfsd" (wrong output)
+        export "" (wrong behaviour)
+        export = (wrong behaviour)
+        export $? (wrong behaviour)
+        export ?=2 (wrong behaviour)
+        export 9HOLA= (wrong behaviour)
+        export HOL@=bonjour (wrong behaviour)
+        export -HOLA=bonjour (wrong behaviour)
+        export --HOLA=bonjour (wrong behaviour)
+        export HOLA-=bonjour (wrong behaviour)
+        export HO-LA=bonjour (wrong behaviour)
+        export HOL.A=bonjour (wrong behaviour)
+        export HOL}A=bonjour (wrong behaviour)
+        export HOL{A=bonjour (wrong behaviour)
+        export HO*LA=bonjour (wrong behaviour)
+        export HO#LA=bonjour (wrong behaviour)
+        export HO@LA=bonjour (wrong behaviour)
+        export HO!LA=bonjour (wrong behaviour)
+        export HOL+A=bonjour (wrong behaviour)
+        export HOLA =bonjour (wrong behaviour)
+        export HOLA = bonjour (wrong behaviour)
+        export TE+S=T (wrong output)
+        export ''='' (wrong behaviour)
+        export "="="=" (wrong behaviour)
+        export '='='=' (wrong behaviour)
+        unset 9HOLA (wrong output)
+        unset $PWD (wrong behaviour)
+        unset HOL!A (wrong output)
+        unset ++++++ (wrong behaviour)
+        pwd -p (wrong output)
+        cd // && pwd (wrong output)
+        cd --- (wrong output)
+        unset HOME && cd $HOME (wrong output)
+        'mkdir a && mkdir a/b && cd a/b && rm -r ../../a pwd' (wrong behaviour)
+        env -i ./minishell (wrong behaviour)
+        echo $HOLA | cat -e (LEAKS)
+        cat | ls + Ctrl^C (LEAKS)
+        ls | exit 42 (wrong behaviour for status return)
+
+        [CHECKPOINT-ligne 501]
 
 URGENT :
-    - j'ai push un fichier supp.supp qui permet de supprimer l'affichage de tous les leaks de readline, ainsi que de la librairie libreadline, la commande pour tester avec la suppression est:
-
     bash-5.1$ valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=supp.supp -s ./minishell
-
-    - j'ai push le fichier `800 tests pour minishell.xlsx` pour qu'on puisse voir tous les tests importants

@@ -1,10 +1,47 @@
 {
     libreadline
     Memcheck:Leak
+    match-leak-kinds: all
+    ...
+    obj: /usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+    ...
+}
+
+{
+    libreadline
+    Memcheck:Leak
     match-leak-kinds: reachable
     ...
-    obj:/usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+    obj: /usr/lib/x86_64-linux-gnu/libreadline.so.8.1
     ...
+}
+
+{
+   readline_history
+   Memcheck:Leak
+   match-leak-kinds: all
+   ...
+   fun:add_history
+   ...
+}
+
+{
+   readline_history
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:add_history
+   ...
+}
+
+
+{
+   readline
+   Memcheck:Leak
+   match-leak-kinds: all
+   ...
+   fun:readline
+   ...
 }
 
 {
