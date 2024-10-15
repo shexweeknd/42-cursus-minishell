@@ -134,7 +134,10 @@ TESTS UNSOLVED :
         time sleep 3 | sleep 3 (wrong output)
         cat < fichierinexistant (wrong behaviour)
         touch hola && rm -rf hola* (wrong behaviour)
-        
+        << hola (wrong status return)
+        << $"hola"$"b" (wrong EOF parsed)
+        << ho$la$"$a"$$"b" (wrong EOF parsed)
+        ls | eof (wrong status return)
         [CHECKPOINT-ligne 700]
 
 URGENT :
