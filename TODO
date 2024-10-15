@@ -79,6 +79,7 @@ MANDATORY :
             "$USER"
             export "nom espacer"=value
             make -n
+            [multilign command]
 
             cat << "e" => shouldn't interpret expanded
 
@@ -130,8 +131,11 @@ TESTS UNSOLVED :
         echo $HOLA | cat -e (LEAKS)
         cat | ls + Ctrl^C (LEAKS)
         ls | exit 42 (wrong behaviour for status return)
-
-        [CHECKPOINT-ligne 501]
+        time sleep 3 | sleep 3 (wrong output)
+        cat < fichierinexistant (wrong behaviour)
+        touch hola && rm -rf hola* (wrong behaviour)
+        
+        [CHECKPOINT-ligne 700]
 
 URGENT :
     bash-5.1$ valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=supp.supp -s ./minishell
