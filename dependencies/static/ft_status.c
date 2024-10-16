@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_status.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:11:21 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/07 14:47:30 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/16 15:44:53 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,18 @@ void	set_status(unsigned char new_status)
 
 int	ft_exit_status(int status)
 {
-	if (WIFSIGNALED(status))
+	if (!WIFEXITED(status))
+	{
+		if (get_sig() == SIGINT)
+			printf("\n");
+		else if (get_sig() == SIGQUIT)
+		{
+			printf("\e[K");
+			if (isatty(STDIN_FILENO))
+				printf("Quit (core dumped)\n");
+		}
+	}
+	if (set_sig(0), WIFSIGNALED(status))
 	{
 		if (WTERMSIG(status) == SIGSEGV)
 			printf("segmentation fault\n");

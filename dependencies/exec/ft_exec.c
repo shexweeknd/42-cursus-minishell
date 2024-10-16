@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/10 18:56:17 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/16 15:38:46 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ int	ft_exec_cmd(t_executable exec)
 		exec.cmd->args[0] = (free(exec.cmd->args[0]), exe);
 	if (fork() == 0)
 	{
-		if (execve(exe, exec.cmd->args, exec.env->var) == -1)
-			(ft_perror_fd(2, (char *[]){strerror(errno), "\n", NULL}), \
+		if (signal(SIGINT, SIG_DFL), signal(SIGQUIT, SIG_DFL), execve(exe,
+				exec.cmd->args, exec.env->var) == -1)
+			(ft_perror_fd(2, (char *[]){strerror(errno), "\n", NULL}),
 				exit(EXIT_FAILURE));
 	}
 	else

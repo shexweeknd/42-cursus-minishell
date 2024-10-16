@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_static.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 09:40:01 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/07 13:32:40 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/16 15:24:34 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_STATIC_H
 # define FT_STATIC_H
 
-# include "libft.h"
 # include "env_struct.h"
+# include "libft.h"
 # include "msh_mac.h"
 # include <signal.h>
 # include <stdio.h>
@@ -31,6 +31,10 @@ void			set_rootpath(char *new_root_path);
 unsigned char	get_status(void);
 void			set_status(unsigned char new_status);
 int				ft_exit_status(int status);
+
+/* _________________________ SIGNAL _________________________ */
+unsigned char	get_sig(void);
+void			set_sig(unsigned char new_sig);
 
 /* _________________________ HIST _________________________ */
 char			*get_histpath(void);

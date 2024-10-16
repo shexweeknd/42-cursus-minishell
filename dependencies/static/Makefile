@@ -9,6 +9,7 @@ FILES			= \
 					ft_hdpath.c		\
 					ft_histpath.c	\
 					ft_status.c		\
+					ft_sig.c 		\
 					ft_statics.c
 
 # OBJECT FILES
