@@ -134,10 +134,10 @@ TEST SOLVE  :
         ls | eof (wrong status return)
         cat and ls with folder as input file
         cd // && pwd (wrong output)
-
-TESTS UNSOLVED :
         << $"hola"$"b" (wrong EOF parsed)
         << ho$la$"$a"$$"b" (wrong EOF parsed)
+
+TESTS UNSOLVED :
 
 URGENT :
     bash-5.1$ valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=supp.supp -s ./minishell

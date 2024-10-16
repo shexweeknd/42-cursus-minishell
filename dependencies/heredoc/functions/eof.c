@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 09:31:35 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/10 12:32:09 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/16 17:27:58 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ int	eof_size(char *line)
 	char	quote;
 
 	i = 0;
+	quote = 0;
 	while (*line && !ft_is_cmd_sep(*line))
 	{
-		end = ((quote = ft_is_quote(*line)), NULL);
+		if (!ft_strncmp(line, "$\"", 2) && *(line - 1) && *(line - 1) != '$')
+			quote = *(++line);
+		if (!quote)
+			end = ((quote = ft_is_quote(*line)), NULL);
 		if (quote)
 		{
 			end = ft_strchr((line + 1), quote);
@@ -30,6 +34,8 @@ int	eof_size(char *line)
 		}
 		if (!end)
 			i += ((line += 1), 1);
+		if (quote)
+			quote = 0;
 	}
 	return (i);
 }
@@ -41,7 +47,9 @@ static int	_get_eof(char *eof, char *line)
 	have_quote = 0;
 	while (line && *line && !ft_is_cmd_sep(*line) && !ft_is_redirect(*line))
 	{
-		if (ft_is_quote(*line) && line++)
+		if ((ft_is_quote(*line) && line++) \
+			|| (!ft_strncmp(line, "$\"", 2) && *(line - 1) \
+			&& *(line - 1) != '$' && ((line += 2), line)))
 		{
 			while (line && *line && !ft_is_quote(*line))
 				*(eof++) = *(line++);
