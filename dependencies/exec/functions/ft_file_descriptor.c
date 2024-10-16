@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:17:58 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/10 18:54:02 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/16 17:07:43 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ void	ft_reset_fd(t_executable exec)
 
 int	ft_open_file(t_rfile *file, int *error)
 {
-	if (is_directory(file->args))
+	if (access(file->args, F_OK) == -1)
+	{
+		ft_perror_fd(2, (char *[]){MSH_LOG,": ", file->args, ": No such file or directory", NULL});
 		return ((*error = 1), -1);
+	}
 	return (open(file->args, file->option, 0644));
 }
 

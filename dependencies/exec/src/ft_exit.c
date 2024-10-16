@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:43:12 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/14 11:34:47 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:53:39 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	ft_exit(t_executable exec)
 		if (!exec.cmd)
 			printf("exit\n");
 		ft_clear_paths();
+		ft_pipe_status(exec.s_fd, get_status(), 1);
 		exit(get_status());
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/16 15:38:46 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:45:56 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ int	ft_exec_cmd(t_executable exec)
 	char	*exe;
 	int		status;
 
-	if (!exec.cmd->args)
-		return (1);
+	if (!exec.cmd->args || !exec.cmd->args[0] )
+		return (0);
 	status = (ft_manage_args(exec.cmd, exec.env), 0);
-	if (!exec.cmd->args[0] || !ft_manage_redirect_file(exec.p_fd, exec.cmd))
+	if (!ft_manage_redirect_file(exec.p_fd, exec.cmd))
 		return (1);
 	if (ft_builtin_cmd(exec))
 		return (get_status());
@@ -72,8 +72,8 @@ void	exec_cmds_right(t_exec_params *params, t_executable *exec)
 {
 	if (params->read_fd != 0)
 		close(params->read_fd);
-	ft_next_cmds(exec->p_fd, *params);
 	set_status(ft_pipe_status(exec->s_fd, 0, 0));
+	ft_next_cmds(exec->p_fd, *params);
 }
 
 int	ft_exec_cmds(t_exec_params params)

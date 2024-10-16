@@ -122,23 +122,22 @@ TEST SOLVE  :
         unset $PWD (wrong behaviour)
         unset ++++++ (wrong behaviour)
         pwd -p (wrong output)
-
-TESTS UNSOLVED :
-        cd // && pwd (wrong output)
         unset HOME && cd $HOME (wrong output)
         'mkdir a && mkdir a/b && cd a/b && rm -r ../../a pwd' (wrong behaviour)
         env -i ./minishell (wrong behaviour)
         echo $HOLA | cat -e (LEAKS)
         cat | ls + Ctrl^C (LEAKS)
+        << hola (wrong status return)
         ls | exit 42 (wrong behaviour for status return)
         time sleep 3 | sleep 3 (wrong output)
         cat < fichierinexistant (wrong behaviour)
-        touch hola && rm -rf hola* (wrong behaviour)
-        << hola (wrong status return)
+        ls | eof (wrong status return)
+        cat and ls with folder as input file
+        cd // && pwd (wrong output)
+
+TESTS UNSOLVED :
         << $"hola"$"b" (wrong EOF parsed)
         << ho$la$"$a"$$"b" (wrong EOF parsed)
-        ls | eof (wrong status return)
-        [CHECKPOINT-ligne 700]
 
 URGENT :
     bash-5.1$ valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=supp.supp -s ./minishell
