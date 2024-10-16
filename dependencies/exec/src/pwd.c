@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:42 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/16 16:17:53 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/16 17:15:10 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ int	pwd(t_executable exec)
 	{
 		cwd = getcwd(NULL, 0);
 		if (!cwd)
-			return (ft_perror_fd(2, (char *[]){"pwd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory", NULL}), 1);
+			return (ft_perror_fd(2, (char *[]){"pwd: error retrieving current", \
+			" directory: getcwd: cannot access parent directories: No such ", \
+			"file or directory", NULL}), 1);
 		else
 			(printf("%s\n", cwd), free(cwd));
 	}

@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/16 16:45:56 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/16 17:12:47 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_exec_cmd(t_executable exec)
 	char	*exe;
 	int		status;
 
-	if (!exec.cmd->args || !exec.cmd->args[0] )
+	if (!exec.cmd->args || !exec.cmd->args[0])
 		return (0);
 	status = (ft_manage_args(exec.cmd, exec.env), 0);
 	if (!ft_manage_redirect_file(exec.p_fd, exec.cmd))
