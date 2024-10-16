@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/16 17:12:47 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/16 20:32:35 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int	ft_exec_cmds(t_exec_params params)
 	}
 	else
 	{
+		exec.s_fd[0] = ((exec.s_fd[1] = -1), -1);
 		if (params.l_type == OR && get_status() != 0)
 			ft_exec_cmd(exec);
 		else

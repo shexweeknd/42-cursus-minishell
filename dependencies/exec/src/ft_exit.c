@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:43:12 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/16 16:53:39 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/16 20:32:15 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	ft_exit(t_executable exec)
 		if (!exec.cmd)
 			printf("exit\n");
 		ft_clear_paths();
-		ft_pipe_status(exec.s_fd, get_status(), 1);
+		if (exec.s_fd[0] != -1 && exec.s_fd[1] != -1)
+			ft_pipe_status(exec.s_fd, get_status(), 1);
 		exit(get_status());
 	}
 }
