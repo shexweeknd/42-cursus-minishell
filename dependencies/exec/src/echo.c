@@ -6,11 +6,27 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:16:48 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/28 13:49:18 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/16 13:58:48 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
+
+int	chech_option(char *arg)
+{
+	if (ft_strncmp(arg, "-n", 2) == 0)
+	{
+		arg += 2;
+		while (arg && *arg)
+		{
+			if (*arg != 'n')
+				return (0);
+			arg++;
+		}
+		return (1);
+	}
+	return (0);
+}
 
 int	echo(t_executable exec)
 {
@@ -19,7 +35,7 @@ int	echo(t_executable exec)
 
 	i = 1;
 	end = '\n';
-	while (exec.cmd->args[i] && ft_strcmp(exec.cmd->args[i], "-n") == 0)
+	while (exec.cmd->args[i] && chech_option(exec.cmd->args[i]))
 		i += ((end = 0), 1);
 	while (exec.cmd->args[i])
 	{

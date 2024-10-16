@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:24:30 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/10 17:55:15 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/16 13:49:39 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	ft_dqoute_len(char **arg, t_env *env, char *stop)
 				return (len);
 			if (**arg == '?')
 				len += ((*arg += 1), ft_nblen(get_status()));
+			else if (!ft_isalpha(**arg) && **arg != '_')
+				len++;
 			else
 				*arg += ((len += ft_lenvar(*arg, env, lenv)), lenv);
 		}
@@ -77,33 +79,4 @@ int	ft_dqoute_len(char **arg, t_env *env, char *stop)
 			len += ((*arg += 1), 1);
 	}
 	return (len);
-}
-
-char	**ft_filter_args(char **args)
-{
-	int		i;
-	int		j;
-	int		len;
-	char	**new_args;
-
-	i = ((len = 0), -1);
-	while (args[++i])
-	{
-		if (ft_strlen(args[i]))
-			len++;
-	}
-	if (i == len)
-		return (args);
-	i = ((j = 0), -1);
-	new_args = (char **)malloc(sizeof(char *) * (len + 1));
-	if (!new_args)
-		return (NULL);
-	while (args[++i])
-	{
-		if (ft_strlen(args[i]))
-			new_args[j++] = args[i];
-		else
-			args[i] = (free(args[i]), NULL);
-	}
-	return ((new_args[j] = 0), free(args), new_args);
 }

@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/10 18:06:07 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/16 15:20:20 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,16 @@ int				ft_add_status(char *dest);
 int				ft_dqoute_len(char **arg, t_env *env, char *stop);
 int				ft_dquote_add(char *dest, char **arg, t_env *env, char *stop);
 void			*ft_manage_args(t_cmd *cmd, t_env *env);
-char			**ft_filter_args(char **args);
 
 /* _________________________ EXEC UTILS _________________________ */
 char			*ft_search_executable(t_executable exec);
 t_executable	ft_init_executable(t_exec_params param);
 void			ft_free_executable(t_executable exec);
 void			ft_next_cmds(int fd[2], t_exec_params params);
-int				ft_check_valid_var(char *var, int status);
+int				ft_check_valid_var(char *var);
 char			*subst_home(char *src, t_env *env);
 
 /* _________________________ EXEC STATUS _________________________ */
-void			p_exec_log(char *msg, char *file_exe);
 int				cmd_found(char *file_exe, int simulate);
 int				cmd_executable(char *file_exe, int simulate);
 char			*is_exec_from_path(t_executable *exec);

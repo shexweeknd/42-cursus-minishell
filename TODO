@@ -85,7 +85,7 @@ MANDATORY :
 
             cat << "e" => shouldn't interpret expanded
 
-TESTS UNSOLVED :
+TEST SOLVE  :
         echo -nnnnn (wrong output)
         echo $:$= | cat -e (wrong output + LEAKS)
         echo " $ " | cat -e (wrong output + LEAKS)
@@ -120,11 +120,11 @@ TESTS UNSOLVED :
         export '='='=' (wrong behaviour)
         unset 9HOLA (wrong output)
         unset $PWD (wrong behaviour)
-        unset HOL!A (wrong output)
         unset ++++++ (wrong behaviour)
         pwd -p (wrong output)
+
+TESTS UNSOLVED :
         cd // && pwd (wrong output)
-        cd --- (wrong output)
         unset HOME && cd $HOME (wrong output)
         'mkdir a && mkdir a/b && cd a/b && rm -r ../../a pwd' (wrong behaviour)
         env -i ./minishell (wrong behaviour)

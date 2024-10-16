@@ -3,38 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:42:58 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/16 07:55:51 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:20:36 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
 
-int	ft_check_valid_var(char *var, int status)
+int	ft_check_valid_var(char *var)
 {
 	int	i;
 	int	has_error;
 
 	has_error = ((i = 0), i);
-	if (var && ft_isdigit(var[i++]))
-		has_error = 1;
+	if ((var && ft_isdigit(var[i])) || !var || var[i] == '=')
+		has_error = (i++, 1);
+	if (!var)
+		var = "";
 	while (var && var[i] && var[i] != '=')
 	{
 		if (!ft_isalnum(var[i]) && var[i] != '_')
 			has_error = 1;
 		i++;
 	}
-	if (var && var[i] && var[i] == '=')
-		var[i] = 0;
-	if (has_error && var)
+	if (has_error)
 	{
-		ft_perror_fd(2, (char *[]){MSH_LOG, ": export: `", var,
+		ft_perror_fd(2, (char *[]){MSH_LOG, ": export: `", var, \
 			"': not a valid identifier", NULL});
 		return (1);
 	}
-	return (status);
+	if (var && var[i] && var[i] == '=')
+		var[i] = 0;
+	return (0);
 }
 
 char	*ft_search_executable(t_executable exec)

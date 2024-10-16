@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:49 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 11:46:42 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:27:43 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	unset(t_executable exec)
 	status = ((i = 0), i);
 	while (exec.cmd->args[++i])
 	{
-		status = ft_check_valid_var(exec.cmd->args[i], status);
 		if (ft_search_var(exec.env, exec.cmd->args[i]))
 			ft_delvar(exec.env, exec.cmd->args[i]);
 	}

@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:11 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/29 18:54:25 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/16 15:20:46 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ static char	*ft_getvar_name(char *arg)
 	char	*equal;
 
 	equal = ft_strchr(arg, '=');
-	if (equal && (equal - arg) != 0)
+	if (equal && (equal - arg) != 0 && *arg != '=')
 		return (ft_substr(arg, 0, ++equal - arg));
-	return (NULL);
+	return (ft_strdup(arg));
 }
 
 static int	ft_addenv(t_env *env, char *new)
@@ -95,8 +95,8 @@ int	export(t_executable exec)
 	while (exec.cmd->args[++i])
 	{
 		var_name = ft_getvar_name(exec.cmd->args[i]);
-		status = ft_check_valid_var(var_name, status);
-		if (!ft_setvar(exec.env, var_name, exec.cmd->args[i]))
+		status = ft_check_valid_var(exec.cmd->args[i]);
+		if (!status && !ft_setvar(exec.env, var_name, exec.cmd->args[i]))
 			ft_addenv(exec.env, exec.cmd->args[i]);
 		if (var_name && !ft_strcmp(var_name, "PATH"))
 		{
@@ -104,7 +104,8 @@ int	export(t_executable exec)
 				(free(*exec.env->path), free(exec.env->path));
 			exec.env->path = ft_split_path(exec.cmd->args[i]);
 		}
-		free(var_name);
+		if (var_name)
+			free(var_name);
 	}
 	return (status);
 }

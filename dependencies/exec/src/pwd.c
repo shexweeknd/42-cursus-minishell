@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:42 by hramaros          #+#    #+#             */
-/*   Updated: 2024/09/27 18:08:21 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/16 15:37:06 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	ft_check_pwd_error(char *arg)
 		if (*(tmp + 1) && (*(tmp + 1) != 'L' && *(tmp + 1) != 'P'))
 		{
 			error = 1;
-			ft_pwd_error(1, *tmp);
+			ft_pwd_error(1, *(tmp + 1));
 			ft_pwd_error(2, 0);
 		}
 	}

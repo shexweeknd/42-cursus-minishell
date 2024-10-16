@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:14:57 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/10 17:54:43 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/16 13:51:12 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	ft_dquote_add(char *dest, char **arg, t_env *env, char *stop)
 				break ;
 			else if (**arg == '?')
 				i += ((*arg += 1), ft_add_status(dest + i));
+			else if (!ft_isalpha(**arg) && **arg != '_')
+				i += ((dest[i] = '$'), lenv);
 			else
 				*arg += ((i += ft_cpvar((dest + i), *arg, env, lenv)), lenv);
 		}
@@ -103,12 +105,13 @@ void	ft_manage_arg(char **arg, t_env *env)
 	if (ft_strchr(*arg, '$') || \
 		new_len != (int)ft_strlen(*arg))
 	{
-		tmp = *arg;
+		*arg = ((tmp = *arg), NULL);
 		*arg = (char *)malloc(sizeof(char) * (new_len + 1));
 		if (!*arg)
 			return ;
 		ft_bzero(*arg, new_len + 1);
-		(ft_addnew_args(*arg, tmp, env), free(tmp));
+		ft_addnew_args(*arg, tmp, env);
+		free (tmp);
 	}
 }
 
@@ -130,6 +133,5 @@ void	*ft_manage_args(t_cmd *cmd, t_env *env)
 	tmp = cmd->file_out;
 	while (tmp)
 		tmp = ((ft_manage_arg(&tmp->args, env)), tmp->next);
-	cmd->args = ft_filter_args(cmd->args);
 	return (cmd);
 }
