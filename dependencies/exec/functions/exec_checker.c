@@ -6,27 +6,24 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:28:57 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/14 09:17:48 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/16 08:30:46 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
 
-void	p_exec_log(char *msg, char *file_exe)
-{
-	ft_perror_fd(2, (char *[]){MSH_LOG, ": ", file_exe, ": ", msg, NULL});
-}
-
 int	cmd_found(char *file_exe, int simulate)
 {
 	if (simulate)
 	{
-		p_exec_log("command not found", file_exe);
+		ft_perror_fd(2, (char *[]){MSH_LOG, ": ", file_exe, ": ",
+			"command not found", NULL});
 		return (set_status(127), 0);
 	}
 	if (access(file_exe, F_OK) == 0)
 		return (1);
-	p_exec_log("No such file or directory", file_exe);
+	ft_perror_fd(2, (char *[]){MSH_LOG, ": ", file_exe, ": ",
+		"No such file or directory", NULL});
 	return (set_status(127), 0);
 }
 
@@ -34,12 +31,14 @@ int	cmd_executable(char *file_exe, int simulate)
 {
 	if (simulate)
 	{
-		p_exec_log("Permission denied", file_exe);
+		ft_perror_fd(2, (char *[]){MSH_LOG, ": ", file_exe, ": ",
+			"Permission denied", NULL});
 		return (set_status(126), 0);
 	}
 	if (access(file_exe, X_OK) == 0)
 		return (1);
-	p_exec_log("Permission denied", file_exe);
+	ft_perror_fd(2, (char *[]){MSH_LOG, ": ", file_exe, ": ",
+		"Permission denied", NULL});
 	return (set_status(126), 0);
 }
 
@@ -59,6 +58,12 @@ int	is_directory(const char *path)
 	return (0);
 }
 
+char	*create_subdir(t_executable *exec, int i)
+{
+	return (ft_join((char *[]){exec->env->path[i], "/", exec->cmd->args[0],
+			NULL}));
+}
+
 char	*is_exec_from_path(t_executable *exec)
 {
 	int		i;
@@ -67,8 +72,7 @@ char	*is_exec_from_path(t_executable *exec)
 	i = 0;
 	while (exec->env->path[i])
 	{
-		tmp = ft_join((char *[]){exec->env->path[i++], "/", exec->cmd->args[0],
-				NULL});
+		tmp = create_subdir(exec, i++);
 		if (!tmp)
 			return (NULL);
 		if (access(tmp, F_OK) == 0)
@@ -79,5 +83,12 @@ char	*is_exec_from_path(t_executable *exec)
 		}
 		free(tmp);
 	}
-	return (NULL);
+	if (ft_get_occ(exec->cmd->args[0], '/'))
+	{
+		if (access(exec->cmd->args[0], F_OK) == 0
+			&& cmd_executable(exec->cmd->args[0], 0))
+			return (exec->cmd->args[0]);
+		return (cmd_found(exec->cmd->args[0], 0), NULL);
+	}
+	return (cmd_found(exec->cmd->args[0], 1), NULL);
 }

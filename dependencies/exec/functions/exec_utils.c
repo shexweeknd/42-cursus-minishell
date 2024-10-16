@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:42:58 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/14 09:20:49 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/16 07:55:51 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ int	ft_check_valid_var(char *var, int status)
 
 char	*ft_search_executable(t_executable exec)
 {
-	char	*tmp;
-
 	exec.cmd->args[0] = subst_home(exec.cmd->args[0], exec.env);
 	if ((!exec.cmd || !exec.cmd->args) || is_directory(exec.cmd->args[0])
 		|| ((!exec.env || !exec.env->path) && (!cmd_found(exec.cmd->args[0], 0)
@@ -48,13 +46,7 @@ char	*ft_search_executable(t_executable exec)
 		return (NULL);
 	else if (*exec.cmd->args[0] != '/' && ft_strncmp(exec.cmd->args[0], "./", 2)
 		&& ft_strncmp(exec.cmd->args[0], "~/", 2))
-	{
-		tmp = is_exec_from_path(&exec);
-		if (tmp == NULL)
-			return (cmd_found(exec.cmd->args[0], 1), NULL);
-		if (tmp)
-			return (tmp);
-	}
+		return (is_exec_from_path(&exec));
 	else if (*exec.cmd->args[0] == '/' || ft_strncmp(exec.cmd->args[0], "./", 2)
 		|| ft_strncmp(exec.cmd->args[0], "~/", 2))
 	{
