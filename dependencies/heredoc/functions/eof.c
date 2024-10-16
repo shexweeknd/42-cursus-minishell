@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 09:31:35 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/16 17:27:58 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/16 17:39:47 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	_get_eof(char *eof, char *line)
 	{
 		if ((ft_is_quote(*line) && line++) \
 			|| (!ft_strncmp(line, "$\"", 2) && *(line - 1) \
-			&& *(line - 1) != '$' && ((line += 2), line)))
+			&& *(line - 1) != '$' && ((line++), line++)))
 		{
 			while (line && *line && !ft_is_quote(*line))
 				*(eof++) = *(line++);

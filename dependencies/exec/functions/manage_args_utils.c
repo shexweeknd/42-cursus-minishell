@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:24:30 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/16 16:11:36 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/16 17:41:11 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,21 @@ int	ft_dqoute_len(char **arg, t_env *env, char *stop)
 			len += ((*arg += 1), 1);
 	}
 	return (len);
+}
+
+void	ft_printf_env_export(char *str)
+{
+	write(1, "export ", 7);
+	while (str && *str && *str != '=')
+		write(1, str++, 1);
+	if (str && *str && *str == '=' && str++)
+		write(1, "=", 1);
+	if (str && *str)
+	{
+		write(1, "\"", 1);
+		while (str && *str && *str)
+			write(1, str++, 1);
+		write(1, "\"", 1);
+	}
+	write(1, "\n", 1);
 }

@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:11 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/16 15:20:46 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/16 17:41:02 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	ft_printsort_tab(char **tab)
 	}
 	i = 0;
 	while (tab && i < len)
-		printf("%s\n", tab[i++]);
+		ft_printf_env_export(tab[i++]);
 }
 
 static int	ft_export_no_arg(char **env)
