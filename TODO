@@ -13,11 +13,8 @@ UPDATE :
 [FINISHED] 'echo "it works"' (doit afficher comme dans bash)
 [FINISHED] 'echo it works' (doit afficher comme dans bash)
 [FINISHED]  - 'echo "cat lol.c | cat > lol.c"' (affiche 'cat lol.c | cat > lol.c' sans attendre)
-[FINISHED]  - 'cat | cat | ls' (affiche ls avant d'attendre le input de cat)
-[FINISHED]  - '> foo' (creer foo et passe a get_line())
 [FINISHED]  - '/bin/ls' (doit s'executer)
 [FINISHED]  - '/bin/pwd' (doit pouvoir lancer pwd)
-[FINISHED]  - 'cat /dev/random | ls' (doit executer ls sans attendre)
 [FINISHED]  - 'cd ~'
 [FINISHED]  - 'cd ~/path/of/your/choice/'
 [FINISHED]  - 'cd .'
@@ -27,12 +24,11 @@ UPDATE :
 [FINISHED]  - export
 [FINISHED]  - status
 [FINISHED]  - $HOME
-[FINISHED]  - unset $PATH --> ls --> core dumped (hramaros + ballain)
+[FINISHED]  - unset $PATH --> ls --> core dumped
 [FINISHED]  - Ctrl + D must print exit (hramaros)
 [FINISHED]  - exit [TOTEST]
 [FINISHED]  - heredoc [EXECUTION && TEST LEFT]
 [FINISHED]  - fix le history qui ne marche pas
-[FINISHED]  - > file.txt (persmission a ajouter -rw-r--r--) (ballain)
 [FINISHED]  - approche sur le hd fichier temp 'cat << e && cat << e'
 [FINISHED]  - '$? || echo $?' (doit faire le passage de status vers la droite)
 [FINISHED]  -
@@ -53,15 +49,12 @@ UPDATE :
 [FINISHED]  - [hramaros]
             Minishell$ ''
             (doit printer "bash: : command not found")
-        
-[FINISHED]  - export "test=test"=TEST
 
 [FINISHED]  - ?$HOME (ft_search_executable: hramaros)
             - test/minishell (doit pouvoir lancer minishell ou bien No S F o Dir: hramaros)
-TODO:
-    - 'export' builtin errors handling:
+[FINISHED]
+        - 'export' builtin errors handling:
         $ export "LVL" = 42 ==> (Minishell: export: `=': not a valid identifier Minishell: export: `42': not a valid identifier) [manome segfault ny minishell antsika]
-        $ export "MSH52"=42 ==> doit fonctionner
 
     ECHO: (lignes 75-83 `800 tests pour minishell.xlsx`)
     - 'echo -nnnnn' (ne doit rien afficher)
@@ -71,21 +64,15 @@ TODO:
     ECHO: (lignes 88 `800 tests pour minishell.xlsx`)
     - 'echo $:$= | cat -e' (comportement non conforme a bash, misy leaks)
 
-TODO BEFORE VOGSPHERERE:
-    - supprimer: sujet.pdf, TODO, README.md
-    - verifier tous les header de fichiers
-
-MANDATORY :
+[FINISHED]
             paramattre vide
             "$? $?"
-            "$USER"
+            - "$USER"
             export "nom espacer"=value
             make -n
-            [multilign command]
-
             cat << "e" => shouldn't interpret expanded
 
-TEST SOLVE  :
+TEST SOLVED :
         echo -nnnnn (wrong output)
         echo $:$= | cat -e (wrong output + LEAKS)
         echo " $ " | cat -e (wrong output + LEAKS)
@@ -94,14 +81,11 @@ TEST SOLVE  :
         echo "$DONTEXIST" "Makefile" (wrong output)
         echo $=HOME (wrong output)
         "$HOMEdskjhfkdshfsd" (wrong output)
-        export "" (wrong behaviour)
         export = (wrong behaviour)
         export $? (wrong behaviour)
         export ?=2 (wrong behaviour)
         export 9HOLA= (wrong behaviour)
         export HOL@=bonjour (wrong behaviour)
-        export -HOLA=bonjour (wrong behaviour)
-        export --HOLA=bonjour (wrong behaviour)
         export HOLA-=bonjour (wrong behaviour)
         export HO-LA=bonjour (wrong behaviour)
         export HOL.A=bonjour (wrong behaviour)
@@ -123,13 +107,10 @@ TEST SOLVE  :
         unset ++++++ (wrong behaviour)
         pwd -p (wrong output)
         unset HOME && cd $HOME (wrong output)
-        'mkdir a && mkdir a/b && cd a/b && rm -r ../../a pwd' (wrong behaviour)
         env -i ./minishell (wrong behaviour)
         echo $HOLA | cat -e (LEAKS)
-        cat | ls + Ctrl^C (LEAKS)
         << hola (wrong status return)
         ls | exit 42 (wrong behaviour for status return)
-        time sleep 3 | sleep 3 (wrong output)
         cat < fichierinexistant (wrong behaviour)
         ls | eof (wrong status return)
         cat and ls with folder as input file
@@ -138,6 +119,22 @@ TEST SOLVE  :
         << ho$la$"$a"$$"b" (wrong EOF parsed)
 
 TESTS UNSOLVED :
+    - '> foo' (wrong behaviour)
+    - > file.txt (wrong behaviour + -rw-r--r--) (ballain)
+    - 'cat /dev/random | ls' (wrong behaviour)
+    - export "test=test"=TEST (wrong behaviour)
+    - export "MSH52"=42 (wrong behaviour)
+    - 'mkdir a && mkdir a/b && cd a/b && rm -r ../../a && pwd' ( LEAKS quand on fait 'exit' apres la commande)
+    - 'cat | cat | ls' (wrong behaviour)
+    - cat | ls + Ctrl^C (wrong behaviour)
+    - time sleep 3 | sleep 3 (wrong behaviour)
+    - export "" (wrong behaviour )
+    - export -HOLA=bonjour (wrong behaviour )
+    - export --HOLA=bonjour (wrong behaviour )
+
+TODO BEFORE VOGSPHERERE:
+    - supprimer: sujet.pdf, TODO, README.md
+    - verifier tous les header de fichiers
 
 URGENT :
     bash-5.1$ valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=supp.supp -s ./minishell

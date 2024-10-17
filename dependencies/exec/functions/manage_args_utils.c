@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_args_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:24:30 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/16 17:41:11 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/17 08:09:37 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_cpvar(char *dest, char *arg, t_env *env, int lenv)
 	if (!var)
 		return (free(tmp), 0);
 	len = ft_strlcpy(dest, var, ft_strlen(var) + 1);
-	return (free(tmp), free(var), len);
+	return (free(tmp), len);
 }
 
 int	ft_add_status(char *dest)
@@ -56,8 +56,8 @@ int	ft_add_status(char *dest)
 
 int	ft_dqoute_len(char **arg, t_env *env, char *stop)
 {
-	int		len;
-	int		lenv;
+	int	len;
+	int	lenv;
 
 	len = 0;
 	while (**arg && !ft_strchr(stop, **arg))
@@ -65,8 +65,8 @@ int	ft_dqoute_len(char **arg, t_env *env, char *stop)
 		lenv = ft_isvar(*arg);
 		if (lenv)
 		{
-			if ((*arg)++ && (!**arg || \
-				(!ft_strcmp(stop, "\"") && ft_strchr(stop, **arg))))
+			if ((*arg)++ && (!**arg || (!ft_strcmp(stop, "\"")
+							&& ft_strchr(stop, **arg))))
 				return ((len += lenv), len);
 			if (ft_strchr(stop, **arg))
 				return (len);
