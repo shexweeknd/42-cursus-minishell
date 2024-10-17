@@ -117,20 +117,23 @@ TEST SOLVED :
         cd // && pwd (wrong output)
         << $"hola"$"b" (wrong EOF parsed)
         << ho$la$"$a"$$"b" (wrong EOF parsed)
+        
+        - '> foo' (wrong behaviour)
+        - > file.txt (wrong behaviour + -rw-r--r--) (ballain)
+        - export "" (wrong behaviour )
+        
+        - export -HOLA=bonjour (wrong behaviour ) <=== not wrong, shouldn't to check
+        - export --HOLA=bonjour (wrong behaviour ) <=== not wrong, shouldn't to check
+        - export "MSH52"=42 (wrong behaviour)
+        - export "test=test"=TEST (wrong behaviour)
+
+        - 'mkdir a && mkdir a/b && cd a/b && rm -r ../../a && pwd' ( LEAKS quand on fait 'exit' apres la commande) <==== no leaks found
 
 TESTS UNSOLVED :
-    - '> foo' (wrong behaviour)
-    - > file.txt (wrong behaviour + -rw-r--r--) (ballain)
     - 'cat /dev/random | ls' (wrong behaviour)
-    - export "test=test"=TEST (wrong behaviour)
-    - export "MSH52"=42 (wrong behaviour)
-    - 'mkdir a && mkdir a/b && cd a/b && rm -r ../../a && pwd' ( LEAKS quand on fait 'exit' apres la commande)
     - 'cat | cat | ls' (wrong behaviour)
     - cat | ls + Ctrl^C (wrong behaviour)
     - time sleep 3 | sleep 3 (wrong behaviour)
-    - export "" (wrong behaviour )
-    - export -HOLA=bonjour (wrong behaviour )
-    - export --HOLA=bonjour (wrong behaviour )
 
 TODO BEFORE VOGSPHERERE:
     - supprimer: sujet.pdf, TODO, README.md

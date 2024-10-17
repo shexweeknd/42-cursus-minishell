@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_args_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:24:30 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/17 08:36:34 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/17 10:10:37 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,11 @@ void	ft_printf_env_export(char *str)
 		write(1, str++, 1);
 	if (str && *str && *str == '=' && str++)
 		write(1, "=", 1);
+	write(1, "\"", 1);
 	if (str && *str)
 	{
-		write(1, "\"", 1);
 		while (str && *str && *str)
 			write(1, str++, 1);
-		write(1, "\"", 1);
 	}
-	write(1, "\n", 1);
+	write(1, "\"\n", 2);
 }
