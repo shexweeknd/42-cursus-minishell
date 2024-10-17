@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/17 10:01:08 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/17 16:02:43 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,13 @@ int	ft_exec_cmd(t_executable exec)
 
 void	exec_cmds_left(t_exec_params *params, t_executable *exec)
 {
+	int	status;
+
 	if (params->read_fd != 0)
 		(dup2(params->read_fd, STDIN_FILENO), close(params->read_fd));
-	ft_pipe_status(exec->s_fd, ft_exec_cmd(*exec), 1);
+	status = ft_exec_cmd(*exec);
+	if (exec && exec->cmd && exec->cmd->l_type == NONE)
+		ft_pipe_status(exec->s_fd, status, 1);
 	(ft_free_executable(*exec), exit(get_status()));
 }
 
@@ -73,7 +77,8 @@ void	exec_cmds_right(t_exec_params *params, t_executable *exec)
 	if (params->read_fd != 0)
 		close(params->read_fd);
 	ft_next_cmds(exec->p_fd, *params);
-	set_status(ft_pipe_status(exec->s_fd, 0, 0));
+	if (exec && exec->cmd && exec->cmd->l_type == NONE)
+		set_status(ft_pipe_status(exec->s_fd, 0, 0));
 }
 
 int	ft_exec_cmds(t_exec_params params)

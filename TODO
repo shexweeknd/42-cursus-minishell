@@ -128,12 +128,12 @@ TEST SOLVED :
         - export "test=test"=TEST (wrong behaviour)
 
         - 'mkdir a && mkdir a/b && cd a/b && rm -r ../../a && pwd' ( LEAKS quand on fait 'exit' apres la commande) <==== no leaks found
+        - 'cat /dev/random | ls' (wrong behaviour)
+        - 'cat | cat | ls' (wrong behaviour)
+        - time sleep 3 | sleep 3 (wrong behaviour)
 
 TESTS UNSOLVED :
-    - 'cat /dev/random | ls' (wrong behaviour)
-    - 'cat | cat | ls' (wrong behaviour)
     - cat | ls + Ctrl^C (wrong behaviour)
-    - time sleep 3 | sleep 3 (wrong behaviour)
 
 TODO BEFORE VOGSPHERERE:
     - supprimer: sujet.pdf, TODO, README.md
