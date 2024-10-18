@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/17 16:02:43 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/18 09:38:27 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,13 @@ void	exec_cmds_left(t_exec_params *params, t_executable *exec)
 
 void	exec_cmds_right(t_exec_params *params, t_executable *exec)
 {
+	t_link	redirect_type;
+
+	redirect_type = exec->cmd->l_type;
 	if (params->read_fd != 0)
 		close(params->read_fd);
 	ft_next_cmds(exec->p_fd, *params);
-	if (exec && exec->cmd && exec->cmd->l_type == NONE)
+	if (redirect_type == NONE)
 		set_status(ft_pipe_status(exec->s_fd, 0, 0));
 }
 

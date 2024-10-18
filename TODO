@@ -123,11 +123,11 @@ TEST SOLVED :
         - export --HOLA=bonjour (wrong behaviour ) <=== not wrong, shouldn't to check
         - export "MSH52"=42 (wrong behaviour)
         - export "test=test"=TEST (wrong behaviour)
+        - time sleep 3 | sleep 3 (invalid read of size 4)
+        - 'cat | cat | ls' (invalid read of size 4)
+        - 'cat /dev/random | ls' (invalid read of size 4)
 
 TESTS UNSOLVED :
-    - time sleep 3 | sleep 3 (invalid read of size 4)
-    - 'cat | cat | ls' (invalid read of size 4)
-    - 'cat /dev/random | ls' (invalid read of size 4)
     - 'mkdir a && mkdir a/b && cd a/b && rm -r ../../a && pwd' ( LEAKS quand on fait 'exit' apres la commande) <==== leaks apres exit !!!!!!!
     - cat | ls + Ctrl^C (invalid read of size 4 + LEAKS)
 
