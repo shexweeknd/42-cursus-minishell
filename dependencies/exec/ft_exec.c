@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/18 09:54:36 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/18 13:05:21 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,9 @@ void	exec_cmds_right(t_exec_params *params, t_executable *exec)
 int	ft_exec_cmds(t_exec_params params)
 {
 	t_executable	exec;
+	int				status;
 
-	if (!params.cmd)
+	if (ft_bzero(&status, 1), !params.cmd)
 		return (0);
 	exec = ft_init_executable(params);
 	if (setup_child_signals(), params.l_type == PIPE)
@@ -109,5 +110,5 @@ int	ft_exec_cmds(t_exec_params params)
 			set_status(ft_exec_cmd(exec));
 		(ft_reset_fd(exec), ft_next_cmds(exec.p_fd, params));
 	}
-	return (0);
+	return (wait(&status), ft_exit_status(status), 0);
 }

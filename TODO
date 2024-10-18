@@ -126,10 +126,10 @@ TEST SOLVED :
         - time sleep 3 | sleep 3 (invalid read of size 4)
         - 'cat | cat | ls' (invalid read of size 4)
         - 'cat /dev/random | ls' (invalid read of size 4)
+        - cat | ls + Ctrl^C (invalid read of size 4 + LEAKS)
+        - 'mkdir a && mkdir a/b && cd a/b && rm -r ../../a && pwd' ( LEAKS quand on fait 'exit' apres la commande) <==== leaks apres exit !!!!!!!
 
 TESTS UNSOLVED :
-    - 'mkdir a && mkdir a/b && cd a/b && rm -r ../../a && pwd' ( LEAKS quand on fait 'exit' apres la commande) <==== leaks apres exit !!!!!!!
-    - cat | ls + Ctrl^C (invalid read of size 4 + LEAKS)
 
 TODO BEFORE VOGSPHERERE:
     - supprimer: sujet.pdf, TODO, README.md
