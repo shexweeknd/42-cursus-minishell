@@ -48,7 +48,7 @@ output		:
 output/%.o	: %.c | output
 				$(call Compile,$<,$@)
 
-output/%.o	: */%.c | output
+output/%.o	: functions/%.c | output
 				$(call Compile,$<,$@)
 
 $(NAME)		: $(OBJS) $(FUNC_OBJS)

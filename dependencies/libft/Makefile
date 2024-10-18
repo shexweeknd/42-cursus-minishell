@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+         #
+#    By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 11:14:27 by ballain           #+#    #+#              #
-#    Updated: 2024/10/07 13:36:55 by ballain          ###   ########.fr        #
+#    Updated: 2024/10/18 13:13:45 by hramaros         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,6 @@ SRCSBONUS	= \
 
 OBJS		= $(SRCS:%.c=output/%.o)
 OBJSBONUS	= $(SRCSBONUS:%.c=output/%.o)
-VIMFILES	= ./.*.swp
 CFLAGS		= -Wall -Wextra -Werror -Iincludes
 RM			= rm -rf
 CC			= cc -g

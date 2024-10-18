@@ -122,21 +122,6 @@ output/%.o	: */%.c | output
 $(NAME)		: $(OBJS)
 				$(call CreateExe,$^,$@)
 
-## Test
-run			: all
-				./$(NAME)
-
-test\:%		: all
-				valgrind --leak-check=full --show-leak-kinds=all -s ./$(NAME) $(subst test:,,$@)
-
-## Save
-push\:%		: fclean
-				git status
-				git add *
-				git status
-				git commit -m $(subst push:,,$@)
-				git push
-
 ## Clean
 clean		:
 				$(call MakeLibs,clean)
@@ -148,5 +133,4 @@ fclean		: clean
 
 re			: fclean all
 
-.PHONY		: clean fclean re all \
-				leaks suppr
+.PHONY		: clean fclean re all
