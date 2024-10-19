@@ -5,7 +5,7 @@ SIGNAUX:
 - Ctrl + \ [FINISHED] [TOTEST]
 
 UPDATE :
-[FINISHED] CORRIGER 'ls || ls | ls' qui quitte automatiquement
+[FINISHED] 'ls | ls | ls' (wrong behaviour)
 [FINISHED] 'echo $? + $?'
 [FINISHED] 'echo "it works"' (doit afficher comme dans bash)
 [FINISHED] 'echo it works' (doit afficher comme dans bash)
@@ -53,7 +53,6 @@ UPDATE :
         - 'export' builtin errors handling:
         $ export "LVL" = 42 ==> (Minishell: export: `=': not a valid identifier Minishell: export: `42': not a valid identifier) [manome segfault ny minishell antsika]
 
-    ECHO: (lignes 75-83 `800 tests pour minishell.xlsx`)
     - 'echo -nnnnn' (ne doit rien afficher)
     - 'echo -n -nnn -nnnn' (ne doit rien afficher)
     ...
@@ -62,7 +61,6 @@ UPDATE :
     - 'echo $:$= | cat -e' (comportement non conforme a bash, misy leaks)
 
 [FINISHED]
-            paramattre vide
             "$? $?"
             - "$USER"
             export "nom espacer"=value
@@ -130,6 +128,8 @@ TEST SOLVED :
         - 'mkdir a && mkdir a/b && cd a/b && rm -r ../../a && pwd' ( LEAKS quand on fait 'exit' apres la commande) <==== leaks apres exit !!!!!!!
 
 TESTS UNSOLVED :
+    << $"hola"$"b"$'' (wrong EOF)
+    << $"hola"$"b"$"" (wrong EOF)
 
 TODO BEFORE VOGSPHERERE:
     - supprimer: sujet.pdf, TODO, README.md
