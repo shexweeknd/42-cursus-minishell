@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 09:31:35 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/16 17:39:47 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/23 08:13:07 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	eof_size(char *line)
 	quote = 0;
 	while (*line && !ft_is_cmd_sep(*line))
 	{
-		if (!ft_strncmp(line, "$\"", 2) && *(line - 1) && *(line - 1) != '$')
+		if ((!ft_strncmp(line, "$\"", 2) || !ft_strncmp(line, "$'", 2)) \
+		&& *(line - 1) && *(line - 1) != '$')
 			quote = *(++line);
 		if (!quote)
 			end = ((quote = ft_is_quote(*line)), NULL);
@@ -48,7 +49,8 @@ static int	_get_eof(char *eof, char *line)
 	while (line && *line && !ft_is_cmd_sep(*line) && !ft_is_redirect(*line))
 	{
 		if ((ft_is_quote(*line) && line++) \
-			|| (!ft_strncmp(line, "$\"", 2) && *(line - 1) \
+			|| ((!ft_strncmp(line, "$\"", 2) || !ft_strncmp(line, "$'", 2)) \
+			&& *(line - 1) \
 			&& *(line - 1) != '$' && ((line++), line++)))
 		{
 			while (line && *line && !ft_is_quote(*line))

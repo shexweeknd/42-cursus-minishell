@@ -126,10 +126,11 @@ TEST SOLVED :
         - 'cat /dev/random | ls' (invalid read of size 4)
         - cat | ls + Ctrl^C (invalid read of size 4 + LEAKS)
         - 'mkdir a && mkdir a/b && cd a/b && rm -r ../../a && pwd' ( LEAKS quand on fait 'exit' apres la commande) <==== leaks apres exit !!!!!!!
+    
+        << $"hola"$"b"$'' (wrong EOF)
+        << $"hola"$"b"$"" (wrong EOF)
 
 TESTS UNSOLVED :
-    << $"hola"$"b"$'' (wrong EOF)
-    << $"hola"$"b"$"" (wrong EOF)
 
 TODO BEFORE VOGSPHERERE:
     - supprimer: sujet.pdf, TODO, README.md
