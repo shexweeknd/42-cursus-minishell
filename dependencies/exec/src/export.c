@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:17:11 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/17 10:08:38 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/24 12:49:28 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ static char	*ft_getvar_name(char *arg)
 	equal = ft_strchr(arg, '=');
 	if (equal && (equal - arg) != 0 && *arg != '=')
 		return (ft_substr(arg, 0, equal - arg));
+	if (!equal)
+		return (NULL);
 	return (ft_strdup(arg));
 }
 
