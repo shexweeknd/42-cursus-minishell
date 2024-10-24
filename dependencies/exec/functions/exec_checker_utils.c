@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_checker_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 14:31:42 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/07 14:55:01 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/24 13:21:07 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,18 @@ int	ft_save_cmd_in_env(t_executable exec)
 	ft_setvar(exec.env, "_", new_cmd);
 	free(new_cmd);
 	return (0);
+}
+
+char	*create_subdir(t_executable *exec, int i)
+{
+	return (ft_join((char *[]){exec->env->path[i], "/", exec->cmd->args[0],
+			NULL}));
+}
+
+char	*process_hard_links(t_executable *exec)
+{
+	if (access(exec->cmd->args[0], F_OK) == 0
+		&& cmd_executable(exec->cmd->args[0], 0))
+		return (exec->cmd->args[0]);
+	return (cmd_found(exec->cmd->args[0], 0), NULL);
 }

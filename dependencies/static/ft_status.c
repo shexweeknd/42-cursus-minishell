@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:11:21 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/16 15:44:53 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/24 13:27:18 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_exit_status(int status)
 	if (set_sig(0), WIFSIGNALED(status))
 	{
 		if (WTERMSIG(status) == SIGSEGV)
-			printf("segmentation fault\n");
+			printf("Segmentation fault (core dumped)\n");
 		if (WTERMSIG(status) == SIGINT)
 			return (130);
 		if (WTERMSIG(status) == SIGQUIT)

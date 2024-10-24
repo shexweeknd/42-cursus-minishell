@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:42:58 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/17 10:06:51 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/24 12:04:55 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_check_valid_var(char *var)
 	}
 	if (has_error || ft_strlen(var) == 0)
 	{
-		ft_perror_fd(2, (char *[]){MSH_LOG, ": export: `", var, \
+		ft_perror_fd(2, (char *[]){MSH_LOG, ": export: `", var,
 			"': not a valid identifier", NULL});
 		return (1);
 	}
@@ -46,7 +46,7 @@ char	*ft_search_executable(t_executable exec)
 		return (NULL);
 	else if (*exec.cmd->args[0] != '/' && ft_strncmp(exec.cmd->args[0], "./", 2)
 		&& ft_strncmp(exec.cmd->args[0], "~/", 2))
-		return (is_exec_from_path(&exec));
+		return (find_exec(&exec));
 	else if (*exec.cmd->args[0] == '/' || ft_strncmp(exec.cmd->args[0], "./", 2)
 		|| ft_strncmp(exec.cmd->args[0], "~/", 2))
 	{

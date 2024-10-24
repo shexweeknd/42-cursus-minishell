@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/16 17:41:21 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/24 13:22:48 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,13 @@ void			ft_free_executable(t_executable exec);
 void			ft_next_cmds(int fd[2], t_exec_params params);
 int				ft_check_valid_var(char *var);
 char			*subst_home(char *src, t_env *env);
+char			*process_hard_links(t_executable *exec);
+char			*create_subdir(t_executable *exec, int i);
 
 /* _________________________ EXEC STATUS _________________________ */
 int				cmd_found(char *file_exe, int simulate);
 int				cmd_executable(char *file_exe, int simulate);
-char			*is_exec_from_path(t_executable *exec);
+char			*find_exec(t_executable *exec);
 int				is_directory(const char *path);
 
 /* _________________________ EXEC _________________________ */
