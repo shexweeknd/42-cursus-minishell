@@ -3,17 +3,9 @@ NAME			= minishell
 
 # FILES
 FILES			= main.c
-FUNC_FILES		= ""
-SRC_FILES		= ""
-
-# SRC FILES
-FUNC			= $(FUNC_FILES:%.c=functions/%.c)
-SRC				= $(SRC_FILES:%.c=src/%.c)
 
 # OBJECT FILES
 OBJS			= $(FILES:%.c=output/%.o)
-FUNC_OBJS		= $(FUNC:functions/%.c=output/%.o)
-SRC_OBJS		= $(SRC:src/%.c=output/%.o)
 
 # DEPENDENCIES
 DEP_PATH		= ./dependencies
@@ -114,9 +106,6 @@ output		:
 				@if [ ! -d output ]; then mkdir output; fi
 
 output/%.o	: %.c | output
-				$(call Compile,$<,$@)
-
-output/%.o	: */%.c | output
 				$(call Compile,$<,$@)
 
 $(NAME)		: $(OBJS)
