@@ -8,3 +8,4 @@ minishell
 trash*
 *.out
 42_*
+*_test*
