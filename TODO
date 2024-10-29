@@ -130,19 +130,20 @@ TEST SOLVED :
         << $"hola"$"b"$'' (wrong EOF)
         << $"hola"$"b"$"" (wrong EOF)
 
+
+        /bin/echo hi >./outfiles/outfile01 | /bin/echo bye
+        ls >./outfiles/outfile01
+        <tcr.sh grep -v $ | wc -l >> $abc123 (status error)
+        /bin/echo <123 <456 hi | /bin/echo 42
+        <$var123 cat
+        <$var123 <$var123 cat
+        Minishell$ unset PWD OLDPWD (then) -----> Minishell$ cd / (segfault) 
+        $NOVAR
+        "."
+
 TESTS UNSOLVED :
-    /bin/echo hi >./outfiles/outfile01 | /bin/echo bye
-    ls >./outfiles/outfile01
-    "."
-    /bin/echo <123 <456 hi | /bin/echo 42
-    $NOVAR
-    export T="l"
-    echo "<<| echo wtf"
-    <$var123 cat
-    <$var123 <$var123 cat
-    Minishell$ unset PWD OLDPWD
-    Minishell$ cd / (segfault)
-    <tcr.sh grep -v $ | wc -l >> $abc123 (status error)
+    export T="l"                <======== (MOI PAS COMPRENDRE CELUI LA)
+    echo "<<| echo wtf"         <======== (Your checker)
 
 TODO BEFORE VOGSPHERERE:
     - supprimer: sujet.pdf, TODO, README.md

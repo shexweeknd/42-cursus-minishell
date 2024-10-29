@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:14:57 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/16 13:51:12 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/29 15:15:33 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,23 +115,31 @@ void	ft_manage_arg(char **arg, t_env *env)
 	}
 }
 
-void	*ft_manage_args(t_cmd *cmd, t_env *env)
+int	ft_manage_args(t_cmd *cmd, t_env *env)
 {
 	int		i;
-	t_rfile	*tmp;
 
 	i = -1;
-	while (cmd->args[++i])
+	while (cmd->args && cmd->args[++i])
 	{
 		if (get_status() == 13)
 			set_status(0);
+		if (i == 0 && cmd->args[i] && cmd->args[i][0] == '$')
+		{
+			if (!ft_getvar(env, cmd->args[i] + 1))
+				return (0);
+		}
 		ft_manage_arg(&cmd->args[i], env);
 	}
-	tmp = cmd->file_in;
-	while (tmp)
-		tmp = ((ft_manage_arg(&tmp->args, env)), tmp->next);
-	tmp = cmd->file_out;
-	while (tmp)
-		tmp = ((ft_manage_arg(&tmp->args, env)), tmp->next);
-	return (cmd);
+	if (cmd->args[0] && !ft_strcmp(cmd->args[0], "."))
+	{
+		ft_perror_fd(2, (char *[]){MSH_LOG, ": ", cmd->args[0], ": ", \
+		"filename argument required\n", cmd->args[0], ": usage: ", \
+		cmd->args[0], " filename[arguments]", NULL});
+		return (2);
+	}
+	if (!ft_manage_rfile(cmd->file_in, env) || \
+		!ft_manage_rfile(cmd->file_out, env))
+		return (1);
+	return (-1);
 }

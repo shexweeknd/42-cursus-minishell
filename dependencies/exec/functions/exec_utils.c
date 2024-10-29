@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 13:42:58 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/24 12:04:55 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/29 14:15:11 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

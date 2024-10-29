@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:17:58 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/17 09:42:25 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/29 13:52:29 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	ft_reset_fd(t_executable exec)
 
 int	ft_open_file(t_rfile *file, int *error, int redirect)
 {
+	int	fd;
+
 	if (redirect)
 	{
 		if (is_directory(file->args))
@@ -27,14 +29,13 @@ int	ft_open_file(t_rfile *file, int *error, int redirect)
 	}
 	else
 	{
-		if (access(file->args, F_OK) == -1)
-		{
-			ft_perror_fd(2, (char *[]){MSH_LOG, ": ", \
-			file->args, ": No such file or directory", NULL});
+		if (!ft_file_exist(file->args))
 			return ((*error = 1), -1);
-		}
 	}
-	return (open(file->args, file->option, 0644));
+	fd = ft_open(file->args, file->option);
+	if (fd == -1)
+		return ((*error = 1), -1);
+	return (fd);
 }
 
 int	ft_manage_redirect_file(int fd[2], t_cmd *cmd)
@@ -45,8 +46,8 @@ int	ft_manage_redirect_file(int fd[2], t_cmd *cmd)
 
 	error = (close(fd[0]), 0);
 	tmp_in = cmd->file_in;
-	while (tmp_in && tmp_in->next)
-		tmp_in = tmp_in->next;
+	while (tmp_in && tmp_in->next && !error)
+		tmp_in = ((error = !ft_file_exist(tmp_in->args)), tmp_in->next);
 	tmp_out = cmd->file_out;
 	while (tmp_out && tmp_out->next && !error)
 		tmp_out = (close(ft_open_file(tmp_out, &error, 1)), tmp_out->next);
@@ -56,7 +57,7 @@ int	ft_manage_redirect_file(int fd[2], t_cmd *cmd)
 		fd[0] = -1;
 	if (tmp_out && !error)
 		fd[1] = (close(fd[1]), ft_open_file(tmp_out, &error, 1));
-	else if (!(cmd->next && cmd->l_type == PIPE))
+	else if (!(cmd->next && cmd->l_type == PIPE) && !error)
 		fd[1] = (close(fd[1]), -1);
 	if (fd[0] != -1)
 		(dup2(fd[0], STDIN_FILENO), close(fd[0]));

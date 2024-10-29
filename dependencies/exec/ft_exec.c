@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/18 13:05:21 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/29 14:54:50 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ int	ft_exec_cmd(t_executable exec)
 	char	*exe;
 	int		status;
 
-	status = (ft_manage_args(exec.cmd, exec.env), 0);
+	status = ft_manage_args(exec.cmd, exec.env);
+	if (status != -1 || !exec.cmd->args || !exec.cmd->args[0])
+		return (status);
 	if (!ft_manage_redirect_file(exec.p_fd, exec.cmd))
 		return (1);
-	if (!exec.cmd->args || !exec.cmd->args[0])
-		return (0);
 	if (ft_builtin_cmd(exec))
 		return (get_status());
 	exe = ft_search_executable(exec);

@@ -20,6 +20,7 @@ FUNC_FILES	= \
 				exec_checker.c			\
 				exec_checker_utils.c	\
 				exec_process.c			\
+				ft_file_checker.c
 
 # SRC FILES
 FUNC		= $(FUNC_FILES:%.c=functions/%.c)
