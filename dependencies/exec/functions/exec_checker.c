@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_checker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:28:57 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/30 14:10:06 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/30 15:56:14 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
