@@ -144,10 +144,41 @@ TEST SOLVED :
         echo "wtf" << "<< echo" (my checker)
 
 TESTS UNSOLVED :
-    export T="l"                <======== (MOI PAS COMPRENDRE CELUI LA)
+    Minishell$ export T="l"
+    Minishell$ $Ts -a
+    
+    Minishell$ export T=e E=c S=h L=o
+    Minishell$ $T$E$S$L haha
+
+    Minishell$ export T="|"
+    Minishell$ $T$T$T$T$T$T$T
+
+    Minishell$ export T="echo segfault | grep segfault"
+    Minishell$ $T
+
+    Minishell$ export T="<<"
+    Minishell$ $T.
+
+    Minishell$ $? + $?
+
+    Minishell$ export var8="echo Hello world"
+    Minishell$ $var8
+
     echo "<< echo
+    
     echo " << echo
+    
     echo "wtf" << "<< ' ls'echo" <======== (elah no nanova ilay fangalana eof)
+    
+    >> foo
+    
+    > foo
+    
+    >> $HOME
+
+    cat<<lim
+
+    .. <=============== (hramaros)
 
 TODO BEFORE VOGSPHERERE:
     - supprimer: sujet.pdf, TODO, README.md
