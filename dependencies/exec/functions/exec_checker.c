@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:28:57 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/24 13:31:24 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/30 14:10:06 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	is_directory(const char *path)
 {
 	DIR	*dir;
 
-	if (is_only_spaces((char *)path))
+	if (is_only_spaces((char *)path) || (ft_strlen(path) == 2
+			&& !ft_strncmp(path, "..", 2)))
 		return (cmd_found((char *)path, 1), 1);
 	dir = opendir(path);
 	if (dir)
