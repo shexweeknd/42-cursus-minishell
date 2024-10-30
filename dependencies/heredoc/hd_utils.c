@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:53:46 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/30 07:45:49 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/30 09:29:00 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ int	skip_hd_eof(char *line)
 		result++;
 	while (!ft_isspace(line[result]))
 	{
+		if (line[result] == '"')
+			result += skip_until(&line[result], '"');
+		else if (line[result] == '\'')
+			result += skip_until(&line[result], '\'');
 		if (!line[result] || ft_is_delimiter(line[result])
 			|| ft_is_redirect(line[result]))
 			break ;

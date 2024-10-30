@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 07:26:21 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/30 07:26:29 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/30 09:19:49 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	skip_until(char *prompt, char offset)
 	{
 		if (prompt[result++] == offset)
 			break ;
+		if (!prompt[result])
+			return (1);
 	}
 	return (result);
 }

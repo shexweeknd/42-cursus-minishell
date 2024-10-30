@@ -141,10 +141,13 @@ TEST SOLVED :
         $NOVAR
         "."
         echo "<<| echo wtf"
+        echo "wtf" << "<< echo" (my checker)
 
 TESTS UNSOLVED :
     export T="l"                <======== (MOI PAS COMPRENDRE CELUI LA)
-     echo "<<| echo wtf" << "<< echo" (my checker)
+    echo "<< echo
+    echo " << echo
+    echo "wtf" << "<< ' ls'echo" <======== (elah no nanova ilay fangalana eof)
 
 TODO BEFORE VOGSPHERERE:
     - supprimer: sujet.pdf, TODO, README.md
