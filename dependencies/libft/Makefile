@@ -6,7 +6,7 @@
 #    By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/29 11:14:27 by ballain           #+#    #+#              #
-#    Updated: 2024/10/18 13:13:45 by hramaros         ###   ########.fr        #
+#    Updated: 2024/10/30 07:26:45 by hramaros         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,8 @@ SRCS		= \
 				ft_skip_space.c			\
 				get_ps_two.c			\
 				ft_nblen.c				\
-				ft_perror_fd.c
+				ft_perror_fd.c			\
+				skip_until.c
 
 SRCSBONUS	= \
 	ft_lstnew_bonus.c	ft_lstadd_front_bonus.c	ft_lstsize_bonus.c	ft_lstlast_bonus.c \

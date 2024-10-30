@@ -140,10 +140,11 @@ TEST SOLVED :
         Minishell$ unset PWD OLDPWD (then) -----> Minishell$ cd / (segfault) 
         $NOVAR
         "."
+        echo "<<| echo wtf"
 
 TESTS UNSOLVED :
     export T="l"                <======== (MOI PAS COMPRENDRE CELUI LA)
-    echo "<<| echo wtf"         <======== (Your checker)
+     echo "<<| echo wtf" << "<< echo" (my checker)
 
 TODO BEFORE VOGSPHERERE:
     - supprimer: sujet.pdf, TODO, README.md

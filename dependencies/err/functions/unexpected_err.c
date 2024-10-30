@@ -6,7 +6,7 @@
 /*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 14:29:29 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/14 07:51:02 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/30 07:51:07 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,11 @@ int	is_unexpected(char *prompt, int lvl)
 		return (1);
 	while (*prompt && !flag)
 	{
-		if ((!ft_strncmp(prompt, ">>", 2) || !ft_strncmp(prompt, "<<", 2))
+		if (*prompt == '"')
+			prompt += skip_until(prompt, '"');
+		else if (*prompt == '\'')
+			prompt += skip_until(prompt, '\'');
+		else if ((!ft_strncmp(prompt, ">>", 2) || !ft_strncmp(prompt, "<<", 2))
 			&& !flag)
 			prompt += chev_check(prompt, &flag, 2, lvl);
 		else if ((*prompt == '>' || *prompt == '<') && !flag)

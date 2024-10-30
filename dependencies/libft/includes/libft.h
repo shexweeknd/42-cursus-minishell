@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:02:13 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/07 13:36:39 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/30 07:26:57 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int		ft_is_cmd_sep(const char c);
 int		ft_is_redirect(const char c);
 int		ft_is_delimiter(const char c);
 int		_skip_space(char *str);
+int		skip_until(char *prompt, char offset);
 
 char	*to_ps_two(char cmd, char *value);
 int		ft_nblen(int nb);

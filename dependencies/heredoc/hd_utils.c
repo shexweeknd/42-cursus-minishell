@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:53:46 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/10 13:21:56 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/30 07:45:49 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,17 @@ int	skip_until_hd(char *line)
 	int	result;
 
 	result = 0;
-	while (line[result] && ft_strncmp(&line[result], "<<", 2))
-		result++;
+	while (line[result])
+	{
+		if (line[result] == '"')
+			result += skip_until(&line[result], '"');
+		else if (line[result] == '\'')
+			result += skip_until(&line[result], '\'');
+		if (!ft_strncmp(&line[result], "<<", 2))
+			break ;
+		if (line[result])
+			result++;
+	}
 	return (result);
 }
 
@@ -87,8 +96,8 @@ int	ft_write_hd(int fd, char *line)
 			if (!*line)
 				return (write(fd, "$", 1), ++len);
 			else if (*line == '?')
-				len += (write(fd, status, ft_strlen(status)), \
-				ft_strlen(status));
+				len += (write(fd, status, ft_strlen(status)),
+						ft_strlen(status));
 			else
 				len += ft_write_var_hd(fd, line, lenv);
 			line += lenv;

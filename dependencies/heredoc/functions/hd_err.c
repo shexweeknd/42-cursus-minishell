@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hd_err.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 10:29:12 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/10 12:14:45 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/30 07:40:29 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ int	valid_before_hd(char *line, int lvl)
 	flag = 0;
 	while (*line && !flag && ft_strncmp(line, "<<", 2))
 	{
+		if (*line == '"')
+			line += skip_until(line, '"');
+		else if (*line == '\'')
+			line += skip_until(line, '\'');
 		if (!ft_strncmp(line, ">>", 2))
 			line += chev_check(line, &flag, 2, lvl);
 		if (!ft_strncmp(line, "<<", 2))
@@ -44,7 +48,7 @@ int	valid_before_hd(char *line, int lvl)
 			line += op_check(line, &flag, 2, lvl);
 		else if ((*line == '|' || *line == '&') && !flag)
 			line += op_check(line, &flag, 1, lvl);
-		else
+		else if (*line)
 			line++;
 	}
 	return (!flag);
