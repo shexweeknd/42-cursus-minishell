@@ -2,7 +2,7 @@
 NAME		= libexec.a
 
 # FILES
-FILES		= ft_exec.c #exec_utils.c
+FILES		= ft_exec.c
 SRC_FILES	= \
 				echo.c		\
 				ft_env.c	\
@@ -14,6 +14,7 @@ SRC_FILES	= \
 
 FUNC_FILES	= \
 				exec_utils.c			\
+				ft_edit_variable.c		\
 				manage_args.c			\
 				manage_args_utils.c		\
 				ft_file_descriptor.c	\

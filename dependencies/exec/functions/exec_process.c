@@ -6,11 +6,19 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 13:22:02 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/29 14:24:43 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/30 13:04:09 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
+
+void	ft_execve(t_executable exec)
+{
+	if (signal(SIGINT, SIG_DFL), signal(SIGQUIT, SIG_DFL), \
+		execve(exec.cmd->args[0], exec.cmd->args, exec.env->var) == -1)
+		(ft_perror_fd(2, (char *[]){strerror(errno), "\n", NULL}),
+			exit(EXIT_FAILURE));
+}
 
 int	cmd_found(char *file_exe, int simulate)
 {

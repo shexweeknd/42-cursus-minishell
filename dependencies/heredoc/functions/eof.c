@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 09:31:35 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/23 08:13:07 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/30 13:04:40 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,30 @@ int	eof_size(char *line)
 
 static int	_get_eof(char *eof, char *line)
 {
-	int	have_quote;
+	int		has_quote;
+	char	quote;
 
-	have_quote = 0;
+	has_quote = 0;
+	quote = 0;
 	while (line && *line && !ft_is_cmd_sep(*line) && !ft_is_redirect(*line))
 	{
-		if ((ft_is_quote(*line) && line++) \
-			|| ((!ft_strncmp(line, "$\"", 2) || !ft_strncmp(line, "$'", 2)) \
-			&& *(line - 1) \
-			&& *(line - 1) != '$' && ((line++), line++)))
+		if (!ft_strncmp(line, "$$", 2))
+			line += ((eof += ft_strlcpy(eof, "$$", 3)), 2);
+		if (!ft_strncmp(line, "$\"", 2) || !ft_strncmp(line, "$'", 2))
+			line++;
+		quote = ft_is_quote(*line);
+		if (quote && line++)
 		{
-			while (line && *line && !ft_is_quote(*line))
+			while (line && *line && *line != quote)
 				*(eof++) = *(line++);
-			if (line && *line && ft_is_quote(*line))
+			if (line && *line)
 				line++;
-			have_quote = 1;
+			has_quote = 1;
 		}
 		else
 			*(eof++) = *(line++);
 	}
-	return (have_quote);
+	return (has_quote);
 }
 
 static int	get_eof(char **dest, char *line)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_static.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 09:40:01 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/16 15:24:34 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/10/30 13:39:04 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ char			*get_hdpath(void);
 void			ft_init_paths(char *cwd);
 void			ft_clear_paths(void);
 
-/* _________________________ STATICS _________________________ */
+/* _________________________ ENV _________________________ */
 void			setsenv(t_env *env);
 t_env			*getsenv(void);
 char			*getvar(char *var_name);
+int				getvarlen(char *var_name);
 
 #endif

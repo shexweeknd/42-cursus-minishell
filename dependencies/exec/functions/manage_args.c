@@ -6,11 +6,13 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:14:57 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/29 15:15:33 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/30 15:43:47 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
+
+// $USER"TEST $ $? $HOME $$"
 
 int	ft_dquote_add(char *dest, char **arg, t_env *env, char *stop)
 {
@@ -115,22 +117,40 @@ void	ft_manage_arg(char **arg, t_env *env)
 	}
 }
 
+void	ft_filter_args(t_cmd *cmd, int to_check)
+{
+	int	i;
+
+	i = 1;
+	if (to_check && cmd->args && cmd->args[0] && !ft_strlen(cmd->args[0]))
+	{
+		cmd->args[0] = (free(cmd->args[0]), NULL);
+		while (cmd && cmd->args && cmd->args[i])
+		{
+			cmd->args[i - 1] = cmd->args[i];
+			i++;
+		}
+		cmd->args[i - 1] = cmd->args[i];
+		cmd->nb_arg -= 1;
+	}
+}
+
 int	ft_manage_args(t_cmd *cmd, t_env *env)
 {
 	int		i;
+	int		to_check;
 
 	i = -1;
+	to_check = 0;
 	while (cmd->args && cmd->args[++i])
 	{
 		if (get_status() == 13)
 			set_status(0);
 		if (i == 0 && cmd->args[i] && cmd->args[i][0] == '$')
-		{
-			if (!ft_getvar(env, cmd->args[i] + 1))
-				return (0);
-		}
+			to_check = 1;
 		ft_manage_arg(&cmd->args[i], env);
 	}
+	ft_filter_args(cmd, to_check);
 	if (cmd->args[0] && !ft_strcmp(cmd->args[0], "."))
 	{
 		ft_perror_fd(2, (char *[]){MSH_LOG, ": ", cmd->args[0], ": ", \

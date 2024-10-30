@@ -142,43 +142,41 @@ TEST SOLVED :
         "."
         echo "<<| echo wtf"
         echo "wtf" << "<< echo" (my checker)
+        
+        Minishell$ export T="l"
+        Minishell$ $Ts -a
+        
+        Minishell$ export T=e E=c S=h L=o
+        Minishell$ $T$E$S$L haha
+
+        Minishell$ export T="|"
+        Minishell$ $T$T$T$T$T$T$T
+        
+        Minishell$ export T="<<"
+        Minishell$ $T.
+
+        echo "wtf" << "<< ' ls'echo" <======== (elah no nanova ilay fangalana eof)
+        cat<<lim
 
 TESTS UNSOLVED :
-    Minishell$ export T="l"
-    Minishell$ $Ts -a
-    
-    Minishell$ export T=e E=c S=h L=o
-    Minishell$ $T$E$S$L haha
-
-    Minishell$ export T="|"
-    Minishell$ $T$T$T$T$T$T$T
 
     Minishell$ export T="echo segfault | grep segfault"
     Minishell$ $T
 
-    Minishell$ export T="<<"
-    Minishell$ $T.
-
-    Minishell$ $? + $?
-
     Minishell$ export var8="echo Hello world"
     Minishell$ $var8
+
+    Minishell$ $? + $?
 
     echo "<< echo
     
     echo " << echo
     
-    echo "wtf" << "<< ' ls'echo" <======== (elah no nanova ilay fangalana eof)
     
-    >> foo
-    
-    > foo
-    
-    >> $HOME
 
-    cat<<lim
 
     .. <=============== (hramaros)
+    << $"hola"$"b"$'' <=============== (hramaros) (ctrl + D) * 2 ==> wrong output
 
 TODO BEFORE VOGSPHERERE:
     - supprimer: sujet.pdf, TODO, README.md

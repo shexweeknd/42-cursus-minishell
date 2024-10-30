@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/29 14:43:07 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/30 14:07:21 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,11 @@ int				ft_open(char *file_name, int option);
 int				ft_is_ambiguous(char *var_name);
 
 int				ft_manage_rfile(t_rfile *file, t_env *env);
+void			ft_execve(t_executable exec);
+
+
+/* _________________________ EDIT VARIABLE _________________________ */
+int				ft_new_arg_len(char *arg);
+char			*ft_transform_args(char *arg);
 
 #endif

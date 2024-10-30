@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:25:38 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/29 14:54:50 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/30 13:01:35 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ int	ft_exec_cmd(t_executable exec)
 	int		status;
 
 	status = ft_manage_args(exec.cmd, exec.env);
-	if (status != -1 || !exec.cmd->args || !exec.cmd->args[0])
+	if (status != -1)
 		return (status);
 	if (!ft_manage_redirect_file(exec.p_fd, exec.cmd))
 		return (1);
+	if (!exec.cmd->args || !exec.cmd->args[0])
+		return (0);
 	if (ft_builtin_cmd(exec))
 		return (get_status());
 	exe = ft_search_executable(exec);
@@ -49,12 +51,7 @@ int	ft_exec_cmd(t_executable exec)
 	if (exe != exec.cmd->args[0])
 		exec.cmd->args[0] = (free(exec.cmd->args[0]), exe);
 	if (fork() == 0)
-	{
-		if (signal(SIGINT, SIG_DFL), signal(SIGQUIT, SIG_DFL), execve(exe,
-				exec.cmd->args, exec.env->var) == -1)
-			(ft_perror_fd(2, (char *[]){strerror(errno), "\n", NULL}),
-				exit(EXIT_FAILURE));
-	}
+		ft_execve(exec);
 	else
 		(wait(&status), ft_save_cmd_in_env(exec));
 	return (ft_exit_status(status));

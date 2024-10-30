@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:11:02 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/27 12:37:51 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/30 09:55:53 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_get_info_len(char *cmd)
 	char	quote;
 
 	i = 0;
-	while (*cmd && !ft_is_cmd_sep(*cmd))
+	while (*cmd && !ft_is_cmd_sep(*cmd) && !ft_is_redirect(*cmd))
 	{
 		end = 0;
 		quote = ft_is_quote(*cmd);

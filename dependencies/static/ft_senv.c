@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:59:17 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/07 14:50:14 by ballain          ###   ########.fr       */
+/*   Updated: 2024/10/30 13:38:05 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,12 @@ char	*getvar(char *var_name)
 			return (var + i);
 	}
 	return (NULL);
+}
+
+int	getvarlen(char *var_name)
+{
+	char	*var;
+
+	var = getvar(var_name);
+	return (ft_strlen(var));
 }
