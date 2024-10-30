@@ -140,6 +140,7 @@ TEST SOLVED :
         Minishell$ unset PWD OLDPWD (then) -----> Minishell$ cd / (segfault) 
         $NOVAR
         "."
+        .. <=============== (hramaros)
         echo "<<| echo wtf"
         echo "wtf" << "<< echo" (my checker)
         
@@ -175,8 +176,11 @@ TESTS UNSOLVED :
     
 
 
+<<<<<<< HEAD
     .. <=============== (hramaros)
     << $"hola"$"b"$'' <=============== (hramaros) (ctrl + D) * 2 ==> wrong output
+=======
+>>>>>>> 314e38d90215bf14f323b5f3f69aab8abb50ec78
 
 TODO BEFORE VOGSPHERERE:
     - supprimer: sujet.pdf, TODO, README.md
