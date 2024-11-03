@@ -14,7 +14,8 @@ SRC_FILES	= \
 
 FUNC_FILES	= \
 				exec_utils.c			\
-				ft_edit_variable.c		\
+				ft_manage_utils.c		\
+				ft_manage_extra_utils.c	\
 				manage_args.c			\
 				manage_args_utils.c		\
 				ft_file_descriptor.c	\

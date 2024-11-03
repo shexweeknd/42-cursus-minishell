@@ -102,6 +102,9 @@ endef
 ## Compilation
 all			: $(NAME)
 
+%			:
+				make all -C $(DEP_PATH)/$@
+
 output		:
 				@if [ ! -d output ]; then mkdir output; fi
 

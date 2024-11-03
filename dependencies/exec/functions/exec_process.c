@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 13:22:02 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/30 13:04:09 by ballain          ###   ########.fr       */
+/*   Updated: 2024/11/03 18:32:23 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,4 @@ int	cmd_executable(char *file_exe, int simulate)
 	ft_perror_fd(2, (char *[]){MSH_LOG, ": ", file_exe, ": ",
 		"Permission denied", NULL});
 	return (set_status(126), 0);
-}
-
-int	ft_is_ambiguous(char *var_name)
-{
-	if (var_name && *var_name == '$' \
-	&& *(var_name + 1) && !getvar(var_name + 1))
-	{
-		ft_perror_fd(2, (char *[]){MSH_LOG, ": ", \
-		var_name, ": ambiguous redirect", NULL});
-		return (1);
-	}
-	return (0);
-}
-
-int	ft_manage_rfile(t_rfile *file, t_env *env)
-{
-	while (file)
-	{
-		if (ft_is_ambiguous(file->args))
-			return (0);
-		file = ((ft_manage_arg(&file->args, env)), file->next);
-	}
-	return (1);
 }

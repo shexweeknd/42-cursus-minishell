@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
+/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:53:46 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/30 09:29:00 by hramaros         ###   ########.fr       */
+/*   Updated: 2024/11/03 20:24:46 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,14 @@ static int	ft_write_var_hd(int fd, char *line, int lenv)
 	char	*tmp;
 	char	*var;
 
-	if (*line != '_' && !ft_isalpha(*line))
-		return (write(fd, (line - 1), 2), 2);
 	tmp = ft_substr(line, 0, lenv);
 	var = getvar(tmp);
 	len = ft_strlen(var);
-	return (free(tmp), write(fd, var, len), len);
+	if (var)
+		write(fd, var, len);
+	if (tmp)
+		free(tmp);
+	return (len);
 }
 
 int	ft_write_hd(int fd, char *line)
@@ -94,12 +96,10 @@ int	ft_write_hd(int fd, char *line)
 	len = 0;
 	while (line && *line)
 	{
-		lenv = ft_isvar(line);
-		if (lenv && line++)
+		if (*line == '$' && ft_isvar(line + 1))
 		{
-			if (!*line)
-				return (write(fd, "$", 1), ++len);
-			else if (*line == '?')
+			lenv = ft_lenvar_name(++line);
+			if (*line == '?')
 				len += (write(fd, status, ft_strlen(status)),
 						ft_strlen(status));
 			else

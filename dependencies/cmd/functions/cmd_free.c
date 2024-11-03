@@ -6,30 +6,34 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 13:15:07 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/28 09:54:08 by ballain          ###   ########.fr       */
+/*   Updated: 2024/11/03 12:09:47 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 
+void	ft_free_args(t_cmd *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd && cmd->args && cmd->args[i])
+		free(cmd->args[i++]);
+	free(cmd->args[i]);
+	free(cmd->args);
+}
+
 void	_free_cmd(void *value, int type)
 {
-	int			i;
 	t_lst_utils	utils;
 
 	if (!value)
 		return ;
 	if (type == CMD)
 	{
-		i = 0;
 		utils = (t_lst_utils){R_FILE, _free_cmd, _next_cmd};
 		if (((t_cmd *)value)->args)
-		{
-			while (((t_cmd *)value)->args[i])
-				free(((t_cmd *)value)->args[i++]);
-			free(((t_cmd *)value)->args[i]);
-			free(((t_cmd *)value)->args);
-		}
+			ft_free_args((t_cmd *)value);
 		if (((t_cmd *)value)->file_in)
 			_loop((void **)&((t_cmd *)value)->file_in, utils);
 		if (((t_cmd *)value)->file_out)

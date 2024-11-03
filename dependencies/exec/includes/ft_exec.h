@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 07:58:57 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/30 14:07:21 by ballain          ###   ########.fr       */
+/*   Updated: 2024/11/03 19:41:49 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,30 @@ int				export(t_executable exec);
 int				unset(t_executable exec);
 void			ft_exit(t_executable exec);
 
-/* _________________________ MANAGE ARGS _________________________ */
-int				ft_lenvar(char *arg, t_env *env, int lenv);
-int				ft_cpvar(char *dest, char *arg, t_env *env, int lenv);
-int				ft_add_status(char *dest);
-int				ft_dqoute_len(char **arg, t_env *env, char *stop);
-int				ft_dquote_add(char *dest, char **arg, t_env *env, char *stop);
-void			ft_manage_arg(char **arg, t_env *env);
-int				ft_manage_args(t_cmd *cmd, t_env *env);
+/* _________________________ MANAGE EXTRA UTILS _________________________ */
+int				ft_is_ambiguous(char *var_name);
+int				ft_manage_rfile(t_rfile *file);
 void			ft_printf_env_export(char *str);
+
+/* _________________________ MANAGE UTILS _________________________ */
+int				ft_count_arg(char *arg);
+int				ft_getlen_word(char *arg);
+char			*ft_clear_quote(char *str);
+int				ft_extract_arg(char **dest, char *src, int index);
+int				ft_update_args(t_cmd *cmd);
+
+/* _________________________ MANAGE ARGS UTILS_________________________ */
+int				ft_add_status(char *dest);
+int				ft_add_char(char *dest, char c, int i);
+int				ft_add_var(char *dest, char *arg, int lenv, int i);
+char			*ft_transform_arg(char *arg);
+int				ft_transform_args(t_cmd *cmd);
+
+/* _________________________ MANAGE ARGS _________________________ */
+int				ft_simple_add(char *dest, char **arg, int i);
+int				ft_default_add(char *dest, char **arg, char end, int i);
+int				ft_manage_arg_content(char *dest, char *arg);
+int				ft_manage_args(t_cmd *cmd);
 
 /* _________________________ EXEC UTILS _________________________ */
 char			*ft_search_executable(t_executable exec);
@@ -81,14 +96,6 @@ int				ft_save_cmd_in_env(t_executable exec);
 int				ft_file_exist(char *file_name);
 int				ft_open(char *file_name, int option);
 
-int				ft_is_ambiguous(char *var_name);
-
-int				ft_manage_rfile(t_rfile *file, t_env *env);
 void			ft_execve(t_executable exec);
-
-
-/* _________________________ EDIT VARIABLE _________________________ */
-int				ft_new_arg_len(char *arg);
-char			*ft_transform_args(char *arg);
 
 #endif

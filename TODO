@@ -112,11 +112,11 @@ TEST SOLVED :
         cd // && pwd (wrong output)
         << $"hola"$"b" (wrong EOF parsed)
         << ho$la$"$a"$$"b" (wrong EOF parsed)
-        
+
         - '> foo' (wrong behaviour)
         - > file.txt (wrong behaviour + -rw-r--r--) (ballain)
         - export "" (wrong behaviour )
-        
+
         - export -HOLA=bonjour (wrong behaviour ) <=== not wrong, shouldn't to check
         - export --HOLA=bonjour (wrong behaviour ) <=== not wrong, shouldn't to check
         - export "MSH52"=42 (wrong behaviour)
@@ -126,7 +126,7 @@ TEST SOLVED :
         - 'cat /dev/random | ls' (invalid read of size 4)
         - cat | ls + Ctrl^C (invalid read of size 4 + LEAKS)
         - 'mkdir a && mkdir a/b && cd a/b && rm -r ../../a && pwd' ( LEAKS quand on fait 'exit' apres la commande) <==== leaks apres exit !!!!!!!
-    
+
         << $"hola"$"b"$'' (wrong EOF)
         << $"hola"$"b"$"" (wrong EOF)
 
@@ -137,43 +137,44 @@ TEST SOLVED :
         /bin/echo <123 <456 hi | /bin/echo 42
         <$var123 cat
         <$var123 <$var123 cat
-        Minishell$ unset PWD OLDPWD (then) -----> Minishell$ cd / (segfault) 
+        Minishell$ unset PWD OLDPWD (then) -----> Minishell$ cd / (segfault)
         $NOVAR
         "."
         .. <=============== (hramaros)
         echo "<<| echo wtf"
         echo "wtf" << "<< echo" (my checker)
-        
+
         Minishell$ export T="l"
         Minishell$ $Ts -a
-        
+
         Minishell$ export T=e E=c S=h L=o
         Minishell$ $T$E$S$L haha
 
         Minishell$ export T="|"
         Minishell$ $T$T$T$T$T$T$T
-        
+
         Minishell$ export T="<<"
         Minishell$ $T.
 
         echo "wtf" << "<< ' ls'echo" <======== (elah no nanova ilay fangalana eof)
         cat<<lim
 
+		Minishell$ export T="echo segfault | grep segfault"
+		Minishell$ $T
+
+		Minishell$ export var8="echo Hello world"
+		Minishell$ $var8
+
+		Minishell$ $? + $?
+
+		echo "<< echo
+
+		echo " << echo
+
 TESTS UNSOLVED :
 
-    Minishell$ export T="echo segfault | grep segfault"
-    Minishell$ $T
 
-    Minishell$ export var8="echo Hello world"
-    Minishell$ $var8
 
-    Minishell$ $? + $?
-
-    echo "<< echo
-    
-    echo " << echo
-    
-    
 
 
 

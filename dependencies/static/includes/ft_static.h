@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 09:40:01 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/30 13:39:04 by ballain          ###   ########.fr       */
+/*   Updated: 2024/11/03 17:43:10 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,5 @@ void			ft_clear_paths(void);
 void			setsenv(t_env *env);
 t_env			*getsenv(void);
 char			*getvar(char *var_name);
-int				getvarlen(char *var_name);
 
 #endif

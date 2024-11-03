@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 03:10:41 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/28 09:03:36 by ballain          ###   ########.fr       */
+/*   Updated: 2024/11/03 12:09:00 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,6 @@ t_cmd		*ft_get_cmds(char *cmd);
 /* --------------------- CMD FREE --------------------- */
 void		_free_cmd(void *value, int type);
 void		ft_free_cmds(t_cmd *cmd);
+void		ft_free_args(t_cmd *cmd);
+
 #endif

@@ -6,36 +6,11 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:24:30 by ballain           #+#    #+#             */
-/*   Updated: 2024/10/17 10:10:37 by ballain          ###   ########.fr       */
+/*   Updated: 2024/11/03 18:40:51 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exec.h"
-
-int	ft_lenvar(char *arg, t_env *env, int lenv)
-{
-	char	*tmp;
-	int		len;
-
-	tmp = ft_substr(arg, 0, lenv);
-	len = ft_strlen(ft_getvar(env, tmp));
-	tmp = (free(tmp), NULL);
-	return (len);
-}
-
-int	ft_cpvar(char *dest, char *arg, t_env *env, int lenv)
-{
-	int		len;
-	char	*tmp;
-	char	*var;
-
-	var = NULL;
-	var = ((tmp = ft_substr(arg, 0, lenv)), ft_getvar(env, tmp));
-	if (!var)
-		return (free(tmp), 0);
-	len = ft_strlcpy(dest, var, ft_strlen(var) + 1);
-	return (free(tmp), len);
-}
 
 int	ft_add_status(char *dest)
 {
@@ -54,47 +29,69 @@ int	ft_add_status(char *dest)
 	return (r_len);
 }
 
-int	ft_dqoute_len(char **arg, t_env *env, char *stop)
+int	ft_add_char(char *dest, char c, int i)
 {
-	int	len;
-	int	lenv;
+	if (dest)
+	{
+		dest += i;
+		return ((*dest = c), 1);
+	}
+	return (0);
+}
+
+int	ft_add_var(char *dest, char *arg, int lenv, int i)
+{
+	char	*var_content;
+	char	*tmp;
+	int		len;
 
 	len = 0;
-	while (**arg && !ft_strchr(stop, **arg))
-	{
-		lenv = ft_isvar(*arg);
-		if (lenv)
-		{
-			if ((*arg)++ && (!**arg || (!ft_strcmp(stop, "\"")
-						&& ft_strchr(stop, **arg))))
-				return ((len += lenv), len);
-			if (ft_strchr(stop, **arg))
-				return (len);
-			if (**arg == '?')
-				len += ((*arg += 1), ft_nblen(get_status()));
-			else if (!ft_isalpha(**arg) && **arg != '_')
-				len++;
-			else
-				*arg += ((len += ft_lenvar(*arg, env, lenv)), lenv);
-		}
-		else
-			len += ((*arg += 1), 1);
-	}
+	if (!lenv)
+		return (0);
+	if (*arg == '?' && dest)
+		return (ft_add_status(dest + i));
+	if (*arg == '?' && !dest)
+		return ((len += ft_nblen(get_status())), len);
+	tmp = ft_substr(arg, 0, lenv);
+	var_content = getvar(tmp);
+	if (var_content && dest)
+		len = ft_strlcpy(dest + i, var_content, ft_strlen(var_content) + 1);
+	if (var_content && !dest)
+		len = ft_strlen(var_content);
+	if (tmp)
+		tmp = (free(tmp), NULL);
 	return (len);
 }
 
-void	ft_printf_env_export(char *str)
+char	*ft_transform_arg(char *arg)
 {
-	write(1, "export ", 7);
-	while (str && *str && *str != '=')
-		write(1, str++, 1);
-	if (str && *str && *str == '=' && str++)
-		write(1, "=", 1);
-	write(1, "\"", 1);
-	if (str && *str)
+	int		len;
+	char	*r_value;
+
+	len = ft_manage_arg_content(NULL, arg);
+	r_value = (char *)malloc(sizeof(char) * (len + 1));
+	if (!r_value)
+		return (NULL);
+	r_value[ft_manage_arg_content(r_value, arg)] = 0;
+	return (r_value);
+}
+
+int	ft_transform_args(t_cmd *cmd)
+{
+	int		i;
+	int		nb_narg;
+	char	*tmp;
+
+	i = 0;
+	nb_narg = 0;
+	while (cmd && cmd->args && cmd->args[i])
 	{
-		while (str && *str && *str)
-			write(1, str++, 1);
+		tmp = ft_transform_arg(cmd->args[i]);
+		if (!tmp)
+			return (0);
+		cmd->args[i] = (free(cmd->args[i]), tmp);
+		nb_narg += ft_count_arg(tmp);
+		i++;
 	}
-	write(1, "\"\n", 2);
+	return (nb_narg);
 }
