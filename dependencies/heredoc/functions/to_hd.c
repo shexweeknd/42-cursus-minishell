@@ -6,7 +6,7 @@
 /*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 09:32:19 by hramaros          #+#    #+#             */
-/*   Updated: 2024/10/10 12:27:19 by ballain          ###   ########.fr       */
+/*   Updated: 2024/11/04 09:05:31 by ballain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_hd(t_hd **hd_addr, t_eofs *eof)
 		return ;
 	pipe(hd->fd);
 	hd->pos = 0;
-	hd->size = fullfill_fd(hd->fd[1], eof);
+	hd->size = fullfill_fd(hd->fd[1], eof) + 1;
 	hd->next = NULL;
 	*hd_addr = hd;
 }
