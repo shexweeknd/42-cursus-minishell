@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballain <ballain@student.42antananarivo    +#+  +:+       +#+        */
+/*   By: hramaros <hramaros@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 19:22:05 by ballain           #+#    #+#             */
-/*   Updated: 2024/09/28 15:47:22 by ballain          ###   ########.fr       */
+/*   Updated: 2024/11/08 12:11:57 by hramaros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ char	**ft_split_path(char *src)
 	int		i;
 
 	i = 0;
+	tmp = ft_strchr(src, '=');
+	if (tmp)
+		src = ++tmp;
 	r_value = (char **)malloc(sizeof(char *) * (ft_getlen_path(src) + 1));
 	if (!r_value)
 		return (NULL);
